@@ -1,0 +1,12 @@
+<div>
+    <accordion>
+        <accordion-group is-open="status.open">
+            <accordion-heading>
+                {{words.length}} words <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
+            </accordion-heading>
+            <ul>
+                <li ng-repeat="word in words">{{word}}</li>
+            <ul>
+        </accordion-group>
+    </accordion>
+<div>
