@@ -55,3 +55,8 @@ target/
 
 # PBF
 .pbf-properties
+
+# SASS
+.sass-cache
+*.css
+*.css.map
