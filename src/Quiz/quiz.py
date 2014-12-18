@@ -4,13 +4,10 @@ import random
 class Quiz:
     """ Represents a quiz for a list of words """
     
-    def __init__(self, concepts, nativeLanguage, testLanguage, conceptManager):
-        """ Initialize the Quizzer with the concepts to test and the native and test languages """
-        self.nativeLanguage = nativeLanguage
-        self.testLanguage = testLanguage
-        
-        wordsInNativeLanguage = conceptManager.findConceptMatches(concepts, nativeLanguage)
-        translations = set(conceptManager.findConceptMatches(concepts, testLanguage))
+    def __init__(self, wordList, conceptManager):
+        """ Initialize the Quiz with the word list to test """
+        wordsInNativeLanguage = wordList.getNativeWords(conceptManager)
+        translations = set(wordList.getTranslatedWords(conceptManager))
         random.shuffle(wordsInNativeLanguage)
         
         self.questions = []
