@@ -1,6 +1,11 @@
-<div>
-    <div ng-repeat="wordList in wordLists">
-        <h1>Name: {{wordList.name}}</h1>
-        <h2>Number of Words: {{wordList.words.length}}</h2>
+<div class="col-md-8 col-md-push-2">
+    <h1 class="text-center">Word Lists</h1>
+    <div class="panel panel-primary" ng-repeat="wordList in wordLists">
+        <div class="panel-heading">
+            <h3 class="panel-title">{{wordList.name}}</h3>
+        </div>
+        <div class="panel-body">
+            {{wordList.words.length}} words
+        </div>
     </div>
 </div>
