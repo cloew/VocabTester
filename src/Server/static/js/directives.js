@@ -1,3 +1,3 @@
 'use strict';
 
-angular.module('VocabTesterDirectives');
+angular.module('VocabTesterDirectives', []);

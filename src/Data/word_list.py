@@ -11,8 +11,8 @@ class WordList:
         
     def getNativeWords(self, conceptManager):
         """ Return the native words in the word list """
-        return conceptManager.findConceptMatches(concepts, self.nativeLanguage)
+        return conceptManager.findConceptMatches(self.concepts, self.nativeLanguage)
         
     def getTranslatedWords(self, conceptManager):
         """ Return the translated words in the word list """
-        return conceptManager.findConceptMatches(concepts, self.testLanguage)
+        return conceptManager.findConceptMatches(self.concepts, self.testLanguage)
