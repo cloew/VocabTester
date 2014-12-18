@@ -1,0 +1,15 @@
+$word-list-heading-height: 41px;
+$word-list-heading-padding: 5px;
+$word-list-header-height: $word-list-heading-height - 2*$word-list-heading-padding - 1;
+
+.word-list-panel-heading {
+    height: $word-list-heading-height;
+    padding-top: $word-list-heading-padding;
+    padding-bottom: $word-list-heading-padding;
+}
+
+.word-list-header {
+    display: table-cell;
+    height: $word-list-header-height;
+    vertical-align: middle;
+}
