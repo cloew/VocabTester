@@ -2,8 +2,9 @@
 class WordList:
     """ Represents a list of words to quiz """
     
-    def __init__(self, concepts, nativeLanguage, testLanguage):
+    def __init__(self, name, concepts, nativeLanguage, testLanguage):
         """ Initialize the Word List with the concepts to test and the native and test languages """
+        self.name = name
         self.concepts = concepts
         self.nativeLanguage = nativeLanguage
         self.testLanguage = testLanguage
