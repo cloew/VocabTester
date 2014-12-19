@@ -2,6 +2,26 @@ $word-list-heading-height: 41px;
 $word-list-heading-padding: 5px;
 $word-list-header-height: $word-list-heading-height - 2*$word-list-heading-padding - 1;
 
+$blue-bg: #428bca;
+
+@mixin border-radius($radius) {
+  -webkit-border-radius: $radius;
+     -moz-border-radius: $radius;
+      -ms-border-radius: $radius;
+          border-radius: $radius;
+}
+
+.option {
+    width: 100px;
+    padding: 5px;
+    margin: 5px;
+}
+
+.selected {
+    @include border-radius(10px);
+    background-color: $blue-bg;
+}
+
 .word-list-panel-heading {
     height: $word-list-heading-height;
     padding-top: $word-list-heading-padding;

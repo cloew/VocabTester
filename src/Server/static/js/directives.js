@@ -20,5 +20,19 @@ angular.module('VocabTesterDirectives', ['ui.bootstrap'])
           scope: {
               question: '=question'
           },
+          link: function(scope, elements, attrs) {
+              scope.selectOption = function(index) {
+                  scope.selectedIndex = index;
+              };
+          },
           templateUrl: 'static/partials/directives/question.html'
+      }})
+    .directive('option', function() {
+      return {
+          restrict: 'E',
+          replace: true,
+          scope: {
+              option: '=option'
+          },
+          templateUrl: 'static/partials/directives/option.html'
       }})
