@@ -13,3 +13,12 @@ angular.module('VocabTesterDirectives', ['ui.bootstrap'])
           },
           templateUrl: 'static/partials/directives/word_count.html'
       }})
+    .directive('question', function() {
+      return {
+          restrict: 'E',
+          replace: true,
+          scope: {
+              question: '=question'
+          },
+          templateUrl: 'static/partials/directives/question.html'
+      }})

@@ -4,10 +4,7 @@
             <h3 class="panel-title">{{quiz.name}} Quiz</h3>
         </div>
         <div class="panel-body">
-            <h4>Translate {{quiz.question.word}}</h4>
-            <div  ng-repeat="option in quiz.question.options">
-                <span>{{option}}</span>
-            </div>
+            <question question="quiz.question"></question>
         </div>
     </div>
 </div>
