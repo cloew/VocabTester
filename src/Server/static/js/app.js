@@ -8,6 +8,10 @@ angular.module('VocabTester', ['ngRoute', 'VocabTesterControllers', 'VocabTester
 			templateUrl: 'static/partials/word_lists.html',
 			controller: 'WordListsController'
 		})
+		.when('/wordlist/:wordlistId/quiz', {
+			templateUrl: 'static/partials/quiz.html',
+			controller: 'QuizController'
+		})
 		.otherwise({
 			redirectTo: '/'
 		})

@@ -13,7 +13,7 @@ class Quiz:
         
         self.questions = []
         for word in wordsInNativeLanguage:
-            translation = conceptManager.findTranslation(word, testLanguage)
+            translation = conceptManager.findTranslation(word, wordList.testLanguage)
             translations.remove(translation)
             self.questions.append(Question(word, translation, translations))
             translations.add(translation)
