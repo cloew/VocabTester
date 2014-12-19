@@ -1,4 +1,4 @@
-from Data.Question.question import Question
+from Quiz.Question.question import Question
 import random
 
 class Quiz:
@@ -6,6 +6,7 @@ class Quiz:
     
     def __init__(self, wordList, conceptManager):
         """ Initialize the Quiz with the word list to test """
+        self.wordList = wordList
         wordsInNativeLanguage = wordList.getNativeWords(conceptManager)
         translations = set(wordList.getTranslatedWords(conceptManager))
         random.shuffle(wordsInNativeLanguage)

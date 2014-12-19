@@ -1,6 +1,7 @@
+from word_wrapper import GetWordListJSON
 
 class WordListWrapper:
-    """ Converts a Word List Wrapper to JSON """
+    """ Converts a Word List to JSON """
     
     def __init__(self, wordList):
         """ Initialize the word list wrapper """
@@ -9,4 +10,4 @@ class WordListWrapper:
     def toJSON(self, conceptManager):
         """ Convert the word list to JSON """
         return {"name":self.wordList.name,
-                "words":[unicode(word) for word in self.wordList.getNativeWords(conceptManager)]}
+                "words":GetWordListJSON(self.wordList.getNativeWords(conceptManager))}
