@@ -6,6 +6,6 @@
         <div class="panel-body">
             <question question="quiz.question" selectOption="selectOption"></question>
         </div>
-        <div class="panel-footer question-footer"><button class="pull-right btn btn-primary" ng-click="answer();">Submit</button></div>
+        <div class="panel-footer question-footer"><button class="pull-right btn btn-primary" ng-click="answer();" ng-disabled="!quiz.question.selectedIndex">Submit</button></div>
     </div>
 </div>
