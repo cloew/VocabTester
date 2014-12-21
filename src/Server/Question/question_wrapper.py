@@ -1,4 +1,4 @@
-from word_wrapper import GetWordListJSON, WordWrapper
+from Server.word_wrapper import GetWordListJSON, WordWrapper
 
 class QuestionWrapper:
     """ Converts a Question to JSON """

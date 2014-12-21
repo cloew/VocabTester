@@ -13,3 +13,8 @@ def BuildQuiz():
     global quizzer, wordList, cm
     quizzer = Quizzer(Quiz(wordList, cm))
     return quizzer
+    
+def GetQuiz():
+    """ Return the current quiz """
+    global quizzer
+    return quizzer

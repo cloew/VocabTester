@@ -15,9 +15,18 @@ controllers.controller('WordListsController', function ($scope, $http, $location
 });
 
 controllers.controller('QuizController', function ($scope, $http) {
-    $http.get("/api/wordlist/1/quiz").success(function(data) {
+    var rootUrl = "/api/wordlist/1/quiz";
+    $http.get(rootUrl).success(function(data) {
         $scope.quiz = data.quiz;
     }).error(function(error) {
         console.log(error);
     });
+    
+    $scope.answer = function() {
+        $http.post(rootUrl+'/answer', {'answer':$scope.quiz.question.selectedIndex}).success(function(data) {
+            $scope.questionResults = data.results;
+        }).error(function(error) {
+            console.log(error);
+        });
+    }
 });
