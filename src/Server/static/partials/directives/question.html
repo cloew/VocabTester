@@ -1,6 +1,6 @@
 <div>
     <h4>Translate {{question.word}}</h4>
     <div ng-repeat="option in question.options">
-        <option option="option" ng-class="{selected: $index===selectedIndex}" ng-click="selectOption($index);"></option>
+        <option option="option" ng-class="{selected: $index===question.selectedIndex}" ng-click="selectOption($index);"></option>
     </div>
 </div>

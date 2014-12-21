@@ -22,7 +22,7 @@ angular.module('VocabTesterDirectives', ['ui.bootstrap'])
           },
           link: function(scope, elements, attrs) {
               scope.selectOption = function(index) {
-                  scope.selectedIndex = index;
+                  scope.question.selectedIndex = index;
               };
           },
           templateUrl: 'static/partials/directives/question.html'
