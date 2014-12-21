@@ -2,7 +2,9 @@ $word-list-heading-height: 41px;
 $word-list-heading-padding: 5px;
 $word-list-header-height: $word-list-heading-height - 2*$word-list-heading-padding - 1;
 
-$blue-bg: #428bca;
+$primary-bg: #428bca;
+$success-bg: #5cb85c;
+$danger-bg: #d9534f;
 
 @mixin border-radius($radius) {
   -webkit-border-radius: $radius;
@@ -19,7 +21,7 @@ $blue-bg: #428bca;
 
 .selected {
     @include border-radius(10px);
-    background-color: $blue-bg;
+    background-color: $primary-bg;
 }
 
 .word-list-panel-heading {
@@ -36,4 +38,12 @@ $blue-bg: #428bca;
 
 .question-footer {
     height: 55px;
+}
+
+.danger-footer {
+    background-color: $danger-bg;
+}
+
+.success-footer {
+    background-color: $success-bg;
 }
