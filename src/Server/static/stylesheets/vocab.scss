@@ -24,6 +24,11 @@ $danger-bg: #d9534f;
     background-color: $primary-bg;
 }
 
+.answer {
+    @include border-radius(10px);
+    background-color: $success-bg;
+}
+
 .word-list-panel-heading {
     height: $word-list-heading-height;
     padding-top: $word-list-heading-padding;
@@ -38,12 +43,4 @@ $danger-bg: #d9534f;
 
 .question-footer {
     height: 55px;
-}
-
-.danger-footer {
-    background-color: $danger-bg;
-}
-
-.success-footer {
-    background-color: $success-bg;
 }

@@ -24,7 +24,7 @@ controllers.controller('QuizController', function ($scope, $http) {
     
     $scope.answer = function() {
         $http.post(rootUrl+'/answer', {'answer':$scope.quiz.question.selectedIndex}).success(function(data) {
-            $scope.questionResults = data.results;
+            $scope.quiz.question.results = data.results;
         }).error(function(error) {
             console.log(error);
         });

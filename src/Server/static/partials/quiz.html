@@ -6,19 +6,12 @@
         <div class="panel-body">
             <question question="quiz.question" selectOption="selectOption"></question>
         </div>
-        <div class="panel-footer question-footer" ng-if="!questionResults">
+        <div class="panel-footer question-footer" ng-if="!quiz.question.results">
             <button class="pull-right btn btn-primary" ng-click="answer();" ng-disabled="!(quiz.question.selectedIndex >= 0)">Submit</button>
         </div>
-        <div class="panel-footer question-footer success-footer" ng-if="questionResults.correct">
+        <div class="panel-footer question-footer" ng-if="quiz.question.results">
             <span>
                 <button class="pull-right btn btn-success">Next</button>
-                <h4>{{questionResults.answer}} is correct!</h4>
-            </span>
-        </div>
-        <div class="panel-footer question-footer danger-footer" ng-if="questionResults && !questionResults.correct">
-            <span>
-                <button class="pull-right btn btn-danger">Next</button>
-                <h4>{{questionResults.guess}} was incorrect. The correct answer was {{questionResults.answer}}</h4>
             </span>
         </div>
     </div>
