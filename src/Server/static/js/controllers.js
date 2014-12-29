@@ -28,5 +28,13 @@ controllers.controller('QuizController', function ($scope, $http) {
         }).error(function(error) {
             console.log(error);
         });
-    }
+    };
+    
+    $scope.next = function() {
+        $http.post(rootUrl+'/next').success(function(data) {
+            $scope.quiz = data.quiz;
+        }).error(function(error) {
+            console.log(error);
+        });
+    };
 });
