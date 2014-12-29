@@ -60,3 +60,6 @@ target/
 .sass-cache
 *.css
 *.css.map
+
+# VirtualEnv
+venv/
