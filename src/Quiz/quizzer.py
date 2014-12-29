@@ -25,3 +25,8 @@ class Quizzer:
     def latestResults(self):
         """ Return the latest question results """
         return self.questionResults[-1]
+       
+    @property
+    def currentQuestionIndex(self):
+        """ Return the current question index """
+        return len(self.questionResults)
