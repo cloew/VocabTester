@@ -1,6 +1,11 @@
+from Server import db
 
-class Word:
+class Word(db.Model):
     """ Represents a word from a particular language """
+    __tablename__ = 'words'
+    
+    id = db.Column(db.Integer, primary_key=True)
+    text = db.Column(db.String())
     
     def __init__(self, conceptId, text):
         """ Initialize the word with its concept id and the text """
