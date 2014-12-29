@@ -63,3 +63,6 @@ target/
 
 # VirtualEnv
 venv/
+
+# Flask
+migrations/

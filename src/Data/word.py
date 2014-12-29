@@ -1,4 +1,4 @@
-from Server import db
+from kao_flask.database import db
 
 class Word(db.Model):
     """ Represents a word from a particular language """
