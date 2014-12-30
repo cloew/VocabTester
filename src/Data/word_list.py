@@ -1,6 +1,17 @@
+from kao_flask.database import db
+
+from language import Language
+from word import Word
 
 class WordList:
     """ Represents a list of words to quiz """
+    __tablename__ = 'word_lists'
+    
+    id = db.Column(db.Integer, primary_key=True)
+    native_id = db.Column(db.Integer, db.ForeignKey('languages.id'))
+    nativeLanguage = db.relationship("Language")
+    test_id = db.Column(db.Integer, db.ForeignKey('languages.id'))
+    testLanguage = db.relationship("Language")
     
     def __init__(self, name, concepts, nativeLanguage, testLanguage):
         """ Initialize the Word List with the concepts to test and the native and test languages """
