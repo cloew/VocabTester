@@ -1,5 +1,3 @@
-from egg_loader import LoadEgg
-
 from concept import Concept
 from word import Word
             
