@@ -5,12 +5,19 @@ from Quiz.quiz import Quiz
 from Quiz.quizzer import Quizzer
 
 cm = ConceptManager(["resources/days_of_week_english.json", "resources/days_of_week_japanese.json"])
-wordList = WordList("Days of the Week", range(1,8), "English", "Japanese")
+wordList = None
 quizzer = None
+
+def GetWordList():
+    global wordList
+    if wordList is None:
+        wordList = WordList.query.first()
+    return wordList
 
 def BuildQuiz():
     """ Build the Quiz """
-    global quizzer, wordList, cm
+    global quizzer, cm
+    wordList = GetWordList()
     quizzer = Quizzer(Quiz(wordList, cm))
     return quizzer
     
