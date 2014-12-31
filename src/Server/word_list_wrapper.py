@@ -9,5 +9,6 @@ class WordListWrapper:
         
     def toJSON(self, conceptManager):
         """ Convert the word list to JSON """
-        return {"name":self.wordList.name,
+        return {"id":self.wordList.id,
+                "name":self.wordList.name,
                 "words":GetWordListJSON(self.wordList.getNativeWords(conceptManager))}

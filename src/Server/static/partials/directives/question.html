@@ -6,7 +6,7 @@
     </div>
     <div ng-repeat="option in question.options">
         <option option="option" 
-                ng-class="{selected: $index===question.selectedIndex, answer: question.results.answer===option}"
+                ng-class="{selected: $index===question.selectedIndex, answer: (question.results && question.answerIndex === $index)}"
                 ng-click="selectOption($index);"></option>
     </div>
 </div>

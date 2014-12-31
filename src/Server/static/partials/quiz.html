@@ -1,18 +1,18 @@
 <div class="col-md-8 col-md-push-2">
     <div class="panel panel-primary">
         <div class="panel-heading">
-            <span class="pull-right question-progress">{{quiz.currentQuestion}} of {{quiz.numberOfQuestions}}</span>
-            <h3 class="panel-title">{{quiz.name}} Quiz</h3>
+            <span class="pull-right question-progress">{{quiz.currentQuestionIndex+1}} of {{quiz.quiz.questions.length}}</span>
+            <h3 class="panel-title">{{quiz.quiz.name}} Quiz</h3>
         </div>
         <div class="panel-body">
-            <question question="quiz.question" selectOption="selectOption"></question>
+            <question question="quiz.currentQuestion" selectOption="selectOption"></question>
         </div>
-        <div class="panel-footer question-footer" ng-if="!quiz.question.results">
-            <button class="pull-right btn btn-primary" ng-click="answer();" ng-disabled="!(quiz.question.selectedIndex >= 0)">Submit</button>
+        <div class="panel-footer question-footer" ng-if="!quiz.currentQuestion.results">
+            <button class="pull-right btn btn-primary" ng-click="quiz.answer();" ng-disabled="!(quiz.currentQuestion.selectedIndex >= 0)">Submit</button>
         </div>
-        <div class="panel-footer question-footer" ng-if="quiz.question.results">
+        <div class="panel-footer question-footer" ng-if="quiz.currentQuestion.results">
             <span>
-                <button class="pull-right btn btn-success" ng-click="next();">Next</button>
+                <button class="pull-right btn btn-success" ng-click="quiz.next();">Next</button>
             </span>
         </div>
     </div>

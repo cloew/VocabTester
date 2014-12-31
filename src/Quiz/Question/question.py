@@ -48,3 +48,8 @@ class Question:
     def numberOfWrongAnswers(self):
         """ Returns the number of wrong answers for this question """
         return min(len(self.otherOptions), self.NUM_WRONG_ANSWERS)
+        
+    @property
+    def answerIndex(self):
+        """ Return the index of the answer to the question """
+        return self.options.index(self.translation)

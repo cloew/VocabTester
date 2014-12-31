@@ -1,6 +1,6 @@
 'use strict';
 
-var controllers = angular.module('VocabTesterControllers', ['ui.bootstrap']);
+var controllers = angular.module('VocabTesterControllers', ['ui.bootstrap', 'VocabTesterServices']);
 
 controllers.controller('WordListsController', function ($scope, $http, $location) {
     $http.get("/api/wordlists").success(function(data) {
@@ -10,31 +10,10 @@ controllers.controller('WordListsController', function ($scope, $http, $location
     });
     
     $scope.startQuiz = function() {
-        $location.path('/wordlist/1/quiz/');
+        $location.path('/wordlist/'+$scope.wordLists[0].id+'/quiz/');
     };
 });
 
-controllers.controller('QuizController', function ($scope, $http) {
-    var rootUrl = "/api/wordlist/1/quiz";
-    $http.get(rootUrl).success(function(data) {
-        $scope.quiz = data.quiz;
-    }).error(function(error) {
-        console.log(error);
-    });
-    
-    $scope.answer = function() {
-        $http.post(rootUrl+'/answer', {'answer':$scope.quiz.question.selectedIndex}).success(function(data) {
-            $scope.quiz.question.results = data.results;
-        }).error(function(error) {
-            console.log(error);
-        });
-    };
-    
-    $scope.next = function() {
-        $http.post(rootUrl+'/next').success(function(data) {
-            $scope.quiz = data.quiz;
-        }).error(function(error) {
-            console.log(error);
-        });
-    };
+controllers.controller('QuizController', function ($scope, quizService) {
+    $scope.quiz = quizService.buildQuiz();
 });

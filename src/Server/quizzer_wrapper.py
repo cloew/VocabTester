@@ -10,6 +10,4 @@ class QuizzerWrapper:
     def toJSON(self):
         """ Convert the word list to JSON """
         return {"name":self.quizzer.quiz.wordList.name,
-                "question":QuestionWrapper(self.quizzer.currentQuestion).toJSON(),
-                "numberOfQuestions":len(self.quizzer.quiz.questions),
-                "currentQuestion":self.quizzer.currentQuestionIndex+1}
+                "questions":[QuestionWrapper(question).toJSON() for question in self.quizzer.quiz.questions]}
