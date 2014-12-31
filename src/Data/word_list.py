@@ -19,13 +19,6 @@ class WordList(db.Model):
     test_id = db.Column(db.Integer, db.ForeignKey('languages.id'))
     testLanguage = db.relationship("Language", foreign_keys=[test_id])
     
-    # def __init__(self, name, concepts, nativeLanguage, testLanguage):
-        # """ Initialize the Word List with the concepts to test and the native and test languages """
-        # self.name = name
-        # self.concepts = concepts
-        # self.nativeLanguage = nativeLanguage
-        # self.testLanguage = testLanguage
-        
     def getNativeWords(self, conceptManager):
         """ Return the native words in the word list """
         return conceptManager.findConceptMatches(self.concepts, self.nativeLanguage)

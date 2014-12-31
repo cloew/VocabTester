@@ -13,11 +13,6 @@ class Word(db.Model):
     concept = db.relationship("Concept", backref=db.backref('words'))
     language_id = db.Column(db.Integer, db.ForeignKey('languages.id'))
     language = db.relationship("Language", backref=db.backref('languages'))
-    
-    # def __init__(self, concept, text, language):
-        # """ Initialize the word with its concept and the text """
-        # self.concept = concept
-        # self.text = text
         
     def __unicode__(self):
         """ Return the string representation of the Word """

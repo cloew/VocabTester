@@ -1,10 +1,10 @@
-from Data.concept_manager import ConceptManager
+import Data.concept_manager as cm
 from Data.word_list import WordList
 
 from Quiz.quiz import Quiz
 from Quiz.quizzer import Quizzer
 
-cm = ConceptManager(["resources/days_of_week_english.json", "resources/days_of_week_japanese.json"])
+# cm = ConceptManager(["resources/days_of_week_english.json", "resources/days_of_week_japanese.json"])
 wordList = None
 quizzer = None
 
@@ -16,7 +16,7 @@ def GetWordList():
 
 def BuildQuiz():
     """ Build the Quiz """
-    global quizzer, cm
+    global quizzer
     wordList = GetWordList()
     quizzer = Quizzer(Quiz(wordList, cm))
     return quizzer

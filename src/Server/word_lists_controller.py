@@ -1,7 +1,7 @@
 from word_list_wrapper import WordListWrapper
 
 from Data.word_list import WordList
-from Data.temp_data import GetWordList, cm
+import Data.concept_manager as cm
 
 from kao_flask.controllers.json_controller import JSONController
 
