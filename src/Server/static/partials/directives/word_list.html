@@ -1,0 +1,11 @@
+<div class="panel panel-primary">
+    <div class="panel-heading word-list-panel-heading">
+        <button class="pull-right btn btn-primary btn-sm" ng-click="startQuiz();">Quiz Me!</button>
+        <div class="word-list-header">
+            <h3 class="panel-title">{{wordList.name}}</h3>
+        </div>
+    </div>
+    <div class="panel-body">
+        <word-count words="wordList.words"></word-count>
+    </div>
+</div>
