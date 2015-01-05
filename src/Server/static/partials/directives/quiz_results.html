@@ -1,0 +1,16 @@
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <span class="pull-right question-progress">{{quiz.correctAnswers}} of {{quiz.numberOfQuestions}}</span>
+        <h3 class="panel-title">{{quiz.quiz.name}} Quiz</h3>
+    </div>
+    <div class="panel-body">
+        <ol>
+            <li ng-repeat="question in quiz.quiz.questions"><i class="pull-right glyphicon" ng-class="{'glyphicon-ok': question.results.correct, 'glyphicon-remove': !question.results.correct}"></i>{{question.word}}</li>
+        <ol>
+    </div>
+    <div class="panel-footer question-footer">
+        <span>
+            <button class="pull-right btn btn-success" ng-click="back();">Back</button>
+        </span>
+    </div>
+</div>

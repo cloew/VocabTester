@@ -50,3 +50,26 @@ angular.module('VocabTesterDirectives', ['ui.bootstrap'])
           },
           templateUrl: 'static/partials/directives/option.html'
       }})
+    .directive('quizPanel', function() {
+      return {
+          restrict: 'E',
+          replace: true,
+          scope: {
+              quiz: '='
+          },
+          templateUrl: 'static/partials/directives/quiz_panel.html'
+      }})
+    .directive('quizResults', function() {
+      return {
+          restrict: 'E',
+          replace: true,
+          scope: {
+              quiz: '='
+          },
+          controller: function($scope, $location) {
+              $scope.back = function() {
+                $location.path('/wordlist/');
+              };
+          },
+          templateUrl: 'static/partials/directives/quiz_results.html'
+      }})
