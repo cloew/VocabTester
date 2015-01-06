@@ -5,6 +5,7 @@ from word import Word
 class WordMastery(db.Model):
     """ Represents the mastery of a word """
     __tablename__ = 'word_masteries'
+    MAX_ANSWERS = 3
     
     id = db.Column(db.Integer, primary_key=True)
     word_id = db.Column(db.Integer, db.ForeignKey('words.id'))
