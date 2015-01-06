@@ -14,15 +14,6 @@ class Word(db.Model):
     language_id = db.Column(db.Integer, db.ForeignKey('languages.id'))
     language = db.relationship("Language", backref=db.backref('languages'))
     
-    def answer(self):
-        """ Answer the word to add mastery """
-        from word_mastery import WordMastery
-        from word_answer import WordAnswer
-        if self.mastery is None:
-            self.mastery = WordMastery(word=self)
-            
-    def getMastery(self):
-        
     def __unicode__(self):
         """ Return the string representation of the Word """
         return unicode(self.text)
