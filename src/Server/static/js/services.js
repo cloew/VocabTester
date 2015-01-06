@@ -20,11 +20,17 @@ services.factory('quizService', function($http, $routeParams) {
     };
     
     Quiz.prototype.answer = function() {
-        var correct = this.currentQuestion.selectedIndex == this.currentQuestion.answerIndex;
-        this.currentQuestion.results = {"correct":correct};
+        var question = this.currentQuestion;
+        var correct = question.selectedIndex == this.currentQuestion.answerIndex;
+        question.results = {"correct":correct};
         if (correct) {
             this.correctAnswers += 1;
         }
+        $http.post('/api/wordlist/'+this.wordListId+'/quiz/answer', {'wordId':question.word.id, 'correct':correct}).success(function(data) {
+            question.word = data;
+        }).error(function(error) {
+            console.log(error);
+        });
     };
     
     Quiz.prototype.next = function() {

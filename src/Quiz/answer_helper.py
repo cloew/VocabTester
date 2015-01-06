@@ -12,12 +12,12 @@ def Answer(word, correct):
 
 def GetWordMastery(word):
     """ Return the word mastery for the word """
-    if word.mastery is None:
+    if len(word.mastery) == 0:
         mastery = WordMastery(word=word)
         db.session.add(mastery)
         db.session.commit()
     else:
-        mastery = word.mastery
+        mastery = word.mastery[0]
     
     return mastery
     
