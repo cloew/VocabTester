@@ -14,6 +14,14 @@ class Word(db.Model):
     language_id = db.Column(db.Integer, db.ForeignKey('languages.id'))
     language = db.relationship("Language", backref=db.backref('languages'))
     
+    @property
+    def mastery(self):
+        """ Return the words current mastery record """
+        mastery = None
+        if len(self.masteries) > 0:
+            mastery = self.masteries[0]
+        return mastery
+    
     def __unicode__(self):
         """ Return the string representation of the Word """
         return unicode(self.text)

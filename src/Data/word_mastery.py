@@ -9,4 +9,9 @@ class WordMastery(db.Model):
     
     id = db.Column(db.Integer, primary_key=True)
     word_id = db.Column(db.Integer, db.ForeignKey('words.id'))
-    word = db.relationship("Word", backref=db.backref('mastery'))
+    word = db.relationship("Word", backref=db.backref('masteries'))
+    
+    @property
+    def numberOfCorrectAnswers(self):
+        """ Return the number of correct answers for this word """
+        return len([answer for answer in self.answers if answer.correct])

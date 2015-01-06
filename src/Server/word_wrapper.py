@@ -8,8 +8,14 @@ class WordWrapper:
         
     def toJSON(self):
         """ Convert the word list to JSON """
+        mastery = self.word.mastery
+        masteryRating = 0
+        if mastery is not None:
+            masteryRating = mastery.numberOfCorrectAnswers
+            
         return {"id":self.word.id,
-                "text":unicode(self.word)}
+                "text":unicode(self.word),
+                "mastery":masteryRating}
         
 def GetWordListJSON(words):
     """ Return a list of word JSON from the given words """
