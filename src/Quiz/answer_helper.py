@@ -1,7 +1,7 @@
 from kao_flask.database import db
 
-from word_mastery import WordMastery
-from word_answer import WordAnswer
+from Data.word_mastery import WordMastery
+from Data.word_answer import WordAnswer
 
 def Answer(word, correct):
     """ Add an answer to the word if its correct """

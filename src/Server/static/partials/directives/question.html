@@ -2,7 +2,7 @@
     <div>
         <!--<alert type="successType" ng-if="question.results.correct">Correct</alert>
         <alert class="alert-danger" type="danger" ng-if="question.results && !question.results.correct">Wrong</alert>-->
-        <h4 style="display:inline-block;">Translate {{question.word}}</h4>
+        <h4 style="display:inline-block;">Translate {{question.word.text}}</h4>
     </div>
     <div ng-repeat="option in question.options">
         <option option="option" 

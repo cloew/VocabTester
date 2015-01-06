@@ -8,7 +8,8 @@ class WordWrapper:
         
     def toJSON(self):
         """ Convert the word list to JSON """
-        return unicode(self.word)
+        return {"id":self.word.id,
+                "text":unicode(self.word)}
         
 def GetWordListJSON(words):
     """ Return a list of word JSON from the given words """
