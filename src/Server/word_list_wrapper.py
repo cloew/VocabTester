@@ -11,4 +11,5 @@ class WordListWrapper:
         """ Convert the word list to JSON """
         return {"id":self.wordList.id,
                 "name":self.wordList.name,
-                "words":GetWordListJSON(self.wordList.getNativeWords(conceptManager))}
+                "words":GetWordListJSON(self.wordList.getTranslatedWords(conceptManager)),
+                "nativeWords":GetWordListJSON(self.wordList.getNativeWords(conceptManager))}

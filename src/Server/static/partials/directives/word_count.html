@@ -2,11 +2,12 @@
     <accordion>
         <accordion-group is-open="status.open">
             <accordion-heading>
-                {{words.length}} words <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
+                {{wordList.words.length}} words <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
             </accordion-heading>
-            <ul>
+            <word-table words="wordList.words" native-words="wordList.nativeWords"></word-table>
+            <!-- <ul>
                 <li ng-repeat="word in words">{{word.text}}</li>
-            <ul>
+            <ul> -->
         </accordion-group>
     </accordion>
 <div>

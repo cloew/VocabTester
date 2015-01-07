@@ -20,12 +20,29 @@ angular.module('VocabTesterDirectives', ['ui.bootstrap'])
           restrict: 'E',
           replace: true,
           scope: {
-              words: '='
+              wordList: '='
           },
           controller: function($scope) {
               $scope.isOpen = false;
           },
           templateUrl: 'static/partials/directives/word_count.html'
+      }})
+    .directive('wordTable', function() {
+      return {
+          restrict: 'E',
+          replace: true,
+          scope: {
+              words: '=',
+              nativeWords: '='
+          },
+          controller: function($scope) {
+              $scope.entries = [];
+              for (var i = 0; i < $scope.words.length; i++) {
+                $scope.entries.push({"word":$scope.words[i],
+                                     "nativeWord":$scope.nativeWords[i]});
+              }
+          },
+          templateUrl: 'static/partials/directives/word_table.html'
       }})
     .directive('question', function() {
       return {
