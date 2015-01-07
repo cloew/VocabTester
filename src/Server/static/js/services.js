@@ -2,6 +2,19 @@
 
 var services = angular.module('VocabTesterServices', []);
 
+
+services.factory('wordTableService', function($http, $routeParams) {
+    return {
+        buildEntries: function (words, nativeWords) {
+            var table = {'entries':[], columns:[{'name':'Word', 'path':'word'}, {'name':'Native', 'path':'native'}]};
+            for (var i = 0; i < words.length; i++) {
+                table.entries.push({'word':words[i].text, 'native':nativeWords[i].text});
+            }
+            return table;
+        }
+    };
+});
+
 services.factory('quizService', function($http, $routeParams) {
     function Quiz(wordListId) {
         this.wordListId = wordListId;

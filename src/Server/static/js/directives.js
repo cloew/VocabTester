@@ -1,6 +1,16 @@
 'use strict';
 
 angular.module('VocabTesterDirectives', ['ui.bootstrap'])
+    .directive('kaoTable', function() {
+      return {
+          restrict: 'E',
+          replace: true,
+          scope: {
+              entries: '=',
+              columns: '='
+          },
+          templateUrl: 'static/partials/directives/kao_table.html'
+      }})
     .directive('wordList', function() {
       return {
           restrict: 'E',
@@ -35,12 +45,10 @@ angular.module('VocabTesterDirectives', ['ui.bootstrap'])
               words: '=',
               nativeWords: '='
           },
-          controller: function($scope) {
-              $scope.entries = [];
-              for (var i = 0; i < $scope.words.length; i++) {
-                $scope.entries.push({"word":$scope.words[i],
-                                     "nativeWord":$scope.nativeWords[i]});
-              }
+          controller: function($scope, wordTableService) {
+              var table = wordTableService.buildEntries($scope.words, $scope.nativeWords);
+              $scope.entries = table.entries;
+              $scope.columns = table.columns;
           },
           templateUrl: 'static/partials/directives/word_table.html'
       }})

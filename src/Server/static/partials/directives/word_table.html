@@ -1,12 +1,3 @@
 <div>
-    <table class="table table-striped table-bordered">
-        <tr>
-            <th>Word</th>
-            <th>Native</th>
-        </tr>
-        <tr ng-repeat="entry in entries">
-            <td>{{entry.word.text}}</td>
-            <td>{{entry.nativeWord.text}}</td>
-        </tr>
-    </table>
+    <kao-table entries="entries" columns="columns"></kao-table>
 <div>
