@@ -6,9 +6,9 @@ var services = angular.module('VocabTesterServices', []);
 services.factory('wordTableService', function($http, $routeParams) {
     return {
         buildEntries: function (words, nativeWords) {
-            var table = {'entries':[], columns:[{'name':'Word', 'path':'word'}, {'name':'Native', 'path':'native'}]};
+            var table = {'entries':[], columns:[{'name':'Word', 'path':'word'}, {'name':'Native', 'path':'native'}, {'name':'Mastery', 'path':'mastery'}]};
             for (var i = 0; i < words.length; i++) {
-                table.entries.push({'word':words[i].text, 'native':nativeWords[i].text});
+                table.entries.push({'word':words[i].text, 'native':nativeWords[i].text, 'mastery':words[i].mastery});
             }
             return table;
         }
