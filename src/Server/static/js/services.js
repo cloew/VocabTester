@@ -23,7 +23,7 @@ services.factory('quizResultsTableService', function(wordTableService) {
             for (var i = 0; i < quiz.quiz.questions.length; i++) {
                 var question = quiz.quiz.questions[i];
                 words.push(question.word);
-                nativeWords.push(question.options[question.answerIndex]);
+                nativeWords.push(question.questionWord);
             }
             var table = wordTableService.buildEntries(words, nativeWords);
             // table.columns.push({'name':'Correct', 'path':'correct'});
