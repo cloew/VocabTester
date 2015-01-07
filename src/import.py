@@ -10,10 +10,17 @@ import sys
 
 def CreateLanguages(languageNames):
     """ Create the languages """
-    languages = [Language(name=name) for name in languageNames]
-    [server.db.session.add(language) for language in languages]
+    languageMap = {}
+    
+    for name in languageNames:
+        language = Language.query.filter_by(name=name).first()
+        if language is None:
+            language = Language(name=name)
+            server.db.session.add(language)
+        languageMap[name] = language
     server.db.session.commit()
-    return {name:language for name, language in zip(languageNames, languages)}
+    
+    return languageMap
 
 def CreateConcepts(words):
     """ Create the concepts """
@@ -36,13 +43,15 @@ def main(args):
         languageMap = CreateLanguages([egg.language for egg in eggs])
         conceptMap = CreateConcepts(eggs[0].words)
         
+        english = Language.query.filter_by(name="English").first()
+        japanese = Language.query.filter_by(name="Japanese").first()
+        
         for egg in eggs:
             CreateWords(egg.words, conceptMap, languageMap[egg.language])
-        
-        # for table in [WordList, Word, Language, Concept]:
-            # records = table.query.all()
-            # [server.db.session.delete(record) for record in records]
-        # server.db.session.commit()
+            
+        wordList = WordList(name=args[1], concepts=conceptMap.values(), nativeLanguage=english, testLanguage=japanese)
+        server.db.session.add(wordList)
+        server.db.session.commit()
 
 if __name__ == "__main__":
     main(sys.argv[1:])
