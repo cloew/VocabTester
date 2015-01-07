@@ -91,7 +91,8 @@ angular.module('VocabTesterDirectives', ['ui.bootstrap'])
           scope: {
               quiz: '='
           },
-          controller: function($scope, $location) {
+          controller: function($scope, $location, quizResultsTableService) {
+              $scope.table = quizResultsTableService.buildEntries($scope.quiz);
               $scope.back = function() {
                 $location.path('/wordlist/');
               };

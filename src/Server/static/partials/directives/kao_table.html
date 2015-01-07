@@ -2,7 +2,7 @@
         <tr>
             <th ng-repeat="column in columns">{{column.name}}</th>
         </tr>
-        <tr ng-repeat="entry in entries">
+        <tr ng-repeat="entry in entries" class="{{entry.rowClass}}">
             <td ng-repeat="column in columns">{{entry[column.path]}}</td>
         </tr>
 </table>

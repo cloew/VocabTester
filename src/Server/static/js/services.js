@@ -3,12 +3,39 @@
 var services = angular.module('VocabTesterServices', []);
 
 
-services.factory('wordTableService', function($http, $routeParams) {
+services.factory('wordTableService', function() {
     return {
         buildEntries: function (words, nativeWords) {
             var table = {'entries':[], columns:[{'name':'Word', 'path':'word'}, {'name':'Native', 'path':'native'}, {'name':'Mastery', 'path':'mastery'}]};
             for (var i = 0; i < words.length; i++) {
                 table.entries.push({'word':words[i].text, 'native':nativeWords[i].text, 'mastery':words[i].mastery});
+            }
+            return table;
+        }
+    };
+});
+
+services.factory('quizResultsTableService', function(wordTableService) {
+    return {
+        buildEntries: function (quiz) {
+            var words = [];
+            var nativeWords = [];
+            for (var i = 0; i < quiz.quiz.questions.length; i++) {
+                var question = quiz.quiz.questions[i];
+                words.push(question.word);
+                nativeWords.push(question.options[question.answerIndex]);
+            }
+            var table = wordTableService.buildEntries(words, nativeWords);
+            // table.columns.push({'name':'Correct', 'path':'correct'});
+            for (var i = 0; i < quiz.quiz.questions.length; i++) {
+                var question = quiz.quiz.questions[i];
+                // table.entries[i].correct = question.results.correct;
+                if (question.results.correct) {
+                    table.entries[i].rowClass = 'success';
+                }
+                else {
+                    table.entries[i].rowClass = 'danger';
+                }
             }
             return table;
         }
