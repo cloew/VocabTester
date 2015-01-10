@@ -1,6 +1,25 @@
 'use strict';
 
 angular.module('VocabTesterDirectives', ['ui.bootstrap'])
+    .directive('keyTrap', function() {
+      return function(scope, elem) {
+        elem.bind('keydown', function(event) {
+          scope.$broadcast('keydown', event);
+        });
+      };
+    })
+    .directive('ngEnter', function() {
+        return function(scope, element, attrs) {
+            scope.$on('keydown', function(msg, event) {
+                if(event.which === 13) {
+                    scope.$apply(function(){
+                        scope.$eval(attrs.ngEnter, {'event': event});
+                    });
+                    event.preventDefault();
+                }
+            });
+        };
+    })
     .directive('kaoTable', function() {
       return {
           restrict: 'E',
