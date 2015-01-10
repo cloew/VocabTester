@@ -18,6 +18,26 @@ angular.module('VocabTesterDirectives', ['ui.bootstrap'])
             });
         };
     })
+    .directive('onUpKey', function($timeout) {
+        return function(scope, element, attrs) {
+            scope.$on('keydown', function(msg, event) {
+                if(event.which === 38) {
+                    scope.$evalAsync(attrs.onUpKey, {'event': event});
+                    event.preventDefault();
+                }
+            });
+        };
+    })
+    .directive('onDownKey', function($timeout) {
+        return function(scope, element, attrs) {
+            scope.$on('keydown', function(msg, event) {
+                if(event.which === 40) {
+                    scope.$evalAsync(attrs.onDownKey, {'event': event});
+                    event.preventDefault();
+                }
+            });
+        };
+    })
     .directive('kaoTable', function() {
       return {
           restrict: 'E',
@@ -79,6 +99,28 @@ angular.module('VocabTesterDirectives', ['ui.bootstrap'])
           controller: function($scope) {
               $scope.selectOption = function(index) {
                   $scope.question.selectedIndex = index;
+              };
+              $scope.selectPreviousOption = function() {
+                    if ($scope.question.selectedIndex === undefined) {
+                        $scope.question.selectedIndex = 0;
+                    }
+                    else if ($scope.question.selectedIndex > 0) {
+                        $scope.question.selectedIndex -= 1;
+                    }
+                    else {
+                        $scope.question.selectedIndex = 0;
+                    }
+              };
+              $scope.selectNextOption = function() {
+                    if ($scope.question.selectedIndex === undefined) {
+                        $scope.question.selectedIndex = 0;
+                    }
+                    else if ($scope.question.selectedIndex < ($scope.question.options.length-1)) {
+                        $scope.question.selectedIndex += 1;
+                    }
+                    else {
+                        $scope.question.selectedIndex = $scope.question.options.length-1;
+                    }
               };
           },
           templateUrl: 'static/partials/directives/question.html'
