@@ -7,11 +7,11 @@
         <question question="quiz.currentQuestion" selectOption="selectOption"></question>
     </div>
     <div class="panel-footer question-footer" ng-if="!quiz.currentQuestion.results">
-        <button class="pull-right btn btn-primary" ng-enter="quiz.answer();" ng-click="quiz.answer();" ng-disabled="!(quiz.currentQuestion.selectedIndex >= 0)">Submit</button>
+        <button class="pull-right btn btn-primary" on-enter-key="quiz.answer();" ng-click="quiz.answer();" ng-disabled="!(quiz.currentQuestion.selectedIndex >= 0)">Submit</button>
     </div>
     <div class="panel-footer question-footer" ng-if="quiz.currentQuestion.results">
         <span>
-            <button class="pull-right btn btn-success" ng-enter="quiz.next();" ng-click="quiz.next();">Next</button>
+            <button class="pull-right btn btn-success" on-enter-key="quiz.next();" ng-click="quiz.next();">Next</button>
         </span>
     </div>
 </div>

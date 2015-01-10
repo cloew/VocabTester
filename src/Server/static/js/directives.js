@@ -8,13 +8,11 @@ angular.module('VocabTesterDirectives', ['ui.bootstrap'])
         });
       };
     })
-    .directive('ngEnter', function() {
+    .directive('onEnterKey', function($timeout) {
         return function(scope, element, attrs) {
             scope.$on('keydown', function(msg, event) {
                 if(event.which === 13) {
-                    scope.$apply(function(){
-                        scope.$eval(attrs.ngEnter, {'event': event});
-                    });
+                    scope.$evalAsync(attrs.onEnterKey, {'event': event});
                     event.preventDefault();
                 }
             });
