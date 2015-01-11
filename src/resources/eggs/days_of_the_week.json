@@ -1,0 +1,36 @@
+[
+{
+    "language":"English",
+    "words":[{"concept":1,
+              "text":"Monday"},
+             {"concept":2,
+              "text":"Tuesday"},
+             {"concept":3,
+              "text":"Wednesday"},
+             {"concept":4,
+              "text":"Thursday"},
+             {"concept":5,
+              "text":"Friday"},
+             {"concept":6,
+              "text":"Saturday"},
+             {"concept":7,
+              "text":"Sunday"}]
+},
+{
+    "language":"Japanese",
+    "words":[{"concept":1,
+              "text":"げつようび"},
+             {"concept":2,
+              "text":"かようび"},
+             {"concept":3,
+              "text":"すいようび"},
+             {"concept":4,
+              "text":"もくようび"},
+             {"concept":5,
+              "text":"きんようび"},
+             {"concept":6,
+              "text":"どようび"},
+             {"concept":7,
+              "text":"にちようび"}]
+}
+]

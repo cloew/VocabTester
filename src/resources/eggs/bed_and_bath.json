@@ -1,0 +1,36 @@
+[
+{
+    "language":"English",
+    "words":[{"concept":1,
+              "text":"Pillow"},
+             {"concept":2,
+              "text":"Futon"},
+             {"concept":3,
+              "text":"Blanket"},
+             {"concept":4,
+              "text":"Bath"},
+             {"concept":5,
+              "text":"Soap"},
+             {"concept":6,
+              "text":"Mirror"},
+             {"concept":7,
+              "text":"Window"}]
+},
+{
+    "language":"Japanese",
+    "words":[{"concept":1,
+              "text":"まくら"},
+             {"concept":2,
+              "text":"ふとん"},
+             {"concept":3,
+              "text":"もうふ"},
+             {"concept":4,
+              "text":"おふろ"},
+             {"concept":5,
+              "text":"せっけん"},
+             {"concept":6,
+              "text":"かがみ"},
+             {"concept":7,
+              "text":"まど"}]
+}
+]

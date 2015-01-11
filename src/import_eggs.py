@@ -34,24 +34,28 @@ def CreateWords(words, conceptMap, language):
     words = [Word(concept=conceptMap[word.conceptId], text=word.text, language=language) for word in words]
     [server.db.session.add(word) for word in words]
     server.db.session.commit()
+    
+def ImportWords(filename, wordListName):
+    """ Import the words from the given file """
+    eggs = LoadEggs(filename)
+    
+    languageMap = CreateLanguages([egg.language for egg in eggs])
+    conceptMap = CreateConcepts(eggs[0].words)
+    
+    english = Language.query.filter_by(name="English").first()
+    japanese = Language.query.filter_by(name="Japanese").first()
+    
+    for egg in eggs:
+        CreateWords(egg.words, conceptMap, languageMap[egg.language])
+        
+    wordList = WordList(name=wordListName, concepts=conceptMap.values(), nativeLanguage=english, testLanguage=japanese)
+    server.db.session.add(wordList)
+    server.db.session.commit()
 
 def main(args):
     """ Run the main file """
     with server.app.app_context():
-        eggs = LoadEggs(args[0])
-        
-        languageMap = CreateLanguages([egg.language for egg in eggs])
-        conceptMap = CreateConcepts(eggs[0].words)
-        
-        english = Language.query.filter_by(name="English").first()
-        japanese = Language.query.filter_by(name="Japanese").first()
-        
-        for egg in eggs:
-            CreateWords(egg.words, conceptMap, languageMap[egg.language])
-            
-        wordList = WordList(name=args[1], concepts=conceptMap.values(), nativeLanguage=english, testLanguage=japanese)
-        server.db.session.add(wordList)
-        server.db.session.commit()
+        ImportWords(args[0], args[1])
 
 if __name__ == "__main__":
     main(sys.argv[1:])

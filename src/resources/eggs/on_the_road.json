@@ -1,0 +1,40 @@
+[
+{
+    "language":"English",
+    "words":[{"concept":1,
+              "text":"Signal"},
+             {"concept":2,
+              "text":"Speed Limit"},
+             {"concept":3,
+              "text":"Intersection"},
+             {"concept":4,
+              "text":"Accident"},
+             {"concept":5,
+              "text":"Sidewalk"},
+             {"concept":6,
+              "text":"Crosswalk"},
+             {"concept":7,
+              "text":"Car"},
+             {"concept":8,
+              "text":"Traffic"}]
+},
+{
+    "language":"Japanese",
+    "words":[{"concept":1,
+              "text":"しんごう"},
+             {"concept":2,
+              "text":"せいげんそくど"},
+             {"concept":3,
+              "text":"こうさてん"},
+             {"concept":4,
+              "text":"じこ"},
+             {"concept":5,
+              "text":"ほどう"},
+             {"concept":6,
+              "text":"おうだんほどう"},
+             {"concept":7,
+              "text":"くるま"},
+             {"concept":8,
+              "text":"こうつう"}]
+}
+]

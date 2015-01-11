@@ -1,25 +1,26 @@
-from Data.concept import Concept
-from Data.language import Language
-from Data.word import Word
-from Data.word_list import WordList
-
 from Server import server
 
-NUM_DAYS = 7
+from import_eggs import ImportWords
+
+import glob
+import os
+
+EGG_DIR = os.path.join(os.path.dirname(__file__), 'resources/eggs')
+
+def GetWordListName(filename):
+    """ Return the word list name for the given file """
+    fullPath = os.path.abspath(filename)
+    basename = os.path.basename(fullPath)
+    filenameWithoutExtension = os.path.splitext(basename)[0]
+    pieces = filenameWithoutExtension.split("_")
+    
+    capitalizedPieces = [piece.capitalize() for piece in pieces]
+    return " ".join(capitalizedPieces)
 
 def main():
     with server.app.app_context():
-        concepts = Concept.query.all()
-        english = Language.query.filter_by(name="English").first()
-        japanese = Language.query.filter_by(name="Japanese").first()
-        
-        wordList = WordList(name="Days of the Week", concepts=concepts, nativeLanguage=english, testLanguage=japanese)
-        server.db.session.add(wordList)
-        server.db.session.commit()
-        
-        for table in [WordList, Word, Language, Concept]:
-            records = table.query.all()
-            print records
-
+        for filename in glob.glob(os.path.join(EGG_DIR, '*.json')):
+            ImportWords(filename, GetWordListName(filename))
+            
 if __name__ == "__main__":
     main()
