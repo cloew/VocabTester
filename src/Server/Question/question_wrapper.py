@@ -9,7 +9,7 @@ class QuestionWrapper:
         
     def toJSON(self):
         """ Convert the word list to JSON """
-        return {"word":WordWrapper(self.question.translation).toJSON(),
-                "questionWord":WordWrapper(self.question.word).toJSON(),
+        return {"subject":WordWrapper(self.question.subject).toJSON(),
+                "queryWord":WordWrapper(self.question.queryWord).toJSON(),
                 "options":GetWordListJSON(self.question.options),
                 "answerIndex":self.question.answerIndex}

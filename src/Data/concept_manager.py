@@ -8,4 +8,4 @@ def findTranslation(word, language):
 def findConceptMatches(concepts, language):
     """ Return the words matching the given concepts """
     conceptIds = [concept.id for concept in concepts]
-    return Word.query.filter(Word.concept_id.in_(conceptIds), Word.language_id==language.id).all()
+    return Word.query.filter(Word.concept_id.in_(conceptIds), Word.language_id==language.id).order_by(Word.concept_id).all()

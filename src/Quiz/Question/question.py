@@ -4,13 +4,14 @@ class Question:
     """ Represents a question in a Quiz """
     NUM_WRONG_ANSWERS = 4
     
-    def __init__(self, word, translation, otherOptions):
+    def __init__(self, subject, queryWord, answer, otherOptions):
         """ Initialize the question with the word to display, its matching translation and the other options """
-        self.word = word
-        self.translation = translation
+        self.subject = subject
+        self.queryWord = queryWord
+        self.answer = answer
         self.otherOptions = otherOptions
         
-        self.options = [self.translation] + random.sample(self.otherOptions, self.numberOfWrongAnswers)
+        self.options = [self.answer] + random.sample(self.otherOptions, self.numberOfWrongAnswers)
         random.shuffle(self.options)
         
     @property
@@ -21,4 +22,4 @@ class Question:
     @property
     def answerIndex(self):
         """ Return the index of the answer to the question """
-        return self.options.index(self.translation)
+        return self.options.index(self.answer)

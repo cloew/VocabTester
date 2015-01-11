@@ -22,8 +22,8 @@ services.factory('quizResultsTableService', function(wordTableService) {
             var nativeWords = [];
             for (var i = 0; i < quiz.quiz.questions.length; i++) {
                 var question = quiz.quiz.questions[i];
-                words.push(question.word);
-                nativeWords.push(question.questionWord);
+                words.push(question.subject);
+                nativeWords.push(question.queryWord);
             }
             var table = wordTableService.buildEntries(words, nativeWords);
             // table.columns.push({'name':'Correct', 'path':'correct'});
@@ -67,7 +67,7 @@ services.factory('quizService', function($http, $routeParams) {
             if (correct) {
                 this.correctAnswers += 1;
             }
-            $http.post('/api/wordlist/'+this.wordListId+'/quiz/answer', {'wordId':question.word.id, 'correct':correct}).success(function(data) {
+            $http.post('/api/wordlist/'+this.wordListId+'/quiz/answer', {'wordId':question.subject.id, 'correct':correct}).success(function(data) {
                 question.word = data;
             }).error(function(error) {
                 console.log(error);
