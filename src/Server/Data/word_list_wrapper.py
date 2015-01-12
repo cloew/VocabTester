@@ -1,4 +1,4 @@
-from Server.Data.native_and_foreign_pair_wrapper import GetPairListJSON
+from Server.Data.concept_pair_wrapper import GetPairListJSON
 
 class WordListWrapper:
     """ Converts a Word List to JSON """

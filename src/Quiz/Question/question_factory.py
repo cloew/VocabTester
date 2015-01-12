@@ -1,7 +1,6 @@
 from native_options_question import NativeOptionsQuestion
 from foreign_options_question import ForeignOptionsQuestion
 
-from Data.native_and_foreign_pair import NativeAndForeignPair
 from Quiz.ratio_picker import RatioPicker
 
 import random

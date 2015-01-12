@@ -1,6 +1,6 @@
 from Server.Data.word_wrapper import WordWrapper
 
-class NativeAndForeignPairWrapper:
+class ConceptPairWrapper:
     """ Converts a Pair object to JSON """
     
     def __init__(self, pair):
@@ -14,4 +14,4 @@ class NativeAndForeignPairWrapper:
         
 def GetPairListJSON(conceptPairs):
     """ Return a list of pair JSON from the given pairs """
-    return [NativeAndForeignPairWrapper(conceptPair).toJSON() for conceptPair in conceptPairs]
+    return [ConceptPairWrapper(conceptPair).toJSON() for conceptPair in conceptPairs]

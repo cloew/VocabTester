@@ -1,4 +1,4 @@
-from Server.Data.native_and_foreign_pair_wrapper import NativeAndForeignPairWrapper
+from Server.Data.concept_pair_wrapper import ConceptPairWrapper
 from Server.Data.word_wrapper import GetWordListJSON, WordWrapper
 
 class QuestionWrapper:
@@ -10,7 +10,7 @@ class QuestionWrapper:
         
     def toJSON(self):
         """ Convert the word list to JSON """
-        return {"subject":NativeAndForeignPairWrapper(self.question.subject).toJSON(),
+        return {"subject":ConceptPairWrapper(self.question.subject).toJSON(),
                 "queryWord":WordWrapper(self.question.queryWord).toJSON(),
                 "options":GetWordListJSON(self.question.options),
                 "answerIndex":self.question.answerIndex}
