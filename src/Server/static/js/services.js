@@ -5,10 +5,10 @@ var services = angular.module('VocabTesterServices', []);
 
 services.factory('wordTableService', function() {
     return {
-        buildEntries: function (words, nativeWords) {
+        buildEntries: function (concepts) {
             var table = {'entries':[], columns:[{'name':'Word', 'path':'word'}, {'name':'Native', 'path':'native'}, {'name':'Mastery', 'path':'mastery'}]};
-            for (var i = 0; i < words.length; i++) {
-                table.entries.push({'word':words[i].text, 'native':nativeWords[i].text, 'mastery':words[i].mastery});
+            for (var i = 0; i < concepts.length; i++) {
+                table.entries.push({'word':concepts[i].foreign.text, 'native':concepts[i].native.text, 'mastery':concepts[i].foreign.mastery});
             }
             return table;
         }
@@ -18,18 +18,14 @@ services.factory('wordTableService', function() {
 services.factory('quizResultsTableService', function(wordTableService) {
     return {
         buildEntries: function (quiz) {
-            var words = [];
-            var nativeWords = [];
+            var concepts = [];
             for (var i = 0; i < quiz.quiz.questions.length; i++) {
                 var question = quiz.quiz.questions[i];
-                words.push(question.subject);
-                nativeWords.push(question.nativeSubject);
+                concepts.push(question.subject);
             }
-            var table = wordTableService.buildEntries(words, nativeWords);
-            // table.columns.push({'name':'Correct', 'path':'correct'});
+            var table = wordTableService.buildEntries(concepts);
             for (var i = 0; i < quiz.quiz.questions.length; i++) {
                 var question = quiz.quiz.questions[i];
-                // table.entries[i].correct = question.results.correct;
                 if (question.results.correct) {
                     table.entries[i].rowClass = 'success';
                 }
@@ -67,7 +63,7 @@ services.factory('quizService', function($http, $routeParams) {
             if (correct) {
                 this.correctAnswers += 1;
             }
-            $http.post('/api/wordlist/'+this.wordListId+'/quiz/answer', {'wordId':question.subject.id, 'correct':correct}).success(function(data) {
+            $http.post('/api/wordlist/'+this.wordListId+'/quiz/answer', {'wordId':question.subject.foreign.id, 'correct':correct}).success(function(data) {
                 question.word = data;
             }).error(function(error) {
                 console.log(error);

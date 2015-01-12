@@ -1,4 +1,4 @@
-from Server.Data.word_wrapper import GetWordListJSON
+from Server.Data.native_and_foreign_pair_wrapper import GetPairListJSON
 
 class WordListWrapper:
     """ Converts a Word List to JSON """
@@ -11,5 +11,4 @@ class WordListWrapper:
         """ Convert the word list to JSON """
         return {"id":self.wordList.id,
                 "name":self.wordList.name,
-                "words":GetWordListJSON(self.wordList.getForeignWords(conceptManager)),
-                "nativeWords":GetWordListJSON(self.wordList.getNativeWords(conceptManager))}
+                "concepts":GetPairListJSON(self.wordList.getWordPairs(conceptManager))}

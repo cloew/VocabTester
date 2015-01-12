@@ -13,9 +13,7 @@ class QuestionFactory:
                      
     def getWords(self, wordList, conceptManager):
         """ Return the Words """
-        nativeForms = wordList.getNativeWords(conceptManager)
-        foreignForms = wordList.getForeignWords(conceptManager)
-        words = [NativeAndForeignPair(native, foreign) for native, foreign in zip(nativeForms, foreignForms)]
+        words = wordList.getWordPairs(conceptManager)
         random.shuffle(words)
         return words
     

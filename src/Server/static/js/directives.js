@@ -79,11 +79,10 @@ angular.module('VocabTesterDirectives', ['ui.bootstrap'])
           restrict: 'E',
           replace: true,
           scope: {
-              words: '=',
-              nativeWords: '='
+              concepts: '='
           },
           controller: function($scope, wordTableService) {
-              var table = wordTableService.buildEntries($scope.words, $scope.nativeWords);
+              var table = wordTableService.buildEntries($scope.concepts);
               $scope.entries = table.entries;
               $scope.columns = table.columns;
           },

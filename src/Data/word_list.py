@@ -2,6 +2,7 @@ from kao_flask.database import db
 
 from concept import Concept
 from language import Language
+from native_and_foreign_pair import NativeAndForeignPair
 
 word_list_concepts = db.Table('word_list_concepts', db.Model.metadata,
                               db.Column('word_list_id', db.Integer, db.ForeignKey('word_lists.id')),
@@ -26,3 +27,9 @@ class WordList(db.Model):
     def getForeignWords(self, conceptManager):
         """ Return the foreign words in the word list """
         return conceptManager.findConceptMatches(self.concepts, self.foreignLanguage)
+        
+    def getWordPairs(self, conceptManager):
+        """ Return the word pairs """
+        nativeForms = self.getNativeWords(conceptManager)
+        foreignForms = self.getForeignWords(conceptManager)
+        return [NativeAndForeignPair(native, foreign) for native, foreign in zip(nativeForms, foreignForms)]

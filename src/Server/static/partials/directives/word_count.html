@@ -2,9 +2,9 @@
     <accordion>
         <accordion-group is-open="status.open">
             <accordion-heading>
-                {{wordList.words.length}} words <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
+                {{wordList.concepts.length}} words <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
             </accordion-heading>
-            <word-table words="wordList.words" native-words="wordList.nativeWords"></word-table>
+            <word-table concepts="wordList.concepts"></word-table>
         </accordion-group>
     </accordion>
 <div>
