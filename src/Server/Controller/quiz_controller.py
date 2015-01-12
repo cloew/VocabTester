@@ -1,4 +1,4 @@
-from quiz_wrapper import QuizWrapper
+from Server.Quiz.quiz_wrapper import QuizWrapper
 
 from Data.word_list import WordList
 import Data.concept_manager as cm

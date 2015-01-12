@@ -1,4 +1,4 @@
-from word_wrapper import GetWordListJSON
+from Server.Data.word_wrapper import GetWordListJSON
 
 class WordListWrapper:
     """ Converts a Word List to JSON """

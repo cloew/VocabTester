@@ -1,4 +1,4 @@
-from Server.Question.question_wrapper import QuestionWrapper
+from Server.Quiz.Question.question_wrapper import QuestionWrapper
 
 class QuizWrapper:
     """ Converts a Quiz to JSON """

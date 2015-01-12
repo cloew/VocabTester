@@ -1,7 +1,7 @@
 from Data.word import Word
 
 from Quiz.answer_helper import Answer
-from word_wrapper import WordWrapper
+from Server.Data.word_wrapper import WordWrapper
 
 from kao_flask.controllers.json_controller import JSONController
 

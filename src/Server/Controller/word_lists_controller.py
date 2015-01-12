@@ -1,4 +1,4 @@
-from word_list_wrapper import WordListWrapper
+from Server.Data.word_list_wrapper import WordListWrapper
 
 from Data.word_list import WordList
 import Data.concept_manager as cm

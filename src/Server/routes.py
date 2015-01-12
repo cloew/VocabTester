@@ -1,6 +1,6 @@
-from Server.quiz_answer_controller import QuizAnswerController
-from Server.quiz_controller import QuizController
-from Server.word_lists_controller import WordListsController
+from Server.Controller.quiz_answer_controller import QuizAnswerController
+from Server.Controller.quiz_controller import QuizController
+from Server.Controller.word_lists_controller import WordListsController
 
 from kao_flask.endpoint import Endpoint
 from kao_flask.controllers.html_controller import HTMLController
