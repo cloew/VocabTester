@@ -1,16 +1,10 @@
 from native_options_question import NativeOptionsQuestion
 from foreign_options_question import ForeignOptionsQuestion
 
+from Data.native_and_foreign_pair import NativeAndForeignPair
 from Quiz.ratio_picker import RatioPicker
 
 import random
-
-class NativeAndForeignPair:
-
-    def __init__(self, native, foreign):
-        """ Initialize the Pair with both the native and foreign forms """
-        self.native = native
-        self.foreign = foreign
 
 class QuestionFactory:
     """ Constructs Questions """
