@@ -57,14 +57,17 @@ services.factory('quizService', function($http, $routeParams) {
     
     Quiz.prototype.answer = function() {
         var question = this.currentQuestion;
+        var self = this;
         if (question.selectedIndex !== undefined) { 
             var correct = question.selectedIndex == this.currentQuestion.answerIndex;
-            question.results = {"correct":correct};
-            if (correct) {
-                this.correctAnswers += 1;
-            }
+            self.grading = true;
             $http.post('/api/wordlist/'+this.wordListId+'/quiz/answer', {'wordId':question.subject.foreign.id, 'correct':correct}).success(function(data) {
-                question.word = data;
+                question.results = {"correct":correct};
+                if (correct) {
+                    self.correctAnswers += 1;
+                }
+                question.subject.foreign = data;
+                self.grading = false;
             }).error(function(error) {
                 console.log(error);
             });
@@ -75,6 +78,10 @@ services.factory('quizService', function($http, $routeParams) {
         this.currentQuestionIndex = this.currentQuestionIndex+1;
         this.currentQuestion =  this.quiz.questions[this.currentQuestionIndex];
         this.completed = (this.currentQuestionIndex == this.quiz.questions.length);
+    };
+    
+    Quiz.prototype.canSubmit = function() {
+        return this.currentQuestion && (this.currentQuestion.selectedIndex >= 0) && !this.grading;
     };
     
     return {
