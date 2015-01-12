@@ -6,5 +6,5 @@ class TranslatedOptionsQuestion(Question):
     def __init__(self, word, options):
         """ Initialize the Question """
         options.remove(word)
-        Question.__init__(self, word.translation, word.native, word.translation, [option.translation for option in options])
+        Question.__init__(self, word, word.native, word.translation, [option.translation for option in options])
         options.add(word)
