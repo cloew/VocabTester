@@ -1,27 +1,27 @@
 from native_options_question import NativeOptionsQuestion
-from translated_options_question import TranslatedOptionsQuestion
+from foreign_options_question import ForeignOptionsQuestion
 
 from Quiz.ratio_picker import RatioPicker
 
 import random
 
-class WordWithTranslation:
+class NativeAndForeignPair:
 
-    def __init__(self, native, translation):
-        """ Initialize the Word with Translation """
+    def __init__(self, native, foreign):
+        """ Initialize the Pair with both the native and foreign forms """
         self.native = native
-        self.translation = translation
+        self.foreign = foreign
 
 class QuestionFactory:
     """ Constructs Questions """
-    questionClassRatio = RatioPicker([(TranslatedOptionsQuestion, .5),
+    questionClassRatio = RatioPicker([(ForeignOptionsQuestion, .5),
                                       (NativeOptionsQuestion, .5)])
                      
     def getWords(self, wordList, conceptManager):
         """ Return the Words """
-        nativeWords = wordList.getNativeWords(conceptManager)
-        translations = wordList.getTranslatedWords(conceptManager)
-        words = [WordWithTranslation(native, translation) for native, translation in zip(nativeWords, translations)]
+        nativeForms = wordList.getNativeWords(conceptManager)
+        foreignForms = wordList.getForeignWords(conceptManager)
+        words = [NativeAndForeignPair(native, foreign) for native, foreign in zip(nativeForms, foreignForms)]
         random.shuffle(words)
         return words
     

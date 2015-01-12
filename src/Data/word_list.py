@@ -16,13 +16,13 @@ class WordList(db.Model):
     concepts = db.relationship("Concept", secondary=word_list_concepts)
     native_id = db.Column(db.Integer, db.ForeignKey('languages.id'))
     nativeLanguage = db.relationship("Language", foreign_keys=[native_id])
-    test_id = db.Column(db.Integer, db.ForeignKey('languages.id'))
-    testLanguage = db.relationship("Language", foreign_keys=[test_id])
+    foreign_id = db.Column(db.Integer, db.ForeignKey('languages.id'))
+    foreignLanguage = db.relationship("Language", foreign_keys=[foreign_id])
     
     def getNativeWords(self, conceptManager):
         """ Return the native words in the word list """
         return conceptManager.findConceptMatches(self.concepts, self.nativeLanguage)
         
-    def getTranslatedWords(self, conceptManager):
-        """ Return the translated words in the word list """
-        return conceptManager.findConceptMatches(self.concepts, self.testLanguage)
+    def getForeignWords(self, conceptManager):
+        """ Return the foreign words in the word list """
+        return conceptManager.findConceptMatches(self.concepts, self.foreignLanguage)

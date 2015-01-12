@@ -6,5 +6,5 @@ class NativeOptionsQuestion(Question):
     def __init__(self, word, options):
         """ Initialize the Question """
         options.remove(word)
-        Question.__init__(self, word, word.translation, word.native, [option.native for option in options])
+        Question.__init__(self, word, word.foreign, word.native, [option.native for option in options])
         options.add(word)

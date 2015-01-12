@@ -48,7 +48,7 @@ def ImportWords(filename, wordListName):
     for egg in eggs:
         CreateWords(egg.words, conceptMap, languageMap[egg.language])
         
-    wordList = WordList(name=wordListName, concepts=conceptMap.values(), nativeLanguage=english, testLanguage=japanese)
+    wordList = WordList(name=wordListName, concepts=conceptMap.values(), nativeLanguage=english, foreignLanguage=japanese)
     server.db.session.add(wordList)
     server.db.session.commit()
 
