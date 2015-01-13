@@ -92,26 +92,25 @@ services.factory('quizService', function($http, $routeParams) {
 });
 
 services.factory('userService', function($http, $window) {
+    var responseHandler = function(promise, successCallback, errorCallback) {
+        promise.success(function(data) {
+            if (data.error) {
+                errorCallback(data.error);
+            } else {
+                $window.sessionStorage.token = data.token;
+                successCallback();
+            }
+        }).error(function(error) {
+            console.log(error);
+        });
+    }
+
     return {
         login: function (email, password, successCallback, errorCallback) {
-            $http.post('/api/login', {'email':email, 'password':password}).success(function(data) {
-                $window.sessionStorage.token = data.token;
-                successCallback();
-                return {'success': true};
-            }).error(function(error) {
-                console.log(error);
-                errorCallback(error);
-            });
+            responseHandler($http.post('/api/login', {'email':email, 'password':password}), successCallback, errorCallback);
         },
         register: function (params, successCallback, errorCallback) {
-            $http.post('/api/register', {'email':params.email, 'password':params.password, 'givenName':params.firstName, 'lastName':params.lastName}).success(function(data) {
-                $window.sessionStorage.token = data.token;
-                successCallback();
-                return {'success': true};
-            }).error(function(error) {
-                console.log(error);
-                errorCallback(error);
-            });
+            responseHandler($http.post('/api/register', {'email':params.email, 'password':params.password, 'givenName':params.firstName, 'lastName':params.lastName}), successCallback, errorCallback);
         }
     };
 });

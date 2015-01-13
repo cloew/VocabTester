@@ -9,6 +9,6 @@ class Error:
         
     def toJSON(self):
         """ Transform the error into JSON """
-        return {'code':self.code, 'message':self.message}
+        return {'error':{'code':self.code, 'message':self.message}}
         
 INVALID_CREDS = Error(1, 'Invalid Credentials')

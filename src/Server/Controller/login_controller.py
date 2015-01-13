@@ -15,4 +15,4 @@ class LoginController(JSONController):
         if user and user.checkPassword(self.json['password']):
             return {'token':BuildToken(user)}, 201
         else:
-            return INVALID_CREDS.toJSON(), 401
+            return INVALID_CREDS.toJSON()
