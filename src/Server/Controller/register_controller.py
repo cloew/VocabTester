@@ -1,7 +1,5 @@
-from Data.token_builder import BuildToken
 from Data.user import User
-
-from Controller.login_controller import LoginController
+from Server.Controller.login_controller import LoginController
 
 from kao_flask.ext.sqlalchemy.database import db
 

@@ -1,5 +1,5 @@
-from Data.token_builder import BuildToken
 from Data.user import User
+from Server.Data.token_builder import BuildToken
 
 from kao_flask.ext.sqlalchemy.database import db
 
