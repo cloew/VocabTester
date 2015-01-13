@@ -1,4 +1,4 @@
-from kao_flask.database import db
+from kao_flask.ext.sqlalchemy.database import db
 
 from word_mastery import WordMastery
 
