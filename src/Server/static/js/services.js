@@ -91,7 +91,7 @@ services.factory('quizService', function($http, $routeParams) {
     };
 });
 
-services.factory('userService', function($http, $window) {
+services.factory('userService', function($http, $window, $route) {
     var responseHandler = function(promise, successCallback, errorCallback) {
         promise.success(function(data) {
             if (data.error) {
@@ -114,9 +114,35 @@ services.factory('userService', function($http, $window) {
         },
         logout: function () {
             delete $window.sessionStorage.token;
+            $route.reload();
         },
         isLoggedIn: function () {
             return $window.sessionStorage.token !== undefined
+        },
+        get: function(url) {
+            return 
         }
     };
+});
+services.factory('authInterceptor', function ($rootScope, $q, $window, $location) {
+  return {
+    request: function (config) {
+      config.headers = config.headers || {};
+      if ($window.sessionStorage.token) {
+        config.headers.Authorization = 'Bearer ' + $window.sessionStorage.token;
+      }
+      return config;
+    },
+    responseError: function (rejection) {
+      if (rejection.status === 401) {
+        var returnToPath = $location.path();
+        $location.path('/login').search('returnTo', returnToPath);
+      }
+      return $q.reject(rejection);
+    }
+  };
+});
+
+services.config(function ($httpProvider) {
+  $httpProvider.interceptors.push('authInterceptor');
 });

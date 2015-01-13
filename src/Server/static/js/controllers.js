@@ -13,7 +13,12 @@ controllers.controller('WordListsController', function ($scope, $http, $location
 controllers.controller('LoginController', function ($scope, $location, userService) {
     $scope.login = function() {
         userService.login($scope.email, $scope.password, function() {
-            $location.path('/');
+            var next = $location.search().returnTo;
+            if (!next) {
+                next = '/'
+            }
+            $location.path(next);
+            $location.search('returnTo', null);
         }, function(error) {
             $scope.errorMessage = error.message;
         });
