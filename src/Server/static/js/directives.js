@@ -157,3 +157,17 @@ angular.module('VocabTesterDirectives', ['ui.bootstrap'])
           },
           templateUrl: 'static/partials/directives/quiz_results.html'
       }})
+    .directive('header', function() {
+      return {
+          restrict: 'E',
+          replace: true,
+          controller: function($scope, $location) {
+              $scope.toLogin = function() {
+                $location.path('/login/');
+              };
+              $scope.toRegister = function() {
+                $location.path('/register/');
+              };
+          },
+          templateUrl: 'static/partials/directives/header.html'
+      }})
