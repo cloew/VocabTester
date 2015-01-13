@@ -10,15 +10,9 @@ controllers.controller('WordListsController', function ($scope, $http, $location
     });
 });
 
-controllers.controller('LoginController', function ($scope, $http) {
+controllers.controller('LoginController', function ($scope, userService) {
     $scope.login = function() {
-        if ($scope.loginForm.$valid) {
-            $http.post('/api/login', {'email':$scope.email, 'password':$scope.password}).success(function(data) {
-                console.log(data);
-            }).error(function(error) {
-                console.log(error);
-            });
-        }
+        userService.login($scope.email, $scope.password);
     };
 });
 
