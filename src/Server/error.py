@@ -12,3 +12,4 @@ class Error:
         return {'error':{'code':self.code, 'message':self.message}}
         
 INVALID_CREDS = Error(1, 'Invalid Credentials')
+EMAIL_IN_USE = Error(2, 'The provided email address is already in use')
