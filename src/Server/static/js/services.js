@@ -102,6 +102,16 @@ services.factory('userService', function($http, $window) {
                 console.log(error);
                 errorCallback(error);
             });
+        },
+        register: function (params, successCallback, errorCallback) {
+            $http.post('/api/register', {'email':params.email, 'password':params.password, 'givenName':params.firstName, 'lastName':params.lastName}).success(function(data) {
+                $window.sessionStorage.token = data.token;
+                successCallback();
+                return {'success': true};
+            }).error(function(error) {
+                console.log(error);
+                errorCallback(error);
+            });
         }
     };
 });

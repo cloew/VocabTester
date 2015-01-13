@@ -20,6 +20,16 @@ controllers.controller('LoginController', function ($scope, $location, userServi
     };
 });
 
+controllers.controller('RegisterController', function ($scope, $location, userService) {
+    $scope.register = function() {
+        userService.register($scope, function() {
+            $location.path('/');
+        }, function(error) {
+            $scope.errorMessage = error.message;
+        });
+    };
+});
+
 controllers.controller('QuizController', function ($scope, quizService) {
     $scope.quiz = quizService.buildQuiz();
 });

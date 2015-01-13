@@ -12,6 +12,10 @@ angular.module('VocabTester', ['ngRoute', 'VocabTesterControllers', 'VocabTester
 			templateUrl: 'static/partials/login.html',
 			controller: 'LoginController'
 		})
+		.when('/register', {
+			templateUrl: 'static/partials/register.html',
+			controller: 'RegisterController'
+		})
 		.when('/wordlist/:wordlistId/quiz', {
 			templateUrl: 'static/partials/quiz.html',
 			controller: 'QuizController'
