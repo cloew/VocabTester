@@ -1,3 +1,4 @@
+from Server.Controller.login_controller import LoginController
 from Server.Controller.quiz_answer_controller import QuizAnswerController
 from Server.Controller.quiz_controller import QuizController
 from Server.Controller.register_controller import RegisterController
@@ -8,6 +9,7 @@ from kao_flask.controllers.html_controller import HTMLController
 
 routes = [Endpoint('/', get=HTMLController('Server/templates/index.html')),
           # Auth
+          Endpoint('/api/login', post=LoginController()),
           Endpoint('/api/register', post=RegisterController()),
           # Wordlists
           Endpoint('/api/wordlists', get=WordListsController()),
