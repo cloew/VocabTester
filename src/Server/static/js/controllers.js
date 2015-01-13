@@ -10,9 +10,11 @@ controllers.controller('WordListsController', function ($scope, $http, $location
     });
 });
 
-controllers.controller('LoginController', function ($scope, userService) {
+controllers.controller('LoginController', function ($scope, $location, userService) {
     $scope.login = function() {
-        userService.login($scope.email, $scope.password, function(error) {
+        userService.login($scope.email, $scope.password, function() {
+            $location.path('/');
+        }, function(error) {
             $scope.errorMessage = error.message;
         });
     };
