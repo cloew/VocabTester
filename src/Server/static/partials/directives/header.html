@@ -1,4 +1,19 @@
-<div>
-    <button ng-click="toLogin();">Login</button>
-    <button ng-click="toRegister();">Register</button>
+<div class="col-md-12">
+    <div ng-if="isLoggedIn();">
+        <div class="col-md-10">
+            <h3>Logged In</h3>
+        </div>
+        <div class="col-md-2">
+            <button ng-click="logout();" class="btn btn-primary">Logout</button>
+        </div>
+    </div>
+    <div ng-if="!isLoggedIn();">
+        <div class="col-md-10">
+            <h3>Not Logged In</h3>
+        </div>
+        <div class="col-md-2">
+            <button ng-click="toLogin();" class="btn btn-primary">Login</button>
+            <button ng-click="toRegister();" class="btn">Register</button>
+        </div>
+    </div>
 </div>

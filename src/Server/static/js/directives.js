@@ -161,13 +161,15 @@ angular.module('VocabTesterDirectives', ['ui.bootstrap'])
       return {
           restrict: 'E',
           replace: true,
-          controller: function($scope, $location) {
+          controller: function($scope, $location, userService) {
               $scope.toLogin = function() {
                 $location.path('/login/');
               };
               $scope.toRegister = function() {
                 $location.path('/register/');
               };
+              $scope.logout = userService.logout;
+              $scope.isLoggedIn = userService.isLoggedIn;
           },
           templateUrl: 'static/partials/directives/header.html'
       }})

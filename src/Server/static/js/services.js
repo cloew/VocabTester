@@ -111,6 +111,12 @@ services.factory('userService', function($http, $window) {
         },
         register: function (params, successCallback, errorCallback) {
             responseHandler($http.post('/api/register', {'email':params.email, 'password':params.password, 'givenName':params.firstName, 'lastName':params.lastName}), successCallback, errorCallback);
+        },
+        logout: function () {
+            delete $window.sessionStorage.token;
+        },
+        isLoggedIn: function () {
+            return $window.sessionStorage.token !== undefined
         }
     };
 });
