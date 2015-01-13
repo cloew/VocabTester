@@ -11,8 +11,9 @@ class LoginController(JSONController):
     def performWithJSON(self):
         """ Create a User record with the given credentials """
         user = User.query.filter_by(email=self.json['email']).first()
-        if user.checkPassword(self.json['password']):
+        if user and user.checkPassword(self.json['password']):
             print "Logged In"
+            return {'token':BuildToken(user)}, 201
         else:
             print "Failed to login"
-        return {'token':BuildToken(user)} # Should return the token and User object
+            return {'code':1, 'message':'Invalid Credentials'}, 401

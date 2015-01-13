@@ -12,7 +12,9 @@ controllers.controller('WordListsController', function ($scope, $http, $location
 
 controllers.controller('LoginController', function ($scope, userService) {
     $scope.login = function() {
-        userService.login($scope.email, $scope.password);
+        userService.login($scope.email, $scope.password, function(error) {
+            $scope.errorMessage = error.message;
+        });
     };
 });
 

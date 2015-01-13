@@ -93,12 +93,13 @@ services.factory('quizService', function($http, $routeParams) {
 
 services.factory('userService', function($http, $window) {
     return {
-        login: function (email, password) {
+        login: function (email, password, errorCallback) {
             $http.post('/api/login', {'email':email, 'password':password}).success(function(data) {
                 $window.sessionStorage.token = data.token;
-                console.log(data);
+                return {'success': true};
             }).error(function(error) {
                 console.log(error);
+                errorCallback(error);
             });
         }
     };
