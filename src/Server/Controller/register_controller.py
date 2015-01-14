@@ -18,7 +18,6 @@ class RegisterController(JSONController):
             db.session.commit()
             
             login = LoginController()
-            login.json = json
-            return login.performWithJSON()
+            return login.performWithJSON(json=json)
         except IntegrityError:
             return EMAIL_IN_USE.toJSON()

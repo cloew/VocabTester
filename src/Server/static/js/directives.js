@@ -70,7 +70,7 @@ angular.module('VocabTesterDirectives', ['ui.bootstrap'])
           },
           controller: function($scope, $location) {
               $scope.startQuiz = function() {
-                $location.path($scope.wordList.quizUrl);
+                $location.path('/wordlist/'+$scope.wordList.id+'/quiz/');
               };
           },
           templateUrl: 'static/partials/directives/word_list.html'

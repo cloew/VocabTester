@@ -61,7 +61,7 @@ services.factory('quizService', function($http, $routeParams) {
         if (question.selectedIndex !== undefined) { 
             var correct = question.selectedIndex == this.currentQuestion.answerIndex;
             self.grading = true;
-            $http.post('/api/wordlist/'+this.wordListId+'/quiz/answer', {'wordId':question.subject.foreign.id, 'correct':correct}).success(function(data) {
+            $http.post(question.answerUrl, {'correct':correct}).success(function(data) {
                 question.results = {"correct":correct};
                 if (correct) {
                     self.correctAnswers += 1;

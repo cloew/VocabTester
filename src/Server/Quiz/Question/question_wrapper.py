@@ -13,4 +13,5 @@ class QuestionWrapper:
         return {"subject":ConceptPairWrapper(self.question.subject).toJSON(user),
                 "queryWord":WordWrapper(self.question.queryWord).toJSON(user),
                 "options":GetWordListJSON(self.question.options, user),
-                "answerIndex":self.question.answerIndex}
+                "answerIndex":self.question.answerIndex,
+                "answerUrl":"/api/mastery/{0}/answer".format(self.question.subject.getMasteryForUser(user).id)}

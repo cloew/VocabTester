@@ -11,5 +11,4 @@ class WordListWrapper:
         """ Convert the word list to JSON """
         return {"id":self.wordList.id,
                 "name":self.wordList.name,
-                "concepts":GetPairListJSON(self.wordList.getWordPairs(conceptManager), user),
-                "quizUrl":"/wordlist/{0}/quiz/".format(self.wordList.id)}
+                "concepts":GetPairListJSON(self.wordList.getWordPairs(conceptManager), user)}

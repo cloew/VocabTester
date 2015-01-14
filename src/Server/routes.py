@@ -16,4 +16,5 @@ routes = [Endpoint('/', get=HTMLController('Server/templates/index.html')),
           # Wordlists
           Endpoint('/api/wordlists', get=WordListsController()),
           Endpoint('/api/wordlist/<int:wordlistId>/quiz', get=QuizController()),
-          Endpoint('/api/wordlist/<int:wordlistId>/quiz/answer', post=QuizAnswerController())]
+          # Mastery
+          Endpoint('/api/mastery/<int:masteryId>/answer', post=QuizAnswerController())]

@@ -6,3 +6,7 @@ class ConceptPair:
         """ Initialize the Pair with both the native and foreign forms """
         self.native = native
         self.foreign = foreign
+        
+    def getMasteryForUser(self, user):
+        """ Return the mastery for the foreign form for the user """
+        return user.getMastery(self.foreign)
