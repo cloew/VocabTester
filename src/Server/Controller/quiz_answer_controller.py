@@ -8,8 +8,8 @@ from auth_json_controller import AuthJSONController
 class QuizAnswerController(AuthJSONController):
     """ Controller to create an answer for the quiz """
     
-    def performWithJSON(self, wordlistId, user=None):
+    def performWithJSON(self, wordlistId, json=None, user=None):
         """ Create an answer for the word's mastery """
-        word = Word.query.filter_by(id=self.json['wordId']).first()
-        answer(user, word, self.json['correct'])
+        word = Word.query.filter_by(id=json['wordId']).first()
+        answer(user, word, json['correct'])
         return WordWrapper(word).toJSON(user)

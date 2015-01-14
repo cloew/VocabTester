@@ -7,7 +7,7 @@ from Server.Data.user_wrapper import UserWrapper
 class CurrentUserController(AuthJSONController):
     """ Controller to return the currently signed in user """
     
-    def performWithJSON(self, user=None):
+    def performWithJSON(self, json=None, user=None):
         """ Convert the existing Word Lists to JSON """
         if user:
             return {'user':UserWrapper(user).toJSON()}

@@ -10,10 +10,10 @@ from kao_flask.controllers.json_controller import JSONController
 class LoginController(JSONController):
     """ Controller to login a user """
     
-    def performWithJSON(self):
+    def performWithJSON(self, json=None):
         """ Create a User record with the given credentials """
-        user = User.query.filter_by(email=self.json['email']).first()
-        if user and user.checkPassword(self.json['password']):
+        user = User.query.filter_by(email=json['email']).first()
+        if user and user.checkPassword(json['password']):
             return {'token':BuildToken(user), 'user':UserWrapper(user).toJSON()}, 201
         else:
             return INVALID_CREDS.toJSON()

@@ -10,15 +10,15 @@ from sqlalchemy.exc import IntegrityError
 class RegisterController(JSONController):
     """ Controller to register a user """
     
-    def performWithJSON(self):
+    def performWithJSON(self, json=None):
         """ Create a User record with the given credentials """
         try:
-            user = User(**self.json)
+            user = User(**json)
             db.session.add(user)
             db.session.commit()
             
             login = LoginController()
-            login.json = self.json
+            login.json = json
             return login.performWithJSON()
         except IntegrityError:
             return EMAIL_IN_USE.toJSON()

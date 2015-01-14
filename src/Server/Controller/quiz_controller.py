@@ -10,7 +10,7 @@ from auth_json_controller import AuthJSONController
 class QuizController(AuthJSONController):
     """ Controller to return the quiz """
     
-    def performWithJSON(self, wordlistId, user=None):
+    def performWithJSON(self, wordlistId, json=None, user=None):
         """ Convert the quiz to JSON """
         wordList = WordList.query.filter_by(id=wordlistId).first()
         quiz = Quiz(wordList, cm)
