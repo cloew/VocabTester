@@ -8,7 +8,7 @@ from auth_json_controller import AuthJSONController
 class WordListsController(AuthJSONController):
     """ Controller to return the word lists """
     
-    def performWithJSON(self):
+    def performWithJSON(self, user=None):
         """ Convert the existing Word Lists to JSON """
         wordLists = WordList.query.all()
         return {"words":[WordListWrapper(wordList).toJSON(cm) for wordList in wordLists]}

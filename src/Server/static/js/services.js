@@ -122,8 +122,17 @@ services.factory('userService', function($http, $window, $route) {
         isLoggedIn: function () {
             return $window.sessionStorage.token !== undefined
         },
-        getUser: function(url) {
-            return user;
+        getUser: function(callback) {
+            if (user === undefined) {
+                $http.get('/api/users/current').success(function(data) {
+                    user = data.user;
+                    callback(user);
+                }).error(function(error) {
+                    console.log(error);
+                });
+            } else  {
+                callback(user);
+            }
         }
     };
 });

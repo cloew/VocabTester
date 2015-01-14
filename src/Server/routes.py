@@ -1,3 +1,4 @@
+from Server.Controller.current_user_controller import CurrentUserController
 from Server.Controller.login_controller import LoginController
 from Server.Controller.quiz_answer_controller import QuizAnswerController
 from Server.Controller.quiz_controller import QuizController
@@ -11,6 +12,7 @@ routes = [Endpoint('/', get=HTMLController('Server/templates/index.html')),
           # Auth
           Endpoint('/api/login', post=LoginController()),
           Endpoint('/api/register', post=RegisterController()),
+          Endpoint('/api/users/current', get=CurrentUserController()),
           # Wordlists
           Endpoint('/api/wordlists', get=WordListsController()),
           Endpoint('/api/wordlist/<int:wordlistId>/quiz', get=QuizController()),

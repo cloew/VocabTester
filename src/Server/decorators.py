@@ -1,10 +1,7 @@
 import jwt
 
 from functools import wraps
-from flask import request, jsonify, _request_ctx_stack
-from werkzeug.local import LocalProxy
-
-current_user = LocalProxy(lambda: _request_ctx_stack.top.current_user)
+from flask import request, jsonify
 
 # Authentication attribute/annotation
 def authenticate(error):
@@ -44,8 +41,8 @@ def requires_auth(f):
 
     # if payload['aud'] != env["AUTH0_CLIENT_ID"]:
       # return authenticate({'code': 'invalid_audience', 'description': 'the audience does not match. expected: ' + CLIENT_ID})
-
-    _request_ctx_stack.top.current_user = user = payload
+      
+    kwargs['user'] = payload
     return f(*args, **kwargs)
 
   return decorated

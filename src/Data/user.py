@@ -15,7 +15,7 @@ class User(db.Model):
     
     def __init__(self, **kwargs):
         """ Initialize the User """
-        if kwargs['password']:
+        if 'password' in kwargs:
             kwargs['password'] = make_password(kwargs['password'])
         db.Model.__init__(self, **kwargs)
         

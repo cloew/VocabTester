@@ -13,3 +13,4 @@ class Error:
         
 INVALID_CREDS = Error(1, 'Invalid Credentials')
 EMAIL_IN_USE = Error(2, 'The provided email address is already in use')
+NO_USER = Error(3, 'The requested user could not be found')
