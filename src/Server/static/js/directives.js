@@ -183,11 +183,9 @@ angular.module('VocabTesterDirectives', ['ui.bootstrap'])
               };
               $scope.logout = userService.logout;
               $scope.isLoggedIn = userService.isLoggedIn;
-              if ($scope.isLoggedIn()) {
-                  userService.getUser(function(user) {
-                    $scope.user = user;
-                  });
-              }
+              userService.watchUser(function(user) {
+                $scope.user = user;
+              });
           },
           templateUrl: 'static/partials/directives/header.html'
       }})

@@ -93,6 +93,7 @@ services.factory('quizService', function($http, $routeParams) {
 
 services.factory('userService', function($http, $window, $route) {
     var user = undefined;
+    var userWatch = [];
     var responseHandler = function(promise, successCallback, errorCallback) {
         promise.success(function(data) {
             if (data.error) {
@@ -101,6 +102,9 @@ services.factory('userService', function($http, $window, $route) {
                 user = data.user;
                 $window.sessionStorage.token = data.token;
                 successCallback();
+                for (var i = 0; i < userWatch.length; i++) {
+                    userWatch[i](user);
+                }
             }
         }).error(function(error) {
             console.log(error);
@@ -122,16 +126,19 @@ services.factory('userService', function($http, $window, $route) {
         isLoggedIn: function () {
             return $window.sessionStorage.token !== undefined
         },
-        getUser: function(callback) {
-            if (user === undefined) {
-                $http.get('/api/users/current').success(function(data) {
-                    user = data.user;
+        watchUser: function(callback) {
+            userWatch.push(callback);
+            if (this.isLoggedIn()) {
+                if (user === undefined) {
+                    $http.get('/api/users/current').success(function(data) {
+                        user = data.user;
+                        callback(user);
+                    }).error(function(error) {
+                        console.log(error);
+                    });
+                } else  {
                     callback(user);
-                }).error(function(error) {
-                    console.log(error);
-                });
-            } else  {
-                callback(user);
+                }
             }
         }
     };
