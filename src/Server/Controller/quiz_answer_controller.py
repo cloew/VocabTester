@@ -1,6 +1,4 @@
 from Data.mastery import Mastery
-
-# from Quiz.answer_helper import answer
 from Server.Data.word_wrapper import WordWrapper
 
 from auth_json_controller import AuthJSONController
