@@ -1,3 +1,5 @@
+$header-height: 56px;
+
 $word-list-heading-height: 41px;
 $word-list-heading-padding: 5px;
 $word-list-header-height: $word-list-heading-height - 2*$word-list-heading-padding - 1;
@@ -11,6 +13,18 @@ $danger-bg: #d9534f;
      -moz-border-radius: $radius;
       -ms-border-radius: $radius;
           border-radius: $radius;
+}
+
+.header-bar {
+    height: $header-height;
+    position: relative;
+    margin-bottom: 10px;
+}
+
+.header-buttons {
+    height: 34px;
+    top:50%;
+    margin-top: -17px;
 }
 
 .option {

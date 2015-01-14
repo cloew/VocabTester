@@ -157,7 +157,7 @@ angular.module('VocabTesterDirectives', ['ui.bootstrap'])
           },
           templateUrl: 'static/partials/directives/quiz_results.html'
       }})
-    .directive('header', function() {
+    .directive('headerBar', function() {
       return {
           restrict: 'E',
           replace: true,
