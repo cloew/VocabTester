@@ -5,27 +5,18 @@ from kao_flask.ext.sqlalchemy.database import db
 
 class UserProxy:
     """ Represents a proxy to lazy load a User object """
+    @classmethod
+    def add_property(cls, attr):
+        def setter(self, v):
+            setattr(self.user, attr, v)
+        def getter(self):
+            return getattr(self.user, attr)
+        setattr(cls, attr, property(getter, setter))
     
     def __init__(self, userInfo):
         """ Initialize the proxy with the user info """
         self.userInfo = userInfo
         self.__user = None
-        
-    @property
-    def id(self):
-        return self.user.id
-        
-    @property
-    def email(self):
-        return self.user.email
-        
-    @property
-    def givenName(self):
-        return self.user.givenName
-        
-    @property
-    def lastName(self):
-        return self.user.lastName
         
     @property
     def user(self):
@@ -50,3 +41,6 @@ class UserProxy:
     def __nonzero__(self):
         """ Return if the object is true """
         return self.exists()
+        
+for attribute in ["id", "email", "givenName", "lastName"]:
+    UserProxy.add_property(attribute)
