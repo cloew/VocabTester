@@ -92,11 +92,13 @@ services.factory('quizService', function($http, $routeParams) {
 });
 
 services.factory('userService', function($http, $window, $route) {
+    var user = undefined;
     var responseHandler = function(promise, successCallback, errorCallback) {
         promise.success(function(data) {
             if (data.error) {
                 errorCallback(data.error);
             } else {
+                user = data.user;
                 $window.sessionStorage.token = data.token;
                 successCallback();
             }
@@ -114,13 +116,14 @@ services.factory('userService', function($http, $window, $route) {
         },
         logout: function () {
             delete $window.sessionStorage.token;
+            user = undefined;
             $route.reload();
         },
         isLoggedIn: function () {
             return $window.sessionStorage.token !== undefined
         },
-        get: function(url) {
-            return 
+        getUser: function(url) {
+            return user;
         }
     };
 });
