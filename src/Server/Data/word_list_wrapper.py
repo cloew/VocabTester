@@ -7,8 +7,8 @@ class WordListWrapper:
         """ Initialize the word list wrapper """
         self.wordList = wordList
         
-    def toJSON(self, conceptManager):
+    def toJSON(self, conceptManager, user):
         """ Convert the word list to JSON """
         return {"id":self.wordList.id,
                 "name":self.wordList.name,
-                "concepts":GetPairListJSON(self.wordList.getWordPairs(conceptManager))}
+                "concepts":GetPairListJSON(self.wordList.getWordPairs(conceptManager), user)}

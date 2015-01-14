@@ -6,9 +6,9 @@ class WordWrapper:
         """ Initialize the word wrapper """
         self.word = word
         
-    def toJSON(self):
+    def toJSON(self, user):
         """ Convert the word list to JSON """
-        mastery = self.word.mastery
+        mastery = user.getMastery(self.word)
         masteryRating = 0
         if mastery is not None:
             masteryRating = mastery.numberOfCorrectAnswers
@@ -17,6 +17,6 @@ class WordWrapper:
                 "text":unicode(self.word),
                 "mastery":masteryRating}
         
-def GetWordListJSON(words):
+def GetWordListJSON(words, user):
     """ Return a list of word JSON from the given words """
-    return [WordWrapper(word).toJSON() for word in words]
+    return [WordWrapper(word).toJSON(user) for word in words]

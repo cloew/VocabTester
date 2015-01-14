@@ -2,6 +2,7 @@ import jwt
 
 from functools import wraps
 from flask import request, jsonify
+from Server.Data.user_proxy import UserProxy
 
 # Authentication attribute/annotation
 def authenticate(error):
@@ -42,7 +43,7 @@ def requires_auth(f):
     # if payload['aud'] != env["AUTH0_CLIENT_ID"]:
       # return authenticate({'code': 'invalid_audience', 'description': 'the audience does not match. expected: ' + CLIENT_ID})
       
-    kwargs['user'] = payload
+    kwargs['user'] = UserProxy(payload)
     return f(*args, **kwargs)
 
   return decorated

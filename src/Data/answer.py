@@ -1,18 +1,18 @@
 from kao_flask.ext.sqlalchemy.database import db
 
-from word_mastery import WordMastery
+from mastery import Mastery
 
 from datetime import datetime
 
-class WordAnswer(db.Model):
-    """ Represents an answer for a word """
-    __tablename__ = 'word_answers'
+class Answer(db.Model):
+    """ Represents an answer for a skill """
+    __tablename__ = 'answers'
     
     id = db.Column(db.Integer, primary_key=True)
     correct = db.Column(db.Boolean)
     createdDate = db.Column(db.DateTime, default=datetime.now)
-    word_mastery_id = db.Column(db.Integer, db.ForeignKey('word_masteries.id'))
-    word_mastery = db.relationship("WordMastery", backref=db.backref('answers', order_by=createdDate))
+    mastery_id = db.Column(db.Integer, db.ForeignKey('masteries.id'))
+    mastery = db.relationship("Mastery", backref=db.backref('answers', order_by=createdDate))
     
     def __repr__(self):
         """ Return the String Representation """

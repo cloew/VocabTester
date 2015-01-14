@@ -8,9 +8,9 @@ class QuestionWrapper:
         """ Initialize the question wrapper """
         self.question = question
         
-    def toJSON(self):
+    def toJSON(self, user):
         """ Convert the word list to JSON """
-        return {"subject":ConceptPairWrapper(self.question.subject).toJSON(),
-                "queryWord":WordWrapper(self.question.queryWord).toJSON(),
-                "options":GetWordListJSON(self.question.options),
+        return {"subject":ConceptPairWrapper(self.question.subject).toJSON(user),
+                "queryWord":WordWrapper(self.question.queryWord).toJSON(user),
+                "options":GetWordListJSON(self.question.options, user),
                 "answerIndex":self.question.answerIndex}

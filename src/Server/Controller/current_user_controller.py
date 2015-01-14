@@ -9,7 +9,6 @@ class CurrentUserController(AuthJSONController):
     
     def performWithJSON(self, user=None):
         """ Convert the existing Word Lists to JSON """
-        user = User.query.filter_by(id=user[u'id']).first()
         if user:
             return {'user':UserWrapper(user).toJSON()}
         return NO_USER.toJSON()

@@ -7,7 +7,7 @@ class QuizWrapper:
         """ Initialize the quiz wrapper """
         self.quiz = quiz
         
-    def toJSON(self):
+    def toJSON(self, user):
         """ Convert the word list to JSON """
         return {"name":self.quiz.wordList.name,
-                "questions":[QuestionWrapper(question).toJSON() for question in self.quiz.questions]}
+                "questions":[QuestionWrapper(question).toJSON(user) for question in self.quiz.questions]}

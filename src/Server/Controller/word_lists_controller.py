@@ -11,4 +11,4 @@ class WordListsController(AuthJSONController):
     def performWithJSON(self, user=None):
         """ Convert the existing Word Lists to JSON """
         wordLists = WordList.query.all()
-        return {"words":[WordListWrapper(wordList).toJSON(cm) for wordList in wordLists]}
+        return {"words":[WordListWrapper(wordList).toJSON(cm, user) for wordList in wordLists]}

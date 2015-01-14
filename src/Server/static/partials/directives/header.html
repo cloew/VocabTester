@@ -1,18 +1,18 @@
 <header class="bg-primary col-md-12 header-bar">
         <div ng-if="isLoggedIn();" class="header-bar">
-            <div class="col-md-10">
+            <div class="col-md-9">
                 <h3>Logged In</h3>
             </div>
-            <div class="col-md-2 header-buttons">
+            <div class="col-md-3 header-buttons">
                 Welcome back, {{user.givenName}}
                 <button ng-click="logout();" class="btn btn-primary">Logout</button>
             </div>
         </div>
         <div ng-if="!isLoggedIn();" class="header-bar">
-            <div class="col-md-10">
+            <div class="col-md-9">
                 <h3>Not Logged In</h3>
             </div>
-            <div class="col-md-2 header-buttons">
+            <div class="col-md-3 header-buttons">
                 <button ng-click="toLogin();" class="btn btn-primary">Login</button>
             </div>
         </div>

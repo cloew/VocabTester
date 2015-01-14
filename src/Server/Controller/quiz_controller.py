@@ -14,4 +14,4 @@ class QuizController(AuthJSONController):
         """ Convert the quiz to JSON """
         wordList = WordList.query.filter_by(id=wordlistId).first()
         quiz = Quiz(wordList, cm)
-        return {"quiz":QuizWrapper(quiz).toJSON()}
+        return {"quiz":QuizWrapper(quiz).toJSON(user)}
