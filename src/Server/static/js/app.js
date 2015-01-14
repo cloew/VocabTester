@@ -5,8 +5,8 @@ angular.module('VocabTester', ['ngRoute', 'VocabTesterControllers', 'VocabTester
 		function($routeProvider) {
 		$routeProvider
 		.when('/', {
-			templateUrl: 'static/partials/word_lists.html',
-			controller: 'WordListsController'
+			templateUrl: 'static/partials/index.html',
+			controller: 'IndexController'
 		})
 		.when('/login', {
 			templateUrl: 'static/partials/login.html',

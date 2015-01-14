@@ -48,6 +48,19 @@ angular.module('VocabTesterDirectives', ['ui.bootstrap'])
           },
           templateUrl: 'static/partials/directives/kao_table.html'
       }})
+    .directive('wordLists', function() {
+      return {
+          restrict: 'E',
+          replace: true,
+          controller: function($scope, $http) {
+            $http.get("/api/wordlists").success(function(data) {
+                $scope.wordLists = data.words;
+            }).error(function(error) {
+                console.log(error);
+            });
+          },
+          templateUrl: 'static/partials/directives/word_lists.html'
+      }})
     .directive('wordList', function() {
       return {
           restrict: 'E',
@@ -177,4 +190,15 @@ angular.module('VocabTesterDirectives', ['ui.bootstrap'])
               }
           },
           templateUrl: 'static/partials/directives/header.html'
+      }})
+    .directive('info', function() {
+      return {
+          restrict: 'E',
+          replace: true,
+          controller: function($scope, $location, userService) {
+              $scope.toRegister = function() {
+                $location.path('/register/');
+              };
+          },
+          templateUrl: 'static/partials/directives/info.html'
       }})

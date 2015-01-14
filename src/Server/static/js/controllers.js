@@ -2,12 +2,8 @@
 
 var controllers = angular.module('VocabTesterControllers', ['ui.bootstrap', 'VocabTesterServices']);
 
-controllers.controller('WordListsController', function ($scope, $http, $location) {
-    $http.get("/api/wordlists").success(function(data) {
-        $scope.wordLists = data.words;
-    }).error(function(error) {
-        console.log(error);
-    });
+controllers.controller('IndexController', function ($scope, userService) {
+    $scope.isLoggedIn = userService.isLoggedIn;
 });
 
 controllers.controller('LoginController', function ($scope, $location, userService) {
