@@ -5,12 +5,12 @@ import Data.concept_manager as cm
 
 from Quiz.quiz import Quiz
 
-from kao_flask.controllers.json_controller import JSONController
+from auth_json_controller import AuthJSONController
 
-class QuizController(JSONController):
+class QuizController(AuthJSONController):
     """ Controller to return the quiz """
     
-    def performWithJSON(self, wordlistId):
+    def performWithJSON(self, wordlistId, user=None):
         """ Convert the quiz to JSON """
         wordList = WordList.query.filter_by(id=wordlistId).first()
         quiz = Quiz(wordList, cm)
