@@ -10,20 +10,12 @@ from Quiz.Question.question import Question
 
 from Server.Data.user_proxy import UserProxy
 
-def masteryRating(word, user):
-    """ Returns the mastery rating for the word and user """    
-    mastery = user.getMastery(word)
-    masteryRating = 0
-    if mastery is not None:
-        masteryRating = mastery.numberOfCorrectAnswers
-    return masteryRating
-
 def answerUrl(question, user):
     """ Returns the mastery rating for the word and user """    
     return "/api/mastery/{0}/answer".format(question.subject.getMasteryForUser(user).id)
 
 jsonFactory = JsonFactory([
-                           (Word,[FieldAttr('id'), JsonAttr('text', unicode), JsonAttr('mastery', masteryRating, args=["user"])]),
+                           (Word,[FieldAttr('id'), JsonAttr('text', unicode), JsonAttr('mastery', Word.getMasteryRating, args=["user"])]),
                            (ConceptPair,[FieldAttr('foreign'), FieldAttr('native')]),
                            (WordList,[FieldAttr('id'), FieldAttr('name'), JsonAttr('concepts', WordList.getWordPairs, args=["conceptManager"])]),
                            ([User, UserProxy], [FieldAttr('id'), FieldAttr('email'), FieldAttr('givenName'), FieldAttr('lastName')]),

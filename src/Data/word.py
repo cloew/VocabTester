@@ -14,6 +14,14 @@ class Word(db.Model):
     language_id = db.Column(db.Integer, db.ForeignKey('languages.id'))
     language = db.relationship("Language", backref=db.backref('languages'))
     
+    def getMasteryRating(self, user):
+        """ Return the user's mastery rating for this word """ 
+        mastery = user.getMastery(self)
+        masteryRating = 0
+        if mastery is not None:
+            masteryRating = mastery.numberOfCorrectAnswers
+        return masteryRating
+    
     def __unicode__(self):
         """ Return the string representation of the Word """
         return unicode(self.text)
