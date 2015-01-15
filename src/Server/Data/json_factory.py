@@ -6,8 +6,7 @@ from Data.word import Word
 from Data.word_list import WordList
 
 from Quiz.quiz import Quiz
-from Quiz.Question.foreign_options_question import ForeignOptionsQuestion
-from Quiz.Question.native_options_question import NativeOptionsQuestion
+from Quiz.Question.question import Question
 
 from Server.Data.user_proxy import UserProxy
 
@@ -27,8 +26,8 @@ jsonFactory = JsonFactory([
                            (Word,[FieldAttr('id'), JsonAttr('text', unicode), JsonAttr('mastery', masteryRating, args=["user"])]),
                            (ConceptPair,[FieldAttr('foreign'), FieldAttr('native')]),
                            (WordList,[FieldAttr('id'), FieldAttr('name'), JsonAttr('concepts', WordList.getWordPairs, args=["conceptManager"])]),
-                           ([User, UserProxy],[FieldAttr('id'), FieldAttr('email'), FieldAttr('givenName'), FieldAttr('lastName')]),
-                           ([ForeignOptionsQuestion, NativeOptionsQuestion],[FieldAttr('subject'), FieldAttr('queryWord'), FieldAttr('options'), FieldAttr('answerIndex'), JsonAttr('answerUrl', answerUrl, args=["user"])]),
+                           ([User, UserProxy], [FieldAttr('id'), FieldAttr('email'), FieldAttr('givenName'), FieldAttr('lastName')]),
+                           (Question, [FieldAttr('subject'), FieldAttr('queryWord'), FieldAttr('options'), FieldAttr('answerIndex'), JsonAttr('answerUrl', answerUrl, args=["user"])]),
                            (Quiz,[FieldAttr('name', field='wordList.name'), FieldAttr('questions')])
                           ])
                          
