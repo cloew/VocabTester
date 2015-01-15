@@ -1,5 +1,5 @@
 from Data.mastery import Mastery
-from Server.Data.word_wrapper import WordWrapper
+from Server.Data.json_factory import toJson
 
 from auth_json_controller import AuthJSONController
 
@@ -10,4 +10,4 @@ class QuizAnswerController(AuthJSONController):
         """ Create an answer for the mastery """
         mastery = Mastery.query.filter_by(id=masteryId).first()
         mastery.addAnswer(json['correct'])
-        return WordWrapper(mastery.word).toJSON(user)
+        return toJson(mastery.word, user=user)

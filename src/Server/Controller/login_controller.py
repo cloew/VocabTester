@@ -1,7 +1,7 @@
 from Data.user import User
 from Server.error import INVALID_CREDS
 from Server.Data.token_builder import BuildToken
-from Server.Data.user_wrapper import UserWrapper
+from Server.Data.json_factory import toJson
 
 from kao_flask.ext.sqlalchemy.database import db
 
@@ -14,6 +14,6 @@ class LoginController(JSONController):
         """ Create a User record with the given credentials """
         user = User.query.filter_by(email=json['email']).first()
         if user and user.checkPassword(json['password']):
-            return {'token':BuildToken(user), 'user':UserWrapper(user).toJSON()}, 201
+            return {'token':BuildToken(user), 'user':toJson(user)}, 201
         else:
             return INVALID_CREDS.toJSON()
