@@ -1,6 +1,7 @@
 from Data.concept import Concept
 from Data.language import Language
 from Data.word import Word
+from Data.symbol import Symbol
 from Data.concept_list import ConceptList
 from Data.answer import Answer
 from Data.mastery import Mastery
@@ -13,7 +14,7 @@ import sys
 def main(args):
     """ Run the main file """
     with server.app.app_context():
-        for table in [ConceptList, Language, Concept, Mastery, Answer, Word, User]:
+        for table in [ConceptList, Answer, Mastery, Word, Symbol, Language, Concept, User]:
             records = table.query.all()
             [server.db.session.delete(record) for record in records]
         server.db.session.commit()

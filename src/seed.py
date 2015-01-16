@@ -1,14 +1,14 @@
 from Server import server
 
-from import_eggs import ImportWords
+from import_eggs import ImportEggs
 
 import glob
 import os
 
 EGG_DIR = os.path.join(os.path.dirname(__file__), 'resources/eggs')
 
-def GetWordListName(filename):
-    """ Return the word list name for the given file """
+def GetListName(filename):
+    """ Return the list name for the given file """
     fullPath = os.path.abspath(filename)
     basename = os.path.basename(fullPath)
     filenameWithoutExtension = os.path.splitext(basename)[0]
@@ -20,7 +20,7 @@ def GetWordListName(filename):
 def main():
     with server.app.app_context():
         for filename in glob.glob(os.path.join(EGG_DIR, '*.json')):
-            ImportWords(filename, GetWordListName(filename))
+            ImportEggs(filename, GetListName(filename))
             
 if __name__ == "__main__":
     main()
