@@ -1,3 +1,5 @@
+from decorators import lazy_property
+
 from Data.language import Language
 from Data.mastery import Mastery
 from Data.user import User
@@ -17,30 +19,21 @@ class UserProxy:
     def __init__(self, userInfo):
         """ Initialize the proxy with the user info """
         self.userInfo = userInfo
-        self.__user = None
-        self.__nativeLanguage = None
-        self.__foreignLanguage = None
         
-    @property
+    @lazy_property
     def user(self):
         """ Lazy load the user """
-        if self.__user is None:
-            self.__user = User.query.filter_by(id=self.userInfo[u'id']).first()
-        return self.__user
+        return User.query.filter_by(id=self.userInfo[u'id']).first()
         
-    @property
+    @lazy_property
     def nativeLanguage(self):
         """ Return the user's native language """
-        if self.__nativeLanguage is None:
-            self.__nativeLanguage = Language.query.filter_by(name='English').first()
-        return self.__nativeLanguage
+        return Language.query.filter_by(name='English').first()
         
-    @property
+    @lazy_property
     def foreignLanguage(self):
         """ Return the user's foreign language """
-        if self.__foreignLanguage is None:
-            self.__foreignLanguage = Language.query.filter_by(name='Japanese').first()
-        return self.__foreignLanguage
+        return Language.query.filter_by(name='Japanese').first()
         
     def exists(self):
         """ Return if the User record actually exists """

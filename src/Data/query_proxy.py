@@ -1,3 +1,4 @@
+from decorators import lazy_property
 
 class QueryProxy:
     def __init__(self, queryModel, clsToReturn):
@@ -14,7 +15,7 @@ class QueryProxy:
         else:
               raise Exception( 'attribute %s not found' % name )
         
-    @property
+    @lazy_property
     def query(self):
         """ Return the user's native language """
         if self.__query is None:
