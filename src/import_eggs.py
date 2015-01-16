@@ -1,7 +1,7 @@
 from Data.concept import Concept
 from Data.language import Language
 from Data.word import Word
-from Data.word_list import WordList
+from Data.concept_list import ConceptList
 
 from Server import server
 
@@ -48,7 +48,7 @@ def ImportWords(filename, wordListName):
     for egg in eggs:
         CreateWords(egg.words, conceptMap, languageMap[egg.language])
         
-    wordList = WordList(name=wordListName, concepts=conceptMap.values(), nativeLanguage=english, foreignLanguage=japanese)
+    wordList = ConceptList(name=wordListName, concepts=conceptMap.values())
     server.db.session.add(wordList)
     server.db.session.commit()
 

@@ -17,7 +17,7 @@ def answerUrl(question, user):
 jsonFactory = JsonFactory([
                            (Word,[FieldAttr('id'), JsonAttr('text', unicode), JsonAttr('mastery', Word.getMasteryRating, args=["user"])]),
                            (ConceptPair,[FieldAttr('foreign'), FieldAttr('native')]),
-                           (WordList,[FieldAttr('id'), FieldAttr('name'), JsonAttr('concepts', WordList.getWordPairs, args=["conceptManager"])]),
+                           (WordList,[FieldAttr('id'), FieldAttr('name'), JsonAttr('concepts', WordList.getWordPairs, args=["conceptManager", "user"])]),
                            ([User, UserProxy], [FieldAttr('id'), FieldAttr('email'), FieldAttr('givenName'), FieldAttr('lastName')]),
                            (Question, [FieldAttr('subject'), FieldAttr('queryWord'), FieldAttr('options'), FieldAttr('answerIndex'), JsonAttr('answerUrl', answerUrl, args=["user"])]),
                            (Quiz,[FieldAttr('name', field='wordList.name'), FieldAttr('questions')])

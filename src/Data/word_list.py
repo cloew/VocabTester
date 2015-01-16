@@ -1,35 +1,70 @@
 from kao_flask.ext.sqlalchemy.database import db
 
-from concept import Concept
+from concept_list import ConceptList
 from language import Language
 from concept_pair import ConceptPair
 
-word_list_concepts = db.Table('word_list_concepts', db.Model.metadata,
-                              db.Column('word_list_id', db.Integer, db.ForeignKey('word_lists.id')),
-                              db.Column('concept_id', db.Integer, db.ForeignKey('concepts.id')))
-
-class WordList(db.Model):
+class WordList:
     """ Represents a list of words to quiz """
-    __tablename__ = 'word_lists'
     
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.Unicode())
-    concepts = db.relationship("Concept", secondary=word_list_concepts)
-    native_id = db.Column(db.Integer, db.ForeignKey('languages.id'))
-    nativeLanguage = db.relationship("Language", foreign_keys=[native_id])
-    foreign_id = db.Column(db.Integer, db.ForeignKey('languages.id'))
-    foreignLanguage = db.relationship("Language", foreign_keys=[foreign_id])
+    def __init__(self, conceptList):
+        """ Initialize the Word List """
+        self.conceptList = conceptList
+        
+    @property
+    def concepts(self):
+        return self.conceptList.concepts
+        
+    @property
+    def id(self):
+        return self.conceptList.id
+        
+    @property
+    def name(self):
+        return self.conceptList.name
     
-    def getNativeWords(self, conceptManager):
+    def getNativeWords(self, conceptManager, user):
         """ Return the native words in the word list """
-        return conceptManager.findConceptMatches(self.concepts, self.nativeLanguage)
+        return conceptManager.findConceptMatches(self.concepts, user.nativeLanguage)
         
-    def getForeignWords(self, conceptManager):
+    def getForeignWords(self, conceptManager, user):
         """ Return the foreign words in the word list """
-        return conceptManager.findConceptMatches(self.concepts, self.foreignLanguage)
+        return conceptManager.findConceptMatches(self.concepts, user.foreignLanguage)
         
-    def getWordPairs(self, conceptManager):
+    def getWordPairs(self, conceptManager, user):
         """ Return the word pairs """
-        nativeForms = self.getNativeWords(conceptManager)
-        foreignForms = self.getForeignWords(conceptManager)
+        nativeForms = self.getNativeWords(conceptManager, user)
+        foreignForms = self.getForeignWords(conceptManager, user)
         return [ConceptPair(native, foreign) for native, foreign in zip(nativeForms, foreignForms)]
+        
+class QueryProxy:
+    def __init__(self, queryModel, clsToReturn):
+        """ Initialize the Query Proxy """
+        self.queryModel = queryModel
+        self.clsToReturn = clsToReturn
+        self.__query = None
+        
+    def __getattr__(self, name):
+        if hasattr(self, name):
+            return getattr(self, name)
+        elif self.query:
+              return getattr(self.query, name )
+        else:
+              raise Exception( 'attribute %s not found' % name )
+        
+    @property
+    def query(self):
+        """ Return the user's native language """
+        if self.__query is None:
+            self.__query = self.queryModel.query
+        return self.__query
+              
+    def first(self):
+        """ Return the first query result """
+        return self.clsToReturn(self.query.first())
+        
+    def all(self):
+        """ Return all the query results """
+        return [self.clsToReturn(entry) for entry in self.query.all()]
+        
+WordList.query = QueryProxy(ConceptList, WordList)
