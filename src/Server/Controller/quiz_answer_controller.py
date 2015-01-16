@@ -1,5 +1,5 @@
 from Data.mastery import Mastery
-from Server.Data.json_factory import toJson
+from Server.helpers.json_factory import toJson
 
 from auth_json_controller import AuthJSONController
 

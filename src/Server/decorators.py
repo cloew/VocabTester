@@ -2,7 +2,7 @@ import jwt
 
 from functools import wraps
 from flask import request, jsonify
-from Server.Data.user_proxy import UserProxy
+from Server.helpers.user_proxy import UserProxy
 
 # Authentication attribute/annotation
 def authenticate(error):

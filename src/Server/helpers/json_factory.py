@@ -8,7 +8,7 @@ from Data.word_list import WordList
 from Quiz.quiz import Quiz
 from Quiz.Question.question import Question
 
-from Server.Data.user_proxy import UserProxy
+from Server.helpers.user_proxy import UserProxy
 
 def answerUrl(question, user):
     """ Returns the mastery rating for the word and user """    

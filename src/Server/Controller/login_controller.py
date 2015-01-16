@@ -1,7 +1,7 @@
 from Data.user import User
 from Server.error import INVALID_CREDS
-from Server.Data.token_builder import BuildToken
-from Server.Data.json_factory import toJson
+from Server.helpers.token_builder import BuildToken
+from Server.helpers.json_factory import toJson
 
 from kao_flask.ext.sqlalchemy.database import db
 
