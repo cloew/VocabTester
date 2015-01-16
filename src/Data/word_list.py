@@ -1,29 +1,20 @@
-from kao_flask.ext.sqlalchemy.database import db
+from decorators import proxy_for
 
 from concept_list import ConceptList
 from concept_pair import ConceptPair
 from language import Language
 from query_proxy import query_via
 
+from kao_flask.ext.sqlalchemy.database import db
+
 @query_via(ConceptList)
+@proxy_for('conceptList', ["id", "name", "concepts"])
 class WordList:
     """ Represents a list of words to quiz """
     
     def __init__(self, conceptList):
         """ Initialize the Word List """
         self.conceptList = conceptList
-        
-    @property
-    def concepts(self):
-        return self.conceptList.concepts
-        
-    @property
-    def id(self):
-        return self.conceptList.id
-        
-    @property
-    def name(self):
-        return self.conceptList.name
     
     def getNativeWords(self, conceptManager, user):
         """ Return the native words in the word list """
