@@ -38,7 +38,7 @@ services.factory('quizResultsTableService', function(wordTableService) {
     };
 });
 
-services.factory('quizService', function($http, $routeParams) {
+services.factory('quizService', function($http, $location, $routeParams) {
     function Quiz(wordListId) {
         this.wordListId = wordListId;
         this.quiz = undefined;
@@ -46,7 +46,7 @@ services.factory('quizService', function($http, $routeParams) {
         this.correctAnswers = 0;
         
         var self = this;
-        $http.get('/api/wordlist/'+self.wordListId+'/quiz').success(function(data) {
+        $http.get('/api' +$location.path()).success(function(data) {
             self.quiz = data.quiz;
             self.currentQuestion =  self.quiz.questions[self.currentQuestionIndex];
             self.numberOfQuestions = self.quiz.questions.length;
@@ -58,7 +58,7 @@ services.factory('quizService', function($http, $routeParams) {
     Quiz.prototype.answer = function() {
         var question = this.currentQuestion;
         var self = this;
-        if (question.selectedIndex !== undefined) { 
+        if (question.selectedIndex !== undefined) {
             var correct = question.selectedIndex == this.currentQuestion.answerIndex;
             self.grading = true;
             $http.post(question.answerUrl, {'correct':correct}).success(function(data) {
@@ -66,7 +66,7 @@ services.factory('quizService', function($http, $routeParams) {
                 if (correct) {
                     self.correctAnswers += 1;
                 }
-                question.subject.foreign = data;
+                question.subject.foreign.mastery = data.rating;
                 self.grading = false;
             }).error(function(error) {
                 console.log(error);
@@ -86,7 +86,7 @@ services.factory('quizService', function($http, $routeParams) {
     
     return {
         buildQuiz: function () {
-            return new Quiz($routeParams.wordlistId);
+            return new Quiz($routeParams.listId);
         }
     };
 });

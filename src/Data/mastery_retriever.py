@@ -5,9 +5,10 @@ def mastery_retriever(masteryFieldName):
     def addMastery(cls):
         def getMastery(self, user):
             """ Return the object's mastery record for the given user """
-            kwargs = {'user_id':user.id, masteryFieldName:self.id}
+            kwargs = {'user_id':user.id, masteryFieldName+'_id':self.id}
             mastery = Mastery.query.filter_by(**kwargs).first()
             if mastery is None:
+                kwargs = {'user':user, masteryFieldName:self}
                 mastery = Mastery(**kwargs)
                 db.session.add(mastery)
                 db.session.commit()

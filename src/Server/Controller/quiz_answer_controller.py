@@ -10,4 +10,4 @@ class QuizAnswerController(AuthJSONController):
         """ Create an answer for the mastery """
         mastery = Mastery.query.filter_by(id=masteryId).first()
         mastery.addAnswer(json['correct'])
-        return toJson(mastery.word, user=user)
+        return {'rating':mastery.rating}

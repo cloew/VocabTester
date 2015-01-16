@@ -8,6 +8,9 @@ angular.module('VocabTester', ['ngRoute', 'VocabTesterControllers', 'VocabTester
 			templateUrl: 'static/partials/index.html',
 			controller: 'IndexController'
 		})
+		.when('/symbollists', {
+			templateUrl: 'static/partials/symbol_lists.html',
+		})
 		.when('/login', {
 			templateUrl: 'static/partials/login.html',
 			controller: 'LoginController'
@@ -16,7 +19,11 @@ angular.module('VocabTester', ['ngRoute', 'VocabTesterControllers', 'VocabTester
 			templateUrl: 'static/partials/register.html',
 			controller: 'RegisterController'
 		})
-		.when('/wordlist/:wordlistId/quiz', {
+		.when('/symbollist/:listId/quiz', {
+			templateUrl: 'static/partials/quiz.html',
+			controller: 'QuizController'
+		})
+		.when('/wordlist/:listId/quiz', {
 			templateUrl: 'static/partials/quiz.html',
 			controller: 'QuizController'
 		})

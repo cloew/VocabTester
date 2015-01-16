@@ -5,7 +5,7 @@ from language import Language
 
 from kao_flask.ext.sqlalchemy.database import db
 
-@mastery_retriever('symbol_id')
+@mastery_retriever('symbol')
 class Symbol(db.Model):
     """ Represents a symbol used in a language """
     __tablename__ = 'symbols'

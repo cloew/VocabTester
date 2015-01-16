@@ -17,6 +17,12 @@ class Mastery(db.Model):
     symbol = db.relationship("Symbol")
     answers = db.relationship("Answer", order_by=Answer.createdDate, backref=db.backref('mastery'))
     
+    def __init__(self, *args, **kwargs):
+        """ Initialize the mastery """
+        if 'user' in kwargs and hasattr(kwargs['user'], 'user'):
+            kwargs['user'] = kwargs['user'].user
+        db.Model.__init__(self, *args, **kwargs)
+    
     def addAnswer(self, correct):
         """ Add an answer to this mastery """
         if len(self.answers) >= self.MAX_ANSWERS:

@@ -5,7 +5,7 @@ from language import Language
 
 from kao_flask.ext.sqlalchemy.database import db
 
-@mastery_retriever('word_id')
+@mastery_retriever('word')
 class Word(db.Model):
     """ Represents a word from a particular language """
     __tablename__ = 'words'

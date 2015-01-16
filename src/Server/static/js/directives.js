@@ -53,18 +53,8 @@ angular.module('VocabTesterDirectives', ['ui.bootstrap'])
           restrict: 'E',
           replace: true,
           controller: function($scope, $http) {
-            $scope.wordLists = [];
             $http.get("/api/wordlists").success(function(data) {
-                for (var i = 0; i < data.lists.length; i++) {
-                    $scope.wordLists.push(data.lists[i]);
-                }
-            }).error(function(error) {
-                console.log(error);
-            });
-            $http.get("/api/symbollists").success(function(data) {
-                for (var i = 0; i < data.lists.length; i++) {
-                    $scope.wordLists.push(data.lists[i]);
-                }
+                $scope.wordLists = data.lists;
             }).error(function(error) {
                 console.log(error);
             });
@@ -76,26 +66,56 @@ angular.module('VocabTesterDirectives', ['ui.bootstrap'])
           restrict: 'E',
           replace: true,
           scope: {
-              wordList: '='
+              conceptList: '='
           },
           controller: function($scope, $location) {
+              $scope.header = 'words';
               $scope.startQuiz = function() {
-                $location.path('/wordlist/'+$scope.wordList.id+'/quiz/');
+                $location.path('/wordlist/'+$scope.conceptList.id+'/quiz/');
               };
           },
-          templateUrl: 'static/partials/directives/word_list.html'
+          templateUrl: 'static/partials/directives/concept_list.html'
       }})
-    .directive('wordCount', function() {
+    .directive('symbolLists', function() {
+      return {
+          restrict: 'E',
+          replace: true,
+          controller: function($scope, $http) {
+            $http.get("/api/symbollists").success(function(data) {
+                $scope.symbolLists = data.lists;
+            }).error(function(error) {
+                console.log(error);
+            });
+          },
+          templateUrl: 'static/partials/directives/symbol_lists.html'
+      }})
+    .directive('symbolList', function() {
       return {
           restrict: 'E',
           replace: true,
           scope: {
-              wordList: '='
+              conceptList: '='
+          },
+          controller: function($scope, $location) {
+              $scope.header = 'symbols';
+              $scope.startQuiz = function() {
+                $location.path('/symbollist/'+$scope.conceptList.id+'/quiz/');
+              };
+          },
+          templateUrl: 'static/partials/directives/concept_list.html'
+      }})
+    .directive('conceptCount', function() {
+      return {
+          restrict: 'E',
+          replace: true,
+          scope: {
+              conceptList: '=',
+              header: '='
           },
           controller: function($scope) {
               $scope.isOpen = false;
           },
-          templateUrl: 'static/partials/directives/word_count.html'
+          templateUrl: 'static/partials/directives/concept_count.html'
       }})
     .directive('wordTable', function() {
       return {
