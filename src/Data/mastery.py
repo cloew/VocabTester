@@ -13,6 +13,8 @@ class Mastery(db.Model):
     user = db.relationship("User")
     word_id = db.Column(db.Integer, db.ForeignKey('words.id'))
     word = db.relationship("Word")
+    symbol_id = db.Column(db.Integer, db.ForeignKey('symbols.id'))
+    symbol = db.relationship("Symbol")
     answers = db.relationship("Answer", order_by=Answer.createdDate, backref=db.backref('mastery'))
     
     def addAnswer(self, correct):
