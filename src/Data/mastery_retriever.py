@@ -1,4 +1,5 @@
 from mastery import Mastery
+from kao_flask.ext.sqlalchemy.database import db
 
 def mastery_retriever(masteryFieldName):
     def addMastery(cls):
@@ -7,7 +8,7 @@ def mastery_retriever(masteryFieldName):
             kwargs = {'user_id':user.id, masteryFieldName:self.id}
             mastery = Mastery.query.filter_by(**kwargs).first()
             if mastery is None:
-                mastery = Mastery(user=self.user, word=word)
+                mastery = Mastery(**kwargs)
                 db.session.add(mastery)
                 db.session.commit()
             return mastery
