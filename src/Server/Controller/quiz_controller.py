@@ -1,5 +1,5 @@
+from Data.symbol_list import SymbolList
 from Data.word_list import WordList
-import Data.concept_manager as cm
 
 from Quiz.quiz import Quiz
 from Server.Data.json_factory import toJson
@@ -12,5 +12,5 @@ class QuizController(AuthJSONController):
     def performWithJSON(self, wordlistId, json=None, user=None):
         """ Convert the quiz to JSON """
         wordList = WordList.query.filter_by(id=wordlistId).first()
-        quiz = Quiz(wordList, cm, user)
+        quiz = Quiz(wordList, user)
         return {"quiz":toJson(quiz, user=user)}

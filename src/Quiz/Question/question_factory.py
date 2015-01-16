@@ -10,9 +10,17 @@ class QuestionFactory:
     questionClassRatio = RatioPicker([(ForeignOptionsQuestion, .5),
                                       (NativeOptionsQuestion, .5)])
                      
-    def getWords(self, wordList, conceptManager, user):
+    def buildQuestions(self, wordList, user):
+        """ Build the questions for use in the quiz """
+        words = self.getWords(wordList, user)
+        questionClasses = self.getQuestionClasses(words)
+        
+        setOfWords = set(words)
+        return [questionClass(word, setOfWords) for word, questionClass in zip(words, questionClasses)]
+        
+    def getWords(self, wordList, user):
         """ Return the Words """
-        words = wordList.getWordPairs(conceptManager, user)
+        words = wordList.getConceptPairs(user)
         random.shuffle(words)
         return words
     
@@ -22,12 +30,4 @@ class QuestionFactory:
         random.shuffle(questionClasses)
         return questionClasses
     
-    def buildQuestions(self, wordList, conceptManager, user):
-        """ Build the questions for use in the quiz """
-        words = self.getWords(wordList, conceptManager, user)
-        questionClasses = self.getQuestionClasses(words)
-        
-        setOfWords = set(words)
-        return [questionClass(word, setOfWords) for word, questionClass in zip(words, questionClasses)]
-        
 QuestionFactory = QuestionFactory()
