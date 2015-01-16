@@ -2,7 +2,6 @@ from kao_flask.ext.sqlalchemy.database import db
 
 from answer import Answer
 from user import User
-from word import Word
 
 class Mastery(db.Model):
     """ Represents the mastery of some skill """
@@ -26,5 +25,10 @@ class Mastery(db.Model):
     
     @property
     def numberOfCorrectAnswers(self):
-        """ Return the number of correct answers for this word """
+        """ Return the number of correct answers for this mastery """
         return len([answer for answer in self.answers if answer.correct])
+    
+    @property
+    def rating(self):
+        """ Return the rating of the mastery """
+        return self.numberOfCorrectAnswers

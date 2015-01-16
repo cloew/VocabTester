@@ -1,8 +1,11 @@
-from kao_flask.ext.sqlalchemy.database import db
+from mastery_retriever import mastery_retriever
 
 from concept import Concept
 from language import Language
 
+from kao_flask.ext.sqlalchemy.database import db
+
+@mastery_retriever('word_id')
 class Word(db.Model):
     """ Represents a word from a particular language """
     __tablename__ = 'words'
@@ -10,17 +13,9 @@ class Word(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     text = db.Column(db.UnicodeText())
     concept_id = db.Column(db.Integer, db.ForeignKey('concepts.id'))
-    concept = db.relationship("Concept", backref=db.backref('words'))
+    concept = db.relationship("Concept")
     language_id = db.Column(db.Integer, db.ForeignKey('languages.id'))
-    language = db.relationship("Language", backref=db.backref('languages'))
-    
-    def getMasteryRating(self, user):
-        """ Return the user's mastery rating for this word """ 
-        mastery = user.getMastery(self)
-        masteryRating = 0
-        if mastery is not None:
-            masteryRating = mastery.numberOfCorrectAnswers
-        return masteryRating
+    language = db.relationship("Language")
     
     def __unicode__(self):
         """ Return the string representation of the Word """
