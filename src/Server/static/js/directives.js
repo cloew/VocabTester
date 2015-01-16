@@ -53,8 +53,18 @@ angular.module('VocabTesterDirectives', ['ui.bootstrap'])
           restrict: 'E',
           replace: true,
           controller: function($scope, $http) {
+            $scope.wordLists = [];
             $http.get("/api/wordlists").success(function(data) {
-                $scope.wordLists = data.lists;
+                for (var i = 0; i < data.lists.length; i++) {
+                    $scope.wordLists.push(data.lists[i]);
+                }
+            }).error(function(error) {
+                console.log(error);
+            });
+            $http.get("/api/symbollists").success(function(data) {
+                for (var i = 0; i < data.lists.length; i++) {
+                    $scope.wordLists.push(data.lists[i]);
+                }
             }).error(function(error) {
                 console.log(error);
             });

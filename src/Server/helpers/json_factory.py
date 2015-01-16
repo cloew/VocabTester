@@ -1,6 +1,8 @@
 from kao_json import JsonFactory, JsonAttr, FieldAttr
 
 from Data.concept_pair import ConceptPair
+from Data.symbol import Symbol
+from Data.symbol_list import SymbolList
 from Data.user import User
 from Data.word import Word
 from Data.word_list import WordList
@@ -15,12 +17,12 @@ def answerUrl(question, user):
     return "/api/mastery/{0}/answer".format(question.subject.getMasteryForUser(user).id)
 
 jsonFactory = JsonFactory([
-                           (Word,[FieldAttr('id'), JsonAttr('text', unicode), JsonAttr('mastery', Word.getMasteryRating, args=["user"])]),
+                           ([Symbol, Word],[FieldAttr('id'), JsonAttr('text', unicode), JsonAttr('mastery', lambda s, u: s.getMasteryRating(u), args=["user"])]),
                            (ConceptPair,[FieldAttr('foreign'), FieldAttr('native')]),
-                           (WordList,[FieldAttr('id'), FieldAttr('name'), JsonAttr('concepts', WordList.getConceptPairs, args=["user"])]),
+                           ([SymbolList, WordList],[FieldAttr('id'), FieldAttr('name'), JsonAttr('concepts', lambda s, u: s.getConceptPairs(u), args=["user"])]),
                            ([User, UserProxy], [FieldAttr('id'), FieldAttr('email'), FieldAttr('givenName'), FieldAttr('lastName')]),
                            (Question, [FieldAttr('subject'), FieldAttr('queryWord'), FieldAttr('options'), FieldAttr('answerIndex'), JsonAttr('answerUrl', answerUrl, args=["user"])]),
-                           (Quiz,[FieldAttr('name', field='wordList.name'), FieldAttr('questions')])
+                           (Quiz, [FieldAttr('name', field='wordList.name'), FieldAttr('questions')])
                           ])
                          
 def toJson(object, **kwargs):

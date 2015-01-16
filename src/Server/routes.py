@@ -17,6 +17,9 @@ routes = [Endpoint('/', get=HTMLController('Server/templates/index.html')),
           Endpoint('/api/register', post=RegisterController()),
           Endpoint('/api/users/current', get=CurrentUserController()),
           # Wordlists
+          Endpoint('/api/symbollists', get=ConceptListsController(SymbolList)),
+          Endpoint('/api/symbollist/<int:listId>/quiz', get=QuizController(SymbolList)),
+          # Wordlists
           Endpoint('/api/wordlists', get=ConceptListsController(WordList)),
           Endpoint('/api/wordlist/<int:listId>/quiz', get=QuizController(WordList)),
           # Mastery
