@@ -38,4 +38,4 @@ class WordList:
         foreignForms = self.getForeignWords(conceptManager, user)
         return [ConceptPair(native, foreign) for native, foreign in zip(nativeForms, foreignForms)]
         
-WordList.query = QueryProxy(ConceptList, WordList)
+WordList.query = QueryProxy(WordList, model=ConceptList)

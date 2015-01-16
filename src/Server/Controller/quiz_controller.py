@@ -12,5 +12,5 @@ class QuizController(AuthJSONController):
     def performWithJSON(self, wordlistId, json=None, user=None):
         """ Convert the quiz to JSON """
         wordList = WordList.query.filter_by(id=wordlistId).first()
-        quiz = Quiz(wordList, cm)
+        quiz = Quiz(wordList, cm, user)
         return {"quiz":toJson(quiz, user=user)}
