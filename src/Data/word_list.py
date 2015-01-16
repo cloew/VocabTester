@@ -3,8 +3,9 @@ from kao_flask.ext.sqlalchemy.database import db
 from concept_list import ConceptList
 from concept_pair import ConceptPair
 from language import Language
-from query_proxy import QueryProxy
+from query_proxy import query_via
 
+@query_via(ConceptList)
 class WordList:
     """ Represents a list of words to quiz """
     
@@ -37,5 +38,3 @@ class WordList:
         nativeForms = self.getNativeWords(conceptManager, user)
         foreignForms = self.getForeignWords(conceptManager, user)
         return [ConceptPair(native, foreign) for native, foreign in zip(nativeForms, foreignForms)]
-        
-WordList.query = QueryProxy(WordList, model=ConceptList)

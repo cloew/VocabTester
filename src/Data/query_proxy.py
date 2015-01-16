@@ -1,5 +1,11 @@
 from decorators import lazy_property
 
+def query_via(model):
+    def addQuery(cls):
+        cls.query = QueryProxy(cls, model=model)
+        return cls
+    return addQuery
+    
 def new_proxy(fn):
     def wrapQuery(self, *args, **kwargs):
         return QueryProxy(self.clsToReturn, query=fn(self, *args, **kwargs))
