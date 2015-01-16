@@ -54,7 +54,7 @@ angular.module('VocabTesterDirectives', ['ui.bootstrap'])
           replace: true,
           controller: function($scope, $http) {
             $http.get("/api/wordlists").success(function(data) {
-                $scope.wordLists = data.words;
+                $scope.wordLists = data.lists;
             }).error(function(error) {
                 console.log(error);
             });
