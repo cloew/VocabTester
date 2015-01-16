@@ -8,7 +8,7 @@ def query_via(queryRetriever):
     
 def new_proxy(fn):
     def wrapQuery(self, *args, **kwargs):
-        return QueryProxy(self.clsToReturn, query=fn(self, *args, **kwargs))
+        return QueryProxy(self.clsToReturn, lambda: fn(self, *args, **kwargs))
     return wrapQuery
 
 class QueryProxy:
