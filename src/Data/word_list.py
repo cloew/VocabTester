@@ -1,13 +1,12 @@
 from decorators import proxy_for
 
-from concept_list import ConceptList
+from concept_list import query_via_concept_list
 from concept_pair import ConceptPair
 from language import Language
-from query_proxy import query_via
 
 from kao_flask.ext.sqlalchemy.database import db
 
-@query_via(ConceptList)
+@query_via_concept_list(isWords=True)
 @proxy_for('conceptList', ["id", "name", "concepts"])
 class WordList:
     """ Represents a list of words to quiz """
