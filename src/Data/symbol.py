@@ -5,10 +5,10 @@ from language import Language
 
 from kao_flask.ext.sqlalchemy.database import db
 
-@mastery_retriever('word')
-class Word(db.Model):
-    """ Represents a word from a particular language """
-    __tablename__ = 'words'
+@mastery_retriever('symbol')
+class Symbol(db.Model):
+    """ Represents a symbol used in a language """
+    __tablename__ = 'symbols'
     
     id = db.Column(db.Integer, primary_key=True)
     text = db.Column(db.UnicodeText())

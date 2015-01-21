@@ -3,10 +3,10 @@ from Quiz.Question.question_factory import QuestionFactory
 class Quiz:
     """ Represents a quiz for a list of words """
     
-    def __init__(self, wordList, conceptManager):
+    def __init__(self, wordList, user):
         """ Initialize the Quiz with the word list to test """
         self.wordList = wordList
-        self.questions = QuestionFactory.buildQuestions(wordList, conceptManager)
+        self.questions = QuestionFactory.buildQuestions(wordList, user)
             
     def start(self):
         """ Start the Quiz """

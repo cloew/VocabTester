@@ -9,4 +9,4 @@ class ConceptPair:
         
     def getMasteryForUser(self, user):
         """ Return the mastery for the foreign form for the user """
-        return user.getMastery(self.foreign)
+        return self.foreign.getMastery(user)
