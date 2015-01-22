@@ -219,6 +219,23 @@ angular.module('VocabTesterDirectives', ['ui.bootstrap'])
           },
           templateUrl: 'static/partials/directives/header.html'
       }})
+    .directive('headerNav', function() {
+      return {
+          restrict: 'E',
+          replace: true,
+          controller: function($scope, $location, $route) {
+                $scope.currentPath = $location.path();
+                console.log($location.path());
+                $scope.navSections = [{'name':'Words', 'path':'/'},
+                                             {'name':'Symbols', 'path':'/symbollists'}];
+                $scope.$on('$routeChangeSuccess', function(event, next, current) {
+                    console.log('Changing path');
+                    console.log($location.path());
+                    $scope.currentPath = $location.path();
+                });
+          },
+          templateUrl: 'static/partials/directives/header_nav.html'
+      }})
     .directive('info', function() {
       return {
           restrict: 'E',

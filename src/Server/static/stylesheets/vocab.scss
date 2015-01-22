@@ -66,3 +66,22 @@ $danger-bg: #d9534f;
 .quiz-button {
     width: 100px;
 }
+
+.nav-anchor {
+    color: #fff;
+    padding: 8px 15px;
+    text-decoration: none  !important;
+}
+
+.nav-anchor:hover, .nav-anchor:visited, .nav-anchor:focus, .nav-anchor:active  {
+    color: #fff;
+    text-decoration: none;
+    @include border-radius(200px);
+    background: #1493d1;
+}
+
+.active {
+    color: #fff;
+    @include border-radius(200px);
+    background: #1493d1;
+}

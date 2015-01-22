@@ -29,6 +29,5 @@ angular.module('VocabTester', ['ngRoute', 'VocabTesterControllers', 'VocabTester
 		})
 		.otherwise({
 			redirectTo: '/'
-		})
-		;
+		});
 	}]);
