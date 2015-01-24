@@ -1,7 +1,7 @@
 from decorators import proxy_for
 from query_proxy import query_via
 from concept import Concept
-from concept_pair import ConceptPair
+from concept_manager import ConceptManager
 
 from kao_flask.ext.sqlalchemy.database import db
 
@@ -27,29 +27,12 @@ def concept_list_proxy(fieldName):
     return proxy_for(fieldName, ["id", "name", "concepts"])
     
 def concept_pair_retriever(FormClass):
-    def addMethods(cls):
-        def findConceptMatches(self, language):
-            """ Return the words matching the given concepts """
-            conceptIds = [concept.id for concept in self.concepts]
-            return FormClass.query.filter(FormClass.concept_id.in_(conceptIds), FormClass.language_id==language.id).order_by(FormClass.concept_id).all()
-        
-        def getNativeForms(self, user):
-            """ Return the native forms for the list """
-            return self.findConceptMatches(user.nativeLanguage)
-            
-        def getForeignForms(self, user):
-            """ Return the foreign forms in the list """
-            return self.findConceptMatches(user.foreignLanguage)
-            
+    def addConceptManager(cls):
         def getConceptPairs(self, user):
             """ Return the concept pairs """
-            nativeForms = self.getNativeForms(user)
-            foreignForms = self.getForeignForms(user)
-            return [ConceptPair(native, foreign) for native, foreign in zip(nativeForms, foreignForms)]
-            
-        cls.findConceptMatches = findConceptMatches
-        cls.getNativeForms = getNativeForms
-        cls.getForeignForms = getForeignForms
+            conceptIds = [concept.id for concept in self.concepts]
+            return self.conceptManager.getConceptPairs(conceptIds, user)
+        cls.conceptManager = ConceptManager(FormClass)
         cls.getConceptPairs = getConceptPairs
         return cls
-    return addMethods
+    return addConceptManager
