@@ -3,6 +3,15 @@ from kao_flask.ext.sqlalchemy.database import db
 import random
 from hashlib import sha1
 
+learned_symbols = db.Table('learned_symbols', db.Model.metadata,
+                                  db.Column('user_id', db.Integer, db.ForeignKey('users.id')),
+                                  db.Column('symbol_id', db.Integer, db.ForeignKey('symbols.id')))
+
+learned_words = db.Table('learned_words', db.Model.metadata,
+                                  db.Column('user_id', db.Integer, db.ForeignKey('users.id')),
+                                  db.Column('word_id', db.Integer, db.ForeignKey('words.id')))
+
+
 class User(db.Model):
     """ Represents a user """
     __tablename__ = 'users'
@@ -12,6 +21,8 @@ class User(db.Model):
     password = db.Column(db.UnicodeText(), nullable=False)
     givenName = db.Column(db.UnicodeText())
     lastName = db.Column(db.UnicodeText())
+    learnedSymbols = db.relationship("Symbol", secondary=learned_symbols)
+    learnedWords = db.relationship("Word", secondary=learned_words)
     
     def __init__(self, **kwargs):
         """ Initialize the User """
