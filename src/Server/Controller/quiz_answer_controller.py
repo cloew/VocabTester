@@ -10,4 +10,9 @@ class QuizAnswerController(AuthJSONController):
         """ Create an answer for the mastery """
         mastery = Mastery.query.filter_by(id=masteryId).first()
         mastery.addAnswer(json['correct'])
+        
+        if mastery.word_id is not None:
+            user.tryToLearnWord(mastery)
+        elif mastery.symbol_id is not None:
+            user.tryToLearnSymbol(mastery)
         return {'rating':mastery.rating}

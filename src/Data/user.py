@@ -1,3 +1,6 @@
+from decorators import lazy_property
+from learned_tracker import LearnedTracker
+
 from kao_flask.ext.sqlalchemy.database import db
 
 import random
@@ -33,6 +36,33 @@ class User(db.Model):
     def checkPassword(self, rawPassword):
         """ Check if the password is this users password """
         return check_password(rawPassword, self.password)
+        
+    def tryToLearnSymbol(self, mastery):
+        """ Try to learn the symbol related to the given mastery """
+        if mastery.symbol_id is not None:
+            if not self.learnedSymbolTracker.hasLearned(mastery.symbol_id):
+                self.learnedSymbolTracker.learn(mastery.symbol)
+        
+    def tryToLearnWord(self, mastery):
+        """ Try to learn the word related to the given mastery """
+        if mastery.word_id is not None:
+            if not self.learnedWordTracker.hasLearned(mastery.word_id):
+                self.learnedWordTracker.learn(mastery.word)
+        
+    def save(self):
+        """ Save the Underlying User Data Object """
+        db.session.add(self)
+        db.session.commit()
+        
+    @lazy_property
+    def learnedSymbolTracker(self):
+        """ Return the learned tracker for this user's symbols """
+        return LearnedTracker(self, 'learnedSymbols', User)
+        
+    @lazy_property
+    def learnedWordTracker(self):
+        """ Return the learned tracker for this user's words """
+        return LearnedTracker(self, 'learnedWords', User)
     
 # borrowing these methods, slightly modified, from flask-peewee which in turn borrowed from django.contrib.auth
 def get_hexdigest(salt, raw_password):
