@@ -1,0 +1,36 @@
+[
+{
+    "language":"English",
+    "words":[{"concept":1,
+              "text":"Painful"},
+              {"concept":2,
+              "text":"Big"},
+              {"concept":3,
+              "text":"Small"},
+              {"concept":4,
+              "text":"Cold"},
+              {"concept":5,
+              "text":"Hot"},
+              {"concept":6,
+              "text":"Expensive"},
+              {"concept":7,
+              "text":"Cheap"}]
+},
+{
+    "language":"Japanese",
+    "words":[{"concept":1,
+              "text":"いたい"},
+              {"concept":2,
+              "text":"おおきい"},
+              {"concept":3,
+              "text":"ちいさい"},
+              {"concept":4,
+              "text":"さむい"},
+              {"concept":5,
+              "text":"あつい"},
+              {"concept":6,
+              "text":"たかい"},
+              {"concept":7,
+              "text":"やすい"}]
+}
+]

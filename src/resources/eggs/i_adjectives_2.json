@@ -1,0 +1,40 @@
+[
+{
+    "language":"English",
+    "words":[{"concept":1,
+              "text":"Far"},
+             {"concept":2,
+              "text":"Close"},
+             {"concept":3,
+              "text":"Loud"},
+             {"concept":4,
+              "text":"Quiet"},
+             {"concept":5,
+              "text":"Sweet"},
+             {"concept":6,
+              "text":"Bitter"},
+             {"concept":7,
+              "text":"Sour"},
+             {"concept":8,
+              "text":"Kind"}]
+},
+{
+    "language":"Japanese",
+    "words":[{"concept":1,
+              "text":"とおい"},
+             {"concept":2,
+              "text":"ちかい"},
+             {"concept":3,
+              "text":"うるさい"},
+             {"concept":4,
+              "text":"おとなしい"},
+             {"concept":5,
+              "text":"あまい"},
+             {"concept":6,
+              "text":"にがい"},
+             {"concept":7,
+              "text":"すっぱい"},
+             {"concept":8,
+              "text":"やさしい"}]
+}
+]
