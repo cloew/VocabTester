@@ -125,9 +125,19 @@ angular.module('VocabTesterDirectives', ['ui.bootstrap'])
               concepts: '='
           },
           controller: function($scope, wordTableService) {
-              var table = wordTableService.buildEntries($scope.concepts);
-              $scope.entries = table.entries;
-              $scope.columns = table.columns;
+              var loadTable = function() {
+                  if ($scope.concepts !== undefined) {
+                      var table = wordTableService.buildEntries($scope.concepts);
+                      $scope.entries = table.entries;
+                      $scope.columns = table.columns;
+                  }
+              }
+              loadTable();
+              $scope.$watch('concepts', function() {
+                  loadTable();
+              });
+              
+              
           },
           templateUrl: 'static/partials/directives/word_table.html'
       }})
@@ -225,8 +235,10 @@ angular.module('VocabTesterDirectives', ['ui.bootstrap'])
           replace: true,
           controller: function($scope, $location, $route) {
                 $scope.currentPath = $location.path();
-                $scope.navSections = [{'name':'Words', 'path':'/'},
-                                             {'name':'Symbols', 'path':'/symbollists'}];
+                $scope.navSections = [{'name':'Words', 'path':'/words'},
+                                      {'name':'Word Lists', 'path':'/'},
+                                      {'name':'Symbols', 'path':'/symbols'},
+                                      {'name':'Symbol Lists', 'path':'/symbollists'}];
                 $scope.$on('$routeChangeSuccess', function(event, next, current) {
                     $scope.currentPath = $location.path();
                 });

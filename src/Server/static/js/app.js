@@ -19,9 +19,17 @@ angular.module('VocabTester', ['ngRoute', 'VocabTesterControllers', 'VocabTester
 			templateUrl: 'static/partials/register.html',
 			controller: 'RegisterController'
 		})
+		.when('/symbols', {
+			templateUrl: 'static/partials/learned_forms.html',
+			controller: 'LearnedFormsController'
+		})
 		.when('/symbollist/:listId/quiz', {
 			templateUrl: 'static/partials/quiz.html',
 			controller: 'QuizController'
+		})
+		.when('/words', {
+			templateUrl: 'static/partials/learned_forms.html',
+			controller: 'LearnedFormsController'
 		})
 		.when('/wordlist/:listId/quiz', {
 			templateUrl: 'static/partials/quiz.html',

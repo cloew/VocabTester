@@ -2,7 +2,9 @@ from decorators import lazy_property, proxy_for
 
 from Data.language import Language
 from Data.mastery import Mastery
+from Data.symbol import Symbol
 from Data.user import User
+from Data.word import Word
 
 from kao_flask.ext.sqlalchemy.database import db
 
@@ -41,6 +43,13 @@ class UserProxy:
             db.session.add(mastery)
             db.session.commit()
         return mastery
+        
+    def getLearnedFor(self, modelClass):
+        """ Return the learned forms for the given model class """
+        if modelClass is Symbol:
+            return self.learnedSymbols
+        elif modelClass is Word:
+            return self.learnedWords
     
     def __nonzero__(self):
         """ Return if the object is true """

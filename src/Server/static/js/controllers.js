@@ -34,3 +34,11 @@ controllers.controller('RegisterController', function ($scope, $location, userSe
 controllers.controller('QuizController', function ($scope, quizService) {
     $scope.quiz = quizService.buildQuiz();
 });
+
+controllers.controller('LearnedFormsController', function ($scope, $http, $location) {
+    $http.get('/api'+$location.path()).success(function(data) {
+            $scope.concepts = data.concepts;
+        }).error(function(error) {
+            console.log(error);
+        });
+});
