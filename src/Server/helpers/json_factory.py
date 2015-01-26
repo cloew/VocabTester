@@ -15,6 +15,10 @@ from Server.helpers.user_proxy import UserProxy
 def answerUrl(question, user):
     """ Returns the mastery rating for the word and user """    
     return "/api/mastery/{0}/answer".format(question.subject.getMasteryForUser(user).id)
+    
+def IsWordsQuiz(quiz):
+    """ Returns if the quiz is for words """    
+    return len(quiz.questions) == 0 or quiz.questions[0].subject.foreign.__class__ is Word
 
 jsonFactory = JsonFactory([
                            ([Symbol, Word],[FieldAttr('id'), JsonAttr('text', unicode), JsonAttr('mastery', lambda s, u: s.getMasteryRating(u), args=["user"])]),
@@ -22,7 +26,7 @@ jsonFactory = JsonFactory([
                            ([SymbolList, WordList],[FieldAttr('id'), FieldAttr('name'), JsonAttr('concepts', lambda s, u: s.getConceptPairs(u), args=["user"])]),
                            ([User, UserProxy], [FieldAttr('id'), FieldAttr('email'), FieldAttr('givenName'), FieldAttr('lastName')]),
                            (Question, [FieldAttr('subject'), FieldAttr('queryWord'), FieldAttr('options'), FieldAttr('answerIndex'), JsonAttr('answerUrl', answerUrl, args=["user"])]),
-                           (Quiz, [FieldAttr('name', field='wordList.name'), FieldAttr('questions')])
+                           (Quiz, [FieldAttr('name', field='wordList.name'), FieldAttr('questions'), JsonAttr('isWords', IsWordsQuiz)])
                           ])
                          
 def toJson(object, **kwargs):

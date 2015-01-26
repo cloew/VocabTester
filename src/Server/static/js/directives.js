@@ -70,6 +70,7 @@ angular.module('VocabTesterDirectives', ['ui.bootstrap'])
           },
           controller: function($scope, $location) {
               $scope.header = 'words';
+              $scope.isWords = true;
               $scope.startQuiz = function() {
                 $location.path('/wordlist/'+$scope.conceptList.id+'/quiz/');
               };
@@ -98,6 +99,7 @@ angular.module('VocabTesterDirectives', ['ui.bootstrap'])
           },
           controller: function($scope, $location) {
               $scope.header = 'symbols';
+              $scope.isWords = false;
               $scope.startQuiz = function() {
                 $location.path('/symbollist/'+$scope.conceptList.id+'/quiz/');
               };
@@ -110,24 +112,26 @@ angular.module('VocabTesterDirectives', ['ui.bootstrap'])
           replace: true,
           scope: {
               conceptList: '=',
-              header: '='
+              header: '=',
+              isWords: '='
           },
           controller: function($scope) {
               $scope.isOpen = false;
           },
           templateUrl: 'static/partials/directives/concept_count.html'
       }})
-    .directive('wordTable', function() {
+    .directive('conceptTable', function() {
       return {
           restrict: 'E',
           replace: true,
           scope: {
-              concepts: '='
+              concepts: '=',
+              isWords: '='
           },
-          controller: function($scope, wordTableService) {
+          controller: function($scope, conceptTableService) {
               var loadTable = function() {
                   if ($scope.concepts !== undefined) {
-                      var table = wordTableService.buildEntries($scope.concepts);
+                      var table = conceptTableService.buildEntries($scope.concepts, $scope.isWords);
                       $scope.entries = table.entries;
                       $scope.columns = table.columns;
                   }
@@ -139,7 +143,7 @@ angular.module('VocabTesterDirectives', ['ui.bootstrap'])
               
               
           },
-          templateUrl: 'static/partials/directives/word_table.html'
+          templateUrl: 'static/partials/directives/concept_table.html'
       }})
     .directive('question', function() {
       return {

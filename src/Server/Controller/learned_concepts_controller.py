@@ -1,4 +1,6 @@
 from Data.concept_manager import ConceptManager
+from Data.word import Word
+
 from Server.helpers.json_factory import toJson
 
 from auth_json_controller import AuthJSONController
@@ -17,4 +19,4 @@ class LearnedConceptsController(AuthJSONController):
         learnedForms = user.getLearnedFor(self.formModel)
         conceptIds = [form.concept_id for form in learnedForms]
         pairs = self.conceptManager.getConceptPairs(conceptIds, user)
-        return {"concepts":toJson(pairs, user=user)}
+        return {"concepts":toJson(pairs, user=user), "isWords":self.formModel is Word}

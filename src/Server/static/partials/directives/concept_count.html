@@ -4,7 +4,7 @@
             <accordion-heading>
                 {{conceptList.concepts.length}} {{header}} <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
             </accordion-heading>
-            <word-table concepts="conceptList.concepts"></word-table>
+            <concept-table concepts="conceptList.concepts" is-words="isWords"></concept-table>
         </accordion-group>
     </accordion>
 <div>

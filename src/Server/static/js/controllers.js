@@ -38,6 +38,7 @@ controllers.controller('QuizController', function ($scope, quizService) {
 controllers.controller('LearnedFormsController', function ($scope, $http, $location) {
     $http.get('/api'+$location.path()).success(function(data) {
             $scope.concepts = data.concepts;
+            $scope.isWords = data.isWords;
         }).error(function(error) {
             console.log(error);
         });

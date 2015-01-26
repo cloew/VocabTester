@@ -3,19 +3,30 @@
 var services = angular.module('VocabTesterServices', []);
 
 
-services.factory('wordTableService', function() {
+services.factory('conceptTableService', function() {
     return {
-        buildEntries: function (concepts) {
-            var table = {'entries':[], columns:[{'name':'Word', 'path':'word'}, {'name':'Native', 'path':'native'}, {'name':'Mastery', 'path':'mastery'}]};
+        buildEntries: function (concepts, isWords) {
+            var columns = [];
+            
+            if (isWords) {
+                columns.push({'name':'Word', 'path':'form'});
+            }
+            else {
+                columns.push({'name':'Symbol', 'path':'form'});
+            }
+            columns.push({'name':'Native', 'path':'native'});
+            columns.push({'name':'Mastery', 'path':'mastery'});
+            
+            var table = {'entries':[], columns:columns};
             for (var i = 0; i < concepts.length; i++) {
-                table.entries.push({'word':concepts[i].foreign.text, 'native':concepts[i].native.text, 'mastery':concepts[i].foreign.mastery});
+                table.entries.push({'form':concepts[i].foreign.text, 'native':concepts[i].native.text, 'mastery':concepts[i].foreign.mastery});
             }
             return table;
         }
     };
 });
 
-services.factory('quizResultsTableService', function(wordTableService) {
+services.factory('quizResultsTableService', function(conceptTableService) {
     return {
         buildEntries: function (quiz) {
             var concepts = [];
@@ -23,7 +34,7 @@ services.factory('quizResultsTableService', function(wordTableService) {
                 var question = quiz.quiz.questions[i];
                 concepts.push(question.subject);
             }
-            var table = wordTableService.buildEntries(concepts);
+            var table = conceptTableService.buildEntries(concepts, quiz.isWords);
             for (var i = 0; i < quiz.quiz.questions.length; i++) {
                 var question = quiz.quiz.questions[i];
                 if (question.results.correct) {
