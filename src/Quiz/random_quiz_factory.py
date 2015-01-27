@@ -16,3 +16,5 @@ class RandomQuizFactory:
     def numberOfQuestions(self, learnedFroms):
         """ Returns the number of questions allowed for this quiz """
         return min(len(learnedForms), self.MAX_QUESTIONS)
+        
+RandomQuizFactory = RandomQuizFactory()
