@@ -209,7 +209,7 @@ angular.module('VocabTesterDirectives', ['ui.bootstrap', 'VocabTesterServices'])
           controller: function($scope, $location, quizResultsTableService) {
               $scope.table = quizResultsTableService.buildEntries($scope.quiz);
               $scope.back = function() {
-                $location.path('/wordlist/');
+                $location.path($scope.quiz.returnTo);
               };
           },
           templateUrl: 'static/partials/directives/quiz_results.html'

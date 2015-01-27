@@ -9,10 +9,10 @@ services.provider('vocabNav', function() {
                {'path':'/register', 'templateUrl':'static/partials/register.html', 'controller':'RegisterController'},
                {'path':'/symbols', 'templateUrl':'static/partials/learned_symbols.html', 'controller':'LearnedFormsController', 'headerNav':{'name':'Symbols'}},
                {'path':'/symbollists', 'templateUrl':'static/partials/symbol_lists.html', 'headerNav':{'name':'Symbol Lists'}},
-               {'path':'/symbollist/:listId/quiz', 'templateUrl':'static/partials/quiz.html', 'controller':'QuizController'},
-               {'path':'/symbollist/random/quiz', 'templateUrl':'static/partials/quiz.html', 'controller':'QuizController'},
-               {'path':'/wordlist/:listId/quiz', 'templateUrl':'static/partials/quiz.html', 'controller':'QuizController'},
-               {'path':'/wordlist/random/quiz', 'templateUrl':'static/partials/quiz.html', 'controller':'QuizController'}];
+               {'path':'/symbollist/random/quiz', 'templateUrl':'static/partials/quiz.html', 'controller':'QuizController', 'returnTo':'/symbols'},
+               {'path':'/symbollist/:listId/quiz', 'templateUrl':'static/partials/quiz.html', 'controller':'QuizController', 'returnTo':'/symbollists'},
+               {'path':'/wordlist/random/quiz', 'templateUrl':'static/partials/quiz.html', 'controller':'QuizController', 'returnTo':'/words'},
+               {'path':'/wordlist/:listId/quiz', 'templateUrl':'static/partials/quiz.html', 'controller':'QuizController', 'returnTo':'/'}];
     this.getConfig = function() {
         return nav;
     };
@@ -26,6 +26,14 @@ services.provider('vocabNav', function() {
                     }
                 }
                 return headerNavConfig;
+            },
+            getReturnTo: function($route) {
+                for (var i = 0; i < nav.length; i++) {
+                    if (nav[i].path === $route.current.$$route.path) {
+                        return nav[i].returnTo;
+                    }
+                }
+                return undefined;
             }
         };
     };
@@ -77,12 +85,13 @@ services.factory('quizResultsTableService', function(conceptTableService) {
     };
 });
 
-services.factory('quizService', function($http, $location, $routeParams) {
+services.factory('quizService', function($http, $location, $routeParams, vocabNav, $route) {
     function Quiz(wordListId) {
         this.wordListId = wordListId;
         this.quiz = undefined;
         this.currentQuestionIndex = 0;
         this.correctAnswers = 0;
+        this.returnTo = vocabNav.getReturnTo($route);
         
         var self = this;
         $http.get('/api' +$location.path()).success(function(data) {
