@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('VocabTesterDirectives', ['ui.bootstrap'])
+angular.module('VocabTesterDirectives', ['ui.bootstrap', 'VocabTesterServices'])
     .directive('keyTrap', function() {
       return function(scope, elem) {
         elem.bind('keydown', function(event) {
@@ -237,12 +237,9 @@ angular.module('VocabTesterDirectives', ['ui.bootstrap'])
       return {
           restrict: 'E',
           replace: true,
-          controller: function($scope, $location, $route) {
+          controller: function($scope, $location, $route, vocabNav) {
                 $scope.currentPath = $location.path();
-                $scope.navSections = [{'name':'Words', 'path':'/words'},
-                                      {'name':'Word Lists', 'path':'/'},
-                                      {'name':'Symbols', 'path':'/symbols'},
-                                      {'name':'Symbol Lists', 'path':'/symbollists'}];
+                $scope.navSections = vocabNav.getHeaderNav();
                 $scope.$on('$routeChangeSuccess', function(event, next, current) {
                     $scope.currentPath = $location.path();
                 });

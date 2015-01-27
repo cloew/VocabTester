@@ -3,17 +3,29 @@
 var services = angular.module('VocabTesterServices', []);
 
 services.provider('vocabNav', function() {
-    var nav = [{'path':'/', 'templateUrl':'static/partials/index.html', 'controller':'IndexController', 'headerNav':{'name':'Word Lists'}},
+    var nav = [{'path':'/words', 'templateUrl':'static/partials/learned_forms.html', 'controller':'LearnedFormsController', 'headerNav':{'name':'Words'}},
+                   {'path':'/', 'templateUrl':'static/partials/index.html', 'controller':'IndexController', 'headerNav':{'name':'Word Lists'}},
                    {'path':'/login', 'templateUrl':'static/partials/login.html', 'controller':'LoginController'},
                    {'path':'/register', 'templateUrl':'static/partials/register.html', 'controller':'RegisterController'},
                    {'path':'/symbols', 'templateUrl':'static/partials/learned_forms.html', 'controller':'LearnedFormsController', 'headerNav':{'name':'Symbols'}},
-                   {'path':'/words', 'templateUrl':'static/partials/learned_forms.html', 'controller':'LearnedFormsController', 'headerNav':{'name':'Words'}},
                    {'path':'/symbollists', 'templateUrl':'static/partials/symbol_lists.html', 'headerNav':{'name':'Symbol Lists'}},
                    {'path':'/symbollist/:listId/quiz', 'templateUrl':'static/partials/quiz.html', 'controller':'QuizController'},
                    {'path':'/wordlist/:listId/quiz', 'templateUrl':'static/partials/quiz.html', 'controller':'QuizController'}];
-    this.$get = angular.noop;
     this.getConfig = function() {
         return nav;
+    };
+    this.$get = function() {
+        return {
+            getHeaderNav: function() {
+                var headerNavConfig = [];
+                for (var i = 0; i < nav.length; i++) {
+                    if (nav[i].headerNav !== undefined) {
+                       headerNavConfig.push({'path':nav[i].path, 'name':nav[i].headerNav.name}) 
+                    }
+                }
+                return headerNavConfig;
+            }
+        };
     };
 });
 
