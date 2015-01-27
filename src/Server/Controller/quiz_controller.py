@@ -14,5 +14,6 @@ class QuizController(AuthJSONController):
     def performWithJSON(self, listId, json=None, user=None):
         """ Convert the quiz to JSON """
         conceptList = self.listModel.query.filter_by(id=listId).first()
-        quiz = Quiz(conceptList, user)
+        pairs = conceptList.getConceptPairs(user)
+        quiz = Quiz(conceptList.name, pairs)
         return {"quiz":toJson(quiz, user=user)}

@@ -26,7 +26,7 @@ jsonFactory = JsonFactory([
                            ([SymbolList, WordList],[FieldAttr('id'), FieldAttr('name'), JsonAttr('concepts', lambda s, u: s.getConceptPairs(u), args=["user"])]),
                            ([User, UserProxy], [FieldAttr('id'), FieldAttr('email'), FieldAttr('givenName'), FieldAttr('lastName')]),
                            (Question, [FieldAttr('subject'), FieldAttr('queryWord'), FieldAttr('options'), FieldAttr('answerIndex'), JsonAttr('answerUrl', answerUrl, args=["user"])]),
-                           (Quiz, [FieldAttr('name', field='wordList.name'), FieldAttr('questions'), JsonAttr('isWords', IsWordsQuiz)])
+                           (Quiz, [FieldAttr('name'), FieldAttr('questions'), JsonAttr('isWords', IsWordsQuiz)])
                           ])
                          
 def toJson(object, **kwargs):
