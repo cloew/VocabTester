@@ -3,14 +3,16 @@
 var services = angular.module('VocabTesterServices', []);
 
 services.provider('vocabNav', function() {
-    var nav = [{'path':'/words', 'templateUrl':'static/partials/learned_forms.html', 'controller':'LearnedFormsController', 'headerNav':{'name':'Words'}},
-                   {'path':'/', 'templateUrl':'static/partials/index.html', 'controller':'IndexController', 'headerNav':{'name':'Word Lists'}},
-                   {'path':'/login', 'templateUrl':'static/partials/login.html', 'controller':'LoginController'},
-                   {'path':'/register', 'templateUrl':'static/partials/register.html', 'controller':'RegisterController'},
-                   {'path':'/symbols', 'templateUrl':'static/partials/learned_forms.html', 'controller':'LearnedFormsController', 'headerNav':{'name':'Symbols'}},
-                   {'path':'/symbollists', 'templateUrl':'static/partials/symbol_lists.html', 'headerNav':{'name':'Symbol Lists'}},
-                   {'path':'/symbollist/:listId/quiz', 'templateUrl':'static/partials/quiz.html', 'controller':'QuizController'},
-                   {'path':'/wordlist/:listId/quiz', 'templateUrl':'static/partials/quiz.html', 'controller':'QuizController'}];
+    var nav = [{'path':'/words', 'templateUrl':'static/partials/learned_words.html', 'controller':'LearnedFormsController', 'headerNav':{'name':'Words'}},
+               {'path':'/', 'templateUrl':'static/partials/index.html', 'controller':'IndexController', 'headerNav':{'name':'Word Lists'}},
+               {'path':'/login', 'templateUrl':'static/partials/login.html', 'controller':'LoginController'},
+               {'path':'/register', 'templateUrl':'static/partials/register.html', 'controller':'RegisterController'},
+               {'path':'/symbols', 'templateUrl':'static/partials/learned_symbols.html', 'controller':'LearnedFormsController', 'headerNav':{'name':'Symbols'}},
+               {'path':'/symbollists', 'templateUrl':'static/partials/symbol_lists.html', 'headerNav':{'name':'Symbol Lists'}},
+               {'path':'/symbollist/:listId/quiz', 'templateUrl':'static/partials/quiz.html', 'controller':'QuizController'},
+               {'path':'/symbollist/random/quiz', 'templateUrl':'static/partials/quiz.html', 'controller':'QuizController'},
+               {'path':'/wordlist/:listId/quiz', 'templateUrl':'static/partials/quiz.html', 'controller':'QuizController'},
+               {'path':'/wordlist/random/quiz', 'templateUrl':'static/partials/quiz.html', 'controller':'QuizController'}];
     this.getConfig = function() {
         return nav;
     };

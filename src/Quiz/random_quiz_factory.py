@@ -1,3 +1,4 @@
+from Data.concept_manager import ConceptManager
 from quiz import Quiz
 import random
 
@@ -7,13 +8,16 @@ class RandomQuizFactory:
     
     def buildQuiz(self, formModel, user):
         """ Build a quiz using the from given and the user provided """
+        conceptManager = ConceptManager(formModel)
+        
         learnedForms = user.getLearnedFor(formModel)
-        sample = random.sample(learnedForms, self.numberOfQuestions(learnedFroms))
+        sample = random.sample(learnedForms, self.numberOfQuestions(learnedForms))
         conceptIds = [form.concept_id for form in sample]
-        pairs = self.conceptManager.getConceptPairs(conceptIds, user)
+        pairs = conceptManager.getConceptPairs(conceptIds, user)
+        
         return Quiz("Random List", pairs)
         
-    def numberOfQuestions(self, learnedFroms):
+    def numberOfQuestions(self, learnedForms):
         """ Returns the number of questions allowed for this quiz """
         return min(len(learnedForms), self.MAX_QUESTIONS)
         

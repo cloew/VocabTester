@@ -42,4 +42,7 @@ controllers.controller('LearnedFormsController', function ($scope, $http, $locat
         }).error(function(error) {
             console.log(error);
         });
+    $scope.goTo = function(path) {
+        $location.path(path);
+    }
 });
