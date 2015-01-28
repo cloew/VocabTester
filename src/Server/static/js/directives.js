@@ -200,9 +200,9 @@ angular.module('VocabTesterDirectives', ['ui.bootstrap', 'kao.input', 'VocabTest
       return {
           restrict: 'E',
           replace: true,
-          controller: function($scope, $location, $route, navService) {
+          controller: function($scope, $location, $route, headerNavService) {
                 $scope.currentPath = $location.path();
-                $scope.navSections = navService.getHeaderNav();
+                $scope.navSections = headerNavService;
                 $scope.$on('$routeChangeSuccess', function(event, next, current) {
                     $scope.currentPath = $location.path();
                 });
