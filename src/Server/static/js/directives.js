@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('VocabTesterDirectives', ['ui.bootstrap', 'kao.input', 'VocabTesterServices'])
+angular.module('VocabTesterDirectives', ['ui.bootstrap', 'kao.input', 'VocabTesterServices', 'VocabNavServices'])
     .directive('kaoTable', function() {
       return {
           restrict: 'E',
@@ -200,9 +200,9 @@ angular.module('VocabTesterDirectives', ['ui.bootstrap', 'kao.input', 'VocabTest
       return {
           restrict: 'E',
           replace: true,
-          controller: function($scope, $location, $route, vocabNav) {
+          controller: function($scope, $location, $route, navService) {
                 $scope.currentPath = $location.path();
-                $scope.navSections = vocabNav.getHeaderNav();
+                $scope.navSections = navService.getHeaderNav();
                 $scope.$on('$routeChangeSuccess', function(event, next, current) {
                     $scope.currentPath = $location.path();
                 });
