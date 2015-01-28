@@ -1,3 +1,4 @@
+from Quiz.sampler import sample_at_most
 import random
 
 class Question:
@@ -11,13 +12,8 @@ class Question:
         self.answer = answer
         self.otherOptions = otherOptions
         
-        self.options = [self.answer] + random.sample(self.otherOptions, self.numberOfWrongAnswers)
+        self.options = [self.answer] + sample_at_most(self.otherOptions, self.NUM_WRONG_ANSWERS)
         random.shuffle(self.options)
-        
-    @property
-    def numberOfWrongAnswers(self):
-        """ Returns the number of wrong answers for this question """
-        return min(len(self.otherOptions), self.NUM_WRONG_ANSWERS)
         
     @property
     def answerIndex(self):

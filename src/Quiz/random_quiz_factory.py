@@ -1,6 +1,6 @@
 from Data.concept_manager import ConceptManager
 from quiz import Quiz
-import random
+from sampler import sample_at_most
 
 class RandomQuizFactory:
     """ Represents method to contstruct a Quiz from random learned Words or Symbols """
@@ -11,14 +11,10 @@ class RandomQuizFactory:
         conceptManager = ConceptManager(formModel)
         
         learnedForms = user.getLearnedFor(formModel)
-        sample = random.sample(learnedForms, self.numberOfQuestions(learnedForms))
+        sample = sample_at_most(learnedForms, self.MAX_QUESTIONS)
         conceptIds = [form.concept_id for form in sample]
         pairs = conceptManager.getConceptPairs(conceptIds, user)
         
         return Quiz("Random List", pairs)
-        
-    def numberOfQuestions(self, learnedForms):
-        """ Returns the number of questions allowed for this quiz """
-        return min(len(learnedForms), self.MAX_QUESTIONS)
         
 RandomQuizFactory = RandomQuizFactory()
