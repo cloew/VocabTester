@@ -5,6 +5,7 @@ from Data.symbol import Symbol
 from Data.concept_list import ConceptList, concept_list_concepts
 from Data.answer import Answer
 from Data.mastery import Mastery
+from Data.staleness_period import StalenessPeriod
 from Data.user import User, learned_symbols, learned_words
 
 from Server import server
@@ -18,7 +19,7 @@ def main(args):
             d = table.delete()
             server.db.session.execute(d)
     
-        for table in [ConceptList, Answer, Mastery, Word, Symbol, Language, Concept, User]:
+        for table in [ConceptList, StalenessPeriod, Answer, Mastery, Word, Symbol, Language, Concept, User]:
             table.query.delete()
         server.db.session.commit()
 
