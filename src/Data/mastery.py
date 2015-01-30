@@ -26,6 +26,8 @@ class Mastery(db.Model):
         """ Initialize the mastery """
         if 'user' in kwargs and hasattr(kwargs['user'], 'user'):
             kwargs['user'] = kwargs['user'].user
+        if 'stalenessPeriod' not in kwargs:
+            kwargs['stalenessPeriod'] = StalenessPeriod.query.filter_by(first=True).first()
         db.Model.__init__(self, *args, **kwargs)
     
     def addAnswer(self, correct):
