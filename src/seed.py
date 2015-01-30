@@ -13,7 +13,7 @@ def AddStalenessPeriods():
     """ Add the staleness periods """
     previousPeriod = None
     for days in [180, 90, 30, 14, 7]:
-        if preivousPeriod is not None:
+        if previousPeriod is not None:
             period = StalenessPeriod(days=days, next=previousPeriod)
         else:
             period = StalenessPeriod(days=days)
