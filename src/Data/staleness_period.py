@@ -6,6 +6,6 @@ class StalenessPeriod(db.Model):
     
     id = db.Column(db.Integer, primary_key=True)
     days = db.Column(db.Integer)
-    start = db.Column(db.Boolean, default=False)
+    first = db.Column(db.Boolean, default=False)
     next_id = db.Column(db.Integer, db.ForeignKey('staleness_periods.id'))
     next = db.relationship("StalenessPeriod", remote_side=[id])
