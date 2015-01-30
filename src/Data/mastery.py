@@ -1,7 +1,10 @@
 from kao_flask.ext.sqlalchemy.database import db
 
 from answer import Answer
+from staleness_period import StalenessPeriod
 from user import User
+
+import datetime
 
 class Mastery(db.Model):
     """ Represents the mastery of some skill """
@@ -16,6 +19,8 @@ class Mastery(db.Model):
     symbol_id = db.Column(db.Integer, db.ForeignKey('symbols.id'))
     symbol = db.relationship("Symbol")
     answers = db.relationship("Answer", order_by=Answer.createdDate, backref=db.backref('mastery'))
+    staleness_period_id = db.Column(db.Integer, db.ForeignKey('staleness_periods.id'))
+    stalenessPeriod = db.relationship("StalenessPeriod")
     
     def __init__(self, *args, **kwargs):
         """ Initialize the mastery """
@@ -39,4 +44,19 @@ class Mastery(db.Model):
     @property
     def rating(self):
         """ Return the rating of the mastery """
+        return max(0, self.answerRating + stalenessRating)
+    
+    @property
+    def answerRating(self):
+        """ Return the answer rating of the mastery """
         return self.numberOfCorrectAnswers
+    
+    @property
+    def stalenessRating(self):
+        """ Return the staleness rating of the mastery """
+        return -1 * int((datetime.datetime.now() - mostRecentCorrectAnswer).days / self.stalenessPeriod.days)
+    
+    @property
+    def mostRecentCorrectAnswer(self):
+        """ Return the most recent correct answer """
+        return max([answer.createdDate for answer in self.answers if answer.correct])
