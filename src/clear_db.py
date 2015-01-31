@@ -19,7 +19,7 @@ def main(args):
             d = table.delete()
             server.db.session.execute(d)
     
-        for table in [ConceptList, StalenessPeriod, Answer, Mastery, Word, Symbol, Language, Concept, User]:
+        for table in [ConceptList, Answer, Mastery, StalenessPeriod, Word, Symbol, Language, Concept, User]:
             table.query.delete()
         server.db.session.commit()
 
