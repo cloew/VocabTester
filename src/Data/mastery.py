@@ -27,16 +27,34 @@ class Mastery(db.Model):
         if 'user' in kwargs and hasattr(kwargs['user'], 'user'):
             kwargs['user'] = kwargs['user'].user
         if 'stalenessPeriod' not in kwargs:
-            kwargs['stalenessPeriod'] = StalenessPeriod.query.filter_by(first=True).first()
+            kwargs['stalenessPeriod'] = StalenessPeriod.getFirstStalenessPeriod()
         db.Model.__init__(self, *args, **kwargs)
     
     def addAnswer(self, correct):
         """ Add an answer to this mastery """
+        self.updateStalenessPeriod(correct)
         if len(self.answers) >= self.MAX_ANSWERS:
             db.session.delete(self.answers[0])
         answer = Answer(correct=correct, mastery=self)
         db.session.add(answer)
         db.session.commit()
+        
+    def updateStalenessPeriod(self, correct):
+        """ Update the staleness period based on whether the answer is correct """
+        if correct and self.answerRating == MAX_ANSWERS:
+            self.moveToNextStalenessPeriod()
+        else:
+            self.revertToFirstStalenessPeriod()
+            
+    def moveToNextStalenessPeriod(self):
+        """ Move the mastery to the next staleness period """
+        self.stalenessPeriod = self.stalenessPeriod.next
+        db.session.add(self)
+        
+    def revertToFirstStalenessPeriod(self):
+        """ Revert the staleness period to the first staleness period """
+        self.stalenessPeriod = StalenessPeriod.getFirstStalenessPeriod()
+        db.session.add(self)
     
     @property
     def numberOfCorrectAnswers(self):

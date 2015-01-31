@@ -9,3 +9,8 @@ class StalenessPeriod(db.Model):
     first = db.Column(db.Boolean, default=False)
     next_id = db.Column(db.Integer, db.ForeignKey('staleness_periods.id'))
     next = db.relationship("StalenessPeriod", remote_side=[id])
+    
+    @classmethod
+    def getFirstStalenessPeriod(cls):
+        """ Return the first staleness period """
+        return cls.query.filter_by(first=True).first()
