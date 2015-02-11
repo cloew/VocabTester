@@ -41,7 +41,7 @@ class Mastery(db.Model):
         
     def updateStalenessPeriod(self, correct):
         """ Update the staleness period based on whether the answer is correct """
-        if correct and self.answerRating == MAX_ANSWERS and self.isStale:
+        if correct and self.answerRating == self.MAX_ANSWERS and self.isStale:
             self.moveToNextStalenessPeriod()
         else:
             self.revertToFirstStalenessPeriod()
