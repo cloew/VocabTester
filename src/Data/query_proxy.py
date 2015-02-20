@@ -1,4 +1,4 @@
-from decorators import lazy_property
+from kao_decorators import lazy_property
 
 def query_via(queryRetriever):
     def addQuery(cls):

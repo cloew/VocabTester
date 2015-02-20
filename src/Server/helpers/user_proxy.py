@@ -1,4 +1,4 @@
-from decorators import lazy_property, proxy_for
+from kao_decorators import lazy_property, proxy_for
 
 from Data.language import Language
 from Data.mastery import Mastery

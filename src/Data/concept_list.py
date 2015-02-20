@@ -1,4 +1,4 @@
-from decorators import proxy_for
+from kao_decorators import proxy_for
 from query_proxy import query_via
 from concept import Concept
 from concept_manager import ConceptManager

@@ -1,4 +1,4 @@
-from decorators import lazy_property
+from kao_decorators import lazy_property
 from learned_tracker import LearnedTracker
 
 from kao_flask.ext.sqlalchemy.database import db
