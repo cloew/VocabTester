@@ -1,6 +1,6 @@
 'use strict';
 
-var controllers = angular.module('VocabTesterControllers', ['ui.bootstrap', 'VocabTesterServices']);
+var controllers = angular.module('VocabTesterControllers', ['ui.bootstrap', 'VocabTesterServices', 'kao.auth']);
 
 controllers.controller('IndexController', function ($scope, userService) {
     $scope.isLoggedIn = userService.isLoggedIn;
