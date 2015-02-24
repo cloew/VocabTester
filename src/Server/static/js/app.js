@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('VocabTester', ['ngRoute', 'VocabTesterControllers', 'VocabTesterDirectives', 'VocabTesterServices', 'VocabNavServices'])
+angular.module('VocabTester', ['ngRoute', 'VocabTesterControllers', 'VocabTesterDirectives', 'VocabTesterServices', 'VocabNavServices', 'Quiz'])
 	.config(['$routeProvider', 'navConfigProvider',
 		function($routeProvider, navConfig) {
             var navConfig = navConfig.getConfig();
