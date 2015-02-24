@@ -31,5 +31,5 @@
                 },
                 templateUrl: 'static/partials/directives/concept_list.html'
             }
-        })
+        });
 })(angular);
