@@ -1,7 +1,7 @@
 (function(a) {
     'use strict';
 
-    a.module('Header', ['ui.bootstrap', 'kao.auth', 'kao.input', 'VocabNavServices'])
+    a.module('Header', ['ui.bootstrap', 'kao.auth', 'kao.input', 'VocabNav'])
         .directive('headerBar', function() {
             return {
                 restrict: 'E',
