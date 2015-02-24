@@ -1,6 +1,29 @@
 (function(a) {
     "use strict";
     a.module('kao.auth', [])
+        .controller('LoginController', function ($scope, $location, userService) {
+            $scope.login = function() {
+                userService.login($scope.email, $scope.password, function() {
+                    var next = $location.search().returnTo;
+                    if (!next) {
+                        next = '/'
+                    }
+                    $location.path(next);
+                    $location.search('returnTo', null);
+                }, function(error) {
+                    $scope.errorMessage = error.message;
+                });
+            };
+        })
+        .controller('RegisterController', function ($scope, $location, userService) {
+            $scope.register = function() {
+                userService.register($scope, function() {
+                    $location.path('/');
+                }, function(error) {
+                    $scope.errorMessage = error.message;
+                });
+            };
+        })
         .factory('userService', function($http, $window, $route) {
             var user = undefined;
             var userWatch = [];
@@ -52,7 +75,8 @@
                     }
                 }
             };
-        }).factory('authInterceptor', function ($rootScope, $q, $window, $location) {
+        })
+        .factory('authInterceptor', function ($rootScope, $q, $window, $location) {
             return {
                 request: function (config) {
                     config.headers = config.headers || {};
@@ -69,8 +93,8 @@
                     return $q.reject(rejection);
                 }
             };
-        }).config(function ($httpProvider) {
+        })
+        .config(function ($httpProvider) {
             $httpProvider.interceptors.push('authInterceptor');
-            }
-        );
+        });
 })(angular);
