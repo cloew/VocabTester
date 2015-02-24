@@ -1,6 +1,6 @@
 (function(a) {
     "use strict";
-    a.module('Words', [])
+    a.module('Words', ['Concepts'])
         .directive('wordLists', function() {
             return {
                 restrict: 'E',

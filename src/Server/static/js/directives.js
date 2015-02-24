@@ -1,16 +1,6 @@
 'use strict';
 
 angular.module('VocabTesterDirectives', ['ui.bootstrap', 'kao.input', 'VocabNavServices'])
-    .directive('kaoTable', function() {
-      return {
-          restrict: 'E',
-          replace: true,
-          scope: {
-              entries: '=',
-              columns: '='
-          },
-          templateUrl: 'static/partials/directives/kao_table.html'
-      }})
     .directive('headerBar', function() {
       return {
           restrict: 'E',

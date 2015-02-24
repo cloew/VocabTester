@@ -1,6 +1,6 @@
 (function(a) {
     "use strict";
-    a.module('Concepts', [])
+    a.module('Concepts', ['ui.bootstrap', 'kao.table'])
         .controller('LearnedFormsController', function ($scope, $http, $location) {
             $http.get('/api'+$location.path()).success(function(data) {
                     $scope.concepts = data.concepts;

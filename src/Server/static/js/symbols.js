@@ -1,6 +1,6 @@
 (function(a) {
     "use strict";
-    a.module('Symbols', [])
+    a.module('Symbols', ['Concepts'])
         .directive('symbolLists', function() {
             return {
                 restrict: 'E',
