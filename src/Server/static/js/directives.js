@@ -42,15 +42,4 @@ angular.module('VocabTesterDirectives', ['ui.bootstrap', 'kao.input', 'VocabNavS
                 });
           },
           templateUrl: 'static/partials/directives/header_nav.html'
-      }})
-    .directive('info', function() {
-      return {
-          restrict: 'E',
-          replace: true,
-          controller: function($scope, $location, userService) {
-              $scope.toRegister = function() {
-                $location.path('/register/');
-              };
-          },
-          templateUrl: 'static/partials/directives/info.html'
-      }})
+      }});
