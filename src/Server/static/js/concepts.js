@@ -1,0 +1,132 @@
+(function(a) {
+    "use strict";
+    a.module('Concepts', [])
+        .controller('LearnedFormsController', function ($scope, $http, $location) {
+            $http.get('/api'+$location.path()).success(function(data) {
+                    $scope.concepts = data.concepts;
+                    $scope.isWords = data.isWords;
+                }).error(function(error) {
+                    console.log(error);
+                });
+            $scope.goTo = function(path) {
+                $location.path(path);
+            }
+        })
+        .factory('conceptTableService', function() {
+            return {
+                buildEntries: function (concepts, isWords) {
+                    var columns = [];
+                    
+                    if (isWords) {
+                        columns.push({'name':'Word', 'path':'form'});
+                    }
+                    else {
+                        columns.push({'name':'Symbol', 'path':'form'});
+                    }
+                    columns.push({'name':'Native', 'path':'native'});
+                    columns.push({'name':'Mastery', 'path':'mastery'});
+                    
+                    var table = {'entries':[], columns:columns};
+                    for (var i = 0; i < concepts.length; i++) {
+                        table.entries.push({'form':concepts[i].foreign.text, 'native':concepts[i].native.text, 'mastery':concepts[i].foreign.mastery});
+                    }
+                    return table;
+                }
+            }
+        })
+        .directive('wordLists', function() {
+          return {
+              restrict: 'E',
+              replace: true,
+              controller: function($scope, $http) {
+                $http.get("/api/wordlists").success(function(data) {
+                    $scope.wordLists = data.lists;
+                }).error(function(error) {
+                    console.log(error);
+                });
+              },
+              templateUrl: 'static/partials/directives/word_lists.html'
+          }})
+        .directive('wordList', function() {
+          return {
+              restrict: 'E',
+              replace: true,
+              scope: {
+                  conceptList: '='
+              },
+              controller: function($scope, $location) {
+                  $scope.header = 'words';
+                  $scope.isWords = true;
+                  $scope.startQuiz = function() {
+                    $location.path('/wordlist/'+$scope.conceptList.id+'/quiz/');
+                  };
+              },
+              templateUrl: 'static/partials/directives/concept_list.html'
+          }})
+        .directive('symbolLists', function() {
+          return {
+              restrict: 'E',
+              replace: true,
+              controller: function($scope, $http) {
+                $http.get("/api/symbollists").success(function(data) {
+                    $scope.symbolLists = data.lists;
+                }).error(function(error) {
+                    console.log(error);
+                });
+              },
+              templateUrl: 'static/partials/directives/symbol_lists.html'
+          }})
+        .directive('symbolList', function() {
+          return {
+              restrict: 'E',
+              replace: true,
+              scope: {
+                  conceptList: '='
+              },
+              controller: function($scope, $location) {
+                  $scope.header = 'symbols';
+                  $scope.isWords = false;
+                  $scope.startQuiz = function() {
+                    $location.path('/symbollist/'+$scope.conceptList.id+'/quiz/');
+                  };
+              },
+              templateUrl: 'static/partials/directives/concept_list.html'
+          }})
+        .directive('conceptCount', function() {
+          return {
+              restrict: 'E',
+              replace: true,
+              scope: {
+                  conceptList: '=',
+                  header: '=',
+                  isWords: '='
+              },
+              controller: function($scope) {
+                  $scope.isOpen = false;
+              },
+              templateUrl: 'static/partials/directives/concept_count.html'
+          }})
+        .directive('conceptTable', function() {
+          return {
+              restrict: 'E',
+              replace: true,
+              scope: {
+                  concepts: '=',
+                  isWords: '='
+              },
+              controller: function($scope, conceptTableService) {
+                  var loadTable = function() {
+                      if ($scope.concepts !== undefined) {
+                          var table = conceptTableService.buildEntries($scope.concepts, $scope.isWords);
+                          $scope.entries = table.entries;
+                          $scope.columns = table.columns;
+                      }
+                  }
+                  loadTable();
+                  $scope.$watch('concepts', function() {
+                      loadTable();
+                  });
+              },
+              templateUrl: 'static/partials/directives/concept_table.html'
+          }});
+})(angular);

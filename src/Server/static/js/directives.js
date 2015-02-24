@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('VocabTesterDirectives', ['ui.bootstrap', 'kao.input', 'VocabTesterServices', 'VocabNavServices'])
+angular.module('VocabTesterDirectives', ['ui.bootstrap', 'kao.input', 'VocabNavServices'])
     .directive('kaoTable', function() {
       return {
           restrict: 'E',
@@ -10,103 +10,6 @@ angular.module('VocabTesterDirectives', ['ui.bootstrap', 'kao.input', 'VocabTest
               columns: '='
           },
           templateUrl: 'static/partials/directives/kao_table.html'
-      }})
-    .directive('wordLists', function() {
-      return {
-          restrict: 'E',
-          replace: true,
-          controller: function($scope, $http) {
-            $http.get("/api/wordlists").success(function(data) {
-                $scope.wordLists = data.lists;
-            }).error(function(error) {
-                console.log(error);
-            });
-          },
-          templateUrl: 'static/partials/directives/word_lists.html'
-      }})
-    .directive('wordList', function() {
-      return {
-          restrict: 'E',
-          replace: true,
-          scope: {
-              conceptList: '='
-          },
-          controller: function($scope, $location) {
-              $scope.header = 'words';
-              $scope.isWords = true;
-              $scope.startQuiz = function() {
-                $location.path('/wordlist/'+$scope.conceptList.id+'/quiz/');
-              };
-          },
-          templateUrl: 'static/partials/directives/concept_list.html'
-      }})
-    .directive('symbolLists', function() {
-      return {
-          restrict: 'E',
-          replace: true,
-          controller: function($scope, $http) {
-            $http.get("/api/symbollists").success(function(data) {
-                $scope.symbolLists = data.lists;
-            }).error(function(error) {
-                console.log(error);
-            });
-          },
-          templateUrl: 'static/partials/directives/symbol_lists.html'
-      }})
-    .directive('symbolList', function() {
-      return {
-          restrict: 'E',
-          replace: true,
-          scope: {
-              conceptList: '='
-          },
-          controller: function($scope, $location) {
-              $scope.header = 'symbols';
-              $scope.isWords = false;
-              $scope.startQuiz = function() {
-                $location.path('/symbollist/'+$scope.conceptList.id+'/quiz/');
-              };
-          },
-          templateUrl: 'static/partials/directives/concept_list.html'
-      }})
-    .directive('conceptCount', function() {
-      return {
-          restrict: 'E',
-          replace: true,
-          scope: {
-              conceptList: '=',
-              header: '=',
-              isWords: '='
-          },
-          controller: function($scope) {
-              $scope.isOpen = false;
-          },
-          templateUrl: 'static/partials/directives/concept_count.html'
-      }})
-    .directive('conceptTable', function() {
-      return {
-          restrict: 'E',
-          replace: true,
-          scope: {
-              concepts: '=',
-              isWords: '='
-          },
-          controller: function($scope, conceptTableService) {
-              var loadTable = function() {
-                  if ($scope.concepts !== undefined) {
-                      var table = conceptTableService.buildEntries($scope.concepts, $scope.isWords);
-                      $scope.entries = table.entries;
-                      $scope.columns = table.columns;
-                  }
-              }
-              loadTable();
-              $scope.$watch('concepts', function() {
-                  loadTable();
-              });
-              
-              
-          },
-          templateUrl: 'static/partials/directives/concept_table.html'
       }})
     .directive('headerBar', function() {
       return {

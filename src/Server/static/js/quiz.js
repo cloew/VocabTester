@@ -1,6 +1,6 @@
 (function(a) {
     "use strict";
-    a.module('Quiz', ['ui.bootstrap', 'kao.input', 'VocabTesterServices', 'VocabNavServices'])
+    a.module('Quiz', ['ui.bootstrap', 'kao.input', 'Concepts', 'VocabNavServices'])
         .factory('quizService', function($http, $location, $routeParams, navService) {
             function Quiz(wordListId) {
                 this.wordListId = wordListId;
