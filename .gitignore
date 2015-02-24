@@ -66,3 +66,6 @@ venv/
 
 # Flask
 migrations/
+
+# NPM
+node_modules
