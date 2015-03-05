@@ -33,13 +33,18 @@ $danger-bg: #d9534f;
     margin: 5px;
 }
 
-.selected {
+.selection {
     @include border-radius(10px);
+    color: #fff;
+}
+
+.selected {
+    @extend .selection;
     background-color: $primary-bg;
 }
 
 .answer {
-    @include border-radius(10px);
+    @extend .selection;
     background-color: $success-bg;
 }
 
