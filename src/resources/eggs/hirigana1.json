@@ -2,27 +2,27 @@
 {
     "language":"English",
     "symbols":[{"concept":1,
-              "text":"a"},
-             {"concept":2,
-              "text":"i"},
-             {"concept":3,
-              "text":"u"},
-             {"concept":4,
-              "text":"e"},
-             {"concept":5,
-              "text":"o"}]
+                "text":"a"},
+               {"concept":2,
+                "text":"i"},
+               {"concept":3,
+                "text":"u"},
+               {"concept":4,
+                "text":"e"},
+               {"concept":5,
+                "text":"o"}]
 },
 {
     "language":"Japanese",
     "symbols":[{"concept":1,
-              "text":"あ"},
-             {"concept":2,
-              "text":"い"},
-             {"concept":3,
-              "text":"う"},
-             {"concept":4,
-              "text":"え"},
-             {"concept":5,
-              "text":"お"}]
+                "text":"あ"},
+               {"concept":2,
+                "text":"い"},
+               {"concept":3,
+                "text":"う"},
+               {"concept":4,
+                "text":"え"},
+               {"concept":5,
+                "text":"お"}]
 }
 ]
