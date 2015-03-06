@@ -15,12 +15,12 @@ class OptionsFinder:
         
     def validOption(self, option):
         """ Return if the option is a valid option for the question """
-        return all([self.notSubject(option), self.noConflict(option)])
+        return all([self.notSubject(option), self.notAmbiguous(option)])
         
     def notSubject(self, option):
         """ Return if the option is not the subject of the question """
         return option is not self.subject
     
-    def noConflict(self, option):
-        """ Return if the option and subject do not conflict with their native or foreign forms """
+    def notAmbiguous(self, option):
+        """ Return if the option and subject are not ambiguous with their native or foreign forms """
         return (not option.native.text == self.subject.native.text) and (not option.foreign.text == self.subject.foreign.text)
