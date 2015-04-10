@@ -1,6 +1,9 @@
 <div class="panel panel-primary">
     <div class="panel-heading word-list-panel-heading">
-        <button class="pull-right btn btn-primary btn-sm" ng-click="startQuiz();">Quiz Me!</button>
+        <span class="pull-right">
+            <span class="panel-title">Avg Mastery: {{conceptList.averageMastery}}</span>
+            <button class="btn btn-primary btn-sm" ng-click="startQuiz();">Quiz Me!</button>
+        </span>
         <div class="word-list-header">
             <h3 class="panel-title">{{conceptList.name}}</h3>
         </div>

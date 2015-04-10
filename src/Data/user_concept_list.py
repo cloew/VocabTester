@@ -11,5 +11,11 @@ class UserConceptList:
         
     @property
     def concepts(self):
-        """ Return the concepts for the users language """
+        """ Return the concepts for the user's language """
         return self.conceptList.getConceptPairs(self.user)
+        
+    @property
+    def averageMastery(self):
+        """ Return the average mastery of this concept list for the user """
+        masteries = [concept.foreign.getMasteryRating(self.user) for concept in self.concepts]
+        return round(sum(masteries, 0.0) / len(masteries), 1)

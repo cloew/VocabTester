@@ -25,7 +25,7 @@ jsonFactory = JsonFactory([
                            ([Symbol, Word],[FieldAttr('id'), JsonAttr('text', unicode), JsonAttr('mastery', lambda s, u: s.getMasteryRating(u), args=["user"])]),
                            (ConceptPair,[FieldAttr('foreign'), FieldAttr('native')]),
                            ([SymbolList, WordList],[FieldAttr('id'), FieldAttr('name'), JsonAttr('concepts', lambda s, u: s.getConceptPairs(u), args=["user"])]),
-                           (UserConceptList,[FieldAttr('id'), FieldAttr('name'), FieldAttr('concepts')]),
+                           (UserConceptList,[FieldAttr('id'), FieldAttr('name'), FieldAttr('concepts'), FieldAttr('averageMastery')]),
                            ([User, UserProxy], [FieldAttr('id'), FieldAttr('email'), FieldAttr('givenName'), FieldAttr('lastName')]),
                            (Question, [FieldAttr('subject'), FieldAttr('queryWord'), FieldAttr('options'), FieldAttr('answerIndex'), JsonAttr('answerUrl', answerUrl, args=["user"])]),
                            (Quiz, [FieldAttr('name'), FieldAttr('questions'), JsonAttr('isWords', IsWordsQuiz)])
