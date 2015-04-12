@@ -1,0 +1,36 @@
+[
+{
+    "language":"English",
+    "words":[{"concept":1,
+              "text":"Strawberry"},
+             {"concept":2,
+              "text":"Apple"},
+             {"concept":3,
+              "text":"Banana"},
+             {"concept":4,
+              "text":"Watermelon"},
+             {"concept":5,
+              "text":"Lemon"},
+             {"concept":6,
+              "text":"Peach"},
+             {"concept":7,
+              "text":"Grapes"}]
+},
+{
+    "language":"Japanese",
+    "words":[{"concept":1,
+              "text":"いちご"},
+             {"concept":2,
+              "text":"りんご"},
+             {"concept":3,
+              "text":"バナナ"},
+             {"concept":4,
+              "text":"すいか"},
+             {"concept":5,
+              "text":"レモン"},
+             {"concept":6,
+              "text":"もも"},
+             {"concept":7,
+              "text":"ぶどう"}]
+}
+]
