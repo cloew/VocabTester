@@ -1,0 +1,36 @@
+[
+{
+    "language":"English",
+    "words":[{"concept":1,
+              "text":"Dog"},
+             {"concept":2,
+              "text":"Cat"},
+             {"concept":3,
+              "text":"Elephant"},
+             {"concept":4,
+              "text":"Horse"},
+             {"concept":5,
+              "text":"Rabbit"},
+             {"concept":6,
+              "text":"Panda"},
+             {"concept":7,
+              "text":"Mouse"}]
+},
+{
+    "language":"Japanese",
+    "words":[{"concept":1,
+              "text":"いぬ"},
+             {"concept":2,
+              "text":"ねこ"},
+             {"concept":3,
+              "text":"ぞう"},
+             {"concept":4,
+              "text":"うま"},
+             {"concept":5,
+              "text":"うさぎ"},
+             {"concept":6,
+              "text":"パンだ"},
+             {"concept":7,
+              "text":"ねずみ"}]
+}
+]

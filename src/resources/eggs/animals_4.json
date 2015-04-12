@@ -1,0 +1,36 @@
+[
+{
+    "language":"English",
+    "words":[{"concept":1,
+              "text":"Lion"},
+             {"concept":2,
+              "text":"Giraffe"},
+             {"concept":3,
+              "text":"Cow"},
+             {"concept":4,
+              "text":"Monkey"},
+             {"concept":5,
+              "text":"Sheep"},
+             {"concept":6,
+              "text":"Fox"},
+             {"concept":7,
+              "text":"Bear"}]
+},
+{
+    "language":"Japanese",
+    "words":[{"concept":1,
+              "text":"ライオン"},
+             {"concept":2,
+              "text":"きりん"},
+             {"concept":3,
+              "text":"うし"},
+             {"concept":4,
+              "text":"さる"},
+             {"concept":5,
+              "text":"ひつじ"},
+             {"concept":6,
+              "text":"きつね"},
+             {"concept":7,
+              "text":"くま"}]
+}
+]
