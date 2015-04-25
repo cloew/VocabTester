@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('VocabTester', ['ui.bootstrap', 'ngRoute', 'Header', 'Concepts', 'Symbols', 'Words', 'Quiz', 'VocabNav', 'kao.auth'])
+angular.module('VocabTester', ['ui.bootstrap', 'ngRoute', 'Header', 'Concepts', 'Symbols', 'Words', 'Quiz', 'VocabNav', 'kao.auth', 'kao.rest'])
 	.config(['$routeProvider', 'navConfigProvider',
 		function($routeProvider, navConfig) {
             var navConfig = navConfig.getConfig();
