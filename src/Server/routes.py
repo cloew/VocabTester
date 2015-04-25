@@ -33,4 +33,6 @@ routes = [Endpoint('/', get=HTMLController('Server/templates/index.html')),
           Endpoint('/api/wordlist/<int:listId>/quiz', get=QuizController(WordList)),
           Endpoint('/api/wordlist/random/quiz', get=RandomQuizController(Word)),
           # Mastery
-          Endpoint('/api/mastery/<int:masteryId>/answer', post=QuizAnswerController())]
+          Endpoint('/api/mastery/<int:masteryId>/answer', post=QuizAnswerController()),
+          #Admin
+          Endpoint('/api/words', get=LearnedConceptsController(Word))]
