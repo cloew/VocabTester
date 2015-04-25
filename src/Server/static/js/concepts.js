@@ -12,6 +12,17 @@
                 $location.path(path);
             }
         })
+        .controller('FormsController', function ($scope, $http, $location, navService) {
+            $http.get(navService.getApiUrl()).success(function(data) {
+                    $scope.concepts = data.concepts;
+                    $scope.isWords = data.isWords;
+                }).error(function(error) {
+                    console.log(error);
+                });
+            $scope.goTo = function(path) {
+                $location.path(path);
+            }
+        })
         .factory('conceptTableService', function() {
             return {
                 buildEntries: function (concepts, isWords) {

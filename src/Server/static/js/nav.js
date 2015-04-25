@@ -14,7 +14,7 @@
             var symbolListQuiz = {name: 'symbolListQuiz', path:'/symbollist/:listId/quiz', templateUrl:'static/partials/quiz.html', controller:'QuizController', returnTo:symbolLists.path};
             var randomWordQuiz = {name: 'randomWordQuiz', path:'/wordlist/random/quiz', templateUrl:'static/partials/quiz.html', controller:'QuizController', returnTo:words.path};
             var wordListQuiz = {name: 'wordListQuiz', path:'/wordlist/:listId/quiz', templateUrl:'static/partials/quiz.html', controller:'QuizController', returnTo:wordLists.path};
-            var nav = [wordLists, login, register, words, symbols, symbolLists, randomSymbolQuiz, symbolListQuiz, randomWordQuiz, wordListQuiz];
+            var nav = [wordLists, login, register, words, symbols, symbolLists, adminWords, randomSymbolQuiz, symbolListQuiz, randomWordQuiz, wordListQuiz];
             this.getConfig = function() {
                 return nav;
             };
