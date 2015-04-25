@@ -1,6 +1,10 @@
 <div class="col-md-8 col-md-push-2" style="text-align:center;">
     <div class="col-md-12">
         <h1 class="col-md-8 col-md-push-2">Languages</h1>
+        <button ng-click="goTo('/admin/languages/new');" class="btn btn-lg btn-primary pull-right">
+            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+            <span class="sr-only">New Language</span>
+        </button>
     </div>
     <div>
         <kao-table entries="records" columns="[{'name':'Name', 'path':'name'}]"></kao-table>
