@@ -1,3 +1,4 @@
+from Data.language import Language
 from Data.symbol import Symbol
 from Data.symbol_list import SymbolList
 from Data.word import Word
@@ -7,6 +8,7 @@ from Server.Controller.concept_lists_controller import ConceptListsController
 from Server.Controller.current_user_controller import CurrentUserController
 from Server.Controller.concepts_controller import ConceptsController
 from Server.Controller.learned_concepts_controller import LearnedConceptsController
+from Server.Controller.list_controller import ListController
 from Server.Controller.login_controller import LoginController
 from Server.Controller.quiz_answer_controller import QuizAnswerController
 from Server.Controller.quiz_controller import QuizController
@@ -36,4 +38,5 @@ routes = [Endpoint('/', get=HTMLController('Server/templates/index.html')),
           # Mastery
           Endpoint('/api/mastery/<int:masteryId>/answer', post=QuizAnswerController()),
           #Admin
+          Endpoint('/api/admin/languages', get=ListController(Language)),
           Endpoint('/api/admin/words', get=ConceptsController(Word))]
