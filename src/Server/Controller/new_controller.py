@@ -7,7 +7,7 @@ class NewController(AuthJSONController):
     """ Controller to create a new record for a particular model """
     
     def __init__(self, modelCls):
-        """ Initialize the List Controller """
+        """ Initialize the New Controller """
         AuthJSONController.__init__(self)
         self.modelCls = modelCls
     
