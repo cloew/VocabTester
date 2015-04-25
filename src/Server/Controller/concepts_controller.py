@@ -5,7 +5,7 @@ from Server.helpers.admin_json_factory import toJson
 
 from auth_json_controller import AuthJSONController
 
-class ConceptsController:
+class ConceptsController(AuthJSONController):
     """ Controller to return the concepts learned in the appropriate form """
     
     def __init__(self, formModel):
