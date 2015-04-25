@@ -1,0 +1,36 @@
+[
+{
+    "language":"English",
+    "words":[{"concept":1,
+              "text":"Red"},
+             {"concept":2,
+              "text":"Blue"},
+             {"concept":3,
+              "text":"Black"},
+             {"concept":4,
+              "text":"White"},
+             {"concept":5,
+              "text":"Brown"},
+             {"concept":6,
+              "text":"Yellow"},
+             {"concept":7,
+              "text":"Orange"}]
+},
+{
+    "language":"Japanese",
+    "words":[{"concept":1,
+              "text":"あか"},
+             {"concept":2,
+              "text":"あお"},
+             {"concept":3,
+              "text":"くろ"},
+             {"concept":4,
+              "text":"しろ"},
+             {"concept":5,
+              "text":"ちゃいろ"},
+             {"concept":6,
+              "text":"きいろ"},
+             {"concept":7,
+              "text":"オレンジ"}]
+}
+]
