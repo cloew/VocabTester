@@ -3,11 +3,11 @@ from Server.helpers.admin_json_factory import toJson
 from auth_json_controller import AuthJSONController
 from kao_flask.ext.sqlalchemy.database import db
 
-class NewController(AuthJSONController):
+class CreateController(AuthJSONController):
     """ Controller to create a new record for a particular model """
     
     def __init__(self, modelCls):
-        """ Initialize the New Controller """
+        """ Initialize the Create Controller """
         AuthJSONController.__init__(self)
         self.modelCls = modelCls
     
