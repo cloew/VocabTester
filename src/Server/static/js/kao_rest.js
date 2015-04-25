@@ -25,12 +25,36 @@
             };
             $scope.getRecords();
         })
-        .controller('NewController', function ($scope, $http, navService) {
+        .controller('EditController', function ($scope, $http, $location, navService) {
+            $scope.record = {};
+            
+            $scope.goTo = function(path) {
+                $location.path(path);
+            };
+            
+            $scope.delete = function(id) {
+                $http.delete(navService.getApiUrl()).success(function(data) {
+                    $scope.goTo('/admin/languages');
+                }).error(function(error) {
+                    console.log(error);
+                });
+            };
+            
+            $scope.getRecord = function() {
+                $http.get(navService.getApiUrl()).success(function(data) {
+                    $scope.record = data.record;
+                }).error(function(error) {
+                    console.log(error);
+                });
+            };
+            $scope.getRecord();
+        })
+        .controller('NewController', function ($scope, $http, $location, navService) {
             $scope.record = {};
             
             $scope.create = function() {
                 $http.post(navService.getApiUrl(), $scope.record).success(function(data) {
-                    
+                    $location.path('/admin/languages/' + data.record.id);
                 }).error(function(error) {
                     console.log(error);
                 });
