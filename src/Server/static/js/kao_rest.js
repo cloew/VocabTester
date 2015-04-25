@@ -32,6 +32,14 @@
                 $location.path(path);
             };
             
+            $scope.save = function(id) {
+                $http.put(navService.getApiUrl(), $scope.record).success(function(data) {
+                    $scope.record = data.record;
+                }).error(function(error) {
+                    console.log(error);
+                });
+            };
+            
             $scope.delete = function(id) {
                 $http.delete(navService.getApiUrl()).success(function(data) {
                     $scope.goTo('/admin/languages');
@@ -52,7 +60,7 @@
         .controller('NewController', function ($scope, $http, $location, navService) {
             $scope.record = {};
             
-            $scope.create = function() {
+            $scope.save = function() {
                 $http.post(navService.getApiUrl(), $scope.record).success(function(data) {
                     $location.path('/admin/languages/' + data.record.id);
                 }).error(function(error) {
