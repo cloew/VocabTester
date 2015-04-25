@@ -3,15 +3,27 @@
     a.module('kao.rest', [])
         .controller('ListController', function ($scope, $http, $location, navService) {
             $scope.records = [];
-            $http.get(navService.getApiUrl()).success(function(data) {
-                $scope.records = data.records;
-            }).error(function(error) {
-                console.log(error);
-            });
             
             $scope.goTo = function(path) {
                 $location.path(path);
             };
+            
+            $scope.delete = function(id) {
+                $http.delete(navService.getApiUrl() + '/' + id).success(function(data) {
+                    $scope.getRecords();
+                }).error(function(error) {
+                    console.log(error);
+                });
+            };
+            
+            $scope.getRecords = function() {
+                $http.get(navService.getApiUrl()).success(function(data) {
+                    $scope.records = data.records;
+                }).error(function(error) {
+                    console.log(error);
+                });
+            };
+            $scope.getRecords();
         })
         .controller('NewController', function ($scope, $http, navService) {
             $scope.record = {};

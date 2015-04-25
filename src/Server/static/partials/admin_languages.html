@@ -7,6 +7,20 @@
         </button>
     </div>
     <div>
-        <kao-table entries="records" columns="[{'name':'Name', 'path':'name'}]"></kao-table>
+        <table class="table table-striped table-bordered">
+            <tr>
+                <th>Name</th>
+                <th></th>
+            </tr>
+            <tr ng-repeat="record in records">
+                <td>{{record.name}}</td>
+                <td style="text-align: center;">
+                    <button ng-click="delete(record.id)" class="btn btn-sm btn-primary">
+                        <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                        <span class="sr-only">Delete Language</span>
+                    </button>
+                </td>
+            </tr>
+        </table>
     <div>
 </div>
