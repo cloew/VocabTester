@@ -35,5 +35,12 @@
                     console.log(error);
                 });
             };
+        })
+        .directive('languageForm', function() {
+            return {
+                restrict: 'E',
+                replace: true,
+                templateUrl: 'static/partials/directives/admin/language_form.html'
+            }
         });
 })(angular);
