@@ -15,6 +15,7 @@ from Server.Controller.login_controller import LoginController
 from Server.Controller.quiz_answer_controller import QuizAnswerController
 from Server.Controller.quiz_controller import QuizController
 from Server.Controller.random_quiz_controller import RandomQuizController
+from Server.Controller.record_controller import RecordController
 from Server.Controller.register_controller import RegisterController
 
 from kao_flask.endpoint import Endpoint
@@ -41,5 +42,5 @@ routes = [Endpoint('/', get=HTMLController('Server/templates/index.html')),
           Endpoint('/api/mastery/<int:masteryId>/answer', post=QuizAnswerController()),
           #Admin
           Endpoint('/api/admin/languages', get=ListController(Language), post=CreateController(Language)),
-          Endpoint('/api/admin/languages/<int:id>', delete=DeleteController(Language)),
+          Endpoint('/api/admin/languages/<int:id>', get=RecordController(Language), delete=DeleteController(Language)),
           Endpoint('/api/admin/words', get=ConceptsController(Word))]
