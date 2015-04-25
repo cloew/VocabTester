@@ -1,8 +1,8 @@
 (function(a) {
     "use strict";
-    a.module('Concepts', ['ui.bootstrap', 'kao.table'])
-        .controller('LearnedFormsController', function ($scope, $http, $location) {
-            $http.get('/api'+$location.path()).success(function(data) {
+    a.module('Concepts', ['ui.bootstrap', 'kao.table', 'VocabNav'])
+        .controller('LearnedFormsController', function ($scope, $http, $location, navService) {
+            $http.get(navService.getApiUrl()).success(function(data) {
                     $scope.concepts = data.concepts;
                     $scope.isWords = data.isWords;
                 }).error(function(error) {

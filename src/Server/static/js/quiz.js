@@ -10,7 +10,7 @@
                 this.returnTo = navService.getReturnTo();
                 
                 var self = this;
-                $http.get('/api' +$location.path()).success(function(data) {
+                $http.get(navService.getApiUrl()).success(function(data) {
                     self.quiz = data.quiz;
                     self.currentQuestion =  self.quiz.questions[self.currentQuestionIndex];
                     self.numberOfQuestions = self.quiz.questions.length;

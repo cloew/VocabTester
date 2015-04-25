@@ -38,6 +38,13 @@
                         return currentConfig.returnTo;
                     }
                     return undefined;
+                },
+                getApiUrl: function() {
+                    var currentConfig = this.getCurrentNav();
+                    if (currentConfig !== undefined) {
+                        return '/api' +$location.path();
+                    }
+                    return undefined;
                 }};
             for (var i = 0; i < navConfig.length; i++) {
                 theService[navConfig[i].name] = navConfig[i];
