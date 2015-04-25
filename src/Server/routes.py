@@ -4,20 +4,17 @@ from Data.symbol_list import SymbolList
 from Data.word import Word
 from Data.word_list import WordList
 
+from Server.helpers.crud_endpoints import CrudEndpoints
+
 from Server.Controller.concept_lists_controller import ConceptListsController
-from Server.Controller.create_controller import CreateController
 from Server.Controller.current_user_controller import CurrentUserController
 from Server.Controller.concepts_controller import ConceptsController
-from Server.Controller.delete_controller import DeleteController
 from Server.Controller.learned_concepts_controller import LearnedConceptsController
-from Server.Controller.list_controller import ListController
 from Server.Controller.login_controller import LoginController
 from Server.Controller.quiz_answer_controller import QuizAnswerController
 from Server.Controller.quiz_controller import QuizController
 from Server.Controller.random_quiz_controller import RandomQuizController
-from Server.Controller.record_controller import RecordController
 from Server.Controller.register_controller import RegisterController
-from Server.Controller.update_controller import UpdateController
 
 from kao_flask.endpoint import Endpoint
 from kao_flask.controllers.html_controller import HTMLController
@@ -42,6 +39,6 @@ routes = [Endpoint('/', get=HTMLController('Server/templates/index.html')),
           # Mastery
           Endpoint('/api/mastery/<int:masteryId>/answer', post=QuizAnswerController()),
           #Admin
-          Endpoint('/api/admin/languages', get=ListController(Language), post=CreateController(Language)),
-          Endpoint('/api/admin/languages/<int:id>', get=RecordController(Language), put=UpdateController(Language), delete=DeleteController(Language)),
           Endpoint('/api/admin/words', get=ConceptsController(Word))]
+          
+routes += CrudEndpoints('/api/admin/languages', Language).endpoints
