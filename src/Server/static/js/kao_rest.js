@@ -8,5 +8,16 @@
             }).error(function(error) {
                 console.log(error);
             });
+        })
+        .controller('NewController', function ($scope, $http, navService) {
+            $scope.record = {};
+            
+            $scope.create = function() {
+                $http.post(navService.getApiUrl(), $scope.record).success(function(data) {
+                    
+                }).error(function(error) {
+                    console.log(error);
+                });
+            };
         });
 })(angular);

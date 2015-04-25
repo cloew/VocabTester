@@ -10,12 +10,13 @@
             var symbols = {name: 'symbols', path:'/symbols', templateUrl:'static/partials/learned_symbols.html', controller:'LearnedFormsController'};
             var symbolLists = {name: 'symbolLists', path:'/symbollists', templateUrl:'static/partials/symbol_lists.html'};
             var adminLanguages = {name: 'adminLanguages', path:'/admin/languages', templateUrl:'static/partials/admin_languages.html', controller:'ListController'};
+            var adminNewLanguages = {name: 'adminNewLanguages', path:'/admin/languages/new', templateUrl:'static/partials/admin_new_language.html', controller:'NewController', apiUrl:'/admin/languages'};
             var adminWords = {name: 'adminWords', path:'/admin/words', templateUrl:'static/partials/admin_words.html', controller:'FormsController'};
             var randomSymbolQuiz = {name: 'randomSymbolQuiz', path:'/symbollist/random/quiz', templateUrl:'static/partials/quiz.html', controller:'QuizController', returnTo:symbols.path};
             var symbolListQuiz = {name: 'symbolListQuiz', path:'/symbollist/:listId/quiz', templateUrl:'static/partials/quiz.html', controller:'QuizController', returnTo:symbolLists.path};
             var randomWordQuiz = {name: 'randomWordQuiz', path:'/wordlist/random/quiz', templateUrl:'static/partials/quiz.html', controller:'QuizController', returnTo:words.path};
             var wordListQuiz = {name: 'wordListQuiz', path:'/wordlist/:listId/quiz', templateUrl:'static/partials/quiz.html', controller:'QuizController', returnTo:wordLists.path};
-            var nav = [wordLists, login, register, words, symbols, symbolLists, adminLanguages, adminWords, randomSymbolQuiz, symbolListQuiz, randomWordQuiz, wordListQuiz];
+            var nav = [wordLists, login, register, words, symbols, symbolLists, adminLanguages, adminNewLanguages, adminWords, randomSymbolQuiz, symbolListQuiz, randomWordQuiz, wordListQuiz];
             this.getConfig = function() {
                 return nav;
             };
@@ -43,7 +44,11 @@
                 getApiUrl: function() {
                     var currentConfig = this.getCurrentNav();
                     if (currentConfig !== undefined) {
-                        return '/api' +$location.path();
+                        if (currentConfig.apiUrl) {
+                            return '/api' + currentConfig.apiUrl;
+                        } else {
+                            return '/api' + $location.path();
+                        }
                     }
                     return undefined;
                 }};
