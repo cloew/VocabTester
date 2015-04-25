@@ -9,6 +9,7 @@
             var words = {name: 'words', path:'/words', templateUrl:'static/partials/learned_words.html', controller:'LearnedFormsController'};
             var symbols = {name: 'symbols', path:'/symbols', templateUrl:'static/partials/learned_symbols.html', controller:'LearnedFormsController'};
             var symbolLists = {name: 'symbolLists', path:'/symbollists', templateUrl:'static/partials/symbol_lists.html'};
+            var adminWords = {name: 'adminWords', path:'/admin/words', templateUrl:'static/partials/admin_words.html', controller:'FormsController'};
             var randomSymbolQuiz = {name: 'randomSymbolQuiz', path:'/symbollist/random/quiz', templateUrl:'static/partials/quiz.html', controller:'QuizController', returnTo:symbols.path};
             var symbolListQuiz = {name: 'symbolListQuiz', path:'/symbollist/:listId/quiz', templateUrl:'static/partials/quiz.html', controller:'QuizController', returnTo:symbolLists.path};
             var randomWordQuiz = {name: 'randomWordQuiz', path:'/wordlist/random/quiz', templateUrl:'static/partials/quiz.html', controller:'QuizController', returnTo:words.path};
@@ -23,11 +24,18 @@
         })
         .factory('navService', function($location, $route, navConfig) {
             var theService = {
-                getReturnTo: function() {
+                getCurrentNav: function() {
                     for (var i = 0; i < navConfig.length; i++) {
                         if (navConfig[i].path === $route.current.$$route.path) {
-                            return navConfig[i].returnTo;
+                            return navConfig[i];
                         }
+                    }
+                    return undefined;
+                },
+                getReturnTo: function() {
+                    var currentConfig = this.getCurrentNav();
+                    if (currentConfig !== undefined) {
+                        return currentConfig.returnTo;
                     }
                     return undefined;
                 }};
