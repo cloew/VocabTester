@@ -36,4 +36,4 @@ routes = [Endpoint('/', get=HTMLController('Server/templates/index.html')),
           # Mastery
           Endpoint('/api/mastery/<int:masteryId>/answer', post=QuizAnswerController()),
           #Admin
-          Endpoint('/api/words', get=ConceptsController(Word))]
+          Endpoint('/api/admin/words', get=ConceptsController(Word))]
