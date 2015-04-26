@@ -3,7 +3,8 @@
     a.module('vocab.rest', ['kao.rest', 'VocabNav'])
         .config(['CrudConfigProvider', 'navConfigProvider',
             function(CrudConfig, navConfig) {
-                CrudConfig.add('/api/admin/languages', [navConfig.adminLanguages.path, navConfig.adminNewLanguages.path, navConfig.adminEditLanguages.path]);
+                var config = navConfig.config;
+                CrudConfig.add('/api/admin/languages', [config.adminLanguages.path, config.adminNewLanguages.path, config.adminEditLanguages.path]);
             }
         ]);
 })(angular);

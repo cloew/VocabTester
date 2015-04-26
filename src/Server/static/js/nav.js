@@ -3,35 +3,37 @@
 
     var services = angular.module('VocabNav', ['ngRoute'])
         .provider('navConfig', function() {
-            this.wordLists = {name: 'wordLists', path:'/', templateUrl:'static/partials/index.html', controller:'IndexController'}
-            this.login = {name: 'login', path:'/login', templateUrl:'static/partials/login.html', controller:'LoginController'};
-            this.register = {name: 'register', path:'/register', templateUrl:'static/partials/register.html', controller:'RegisterController'};
-            this.words = {name: 'words', path:'/words', templateUrl:'static/partials/learned_words.html', controller:'LearnedFormsController'};
-            this.symbols = {name: 'symbols', path:'/symbols', templateUrl:'static/partials/learned_symbols.html', controller:'LearnedFormsController'};
-            this.symbolLists = {name: 'symbolLists', path:'/symbollists', templateUrl:'static/partials/symbol_lists.html'};
-            this.adminLanguages = {name: 'adminLanguages', path:'/admin/languages', templateUrl:'static/partials/admin_languages.html', controller:'ListController'};
-            this.adminNewLanguages = {name: 'adminNewLanguages', path:'/admin/languages/new', templateUrl:'static/partials/admin_new_language.html', controller:'NewController', apiUrl:'/admin/languages'};
-            this.adminEditLanguages = {name: 'adminEditLanguages', path:'/admin/languages/:id', templateUrl:'static/partials/admin_edit_language.html', controller:'EditController'};
-            this.adminWords = {name: 'adminWords', path:'/admin/words', templateUrl:'static/partials/admin_words.html', controller:'FormsController'};
-            this.randomSymbolQuiz = {name: 'randomSymbolQuiz', path:'/symbollist/random/quiz', templateUrl:'static/partials/quiz.html', controller:'QuizController', returnTo:this.symbols.path};
-            this.symbolListQuiz = {name: 'symbolListQuiz', path:'/symbollist/:listId/quiz', templateUrl:'static/partials/quiz.html', controller:'QuizController', returnTo:this.symbolLists.path};
-            this.randomWordQuiz = {name: 'randomWordQuiz', path:'/wordlist/random/quiz', templateUrl:'static/partials/quiz.html', controller:'QuizController', returnTo:this.words.path};
-            this.wordListQuiz = {name: 'wordListQuiz', path:'/wordlist/:listId/quiz', templateUrl:'static/partials/quiz.html', controller:'QuizController', returnTo:this.wordLists.path};
-            var nav = [this.wordLists, this.login, this.register, this.words, this.symbols, this.symbolLists, this.adminLanguages, this.adminNewLanguages, 
-                       this.adminEditLanguages, this.adminWords, this.randomSymbolQuiz, this.symbolListQuiz, this.randomWordQuiz, this.wordListQuiz];
-            this.getConfig = function() {
-                return nav;
+            this.config = {};
+            this.routes = []
+            this.add = function(config) {
+                this.config[config.name] = config;
+                this.routes.push(config);
             };
+            this.add({name: 'wordLists', path:'/', templateUrl:'static/partials/index.html', controller:'IndexController'});
+            this.add({name: 'login', path:'/login', templateUrl:'static/partials/login.html', controller:'LoginController'});
+            this.add({name: 'register', path:'/register', templateUrl:'static/partials/register.html', controller:'RegisterController'});
+            this.add({name: 'words', path:'/words', templateUrl:'static/partials/learned_words.html', controller:'LearnedFormsController'});
+            this.add({name: 'symbols', path:'/symbols', templateUrl:'static/partials/learned_symbols.html', controller:'LearnedFormsController'});
+            this.add({name: 'symbolLists', path:'/symbollists', templateUrl:'static/partials/symbol_lists.html'});
+            this.add({name: 'adminLanguages', path:'/admin/languages', templateUrl:'static/partials/admin_languages.html', controller:'ListController'});
+            this.add({name: 'adminNewLanguages', path:'/admin/languages/new', templateUrl:'static/partials/admin_new_language.html', controller:'NewController'});
+            this.add({name: 'adminEditLanguages', path:'/admin/languages/:id', templateUrl:'static/partials/admin_edit_language.html', controller:'EditController'});
+            this.add({name: 'adminWords', path:'/admin/words', templateUrl:'static/partials/admin_words.html', controller:'FormsController'});
+            this.add({name: 'randomSymbolQuiz', path:'/symbollist/random/quiz', templateUrl:'static/partials/quiz.html', controller:'QuizController', returnTo:this.config.symbols.path});
+            this.add({name: 'symbolListQuiz', path:'/symbollist/:listId/quiz', templateUrl:'static/partials/quiz.html', controller:'QuizController', returnTo:this.config.symbolLists.path});
+            this.add({name: 'randomWordQuiz', path:'/wordlist/random/quiz', templateUrl:'static/partials/quiz.html', controller:'QuizController', returnTo:this.config.words.path});
+            this.add({name: 'wordListQuiz', path:'/wordlist/:listId/quiz', templateUrl:'static/partials/quiz.html', controller:'QuizController', returnTo:this.config.wordLists.path});
+            
             this.$get = function() {
-                return nav;
+                return this;
             };
         })
         .factory('navService', function($location, $route, navConfig) {
             var theService = {
                 getCurrentNav: function() {
-                    for (var i = 0; i < navConfig.length; i++) {
-                        if (navConfig[i].path === $route.current.$$route.path) {
-                            return navConfig[i];
+                    for (var i = 0; i < this.routes.length; i++) {
+                        if (navConfig.routes[i].path === $route.current.$$route.path) {
+                            return navConfig.routes[i];
                         }
                     }
                     return undefined;
@@ -54,8 +56,8 @@
                     }
                     return undefined;
                 }};
-            for (var i = 0; i < navConfig.length; i++) {
-                theService[navConfig[i].name] = navConfig[i];
+            for (var i = 0; i < navConfig.routes.length; i++) {
+                theService[navConfig.routes[i].name] = navConfig.routes[i];
             }
             
             return theService;

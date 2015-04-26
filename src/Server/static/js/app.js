@@ -3,9 +3,9 @@
 angular.module('VocabTester', ['ui.bootstrap', 'ngRoute', 'Header', 'Concepts', 'Symbols', 'Words', 'Quiz', 'VocabNav', 'kao.auth', 'kao.rest', 'vocab.rest'])
 	.config(['$routeProvider', 'navConfigProvider',
 		function($routeProvider, navConfig) {
-            var navConfig = navConfig.getConfig();
-            for (var i = 0; i < navConfig.length; i++) {
-                $routeProvider.when(navConfig[i].path, navConfig[i]);
+            var routes = navConfig.routes;
+            for (var i = 0; i < routes.length; i++) {
+                $routeProvider.when(routes[i].path, routes[i]);
             }
 		$routeProvider.otherwise({
 			redirectTo: '/'
