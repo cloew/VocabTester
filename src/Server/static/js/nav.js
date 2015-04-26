@@ -31,7 +31,7 @@
         .factory('navService', function($location, $route, navConfig) {
             var theService = {
                 getCurrentNav: function() {
-                    for (var i = 0; i < this.routes.length; i++) {
+                    for (var i = 0; i < navConfig.routes.length; i++) {
                         if (navConfig.routes[i].path === $route.current.$$route.path) {
                             return navConfig.routes[i];
                         }
