@@ -13,7 +13,7 @@
                 <th></th>
             </tr>
             <tr ng-repeat="record in records">
-                <td><a href="" ng-click="goTo('/admin/languages/' + record.id)">{{record.name}}</a></td>
+                <td><a ng-href="#/admin/languages/{{record.id}}">{{record.name}}</a></td>
                 <td style="text-align: center;">
                     <button ng-click="delete(record.id)" class="btn btn-sm btn-primary">
                         <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
