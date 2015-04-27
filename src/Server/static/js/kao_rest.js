@@ -1,7 +1,7 @@
 (function(a) {
     'use strict';
     a.module('kao.rest', [])
-        .provider('CrudConfig', function() {
+        .provider('CrudApiConfig', function() {
             var crudConfigs = [];
             this.add = function(apiUrl, paths) {
                 crudConfigs.push({apiUrl: apiUrl, paths: paths});
@@ -10,32 +10,32 @@
                 return crudConfigs;
             };
         })
-        .factory('CrudWrapper', function($http) {
-            function CrudWrapper(apiUrl) {
+        .factory('CrudApi', function($http) {
+            function CrudApi(apiUrl) {
                 this.apiUrl = apiUrl;
             };
-            CrudWrapper.prototype.getAll = function() {
+            CrudApi.prototype.getAll = function() {
                 return $http.get(this.apiUrl);
             };
-            CrudWrapper.prototype.create = function(record) {
+            CrudApi.prototype.create = function(record) {
                 return $http.post(this.apiUrl, record);
             };
-            CrudWrapper.prototype.get = function(recordId) {
+            CrudApi.prototype.get = function(recordId) {
                 return $http.get(this.apiUrl+'/'+recordId);
             };
-            CrudWrapper.prototype.update = function(record) {
+            CrudApi.prototype.update = function(record) {
                 return $http.put(this.apiUrl+'/'+record.id, record);
             };
-            CrudWrapper.prototype.delete = function(recordId) {
+            CrudApi.prototype.delete = function(recordId) {
                 return $http.delete(this.apiUrl+'/'+recordId);
             };
-            return CrudWrapper;
+            return CrudApi;
         })
-        .factory('CrudWrappers', function($route, CrudWrapper, CrudConfig) {
+        .factory('CrudApiService', function($route, CrudApi, CrudApiConfig) {
             var pathToWrappers = {}
             var wrappers = {
                 addCrud: function(apiUrl, paths) {
-                    var wrapper = new CrudWrapper(apiUrl);
+                    var wrapper = new CrudApi(apiUrl);
                     for (var i = 0; i < paths.length; i++) {
                         pathToWrappers[paths[i]] = wrapper;
                     }
@@ -44,14 +44,14 @@
                     return pathToWrappers[$route.current.$$route.path];
                 }
             };
-            for (var i = 0; i < CrudConfig.length; i++) {
-                wrappers.addCrud(CrudConfig[i].apiUrl, CrudConfig[i].paths);
+            for (var i = 0; i < CrudApiConfig.length; i++) {
+                wrappers.addCrud(CrudApiConfig[i].apiUrl, CrudApiConfig[i].paths);
             }
             return wrappers;
         })
-        .controller('ListController', function ($scope, $location, CrudWrappers) {
+        .controller('ListController', function ($scope, $location, CrudApiService) {
             $scope.records = [];
-            var crud = CrudWrappers.getCurrentCrud();
+            var crud = CrudApiService.getCurrentCrud();
             
             $scope.goTo = function(path) {
                 $location.path(path);
@@ -74,9 +74,9 @@
             };
             $scope.getRecords();
         })
-        .controller('EditController', function ($scope, $location, $routeParams, CrudWrappers) {
+        .controller('EditController', function ($scope, $location, $routeParams, CrudApiService) {
             $scope.record = {};
-            var crud = CrudWrappers.getCurrentCrud();
+            var crud = CrudApiService.getCurrentCrud();
             
             $scope.goTo = function(path) {
                 $location.path(path);
@@ -107,9 +107,9 @@
             };
             $scope.getRecord();
         })
-        .controller('NewController', function ($scope, $location, CrudWrappers) {
+        .controller('NewController', function ($scope, $location, CrudApiService) {
             $scope.record = {};
-            var crud = CrudWrappers.getCurrentCrud();
+            var crud = CrudApiService.getCurrentCrud();
             
             $scope.save = function() {
                 crud.create($scope.record).success(function(data) {
@@ -118,13 +118,6 @@
                     console.log(error);
                 });
             };
-        })
-        .directive('languageForm', function() {
-            return {
-                restrict: 'E',
-                replace: true,
-                templateUrl: 'static/partials/directives/admin/language_form.html'
-            }
         })
         .directive('toNewPage', function() {
             return {

@@ -1,10 +1,17 @@
 (function(a) {
     'use strict';
     a.module('vocab.rest', ['kao.rest', 'VocabNav'])
-        .config(['CrudConfigProvider', 'navConfigProvider',
-            function(CrudConfig, navConfig) {
+        .config(['CrudApiConfigProvider', 'navConfigProvider',
+            function(CrudApiConfig, navConfig) {
                 var config = navConfig.config;
-                CrudConfig.add('/api/admin/languages', [config.adminLanguages.path, config.adminNewLanguages.path, config.adminEditLanguages.path]);
+                CrudApiConfig.add('/api/admin/languages', [config.adminLanguages.path, config.adminNewLanguages.path, config.adminEditLanguages.path]);
             }
-        ]);
+        ])
+        .directive('languageForm', function() {
+            return {
+                restrict: 'E',
+                replace: true,
+                templateUrl: 'static/partials/directives/admin/language_form.html'
+            }
+        });
 })(angular);
