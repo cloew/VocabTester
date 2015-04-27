@@ -135,5 +135,17 @@
               },
                 templateUrl: 'static/partials/directives/admin/to_new_page.html'
             }
+        })
+        .directive('deleteButton', function() {
+            return {
+                restrict: 'E',
+                replace: true,
+              scope: {
+                  deleteMethod: '=',
+                  id: '=',
+                  dataType: '@',
+              },
+                templateUrl: 'static/partials/directives/admin/delete_button.html'
+            }
         });
 })(angular);

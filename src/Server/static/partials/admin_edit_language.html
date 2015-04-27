@@ -1,10 +1,7 @@
 <div class="col-md-8 col-md-push-2" style="text-align:center;">
     <div class="col-md-12">
         <h1 class="col-md-8 col-md-push-2">Edit Language</h1>
-        <button ng-click="delete();" class="btn btn-lg btn-primary pull-right">
-            <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
-            <span class="sr-only">Delete Language</span>
-        </button>
+        <delete-button delete-method="delete" id="record.id" data-type="Language" class="btn-lg pull-right"></delete-button>
     </div>
     <div>
         <language-form></language-form>
