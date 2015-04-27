@@ -10,6 +10,31 @@
                 return crudConfigs;
             };
         })
+        .provider('FrontEndCrudConfig', function() {
+            var crudConfigs = [];
+            function CrudFrontEnd(config) {
+                this.name = config.name;
+                this.pluralName = config.pluralName;
+                if (!this.pluralName && this.name) {
+                    this.pluralName = this.name + 's';
+                }
+                this.listUrl = config.listUrl;
+                this.newUrl = config.newUrl;
+                this.editUrl = config.editUrl;
+                
+                this.tableDirective = config.tableDirective;
+                this.formDirective = config.formDirective;
+            };
+            CrudFrontEnd.prototype.getEditUrl = function(id) {
+                return this.editUrl.replace(':id', id);
+            };
+            this.add = function(config) {
+                crudConfigs.push(new CrudFrontEnd(config));
+            };
+            this.$get = function() {
+                return crudConfigs;
+            };
+        })
         .factory('CrudApi', function($http) {
             function CrudApi(apiUrl) {
                 this.apiUrl = apiUrl;
@@ -46,6 +71,26 @@
             };
             for (var i = 0; i < CrudApiConfig.length; i++) {
                 wrappers.addCrud(CrudApiConfig[i].apiUrl, CrudApiConfig[i].paths);
+            }
+            return wrappers;
+        })
+        .factory('FrontEndCrudService', function($route, FrontEndCrudConfig) {
+            var pathToWrappers = {}
+            var wrappers = {
+                addCrud: function(config) {
+                    var paths = [config.listUrl, config.newUrl, config.editUrl];
+                    for (var i = 0; i < paths.length; i++) {
+                        if (paths[i]) {
+                            pathToWrappers[paths[i]] = config;
+                        }
+                    }
+                },
+                getCurrentCrud: function() {
+                    return pathToWrappers[$route.current.$$route.path];
+                }
+            };
+            for (var i = 0; i < FrontEndCrudConfig.length; i++) {
+                wrappers.addCrud(FrontEndCrudConfig[i]);
             }
             return wrappers;
         })
