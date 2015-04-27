@@ -94,16 +94,19 @@
             }
             return wrappers;
         })
-        .controller('ListController', function ($scope, $location, CrudApiService) {
+        .controller('ListController', function ($scope, $location, CrudApiService, FrontEndCrudService) {
+            var crudApi = CrudApiService.getCurrentCrud();
+            var frontEndCrud = FrontEndCrudService.getCurrentCrud();
             $scope.records = [];
-            var crud = CrudApiService.getCurrentCrud();
+            $scope.dataType = frontEndCrud.pluralName;
+            $scope.newUrl = '#'+frontEndCrud.newUrl;
             
             $scope.goTo = function(path) {
                 $location.path(path);
             };
             
             $scope.delete = function(id) {
-                crud.delete(id).success(function(data) {
+                crudApi.delete(id).success(function(data) {
                     $scope.getRecords();
                 }).error(function(error) {
                     console.log(error);
@@ -111,7 +114,7 @@
             };
             
             $scope.getRecords = function() {
-                crud.getAll().success(function(data) {
+                crudApi.getAll().success(function(data) {
                     $scope.records = data.records;
                 }).error(function(error) {
                     console.log(error);
