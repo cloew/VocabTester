@@ -127,6 +127,7 @@
             var frontEndCrud = FrontEndCrudService.getCurrentCrud();
             $scope.record = {};
             $scope.dataType = frontEndCrud.name;
+            $scope.formDirective = frontEndCrud.formDirective;
             
             $scope.save = function() {
                 crudApi.create($scope.record).success(function(data) {
@@ -141,6 +142,7 @@
             var frontEndCrud = FrontEndCrudService.getCurrentCrud();
             $scope.record = {};
             $scope.dataType = frontEndCrud.name;
+            $scope.formDirective = frontEndCrud.formDirective;
             
             $scope.goTo = function(path) {
                 $location.path(path);
@@ -170,6 +172,17 @@
                 });
             };
             $scope.getRecord();
+        })
+        .directive('kaoRestForm', function($compile) {
+            return {
+                restrict: 'E',
+                replace: true,
+                link: function(scope, element, attrs) {
+                    var dom = '<'+attrs.formDirective+'>'+'</'+attrs.formDirective+'>'
+                    var el = $compile(dom)(scope);
+                    element.append(el);
+                }
+            }
         })
         .directive('toNewPage', function() {
             return {

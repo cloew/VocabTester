@@ -5,7 +5,8 @@
             function(CrudApiConfig, FrontEndCrudConfig, navConfig) {
                 var config = navConfig.config;
                 CrudApiConfig.add('/api/admin/languages', [config.adminLanguages.path, config.adminNewLanguages.path, config.adminEditLanguages.path]);
-                FrontEndCrudConfig.add({'name':'Language', 'listUrl':config.adminLanguages.path, 'newUrl':config.adminNewLanguages.path, 'editUrl':config.adminEditLanguages.path});
+                FrontEndCrudConfig.add({'name':'Language', 'listUrl':config.adminLanguages.path, 'newUrl':config.adminNewLanguages.path, 'editUrl':config.adminEditLanguages.path,
+                                        'formDirective':'language-form'});
             }
         ])
         .directive('languageTable', function() {
