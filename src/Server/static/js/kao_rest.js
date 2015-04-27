@@ -125,5 +125,15 @@
                 replace: true,
                 templateUrl: 'static/partials/directives/admin/language_form.html'
             }
+        })
+        .directive('toNewPage', function() {
+            return {
+                restrict: 'E',
+                replace: true,
+              scope: {
+                  newUrl: '@'
+              },
+                templateUrl: 'static/partials/directives/admin/to_new_page.html'
+            }
         });
 })(angular);
