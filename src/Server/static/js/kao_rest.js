@@ -130,9 +130,9 @@
             return {
                 restrict: 'E',
                 replace: true,
-              scope: {
+                scope: {
                   newUrl: '@'
-              },
+                },
                 templateUrl: 'static/partials/directives/admin/to_new_page.html'
             }
         })
@@ -140,12 +140,19 @@
             return {
                 restrict: 'E',
                 replace: true,
-              scope: {
+                scope: {
                   deleteMethod: '=',
                   id: '=',
                   dataType: '@',
-              },
+                },
                 templateUrl: 'static/partials/directives/admin/delete_button.html'
+            }
+        })
+        .directive('saveButton', function() {
+            return {
+                restrict: 'E',
+                replace: true,
+                templateUrl: 'static/partials/directives/admin/save_button.html'
             }
         });
 })(angular);
