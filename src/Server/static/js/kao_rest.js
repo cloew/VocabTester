@@ -122,6 +122,20 @@
             };
             $scope.getRecords();
         })
+        .controller('NewController', function ($scope, $location, CrudApiService, FrontEndCrudService) {
+            var crudApi = CrudApiService.getCurrentCrud();
+            var frontEndCrud = FrontEndCrudService.getCurrentCrud();
+            $scope.record = {};
+            $scope.dataType = frontEndCrud.name;
+            
+            $scope.save = function() {
+                crudApi.create($scope.record).success(function(data) {
+                    $location.path(frontEndCrud.getEditUrl(data.record.id));
+                }).error(function(error) {
+                    console.log(error);
+                });
+            };
+        })
         .controller('EditController', function ($scope, $location, $routeParams, CrudApiService) {
             $scope.record = {};
             var crud = CrudApiService.getCurrentCrud();
@@ -154,18 +168,6 @@
                 });
             };
             $scope.getRecord();
-        })
-        .controller('NewController', function ($scope, $location, CrudApiService) {
-            $scope.record = {};
-            var crud = CrudApiService.getCurrentCrud();
-            
-            $scope.save = function() {
-                crud.create($scope.record).success(function(data) {
-                    $location.path('/admin/languages/' + data.record.id);
-                }).error(function(error) {
-                    console.log(error);
-                });
-            };
         })
         .directive('toNewPage', function() {
             return {
