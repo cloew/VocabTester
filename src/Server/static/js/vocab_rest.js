@@ -7,6 +7,13 @@
                 CrudApiConfig.add('/api/admin/languages', [config.adminLanguages.path, config.adminNewLanguages.path, config.adminEditLanguages.path]);
             }
         ])
+        .directive('languageTable', function() {
+            return {
+                restrict: 'E',
+                replace: true,
+                templateUrl: 'static/partials/directives/admin/language_table.html'
+            }
+        })
         .directive('languageForm', function() {
             return {
                 restrict: 'E',
