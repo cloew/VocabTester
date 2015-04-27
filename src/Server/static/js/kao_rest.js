@@ -100,6 +100,7 @@
             $scope.records = [];
             $scope.dataType = frontEndCrud.pluralName;
             $scope.newUrl = '#'+frontEndCrud.newUrl;
+            $scope.tableDirective = frontEndCrud.tableDirective;
             
             $scope.goTo = function(path) {
                 $location.path(path);
@@ -172,6 +173,17 @@
                 });
             };
             $scope.getRecord();
+        })
+        .directive('kaoRestTable', function($compile) {
+            return {
+                restrict: 'E',
+                replace: true,
+                link: function(scope, element, attrs) {
+                    var dom = '<'+attrs.tableDirective+'>'+'</'+attrs.tableDirective+'>'
+                    var el = $compile(dom)(scope);
+                    element.append(el);
+                }
+            }
         })
         .directive('kaoRestForm', function($compile) {
             return {
