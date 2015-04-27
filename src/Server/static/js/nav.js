@@ -15,9 +15,9 @@
             this.add({name: 'words', path:'/words', templateUrl:'static/partials/learned_words.html', controller:'LearnedFormsController'});
             this.add({name: 'symbols', path:'/symbols', templateUrl:'static/partials/learned_symbols.html', controller:'LearnedFormsController'});
             this.add({name: 'symbolLists', path:'/symbollists', templateUrl:'static/partials/symbol_lists.html'});
-            this.add({name: 'adminLanguages', path:'/admin/languages', templateUrl:'static/partials/admin_languages.html', controller:'ListController'});
-            this.add({name: 'adminNewLanguages', path:'/admin/languages/new', templateUrl:'static/partials/admin_new_language.html', controller:'NewController'});
-            this.add({name: 'adminEditLanguages', path:'/admin/languages/:id', templateUrl:'static/partials/admin_edit_language.html', controller:'EditController'});
+            this.add({name: 'adminLanguages', path:'/admin/languages', templateUrl:'static/partials/admin/list_records.html', controller:'ListController'});
+            this.add({name: 'adminNewLanguages', path:'/admin/languages/new', templateUrl:'static/partials/admin/new_record.html', controller:'NewController'});
+            this.add({name: 'adminEditLanguages', path:'/admin/languages/:id', templateUrl:'static/partials/admin/edit_record.html', controller:'EditController'});
             this.add({name: 'adminWords', path:'/admin/words', templateUrl:'static/partials/admin_words.html', controller:'FormsController'});
             this.add({name: 'randomSymbolQuiz', path:'/symbollist/random/quiz', templateUrl:'static/partials/quiz.html', controller:'QuizController', returnTo:this.config.symbols.path});
             this.add({name: 'symbolListQuiz', path:'/symbollist/:listId/quiz', templateUrl:'static/partials/quiz.html', controller:'QuizController', returnTo:this.config.symbolLists.path});
