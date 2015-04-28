@@ -11,7 +11,6 @@ from Server.Controller.concept_lists_controller import ConceptListsController
 from Server.Controller.current_user_controller import CurrentUserController
 from Server.Controller.concepts_controller import ConceptsController
 from Server.Controller.learned_concepts_controller import LearnedConceptsController
-from Server.Controller.list_controller import ListController
 from Server.Controller.login_controller import LoginController
 from Server.Controller.quiz_answer_controller import QuizAnswerController
 from Server.Controller.quiz_controller import QuizController
@@ -39,9 +38,8 @@ routes = [Endpoint('/', get=HTMLController('Server/templates/index.html')),
           Endpoint('/api/wordlist/<int:listId>/quiz', get=QuizController(WordList)),
           Endpoint('/api/wordlist/random/quiz', get=RandomQuizController(Word)),
           # Mastery
-          Endpoint('/api/mastery/<int:masteryId>/answer', post=QuizAnswerController()),
-          #Admin
-          Endpoint('/api/admin/concepts/<int:conceptId>/words', get=ListController(Word, routeParams={'conceptId':'concept_id'}))]
+          Endpoint('/api/mastery/<int:masteryId>/answer', post=QuizAnswerController())]
           
 routes += CrudEndpoints('/api/admin/languages', Language).endpoints
 routes += CrudEndpoints('/api/admin/concepts', Concept).endpoints
+routes += CrudEndpoints('/api/admin/concepts/<int:conceptId>/words', Word, routeParams={'conceptId':'concept_id'}).endpoints
