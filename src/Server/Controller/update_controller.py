@@ -11,8 +11,11 @@ class UpdateController(AuthJSONController):
         AuthJSONController.__init__(self)
         self.modelCls = modelCls
     
-    def performWithJSON(self, id, json=None, user=None):
+    def performWithJSON(self, id, **kwargs):
         """ Remove the record """
+        json = kwargs['json']
+        user = kwargs['user']
+        
         record = self.modelCls.query.filter(self.modelCls.id==id).first()
         for key in json:
             setattr(record, key, json[key])

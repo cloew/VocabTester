@@ -9,9 +9,9 @@ from kao_flask.endpoint import Endpoint
 class CrudEndpoints:
     """ Represents the standard CRUD Endpoints for a particualr model class """
     
-    def __init__(self, rootUrl, modelCls):
+    def __init__(self, rootUrl, modelCls, routeParams={}):
         """ Initialize with the root URL and the model class to wrap """
-        self.listEndpoint = Endpoint(rootUrl, get=ListController(modelCls), post=CreateController(modelCls))
+        self.listEndpoint = Endpoint(rootUrl, get=ListController(modelCls, routeParams=routeParams), post=CreateController(modelCls, routeParams=routeParams))
         self.recordEndpoint = Endpoint(rootUrl+'/<int:id>', get=RecordController(modelCls), put=UpdateController(modelCls), delete=DeleteController(modelCls))
         
     @property

@@ -11,8 +11,11 @@ class DeleteController(AuthJSONController):
         AuthJSONController.__init__(self)
         self.modelCls = modelCls
     
-    def performWithJSON(self, id, json=None, user=None):
+    def performWithJSON(self, id, **kwargs):
         """ Remove the record """
+        json = kwargs['json']
+        user = kwargs['user']
+        
         record = self.modelCls.query.filter(self.modelCls.id==id).first()
         db.session.delete(record)
         db.session.commit()
