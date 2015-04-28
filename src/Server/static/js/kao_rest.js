@@ -99,11 +99,16 @@
             var frontEndCrud = FrontEndCrudService.getCurrentCrud();
             $scope.records = [];
             $scope.dataType = frontEndCrud.pluralName;
+            $scope.pluralDataType = frontEndCrud.pluralName;
             $scope.newUrl = '#'+frontEndCrud.newUrl;
             $scope.tableDirective = frontEndCrud.tableDirective;
             
             $scope.goTo = function(path) {
                 $location.path(path);
+            };
+            
+            $scope.getRecordEditUrl = function(record) {
+                return '#'+frontEndCrud.getEditUrl(record.id);
             };
             
             $scope.delete = function(id) {
