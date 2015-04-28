@@ -4,10 +4,10 @@
         .config(['CrudApiConfigProvider', 'FrontEndCrudConfigProvider', 'navConfigProvider',
             function(CrudApiConfig, FrontEndCrudConfig, navConfig) {
                 var config = navConfig.config;
-                CrudApiConfig.add('/api/admin/languages', [config.adminLanguages.path, config.adminNewLanguages.path, config.adminEditLanguages.path]);
+                CrudApiConfig.add('/api/admin/languages', 'Language');
                 FrontEndCrudConfig.add({'name':'Language', 'listUrl':config.adminLanguages.path, 'newUrl':config.adminNewLanguages.path, 'editUrl':config.adminEditLanguages.path,
                                         'formDirective':'language-form', 'tableDirective':'language-table'});
-                CrudApiConfig.add('/api/admin/concepts', [config.adminConcepts.path, config.adminNewConcepts.path, config.adminEditConcepts.path]);
+                CrudApiConfig.add('/api/admin/concepts', 'Concept');
                 FrontEndCrudConfig.add({'name':'Concept', 'listUrl':config.adminConcepts.path, 'newUrl':config.adminNewConcepts.path, 'editUrl':config.adminEditConcepts.path,
                                         'formDirective':'admin-concept-form', 'tableDirective':'admin-concept-table'});
             }
@@ -40,7 +40,7 @@
                 templateUrl: 'static/partials/directives/admin/concept_form.html'
             }
         })
-        .controller('WordsTableController', function ($scope, $routeParams, $http) {
+        .controller('WordsTableController', function ($scope, $routeParams, $http, $route) {
             $scope.records = [];
             
             $scope.getRecords = function() {

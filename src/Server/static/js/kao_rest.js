@@ -3,8 +3,8 @@
     a.module('kao.rest', [])
         .provider('CrudApiConfig', function() {
             var crudConfigs = [];
-            this.add = function(apiUrl, paths) {
-                crudConfigs.push({apiUrl: apiUrl, paths: paths});
+            this.add = function(apiUrl, dataType) {
+                crudConfigs.push({apiUrl: apiUrl, dataType: dataType});
             };
             this.$get = function() {
                 return crudConfigs;
@@ -57,26 +57,23 @@
             return CrudApi;
         })
         .factory('CrudApiService', function($route, CrudApi, CrudApiConfig) {
-            var pathToWrappers = {}
-            var wrappers = {
-                addCrud: function(apiUrl, paths) {
-                    var wrapper = new CrudApi(apiUrl);
-                    for (var i = 0; i < paths.length; i++) {
-                        pathToWrappers[paths[i]] = wrapper;
-                    }
+            var dataTypeToApi = {}
+            var service = {
+                addCrud: function(apiUrl, dataType) {
+                    dataTypeToApi[dataType] = new CrudApi(apiUrl);
                 },
-                getCurrentCrud: function() {
-                    return pathToWrappers[$route.current.$$route.path];
+                getApiFor: function(dataType) {
+                    return dataTypeToApi[dataType];
                 }
             };
             for (var i = 0; i < CrudApiConfig.length; i++) {
-                wrappers.addCrud(CrudApiConfig[i].apiUrl, CrudApiConfig[i].paths);
+                service.addCrud(CrudApiConfig[i].apiUrl, CrudApiConfig[i].dataType);
             }
-            return wrappers;
+            return service;
         })
         .factory('FrontEndCrudService', function($route, FrontEndCrudConfig) {
             var pathToWrappers = {}
-            var wrappers = {
+            var service = {
                 addCrud: function(config) {
                     var paths = [config.listUrl, config.newUrl, config.editUrl];
                     for (var i = 0; i < paths.length; i++) {
@@ -90,13 +87,13 @@
                 }
             };
             for (var i = 0; i < FrontEndCrudConfig.length; i++) {
-                wrappers.addCrud(FrontEndCrudConfig[i]);
+                service.addCrud(FrontEndCrudConfig[i]);
             }
-            return wrappers;
+            return service;
         })
         .controller('ListController', function ($scope, $location, CrudApiService, FrontEndCrudService) {
-            var crudApi = CrudApiService.getCurrentCrud();
             var frontEndCrud = FrontEndCrudService.getCurrentCrud();
+            var crudApi = CrudApiService.getApiFor(frontEndCrud.name);
             $scope.records = [];
             $scope.dataType = frontEndCrud.pluralName;
             $scope.pluralDataType = frontEndCrud.pluralName;
@@ -129,8 +126,8 @@
             $scope.getRecords();
         })
         .controller('NewController', function ($scope, $location, CrudApiService, FrontEndCrudService) {
-            var crudApi = CrudApiService.getCurrentCrud();
             var frontEndCrud = FrontEndCrudService.getCurrentCrud();
+            var crudApi = CrudApiService.getApiFor(frontEndCrud.name);
             $scope.record = {};
             $scope.dataType = frontEndCrud.name;
             $scope.formDirective = frontEndCrud.formDirective;
@@ -144,8 +141,8 @@
             };
         })
         .controller('EditController', function ($scope, $location, $routeParams, CrudApiService, FrontEndCrudService) {
-            var crudApi = CrudApiService.getCurrentCrud();
             var frontEndCrud = FrontEndCrudService.getCurrentCrud();
+            var crudApi = CrudApiService.getApiFor(frontEndCrud.name);
             $scope.record = {};
             $scope.dataType = frontEndCrud.name;
             $scope.formDirective = frontEndCrud.formDirective;
