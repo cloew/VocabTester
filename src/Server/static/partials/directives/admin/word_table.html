@@ -1,0 +1,12 @@
+<table class="table table-striped table-bordered">
+    <tr>
+        <th>Id</th>
+        <th>Word</th>
+        <th>Language</th>
+    </tr>
+    <tr ng-repeat="record in records">
+        <td>{{record.id}}</td>
+        <td>{{record.text}}</td>
+        <td>{{record.language.name}}</td>
+    </tr>
+</table>

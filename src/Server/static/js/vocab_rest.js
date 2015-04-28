@@ -39,5 +39,25 @@
                 replace: true,
                 templateUrl: 'static/partials/directives/admin/concept_form.html'
             }
+        })
+        .controller('WordsTableController', function ($scope, $routeParams, $http) {
+            $scope.records = [];
+            
+            $scope.getRecords = function() {
+                $http.get('/api/admin/concepts/'+$routeParams.id+'/words').success(function(data) {
+                    $scope.records = data.records;
+                }).error(function(error) {
+                    console.log(error);
+                });
+            };
+            $scope.getRecords();
+        })
+        .directive('adminWordsTable', function() {
+            return {
+                restrict: 'E',
+                replace: true,
+                templateUrl: 'static/partials/directives/admin/word_table.html',
+                controller: 'WordsTableController'
+            }
         });
 })(angular);

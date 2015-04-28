@@ -23,7 +23,7 @@ def GetNativeForm(concept, user):
     return form.text if form is not None else ''
 
 jsonFactory = JsonFactory([(Concept, [FieldAttr('id'), JsonAttr('native', GetNativeForm, args=["user"])]),
-                           ([Symbol, Word], [FieldAttr('id'), JsonAttr('text', unicode)]),
+                           ([Symbol, Word], [FieldAttr('id'), JsonAttr('text', unicode), FieldAttr('language')]),
                            (ConceptPair, [FieldAttr('foreign'), FieldAttr('native')]),
                            (Language, [FieldAttr('id'), FieldAttr('name')])
                           ])
