@@ -1,3 +1,4 @@
+from Data.concept import Concept
 from Data.language import Language
 from Data.symbol import Symbol
 from Data.symbol_list import SymbolList
@@ -42,3 +43,4 @@ routes = [Endpoint('/', get=HTMLController('Server/templates/index.html')),
           Endpoint('/api/admin/words', get=ConceptsController(Word))]
           
 routes += CrudEndpoints('/api/admin/languages', Language).endpoints
+routes += CrudEndpoints('/api/admin/concepts', Concept).endpoints

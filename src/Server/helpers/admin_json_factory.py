@@ -1,5 +1,6 @@
 from kao_json import JsonFactory, JsonAttr, FieldAttr
 
+from Data.concept import Concept
 from Data.concept_pair import ConceptPair
 from Data.language import Language
 from Data.symbol import Symbol
@@ -14,7 +15,14 @@ from Quiz.Question.question import Question
 
 from Server.helpers.user_proxy import UserProxy
 
-jsonFactory = JsonFactory([
+def GetNativeForm(concept, user):
+    """ Return the native form of the concept """
+    form = Word.query.filter_by(concept_id=concept.id, language_id=user.nativeLanguage.id).first()
+    if form is None:
+        form = Symbol.query.filter_by(concept_id=concept.id, language_id=user.nativeLanguage.id).first()
+    return form.text if form is not None else ''
+
+jsonFactory = JsonFactory([(Concept, [FieldAttr('id'), JsonAttr('native', GetNativeForm, args=["user"])]),
                            ([Symbol, Word], [FieldAttr('id'), JsonAttr('text', unicode)]),
                            (ConceptPair, [FieldAttr('foreign'), FieldAttr('native')]),
                            (Language, [FieldAttr('id'), FieldAttr('name')])

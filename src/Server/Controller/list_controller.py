@@ -12,4 +12,4 @@ class ListController(AuthJSONController):
     
     def performWithJSON(self, json=None, user=None):
         """ Convert the records to JSON """
-        return {"records":toJson(self.modelCls.query.all())}
+        return {"records":toJson(self.modelCls.query.all(), user=user)}

@@ -12,4 +12,4 @@ class RecordController(AuthJSONController):
     
     def performWithJSON(self, id, json=None, user=None):
         """ Convert the records to JSON """
-        return {"record":toJson(self.modelCls.query.filter(self.modelCls.id==id).first())}
+        return {"record":toJson(self.modelCls.query.filter(self.modelCls.id==id).first(), user=user)}
