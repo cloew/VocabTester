@@ -59,19 +59,25 @@
                 return crudConfigs;
             };
         })
-        .factory('CrudApi', function($http, $injector) {
+        .factory('NestedRouteService', function($injector) {
+            this.getUrl = function(apiUrl, nested) {
+                var apiUrl = apiUrl;
+                if (nested) {
+                    for (var i = 0; i < nested.length; i++) {
+                        apiUrl = apiUrl.replace(':'+nested[i].param, nested[i].provider.get($injector))
+                    }
+                }
+                return apiUrl;
+            }
+            return this;
+        })
+        .factory('CrudApi', function($http, $injector, NestedRouteService) {
             function CrudApi(apiUrl, nested) {
                 this.apiUrl = apiUrl;
                 this.nested = nested;
             };
             CrudApi.prototype.getBaseUrl = function() {
-                var apiUrl = this.apiUrl;
-                if (this.nested) {
-                    for (var i = 0; i < this.nested.length; i++) {
-                        apiUrl = apiUrl.replace(':'+this.nested[i].param, this.nested[i].provider.get($injector))
-                    }
-                }
-                return apiUrl;
+                return NestedRouteService.getUrl(this.apiUrl, this.nested);
             };
             CrudApi.prototype.getAll = function() {
                 return $http.get(this.getBaseUrl());
