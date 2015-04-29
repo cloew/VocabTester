@@ -27,8 +27,8 @@
         })
         .provider('CrudApiConfig', function() {
             var crudConfigs = [];
-            this.add = function(apiUrl, dataType) {
-                crudConfigs.push({apiUrl: apiUrl, dataType: dataType});
+            this.add = function(apiUrl, dataType, nested) {
+                crudConfigs.push({apiUrl: apiUrl, dataType: dataType, nested: nested});
             };
             this.$get = function() {
                 return crudConfigs;
@@ -59,39 +59,49 @@
                 return crudConfigs;
             };
         })
-        .factory('CrudApi', function($http) {
-            function CrudApi(apiUrl) {
+        .factory('CrudApi', function($http, $injector) {
+            function CrudApi(apiUrl, nested) {
                 this.apiUrl = apiUrl;
+                this.nested = nested;
+            };
+            CrudApi.prototype.getBaseUrl = function() {
+                var apiUrl = this.apiUrl;
+                if (this.nested) {
+                    for (var i = 0; i < this.nested.length; i++) {
+                        apiUrl = apiUrl.replace(':'+this.nested[i].param, this.nested[i].provider.get($injector))
+                    }
+                }
+                return apiUrl;
             };
             CrudApi.prototype.getAll = function() {
-                return $http.get(this.apiUrl);
+                return $http.get(this.getBaseUrl());
             };
             CrudApi.prototype.create = function(record) {
-                return $http.post(this.apiUrl, record);
+                return $http.post(this.getBaseUrl(), record);
             };
             CrudApi.prototype.get = function(recordId) {
-                return $http.get(this.apiUrl+'/'+recordId);
+                return $http.get(this.getBaseUrl()+'/'+recordId);
             };
             CrudApi.prototype.update = function(record) {
-                return $http.put(this.apiUrl+'/'+record.id, record);
+                return $http.put(this.getBaseUrl()+'/'+record.id, record);
             };
             CrudApi.prototype.delete = function(recordId) {
-                return $http.delete(this.apiUrl+'/'+recordId);
+                return $http.delete(this.getBaseUrl()+'/'+recordId);
             };
             return CrudApi;
         })
         .factory('CrudApiService', function($route, CrudApi, CrudApiConfig) {
             var dataTypeToApi = {}
             var service = {
-                addCrud: function(apiUrl, dataType) {
-                    dataTypeToApi[dataType] = new CrudApi(apiUrl);
+                addCrud: function(apiUrl, dataType, nested) {
+                    dataTypeToApi[dataType] = new CrudApi(apiUrl, nested);
                 },
                 getApiFor: function(dataType) {
                     return dataTypeToApi[dataType];
                 }
             };
             for (var i = 0; i < CrudApiConfig.length; i++) {
-                service.addCrud(CrudApiConfig[i].apiUrl, CrudApiConfig[i].dataType);
+                service.addCrud(CrudApiConfig[i].apiUrl, CrudApiConfig[i].dataType, CrudApiConfig[i].nested);
             }
             return service;
         })

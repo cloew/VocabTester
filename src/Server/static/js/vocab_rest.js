@@ -1,15 +1,18 @@
 (function(a) {
     'use strict';
     a.module('vocab.rest', ['kao.rest', 'VocabNav'])
-        .config(['CrudApiConfigProvider', 'FrontEndCrudConfigProvider', 'navConfigProvider',
-            function(CrudApiConfig, FrontEndCrudConfig, navConfig) {
+        .config(['CrudApiConfigProvider', 'FrontEndCrudConfigProvider', 'CrudParamFromRouteConfigProvider', 'navConfigProvider',
+            function(CrudApiConfig, FrontEndCrudConfig, CrudParamFromRouteConfig, navConfig) {
                 var config = navConfig.config;
+                CrudParamFromRouteConfig.register('conceptId', [{path:config.adminEditConcepts.path, param: 'id'}]);
+                
                 CrudApiConfig.add('/api/admin/languages', 'Language');
                 FrontEndCrudConfig.add({'name':'Language', 'listUrl':config.adminLanguages.path, 'newUrl':config.adminNewLanguages.path, 'editUrl':config.adminEditLanguages.path,
                                         'formDirective':'language-form', 'tableDirective':'language-table'});
                 CrudApiConfig.add('/api/admin/concepts', 'Concept');
                 FrontEndCrudConfig.add({'name':'Concept', 'listUrl':config.adminConcepts.path, 'newUrl':config.adminNewConcepts.path, 'editUrl':config.adminEditConcepts.path,
                                         'formDirective':'admin-concept-form', 'tableDirective':'admin-concept-table'});
+                CrudApiConfig.add('/api/admin/concepts/:conceptId/words', 'Word', [{param: 'conceptId', provider: CrudParamFromRouteConfig.forParam('conceptId')}]);
             }
         ])
         .directive('languageTable', function() {
@@ -40,11 +43,12 @@
                 templateUrl: 'static/partials/directives/admin/concept_form.html'
             }
         })
-        .controller('WordsTableController', function ($scope, $routeParams, $http, $route) {
+        .controller('WordsTableController', function ($scope, $routeParams, $http, $route, CrudApiService) {
+            var crudApi = CrudApiService.getApiFor('Word');
             $scope.records = [];
             
             $scope.getRecords = function() {
-                $http.get('/api/admin/concepts/'+$routeParams.id+'/words').success(function(data) {
+                crudApi.getAll().success(function(data) {
                     $scope.records = data.records;
                 }).error(function(error) {
                     console.log(error);
@@ -56,6 +60,7 @@
             return {
                 restrict: 'E',
                 replace: true,
+                scope: {dataType: '@'},
                 templateUrl: 'static/partials/directives/admin/word_table.html',
                 controller: 'WordsTableController'
             }
