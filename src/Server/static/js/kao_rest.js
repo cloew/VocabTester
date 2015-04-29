@@ -36,24 +36,8 @@
         })
         .provider('FrontEndCrudConfig', function() {
             var crudConfigs = [];
-            function CrudFrontEnd(config) {
-                this.name = config.name;
-                this.pluralName = config.pluralName;
-                if (!this.pluralName && this.name) {
-                    this.pluralName = this.name + 's';
-                }
-                this.listUrl = config.listUrl;
-                this.newUrl = config.newUrl;
-                this.editUrl = config.editUrl;
-                
-                this.tableDirective = config.tableDirective;
-                this.formDirective = config.formDirective;
-            };
-            CrudFrontEnd.prototype.getEditUrl = function(id) {
-                return this.editUrl.replace(':id', id);
-            };
             this.add = function(config) {
-                crudConfigs.push(new CrudFrontEnd(config));
+                crudConfigs.push(config);
             };
             this.$get = function() {
                 return crudConfigs;
@@ -71,7 +55,7 @@
             }
             return this;
         })
-        .factory('CrudApi', function($http, $injector, NestedRouteService) {
+        .factory('CrudApi', function($http, NestedRouteService) {
             function CrudApi(apiUrl, nested) {
                 this.apiUrl = apiUrl;
                 this.nested = nested;
@@ -111,11 +95,52 @@
             }
             return service;
         })
-        .factory('FrontEndCrudService', function($route, FrontEndCrudConfig) {
+        .factory('FrontEndCrud', function(NestedRouteService) {
+            function CrudFrontEnd(config) {
+                this.name = config.name;
+                this.pluralName = config.pluralName;
+                if (!this.pluralName && this.name) {
+                    this.pluralName = this.name + 's';
+                }
+                this.nested = config.nested;
+                this.primaryPaths = config.primaryPaths;
+                this.listUrl = config.listUrl;
+                this.newUrl = config.newUrl;
+                this.editUrl = config.editUrl;
+                
+                this.tableDirective = config.tableDirective;
+                this.formDirective = config.formDirective;
+            };
+            CrudFrontEnd.prototype.getProperNestedConfig = function(varName) {
+                var nested = this.nested;
+                if (nested[varName]) {
+                    nested = {param: nested[varName], provider: nested.provider};
+                }
+                return nested;
+            };
+            CrudFrontEnd.prototype.getListUrl = function() {
+                return NestedRouteService.getUrl(this.listUrl, this.getProperNestedConfig('list'));
+            };
+            CrudFrontEnd.prototype.getNewUrl = function() {
+                return NestedRouteService.getUrl(this.newUrl, this.getProperNestedConfig('new'));
+            };
+            CrudFrontEnd.prototype.getEditUrl = function(id) {
+                return NestedRouteService.getUrl(this.editUrl, this.getProperNestedConfig('edit')).replace(':id', id);
+            };
+            return CrudFrontEnd;
+        })
+        .factory('FrontEndCrudService', function($route, FrontEndCrud, FrontEndCrudConfig) {
+            var dataTypeToWrapper = {}
             var pathToWrappers = {}
             var service = {
                 addCrud: function(config) {
-                    var paths = [config.listUrl, config.newUrl, config.editUrl];
+                    dataTypeToWrapper[config.name] = config;
+                    var paths;
+                    if (config.primaryPaths) {
+                        paths = config.primaryPaths;
+                    } else {
+                        paths = [config.listUrl, config.newUrl, config.editUrl];
+                    }
                     for (var i = 0; i < paths.length; i++) {
                         if (paths[i]) {
                             pathToWrappers[paths[i]] = config;
@@ -124,10 +149,13 @@
                 },
                 getCurrentCrud: function() {
                     return pathToWrappers[$route.current.$$route.path];
+                },
+                getFrontEndFor: function(dataType) {
+                    return dataTypeToWrapper[dataType];
                 }
             };
             for (var i = 0; i < FrontEndCrudConfig.length; i++) {
-                service.addCrud(FrontEndCrudConfig[i]);
+                service.addCrud( new FrontEndCrud(FrontEndCrudConfig[i]));
             }
             return service;
         })
@@ -137,7 +165,7 @@
             $scope.records = [];
             $scope.dataType = frontEndCrud.pluralName;
             $scope.pluralDataType = frontEndCrud.pluralName;
-            $scope.newUrl = '#'+frontEndCrud.newUrl;
+            $scope.newUrl = '#'+frontEndCrud.getNewUrl();
             $scope.tableDirective = frontEndCrud.tableDirective;
             
             $scope.goTo = function(path) {
@@ -201,7 +229,7 @@
             
             $scope.delete = function(id) {
                 crudApi.delete($routeParams.id).success(function(data) {
-                    $scope.goTo(frontEndCrud.listUrl);
+                    $scope.goTo(frontEndCrud.getListUrl());
                 }).error(function(error) {
                     console.log(error);
                 });
