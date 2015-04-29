@@ -1,6 +1,30 @@
 (function(a) {
     'use strict';
     a.module('kao.rest', [])
+        .provider('CrudParamFromRouteConfig', function() {
+            var paramToConfig = {};
+            var CrudParamFromRoute = function(pathConfigs) {
+                this.pathConfigs = {};
+                for (var i = 0; i < pathConfigs.length; i++) {
+                    this.pathConfigs[pathConfigs[i].path] = pathConfigs[i].param;
+                }
+            };
+            CrudParamFromRoute.prototype.get = function($injector) {
+                return $injector.invoke(function($route, $routeParams) {
+                    return $routeParams[this.pathConfigs[$route.current.$$route.path]];
+                }, this);
+            };
+            
+            this.register = function(param, pathConfigs) {
+                paramToConfig[param] = new CrudParamFromRoute(pathConfigs);
+            };
+            this.forParam = function(param) {
+                return paramToConfig[param];
+            };
+            this.$get = function() {
+                return this;
+            };
+        })
         .provider('CrudApiConfig', function() {
             var crudConfigs = [];
             this.add = function(apiUrl, dataType) {
