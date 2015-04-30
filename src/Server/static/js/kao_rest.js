@@ -167,18 +167,18 @@
             replace: true,
             templateUrl: 'static/partials/admin/kao_crud_list.html',
             scope: {
-                dataType: '@'
+                type: '@'
             },
             controller: function ($scope, $location, CrudApiService, FrontEndCrudService) {
                 var frontEndCrud;
-                if ($scope.dataType) {
-                    frontEndCrud = FrontEndCrudService.getFrontEndFor($scope.dataType);
+                if ($scope.type) {
+                    frontEndCrud = FrontEndCrudService.getFrontEndFor($scope.type);
                 } else {
                     frontEndCrud = FrontEndCrudService.getCurrentCrud();
                 }
                 var crudApi = CrudApiService.getApiFor(frontEndCrud.name);
                 $scope.records = [];
-                $scope.dataTypeName = frontEndCrud.name;
+                $scope.dataType = frontEndCrud.name;
                 $scope.pluralDataType = frontEndCrud.pluralName;
                 $scope.newUrl = '#'+frontEndCrud.getNewUrl();
                 $scope.tableDirective = frontEndCrud.tableDirective;
@@ -215,18 +215,18 @@
             replace: true,
             templateUrl: 'static/partials/admin/kao_crud_new.html',
             scope: {
-                dataType: '@'
+                type: '@'
             },
             controller: function ($scope, $location, CrudApiService, FrontEndCrudService) {
                 var frontEndCrud;
-                if ($scope.dataType) {
-                    frontEndCrud = FrontEndCrudService.getFrontEndFor($scope.dataType);
+                if ($scope.type) {
+                    frontEndCrud = FrontEndCrudService.getFrontEndFor($scope.type);
                 } else {
                     frontEndCrud = FrontEndCrudService.getCurrentCrud();
                 }
                 var crudApi = CrudApiService.getApiFor(frontEndCrud.name);
                 $scope.record = {};
-                $scope.dataTypeName = frontEndCrud.name;
+                $scope.dataType = frontEndCrud.name;
                 $scope.formDirective = frontEndCrud.formDirective;
                 
                 $scope.save = function() {
@@ -244,18 +244,18 @@
             replace: true,
             templateUrl: 'static/partials/admin/kao_crud_edit.html',
             scope: {
-                dataType: '@'
+                type: '@'
             },
             controller: function ($scope, $location, $routeParams, CrudApiService, FrontEndCrudService) {
                 var frontEndCrud;
-                if ($scope.dataType) {
-                    frontEndCrud = FrontEndCrudService.getFrontEndFor($scope.dataType);
+                if ($scope.type) {
+                    frontEndCrud = FrontEndCrudService.getFrontEndFor($scope.type);
                 } else {
                     frontEndCrud = FrontEndCrudService.getCurrentCrud();
                 }
                 var crudApi = CrudApiService.getApiFor(frontEndCrud.name);
                 $scope.record = {};
-                $scope.dataTypeName = frontEndCrud.name;
+                $scope.dataType = frontEndCrud.name;
                 $scope.formDirective = frontEndCrud.formDirective;
                 
                 $scope.goTo = function(path) {
