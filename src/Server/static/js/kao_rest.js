@@ -288,23 +288,12 @@
                 $scope.getRecord();
             }
         }})
-        .directive('kaoRestTable', function($compile) {
+        .directive('dynamicDirective', function($compile) {
             return {
                 restrict: 'E',
                 replace: true,
                 link: function(scope, element, attrs) {
-                    var dom = '<'+attrs.tableDirective+'>'+'</'+attrs.tableDirective+'>'
-                    var el = $compile(dom)(scope);
-                    element.append(el);
-                }
-            }
-        })
-        .directive('kaoRestForm', function($compile) {
-            return {
-                restrict: 'E',
-                replace: true,
-                link: function(scope, element, attrs) {
-                    var dom = '<'+attrs.formDirective+'>'+'</'+attrs.formDirective+'>'
+                    var dom = '<'+attrs.directive+'>'+'</'+attrs.directive+'>'
                     var el = $compile(dom)(scope);
                     element.append(el);
                 }
