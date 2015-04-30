@@ -45,3 +45,6 @@ routes += CrudEndpoints('/api/admin/concepts', Concept).endpoints
 routes += CrudEndpoints('/api/admin/concepts/<int:conceptId>/words', Word, 
                         routeParams={'conceptId':'concept_id'}, 
                         jsonColumnMap={'language': lambda value: ('language_id', value['id'])}).endpoints
+routes += CrudEndpoints('/api/admin/concepts/<int:conceptId>/symbols', Symbol, 
+                        routeParams={'conceptId':'concept_id'}, 
+                        jsonColumnMap={'language': lambda value: ('language_id', value['id'])}).endpoints
