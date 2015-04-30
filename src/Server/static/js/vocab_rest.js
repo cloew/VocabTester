@@ -4,7 +4,9 @@
         .config(['CrudApiConfigProvider', 'FrontEndCrudConfigProvider', 'CrudParamFromRouteConfigProvider', 'navConfigProvider',
             function(CrudApiConfig, FrontEndCrudConfig, CrudParamFromRouteConfig, navConfig) {
                 var config = navConfig.config;
-                CrudParamFromRouteConfig.register('conceptId', [{path:config.adminEditConcepts.path, param: 'id'}]);
+                CrudParamFromRouteConfig.register('conceptId', [{path:config.adminEditConcepts.path, param: 'id'},
+                                                                {path:config.adminNewConceptWords.path, param: 'conceptId'},
+                                                                {path:config.adminEditConceptWords.path, param: 'conceptId'}]);
                 
                 CrudApiConfig.add('/api/admin/languages', 'Language');
                 FrontEndCrudConfig.add({'name':'Language', 'listUrl':config.adminLanguages.path, 'newUrl':config.adminNewLanguages.path, 'editUrl':config.adminEditLanguages.path,
