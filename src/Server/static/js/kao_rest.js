@@ -113,8 +113,10 @@
             };
             CrudFrontEnd.prototype.getProperNestedConfig = function(varName) {
                 var nested = this.nested;
-                if (nested[varName]) {
-                    nested = {param: nested[varName], provider: nested.provider};
+                if (nested) {
+                    if (nested[varName]) {
+                        nested = {param: nested[varName], provider: nested.provider};
+                    }
                 }
                 return nested;
             };
@@ -159,91 +161,133 @@
             }
             return service;
         })
-        .controller('ListController', function ($scope, $location, CrudApiService, FrontEndCrudService) {
-            var frontEndCrud = FrontEndCrudService.getCurrentCrud();
-            var crudApi = CrudApiService.getApiFor(frontEndCrud.name);
-            $scope.records = [];
-            $scope.dataType = frontEndCrud.pluralName;
-            $scope.pluralDataType = frontEndCrud.pluralName;
-            $scope.newUrl = '#'+frontEndCrud.getNewUrl();
-            $scope.tableDirective = frontEndCrud.tableDirective;
-            
-            $scope.goTo = function(path) {
-                $location.path(path);
-            };
-            
-            $scope.getRecordEditUrl = function(record) {
-                return '#'+frontEndCrud.getEditUrl(record.id);
-            };
-            
-            $scope.delete = function(id) {
-                crudApi.delete(id).success(function(data) {
-                    $scope.getRecords();
-                }).error(function(error) {
-                    console.log(error);
-                });
-            };
-            
-            $scope.getRecords = function() {
-                crudApi.getAll().success(function(data) {
-                    $scope.records = data.records;
-                }).error(function(error) {
-                    console.log(error);
-                });
-            };
-            $scope.getRecords();
-        })
-        .controller('NewController', function ($scope, $location, CrudApiService, FrontEndCrudService) {
-            var frontEndCrud = FrontEndCrudService.getCurrentCrud();
-            var crudApi = CrudApiService.getApiFor(frontEndCrud.name);
-            $scope.record = {};
-            $scope.dataType = frontEndCrud.name;
-            $scope.formDirective = frontEndCrud.formDirective;
-            
-            $scope.save = function() {
-                crudApi.create($scope.record).success(function(data) {
-                    $location.path(frontEndCrud.getEditUrl(data.record.id));
-                }).error(function(error) {
-                    console.log(error);
-                });
-            };
-        })
-        .controller('EditController', function ($scope, $location, $routeParams, CrudApiService, FrontEndCrudService) {
-            var frontEndCrud = FrontEndCrudService.getCurrentCrud();
-            var crudApi = CrudApiService.getApiFor(frontEndCrud.name);
-            $scope.record = {};
-            $scope.dataType = frontEndCrud.name;
-            $scope.formDirective = frontEndCrud.formDirective;
-            
-            $scope.goTo = function(path) {
-                $location.path(path);
-            };
-            
-            $scope.save = function() {
-                crudApi.update($scope.record).success(function(data) {
-                    $scope.record = data.record;
-                }).error(function(error) {
-                    console.log(error);
-                });
-            };
-            
-            $scope.delete = function(id) {
-                crudApi.delete($routeParams.id).success(function(data) {
-                    $scope.goTo(frontEndCrud.getListUrl());
-                }).error(function(error) {
-                    console.log(error);
-                });
-            };
-            
-            $scope.getRecord = function() {
-                crudApi.get($routeParams.id).success(function(data) {
-                    $scope.record = data.record;
-                }).error(function(error) {
-                    console.log(error);
-                });
-            };
-            $scope.getRecord();
-        })
+        .directive('kaoCrudList', function() {
+          return {
+            restrict: 'E',
+            replace: true,
+            templateUrl: 'static/partials/admin/kao_crud_list.html',
+            scope: {
+                dataType: '@'
+            },
+            controller: function ($scope, $location, CrudApiService, FrontEndCrudService) {
+                var frontEndCrud;
+                if ($scope.dataType) {
+                    frontEndCrud = FrontEndCrudService.getFrontEndFor($scope.dataType);
+                } else {
+                    frontEndCrud = FrontEndCrudService.getCurrentCrud();
+                }
+                var crudApi = CrudApiService.getApiFor(frontEndCrud.name);
+                $scope.records = [];
+                $scope.dataTypeName = frontEndCrud.name;
+                $scope.pluralDataType = frontEndCrud.pluralName;
+                $scope.newUrl = '#'+frontEndCrud.getNewUrl();
+                $scope.tableDirective = frontEndCrud.tableDirective;
+                
+                $scope.goTo = function(path) {
+                    $location.path(path);
+                };
+                
+                $scope.getRecordEditUrl = function(record) {
+                    return '#'+frontEndCrud.getEditUrl(record.id);
+                };
+                
+                $scope.delete = function(id) {
+                    crudApi.delete(id).success(function(data) {
+                        $scope.getRecords();
+                    }).error(function(error) {
+                        console.log(error);
+                    });
+                };
+                
+                $scope.getRecords = function() {
+                    crudApi.getAll().success(function(data) {
+                        $scope.records = data.records;
+                    }).error(function(error) {
+                        console.log(error);
+                    });
+                };
+                $scope.getRecords();
+            }
+        }})
+        .directive('kaoCrudNew', function() {
+          return {
+            restrict: 'E',
+            replace: true,
+            templateUrl: 'static/partials/admin/kao_crud_new.html',
+            scope: {
+                dataType: '@'
+            },
+            controller: function ($scope, $location, CrudApiService, FrontEndCrudService) {
+                var frontEndCrud;
+                if ($scope.dataType) {
+                    frontEndCrud = FrontEndCrudService.getFrontEndFor($scope.dataType);
+                } else {
+                    frontEndCrud = FrontEndCrudService.getCurrentCrud();
+                }
+                var crudApi = CrudApiService.getApiFor(frontEndCrud.name);
+                $scope.record = {};
+                $scope.dataTypeName = frontEndCrud.name;
+                $scope.formDirective = frontEndCrud.formDirective;
+                
+                $scope.save = function() {
+                    crudApi.create($scope.record).success(function(data) {
+                        $location.path(frontEndCrud.getEditUrl(data.record.id));
+                    }).error(function(error) {
+                        console.log(error);
+                    });
+                };
+            }
+        }})
+        .directive('kaoCrudEdit', function() {
+          return {
+            restrict: 'E',
+            replace: true,
+            templateUrl: 'static/partials/admin/kao_crud_edit.html',
+            scope: {
+                dataType: '@'
+            },
+            controller: function ($scope, $location, $routeParams, CrudApiService, FrontEndCrudService) {
+                var frontEndCrud;
+                if ($scope.dataType) {
+                    frontEndCrud = FrontEndCrudService.getFrontEndFor($scope.dataType);
+                } else {
+                    frontEndCrud = FrontEndCrudService.getCurrentCrud();
+                }
+                var crudApi = CrudApiService.getApiFor(frontEndCrud.name);
+                $scope.record = {};
+                $scope.dataTypeName = frontEndCrud.name;
+                $scope.formDirective = frontEndCrud.formDirective;
+                
+                $scope.goTo = function(path) {
+                    $location.path(path);
+                };
+                
+                $scope.save = function() {
+                    crudApi.update($scope.record).success(function(data) {
+                        $scope.record = data.record;
+                    }).error(function(error) {
+                        console.log(error);
+                    });
+                };
+                
+                $scope.delete = function(id) {
+                    crudApi.delete($routeParams.id).success(function(data) {
+                        $scope.goTo(frontEndCrud.getListUrl());
+                    }).error(function(error) {
+                        console.log(error);
+                    });
+                };
+                
+                $scope.getRecord = function() {
+                    crudApi.get($routeParams.id).success(function(data) {
+                        $scope.record = data.record;
+                    }).error(function(error) {
+                        console.log(error);
+                    });
+                };
+                $scope.getRecord();
+            }
+        }})
         .directive('kaoRestTable', function($compile) {
             return {
                 restrict: 'E',
