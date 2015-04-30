@@ -13,6 +13,10 @@
                 FrontEndCrudConfig.add({'name':'Concept', 'listUrl':config.adminConcepts.path, 'newUrl':config.adminNewConcepts.path, 'editUrl':config.adminEditConcepts.path,
                                         'formDirective':'admin-concept-form', 'tableDirective':'admin-concept-table'});
                 CrudApiConfig.add('/api/admin/concepts/:conceptId/words', 'Word', [{param: 'conceptId', provider: CrudParamFromRouteConfig.forParam('conceptId')}]);
+                FrontEndCrudConfig.add({name:'Word', listUrl:config.adminEditConcepts.path, newUrl:config.adminNewConceptWords.path, editUrl:config.adminEditConceptWords.path,
+                                        formDirective:'admin-words-form', tableDirective:'admin-words-table',
+                                        nested:[{param: 'conceptId', provider: CrudParamFromRouteConfig.forParam('conceptId'), list:'id'}],
+                                        primaryPaths:[config.adminNewConceptWords.path, config.adminEditConceptWords.path]});
             }
         ])
         .directive('languageTable', function() {
@@ -43,26 +47,18 @@
                 templateUrl: 'static/partials/directives/admin/concept_form.html'
             }
         })
-        .controller('WordsTableController', function ($scope, $routeParams, $http, $route, CrudApiService) {
-            var crudApi = CrudApiService.getApiFor('Word');
-            $scope.records = [];
-            
-            $scope.getRecords = function() {
-                crudApi.getAll().success(function(data) {
-                    $scope.records = data.records;
-                }).error(function(error) {
-                    console.log(error);
-                });
-            };
-            $scope.getRecords();
-        })
         .directive('adminWordsTable', function() {
             return {
                 restrict: 'E',
                 replace: true,
-                scope: {dataType: '@'},
-                templateUrl: 'static/partials/directives/admin/word_table.html',
-                controller: 'WordsTableController'
+                templateUrl: 'static/partials/directives/admin/word_table.html'
+            }
+        })
+        .directive('adminWordsForm', function() {
+            return {
+                restrict: 'E',
+                replace: true,
+                templateUrl: 'static/partials/directives/admin/word_form.html'
             }
         });
 })(angular);
