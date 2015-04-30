@@ -327,5 +327,30 @@
                 replace: true,
                 templateUrl: 'static/partials/directives/admin/save_button.html'
             }
+        })
+        .directive('modelSelect', function() {
+            return {
+                restrict: 'E',
+                replace: true,
+                scope: {
+                  model: '=',
+                  type: '@',
+                  displayField: '@'
+                },
+                controller: function($scope, CrudApiService) {                    
+                    var crudApi = CrudApiService.getApiFor($scope.type);
+                    $scope.records = [];
+                
+                    $scope.getRecords = function() {
+                        crudApi.getAll().success(function(data) {
+                            $scope.records = data.records;
+                        }).error(function(error) {
+                            console.log(error);
+                        });
+                    };
+                    $scope.getRecords();
+                },
+                templateUrl: 'static/partials/directives/admin/model_select.html'
+            }
         });
 })(angular);
