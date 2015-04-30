@@ -22,7 +22,7 @@
             this.add({name: 'adminNewConcepts', path:'/admin/concepts/new', templateUrl:'static/partials/admin/new_record.html'});
             this.add({name: 'adminEditConcepts', path:'/admin/concepts/:id', templateUrl:'static/partials/admin/edit_record.html'});
             this.add({name: 'adminNewConceptWords', path:'/admin/concepts/:conceptId/words/new', templateUrl:'static/partials/admin/new_record.html'});
-            this.add({name: 'adminEditConceptWords', path:'/admin/concepts/:conceptId/words/edit', templateUrl:'static/partials/admin/edit_record.html'});
+            this.add({name: 'adminEditConceptWords', path:'/admin/concepts/:conceptId/words/:id', templateUrl:'static/partials/admin/edit_record.html'});
             this.add({name: 'adminWords', path:'/admin/words', templateUrl:'static/partials/admin_words.html', controller:'FormsController'});
             this.add({name: 'randomSymbolQuiz', path:'/symbollist/random/quiz', templateUrl:'static/partials/quiz.html', controller:'QuizController', returnTo:this.config.symbols.path});
             this.add({name: 'symbolListQuiz', path:'/symbollist/:listId/quiz', templateUrl:'static/partials/quiz.html', controller:'QuizController', returnTo:this.config.symbolLists.path});
