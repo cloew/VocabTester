@@ -25,14 +25,3 @@ def query_via_concept_list(isWords=None):
 
 def concept_list_proxy(fieldName):
     return proxy_for(fieldName, ["id", "name", "concepts"])
-    
-def concept_pair_retriever(FormClass):
-    def addConceptManager(cls):
-        def getConceptPairs(self, user):
-            """ Return the concept pairs """
-            conceptIds = [concept.id for concept in self.concepts]
-            return self.conceptManager.getConceptPairs(conceptIds, user)
-        cls.conceptManager = ConceptManager(FormClass)
-        cls.getConceptPairs = getConceptPairs
-        return cls
-    return addConceptManager
