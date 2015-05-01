@@ -26,7 +26,7 @@ class RandomQuizFactory:
         """ Return the learned forms organized by their mastery rating """
         forms = {}
         for form in learnedForms:
-            rating = form.getMasteryRating(user)
+            rating = form.getMastery(user).rating
             if rating not in forms:
                 forms[rating] = [form]
             else:
