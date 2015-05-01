@@ -13,12 +13,7 @@ def mastery_retriever(masteryFieldName):
                 db.session.add(mastery)
                 db.session.commit()
             return mastery
-        
-        def getMasteryRating(self, user):
-            """ Return the user's mastery rating for this object """ 
-            return self.getMastery(user).rating
             
         cls.getMastery = getMastery
-        cls.getMasteryRating = getMasteryRating
         return cls
     return addMastery

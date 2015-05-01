@@ -22,7 +22,7 @@ def IsWordsQuiz(quiz):
     return len(quiz.questions) == 0 or quiz.questions[0].subject.foreign.__class__ is Word
 
 jsonFactory = JsonFactory([
-                           ([Symbol, Word],[FieldAttr('id'), JsonAttr('text', unicode), JsonAttr('mastery', lambda s, u: s.getMasteryRating(u), args=["user"])]),
+                           ([Symbol, Word],[FieldAttr('id'), JsonAttr('text', unicode), JsonAttr('mastery', lambda s, u: s.getMastery(u).rating, args=["user"])]),
                            (ConceptPair,[FieldAttr('foreign'), FieldAttr('native')]),
                            ([SymbolList, WordList],[FieldAttr('id'), FieldAttr('name'), JsonAttr('concepts', lambda s, u: s.getConceptPairs(u), args=["user"])]),
                            (UserConceptList,[FieldAttr('id'), FieldAttr('name'), FieldAttr('concepts'), FieldAttr('averageMastery')]),

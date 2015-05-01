@@ -17,5 +17,5 @@ class UserConceptList:
     @property
     def averageMastery(self):
         """ Return the average mastery of this concept list for the user """
-        masteries = [concept.foreign.getMasteryRating(self.user) for concept in self.concepts]
+        masteries = [concept.foreign.getMastery(self.user).rating for concept in self.concepts]
         return round(sum(masteries, 0.0) / len(masteries), 1)
