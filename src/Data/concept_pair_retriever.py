@@ -10,8 +10,6 @@ class ConceptPairRetriever(object):
         
     def __get__(self, obj, objtype=None):
         """ Return this descriptor or the getConceptPairs method """
-        with open('temp', 'a') as f:
-            f.write("Obj: {0}".format(obj))
         if obj is None:
             return self
         return functools.partial(self.getConceptPairs, obj)

@@ -13,7 +13,3 @@ class WordList:
     def __init__(self, conceptList):
         """ Initialize the Word List """
         self.conceptList = conceptList
-        
-with open('temp', 'a') as f:
-    f.write("getConceptPairs from Class: {0}\n".format(WordList.getConceptPairs))
-    f.write("getConceptPairs from Instance: {0}\n".format(WordList(None).getConceptPairs))
