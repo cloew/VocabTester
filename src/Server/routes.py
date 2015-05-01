@@ -9,7 +9,6 @@ from Server.helpers.crud_endpoints import CrudEndpoints
 
 from Server.Controller.concept_lists_controller import ConceptListsController
 from Server.Controller.current_user_controller import CurrentUserController
-from Server.Controller.concepts_controller import ConceptsController
 from Server.Controller.learned_concepts_controller import LearnedConceptsController
 from Server.Controller.login_controller import LoginController
 from Server.Controller.quiz_answer_controller import QuizAnswerController
