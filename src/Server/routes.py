@@ -15,6 +15,7 @@ from Server.Controller.quiz_answer_controller import QuizAnswerController
 from Server.Controller.quiz_controller import QuizController
 from Server.Controller.random_quiz_controller import RandomQuizController
 from Server.Controller.register_controller import RegisterController
+from Server.Controller.search_controller import SearchController
 
 from kao_flask.endpoint import Endpoint
 from kao_flask.controllers.html_controller import HTMLController
@@ -32,6 +33,7 @@ routes = [Endpoint('/', get=HTMLController('Server/templates/index.html')),
           Endpoint('/api/symbollist/random/quiz', get=RandomQuizController(Symbol)),
           # Words
           Endpoint('/api/words', get=LearnedConceptsController(Word)),
+          Endpoint('/api/search', post=SearchController()),
           # Wordlists
           Endpoint('/api/wordlists', get=ConceptListsController(WordList)),
           Endpoint('/api/wordlist/<int:listId>/quiz', get=QuizController(WordList)),
