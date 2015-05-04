@@ -40,14 +40,12 @@ class User(db.Model):
     def tryToLearnSymbol(self, mastery):
         """ Try to learn the symbol related to the given mastery """
         if mastery.symbol_id is not None:
-            if not self.learnedSymbolTracker.hasLearned(mastery.symbol_id):
-                self.learnedSymbolTracker.learn(mastery.symbol)
+            self.learnedSymbolTracker.tryToLearn(mastery.symbol)
         
     def tryToLearnWord(self, mastery):
         """ Try to learn the word related to the given mastery """
         if mastery.word_id is not None:
-            if not self.learnedWordTracker.hasLearned(mastery.word_id):
-                self.learnedWordTracker.learn(mastery.word)
+            self.learnedWordTracker.tryToLearn(mastery.word)
         
     def save(self):
         """ Save the Underlying User Data Object """

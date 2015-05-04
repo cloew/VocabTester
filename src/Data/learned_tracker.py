@@ -8,13 +8,18 @@ class LearnedTracker:
         self.fieldName = fieldName
         self.modelClass = modelClass
         
-    def learn(self, aspect):
-        """ Create the connection between the parent and the aspect """
-        getattr(self.parent, self.fieldName).append(aspect)
+    def tryToLearn(self, form):
+        """ Learn the form unless it is already being tracked """
+        if not self.hasLearned(form.id):
+            self.learn(form)
+        
+    def learn(self, form):
+        """ Create the connection between the parent and the form """
+        getattr(self.parent, self.fieldName).append(form)
         self.parent.save()
         
     def hasLearned(self, id):
-        """ Return if the parent has learned the aspect related to this id """
+        """ Return if the parent has learned the form related to this id """
         return self.modelClass.query.filter_by(id=self.parent.id).filter(self.column.any(id=id)).first() != None
         
     @property
