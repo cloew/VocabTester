@@ -31,5 +31,16 @@
                 },
                 templateUrl: 'static/partials/directives/concept_list.html'
             }
+        })
+        .controller('SearchController', function ($scope, $http) {
+            $scope.results = undefined;
+            $scope.isWords = true;
+            $scope.search = function(text) {
+                $http.post('/api/search', {'text':text}).success(function(data) {
+                    $scope.results = data.results;
+                }).error(function(error) {
+                    console.log(error);
+                });
+            };
         });
 })(angular);
