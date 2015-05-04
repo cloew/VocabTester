@@ -17,4 +17,7 @@
         <h2 class="col-md-8 col-md-push-2">Results</h2>
         <concept-table concepts="results" is-words="isWords"></concept-table>
     </div>
+    <div class="col-md-12" ng-if="results.length === 0" style="text-align:center;">
+        <h3 class="col-md-8 col-md-push-2">Sorry, no results were found</h3>
+    </div>
 </div>

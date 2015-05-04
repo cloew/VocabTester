@@ -38,6 +38,7 @@
             $scope.search = function(text) {
                 $http.post('/api/search', {'text':text}).success(function(data) {
                     $scope.results = data.results;
+                    console.log($scope.results);
                 }).error(function(error) {
                     console.log(error);
                 });
