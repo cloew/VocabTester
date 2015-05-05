@@ -4,7 +4,7 @@ from Server.helpers.json_factory import toJson
 
 from auth_json_controller import AuthJSONController
 
-class LearnWordController:
+class LearnWordController(AuthJSONController):
     """ Controller to mark a word as learned """
     
     def performWithJSON(self, wordId, json=None, user=None):
