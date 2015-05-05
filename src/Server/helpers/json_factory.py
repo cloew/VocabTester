@@ -20,9 +20,19 @@ def answerUrl(question, user):
 def IsWordsQuiz(quiz):
     """ Returns if the quiz is for words """    
     return len(quiz.questions) == 0 or quiz.questions[0].subject.foreign.__class__ is Word
+    
+def GetMateryRating(form, user):
+    """ Return the mastery rating for the given form """    
+    return form.getMastery(user).rating
+    
+def HasLearned(form, user):
+    """ Return if the user has learned the given form """
+    hasLearnedMethod = {Word: user.hasLearnedWord, Symbol: user.hasLearnedSymbol}
+    return hasLearnedMethod[form.__class__](form)
 
 jsonFactory = JsonFactory([
-                           ([Symbol, Word],[FieldAttr('id'), JsonAttr('text', unicode), JsonAttr('mastery', lambda s, u: s.getMastery(u).rating, args=["user"])]),
+                           ([Symbol, Word],[FieldAttr('id'), JsonAttr('text', unicode), JsonAttr('mastery', GetMateryRating, args=["user"]), 
+                                            JsonAttr('learned', HasLearned, args=["user"])]),
                            (ConceptPair,[FieldAttr('foreign'), FieldAttr('native')]),
                            ([SymbolList, WordList],[FieldAttr('id'), FieldAttr('name'), JsonAttr('concepts', lambda s, u: s.getConceptPairs(u), args=["user"])]),
                            (UserConceptList,[FieldAttr('id'), FieldAttr('name'), FieldAttr('concepts'), FieldAttr('averageMastery')]),
