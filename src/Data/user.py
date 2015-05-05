@@ -37,9 +37,17 @@ class User(db.Model):
         """ Check if the password is this users password """
         return check_password(rawPassword, self.password)
         
+    def hasLearnedSymbol(self, symbol):
+        """ Return if the symbol has already been learned """
+        return self.learnedSymbolTracker.hasLearned(symbol.id)
+        
     def tryToLearnSymbol(self, symbol):
         """ Try to learn the symbol """
         self.learnedSymbolTracker.tryToLearn(symbol)
+        
+    def hasLearnedWord(self, word):
+        """ Return if the word has already been learned """
+        return self.learnedWordTracker.hasLearned(word.id)
         
     def tryToLearnWord(self, word):
         """ Try to learn the word """
