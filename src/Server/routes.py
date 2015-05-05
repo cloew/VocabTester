@@ -10,6 +10,7 @@ from Server.helpers.crud_endpoints import CrudEndpoints
 from Server.Controller.concept_lists_controller import ConceptListsController
 from Server.Controller.current_user_controller import CurrentUserController
 from Server.Controller.learned_concepts_controller import LearnedConceptsController
+from Server.Controller.learn_word_controller import LearnWordController
 from Server.Controller.login_controller import LoginController
 from Server.Controller.quiz_answer_controller import QuizAnswerController
 from Server.Controller.quiz_controller import QuizController
@@ -33,6 +34,7 @@ routes = [Endpoint('/', get=HTMLController('Server/templates/index.html')),
           Endpoint('/api/symbollist/random/quiz', get=RandomQuizController(Symbol)),
           # Words
           Endpoint('/api/words', get=LearnedConceptsController(Word)),
+          Endpoint('/api/words/<int:wordId>/learn', post=LearnWordController()),
           Endpoint('/api/search', post=SearchController()),
           # Wordlists
           Endpoint('/api/wordlists', get=ConceptListsController(WordList)),
