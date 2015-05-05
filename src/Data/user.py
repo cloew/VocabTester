@@ -37,15 +37,13 @@ class User(db.Model):
         """ Check if the password is this users password """
         return check_password(rawPassword, self.password)
         
-    def tryToLearnSymbol(self, mastery):
-        """ Try to learn the symbol related to the given mastery """
-        if mastery.symbol_id is not None:
-            self.learnedSymbolTracker.tryToLearn(mastery.symbol)
+    def tryToLearnSymbol(self, symbol):
+        """ Try to learn the symbol """
+        self.learnedSymbolTracker.tryToLearn(symbol)
         
-    def tryToLearnWord(self, mastery):
-        """ Try to learn the word related to the given mastery """
-        if mastery.word_id is not None:
-            self.learnedWordTracker.tryToLearn(mastery.word)
+    def tryToLearnWord(self, word):
+        """ Try to learn the word """
+        self.learnedWordTracker.tryToLearn(word)
         
     def save(self):
         """ Save the Underlying User Data Object """

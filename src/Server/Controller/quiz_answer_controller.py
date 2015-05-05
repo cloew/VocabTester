@@ -12,7 +12,7 @@ class QuizAnswerController(AuthJSONController):
         mastery.addAnswer(json['correct'])
         
         if mastery.word_id is not None:
-            user.tryToLearnWord(mastery)
+            user.tryToLearnWord(mastery.word)
         elif mastery.symbol_id is not None:
-            user.tryToLearnSymbol(mastery)
+            user.tryToLearnSymbol(mastery.symbol)
         return {'rating':mastery.rating}
