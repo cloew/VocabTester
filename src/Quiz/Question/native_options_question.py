@@ -1,6 +1,6 @@
-from question import Question
+from options_question import OptionsQuestion
 
-class NativeOptionsQuestion(Question):
+class NativeOptionsQuestion(OptionsQuestion):
     """ Represents a question where all the options are in the native language """
     
     def getQuestionForm(self, subject):

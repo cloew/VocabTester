@@ -3,8 +3,8 @@ from options_finder import OptionsFinder
 
 import random
 
-class Question:
-    """ Represents a question in a Quiz """
+class OptionsQuestion:
+    """ Represents a question with options in a Quiz """
     NUM_WRONG_ANSWERS = 4
     
     def __init__(self, subject, allPairs):
