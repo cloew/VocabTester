@@ -43,5 +43,24 @@
                     console.log(error);
                 });
             };
+        })
+        .directive('searchResult', function() {
+            return {
+                restrict: 'E',
+                replace: true,
+                scope: {
+                    result: '='
+                },
+                controller: function($scope, $http) {
+                    $scope.learn = function() {
+                        $http.post('/api/words/'+$scope.result.foreign.id+'/learn').success(function(data) {
+                            $scope.result.foreign = data.word;
+                        }).error(function(error) {
+                            console.log(error);
+                        });
+                    };
+                },
+                templateUrl: 'static/partials/directives/search_result.html'
+            }
         });
 })(angular);
