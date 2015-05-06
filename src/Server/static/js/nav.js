@@ -14,8 +14,8 @@
             this.add({name: 'register', path:'/register', templateUrl:'static/partials/register.html', controller:'RegisterController'});
             this.add({name: 'words', path:'/words', templateUrl:'static/partials/learned_words.html', controller:'LearnedFormsController'});
             this.add({name: 'symbols', path:'/symbols', templateUrl:'static/partials/learned_symbols.html', controller:'LearnedFormsController'});
-            this.add({name: 'search', path:'/search', templateUrl:'static/partials/search.html', controller:'SearchController'});
             this.add({name: 'symbolLists', path:'/symbollists', templateUrl:'static/partials/symbol_lists.html'});
+            this.add({name: 'search', path:'/search', templateUrl:'static/partials/search.html', controller:'SearchController'});
             this.add({name: 'adminLanguages', path:'/admin/languages', templateUrl:'static/partials/admin/list_records.html'});
             this.add({name: 'adminNewLanguages', path:'/admin/languages/new', templateUrl:'static/partials/admin/new_record.html'});
             this.add({name: 'adminEditLanguages', path:'/admin/languages/:id', templateUrl:'static/partials/admin/edit_record.html'});
@@ -74,6 +74,7 @@
             return [{name: 'Words', path: navService.words.path},
                     {name: 'Word Lists', path: navService.wordLists.path},
                     {name: 'Symbols', path: navService.symbols.path},
-                    {name: 'Symbol Lists', path: navService.symbolLists.path}];
+                    {name: 'Symbol Lists', path: navService.symbolLists.path},
+                    {name: 'Search', path: navService.search.path}];
         });
 })(angular);
