@@ -5,10 +5,12 @@ from sampler import sample_at_most
 class RandomQuizFactory:
     """ Represents method to contstruct a Quiz from random learned Words or Symbols """
     MAX_QUESTIONS = 10
-    RATING_RATIOS = [(0, .4),
-                     (1, .3),
+    RATING_RATIOS = [(0, .3),
+                     (1, .2),
                      (2, .2),
-                     (3, .1)]
+                     (3, .1),
+                     (4, .1),
+                     (5, .1)]
     
     def buildQuiz(self, formModel, user):
         """ Build a quiz using the from given and the user provided """
