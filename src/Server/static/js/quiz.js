@@ -1,7 +1,22 @@
 (function(a) {
     "use strict";
     a.module('Quiz', ['ui.bootstrap', 'kao.input', 'kao.table', 'Concepts', 'VocabNav'])
-        .factory('quizService', function($http, $location, $routeParams, navService) {
+        .factory('OptionsQuestion', function() {
+            function OptionsQuestion(question) {
+                this.question = question;
+                this.answerIndex = question.answerIndex;
+                this.answerUrl = question.answerUrl;
+                this.queryWord = question.queryWord;
+                this.options = question.options;
+                this.subject = question.subject;
+            };
+            OptionsQuestion.prototype.isCorrect = function() {
+                return this.selectedIndex == this.question.answerIndex;
+            };
+            
+            return OptionsQuestion;
+        })
+        .factory('quizService', function($http, $location, $routeParams, navService, OptionsQuestion) {
             function Quiz(wordListId) {
                 this.wordListId = wordListId;
                 this.quiz = undefined;
@@ -12,8 +27,12 @@
                 var self = this;
                 $http.get(navService.getApiUrl()).success(function(data) {
                     self.quiz = data.quiz;
-                    self.currentQuestion =  self.quiz.questions[self.currentQuestionIndex];
+                    self.questions = [];
                     self.numberOfQuestions = self.quiz.questions.length;
+                    for (var i = 0; i < self.numberOfQuestions; i++) {
+                        self.questions.push(new OptionsQuestion(self.quiz.questions[i]));
+                    }
+                    self.currentQuestion =  self.questions[self.currentQuestionIndex];
                 }).error(function(error) {
                     console.log(error);
                 });
@@ -22,7 +41,7 @@
                 var question = this.currentQuestion;
                 var self = this;
                 if (question.selectedIndex !== undefined) {
-                    var correct = question.selectedIndex == this.currentQuestion.answerIndex;
+                    var correct = question.isCorrect();
                     self.grading = true;
                     $http.post(question.answerUrl, {'correct':correct}).success(function(data) {
                         question.results = {"correct":correct};
@@ -38,8 +57,8 @@
             };
             Quiz.prototype.next = function() {
                 this.currentQuestionIndex = this.currentQuestionIndex+1;
-                this.currentQuestion =  this.quiz.questions[this.currentQuestionIndex];
-                this.completed = (this.currentQuestionIndex == this.quiz.questions.length);
+                this.currentQuestion =  this.questions[this.currentQuestionIndex];
+                this.completed = (this.currentQuestionIndex == this.questions.length);
             };
             Quiz.prototype.canSubmit = function() {
                 return this.currentQuestion && (this.currentQuestion.selectedIndex >= 0) && !this.grading;
@@ -55,13 +74,13 @@
             return {
                 buildEntries: function (quiz) {
                     var concepts = [];
-                    for (var i = 0; i < quiz.quiz.questions.length; i++) {
-                        var question = quiz.quiz.questions[i];
+                    for (var i = 0; i < quiz.questions.length; i++) {
+                        var question = quiz.questions[i];
                         concepts.push(question.subject);
                     }
                     var table = conceptTableService.buildEntries(concepts, quiz.isWords);
-                    for (var i = 0; i < quiz.quiz.questions.length; i++) {
-                        var question = quiz.quiz.questions[i];
+                    for (var i = 0; i < quiz.questions.length; i++) {
+                        var question = quiz.questions[i];
                         if (question.results.correct) {
                             table.entries[i].rowClass = 'success';
                         }
