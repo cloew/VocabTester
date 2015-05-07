@@ -25,7 +25,7 @@ class QuestionFactory:
         questions = []
         for mastery, conceptPairs in groupby(pairs, lambda pair: pair.foreign.getMastery(user).rating):
             if mastery in self.optionsRange:
-                questions += self.optionsQuestionBuilder.buildQuestions(list(conceptPairs))
+                questions += self.optionsQuestionBuilder.buildQuestions(list(conceptPairs), pairs)
             if mastery in self.promptRange:
                 questions += self.promptQuestionBuilder.buildQuestions(list(conceptPairs))
         return questions

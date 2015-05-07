@@ -10,12 +10,12 @@ class OptionsQuestionBuilder:
     questionClassRatio = RatioPicker([(ForeignOptionsQuestion, .5),
                                       (NativeOptionsQuestion, .5)])
                      
-    def buildQuestions(self, pairs):
+    def buildQuestions(self, pairs, allPairs):
         """ Build the questions for use in the quiz """
         random.shuffle(pairs)
         questionClasses = self.getQuestionClasses(pairs)
         
-        setOfPairs = set(pairs)
+        setOfPairs = set(allPairs)
         return [questionClass(pair, setOfPairs) for pair, questionClass in zip(pairs, questionClasses)]
     
     def getQuestionClasses(self, pairs):
