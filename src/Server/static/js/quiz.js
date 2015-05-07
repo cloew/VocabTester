@@ -31,7 +31,7 @@
                 this.type = question.questionType;
             };
             PromptQuestion.prototype.isCorrect = function() {
-                return this.enteredText == this.question.answer;
+                return this.enteredText.toLowerCase() == this.question.answer;
             };
             PromptQuestion.prototype.canSubmit = function() {
                 return this.enteredText;
