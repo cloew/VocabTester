@@ -25,9 +25,7 @@
                 controller: function($scope, $location) {
                     $scope.header = 'words';
                     $scope.isWords = true;
-                    $scope.startQuiz = function() {
-                        $location.path('/wordlist/'+$scope.conceptList.id+'/quiz/');
-                    };
+                    $scope.quizUrl = '#/wordlist/'+$scope.conceptList.id+'/quiz/';
                 },
                 templateUrl: 'static/partials/directives/concept_list.html'
             }

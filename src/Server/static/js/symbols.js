@@ -25,9 +25,7 @@
                 controller: function($scope, $location) {
                     $scope.header = 'symbols';
                     $scope.isWords = false;
-                    $scope.startQuiz = function() {
-                        $location.path('/symbollist/'+$scope.conceptList.id+'/quiz/');
-                    };
+                    $scope.quizUrl = '#/symbollist/'+$scope.conceptList.id+'/quiz/';
                 },
                 templateUrl: 'static/partials/directives/concept_list.html'
             }
