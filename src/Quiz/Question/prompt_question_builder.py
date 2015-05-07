@@ -2,7 +2,7 @@ from .foreign_prompt_question import ForeignPromptQuestion
 
 import random
 
-class PromptQuestionFactory:
+class PromptQuestionBuilder:
     """ Helper class to construct Prompt Question Builder """
                      
     def buildQuestions(self, pairs):
