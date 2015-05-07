@@ -24,10 +24,10 @@ class QuestionFactory:
         """ Build the questions for use in the quiz """
         questions = []
         for mastery, conceptPairs in groupby(pairs, lambda pair: pair.foreign.getMastery(user).rating):
-            if mastery in sef.optionsRange:
-                questions += self.optionsQuestionBuilder.buildQuestions(conceptPairs)
-            if mastery in sef.promptRange:
-                questions += self.promptQuestionBuilder.buildQuestions(conceptPairs)
+            if mastery in self.optionsRange:
+                questions += self.optionsQuestionBuilder.buildQuestions(list(conceptPairs))
+            if mastery in self.promptRange:
+                questions += self.promptQuestionBuilder.buildQuestions(list(conceptPairs))
         return questions
     
 QuestionFactory = QuestionFactory()
