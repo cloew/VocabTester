@@ -1,8 +1,12 @@
 <div>
     <div>
-        <h4 style="display:inline-block;">Translate {{question.prompt}}</h4>
+        <h4 style="display:inline-block;">Translate {{question.prompt}}
+            <small ng-if="question.results && !question.results.correct"> {{question.answer}}</small>
+            <span class="glyphicon glyphicon-ok" ng-if="question.results.correct" style="color: #5cb85c"></span>
+            <span class="glyphicon glyphicon-remove" ng-if="question.results && !question.results.correct" style="color: #a94442"></span>
+        </h4>
     </div>
-    <div>
-        <input id="translation" type="text" class="form-control" ng-model="question.enteredText" placeholder="Translation"/>
+    <div ng-class="{'has-success':question.results.correct, 'has-error':(question.results && !question.results.correct)}">
+        <input id="translation" type="text" class="form-control" ng-model="question.enteredText" placeholder="Translation" ng-disabled="question.results"/>
     </div>
 </div>
