@@ -15,7 +15,7 @@
                 return this.selectedIndex == this.question.answerIndex;
             };
             OptionsQuestion.prototype.canSubmit = function() {
-                return this.currentQuestion.selectedIndex >= 0;
+                return this.selectedIndex >= 0;
             };
             
             return OptionsQuestion;
