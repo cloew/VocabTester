@@ -22,7 +22,7 @@ class RandomQuizFactory:
         conceptIds = [form.concept_id for form in sample]
         pairs = conceptManager.getConceptPairs(conceptIds, user)
         
-        return Quiz("Random List", pairs)
+        return Quiz("Random List", pairs, user)
         
     def organizeByMastery(self, learnedForms, user):
         """ Return the learned forms organized by their mastery rating """
