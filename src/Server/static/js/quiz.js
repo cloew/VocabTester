@@ -9,14 +9,36 @@
                 this.queryWord = question.queryWord;
                 this.options = question.options;
                 this.subject = question.subject;
+                this.type = question.questionType;
             };
             OptionsQuestion.prototype.isCorrect = function() {
                 return this.selectedIndex == this.question.answerIndex;
             };
+            OptionsQuestion.prototype.canSubmit = function() {
+                return this.currentQuestion.selectedIndex >= 0;
+            };
             
             return OptionsQuestion;
         })
-        .factory('quizService', function($http, $location, $routeParams, navService, OptionsQuestion) {
+        .factory('PromptQuestion', function() {
+            function PromptQuestion(question) {
+                this.question = question;
+                this.answerUrl = question.answerUrl;
+                this.prompt = question.prompt;
+                this.answer = question.answer;
+                this.subject = question.subject;
+                this.type = question.questionType;
+            };
+            PromptQuestion.prototype.isCorrect = function() {
+                return this.enteredText == this.question.answer;
+            };
+            PromptQuestion.prototype.canSubmit = function() {
+                return this.enteredText;
+            };
+            
+            return PromptQuestion;
+        })
+        .factory('quizService', function($http, $location, $routeParams, navService, OptionsQuestion, PromptQuestion) {
             function Quiz(wordListId) {
                 this.wordListId = wordListId;
                 this.quiz = undefined;
@@ -30,7 +52,12 @@
                     self.questions = [];
                     self.numberOfQuestions = self.quiz.questions.length;
                     for (var i = 0; i < self.numberOfQuestions; i++) {
-                        self.questions.push(new OptionsQuestion(self.quiz.questions[i]));
+                        var question = self.quiz.questions[i];
+                        if (question.questionType === 'options') {
+                            self.questions.push(new OptionsQuestion(question));
+                        } else if (question.questionType === 'prompt') {
+                            self.questions.push(new PromptQuestion(question));
+                        }
                     }
                     self.currentQuestion =  self.questions[self.currentQuestionIndex];
                 }).error(function(error) {
@@ -40,7 +67,7 @@
             Quiz.prototype.answer = function() {
                 var question = this.currentQuestion;
                 var self = this;
-                if (question.selectedIndex !== undefined) {
+                if (question.canSubmit()) {
                     var correct = question.isCorrect();
                     self.grading = true;
                     $http.post(question.answerUrl, {'correct':correct}).success(function(data) {
@@ -61,7 +88,7 @@
                 this.completed = (this.currentQuestionIndex == this.questions.length);
             };
             Quiz.prototype.canSubmit = function() {
-                return this.currentQuestion && (this.currentQuestion.selectedIndex >= 0) && !this.grading;
+                return this.currentQuestion && this.currentQuestion.canSubmit() && !this.grading;
             };
             
             return {
@@ -102,6 +129,15 @@
               scope: {
                   question: '='
               },
+              templateUrl: 'static/partials/directives/question.html'
+          }})
+        .directive('optionsQuestion', function() {
+          return {
+              restrict: 'E',
+              replace: true,
+              scope: {
+                  question: '='
+              },
               controller: function($scope) {
                   $scope.selectOption = function(index) {
                       $scope.question.selectedIndex = index;
@@ -129,7 +165,16 @@
                         }
                   };
               },
-              templateUrl: 'static/partials/directives/question.html'
+              templateUrl: 'static/partials/directives/options_question.html'
+          }})
+        .directive('promptQuestion', function() {
+          return {
+              restrict: 'E',
+              replace: true,
+              scope: {
+                  question: '='
+              },
+              templateUrl: 'static/partials/directives/prompt_question.html'
           }})
         .directive('option', function() {
           return {
