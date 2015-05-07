@@ -15,3 +15,8 @@ class ForeignPromptQuestion:
     def answer(self):
         """ Return the text for the answer """
         return self.subject.native.text.lower()
+        
+    @property
+    def displayAnswer(self):
+        """ Return the text to display for the answer """
+        return self.subject.native.text

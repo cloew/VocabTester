@@ -39,7 +39,7 @@ jsonFactory = JsonFactory([
                            (UserConceptList,[FieldAttr('id'), FieldAttr('name'), FieldAttr('concepts'), FieldAttr('averageMastery')]),
                            ([User, UserProxy], [FieldAttr('id'), FieldAttr('email'), FieldAttr('givenName'), FieldAttr('lastName')]),
                            (OptionsQuestion, [FieldAttr('subject'), FieldAttr('queryWord'), FieldAttr('options'), FieldAttr('answerIndex'), StaticAttr('questionType', 'options'), JsonAttr('answerUrl', answerUrl, args=["user"])]),
-                           (ForeignPromptQuestion, [FieldAttr('subject'), FieldAttr('prompt'), FieldAttr('answer'), StaticAttr('questionType', 'prompt'), JsonAttr('answerUrl', answerUrl, args=["user"])]),
+                           (ForeignPromptQuestion, [FieldAttr('subject'), FieldAttr('prompt'), FieldAttr('answer'), FieldAttr('displayAnswer'), StaticAttr('questionType', 'prompt'), JsonAttr('answerUrl', answerUrl, args=["user"])]),
                            (Quiz, [FieldAttr('name'), FieldAttr('questions'), JsonAttr('isWords', IsWordsQuiz)])
                           ])
                          

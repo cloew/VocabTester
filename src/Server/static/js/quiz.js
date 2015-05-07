@@ -26,6 +26,7 @@
                 this.answerUrl = question.answerUrl;
                 this.prompt = question.prompt;
                 this.answer = question.answer;
+                this.displayAnswer = question.displayAnswer;
                 this.subject = question.subject;
                 this.type = question.questionType;
             };
