@@ -18,11 +18,6 @@ angular.module('VocabTester', ['ui.bootstrap', 'ngRoute', 'Header', 'Concepts', 
         return {
             restrict: 'E',
             replace: true,
-            controller: function($scope, $location, userService) {
-                $scope.toRegister = function() {
-                    $location.path('/register/');
-                };
-            },
             templateUrl: 'static/partials/directives/info.html'
             }
         });
