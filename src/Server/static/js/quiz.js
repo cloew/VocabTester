@@ -202,12 +202,22 @@
               scope: {
                   quiz: '='
               },
-              controller: function($scope, $location, quizResultsTableService) {
+              controller: function($scope, quizResultsTableService) {
                   $scope.table = quizResultsTableService.buildEntries($scope.quiz);
-                  $scope.back = function() {
-                    $location.path($scope.quiz.returnTo);
-                  };
               },
               templateUrl: 'static/partials/directives/quiz_results.html'
+          }})
+        .directive('quizBackButton', function() {
+          return {
+              restrict: 'E',
+              replace: true,
+              controller: function($scope, $element, $timeout) {
+                  $scope.click = function() {
+                    $timeout(function() {
+                        a.element($element)[0].click();
+                    }, 0);
+                  };
+              },
+              templateUrl: 'static/partials/directives/quiz_back_button.html'
           }});
 })(angular);
