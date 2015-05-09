@@ -23,7 +23,7 @@ class QuestionFactory:
     def buildQuestions(self, pairs, user):
         """ Build the questions for use in the quiz """
         questions = []
-        for mastery, conceptPairs in groupby(pairs, lambda pair: pair.foreign.getMastery(user).rating):
+        for mastery, conceptPairs in groupby(pairs, lambda pair: pair.foreign.getMastery(user).answerRating):
             if mastery in self.optionsRange:
                 questions += self.optionsQuestionBuilder.buildQuestions(list(conceptPairs), pairs)
             if mastery in self.promptRange:
