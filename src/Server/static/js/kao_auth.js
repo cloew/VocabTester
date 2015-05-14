@@ -31,7 +31,6 @@
             
             $scope.update = function() {
                 userService.update($scope.user, function() {
-                    $location.path('/');
                 }, function(error) {
                     $scope.errorMessage = error.message;
                 });
