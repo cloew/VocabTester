@@ -24,6 +24,19 @@
                 });
             };
         })
+        .controller('ProfileController', function ($scope, $location, userService) {
+            userService.getUser(function(user) {
+                $scope.user = {givenName:user.givenName, lastName:user.lastName};
+            });
+            
+            $scope.update = function() {
+                userService.update($scope.user, function() {
+                    $location.path('/');
+                }, function(error) {
+                    $scope.errorMessage = error.message;
+                });
+            };
+        })
         .factory('userService', function($http, $window, $route) {
             var user = undefined;
             var userWatch = [];
@@ -51,27 +64,38 @@
                 register: function (params, successCallback, errorCallback) {
                     responseHandler($http.post('/api/users', {'email':params.email, 'password':params.password, 'givenName':params.firstName, 'lastName':params.lastName}), successCallback, errorCallback);
                 },
+                update: function (user, successCallback, errorCallback) {
+                    responseHandler($http.put('/api/users/current', {'givenName':user.givenName, 'lastName':user.lastName}), successCallback, errorCallback);
+                },
                 logout: function () {
                     delete $window.sessionStorage.token;
                     user = undefined;
                     $route.reload();
                 },
                 isLoggedIn: function () {
-                    return $window.sessionStorage.token !== undefined
+                    return $window.sessionStorage.token !== undefined;
+                },
+                getUser: function (callback) {
+                    if (this.isLoggedIn() && (user === undefined)) {
+                        $http.get('/api/users/current').success(function(data) {
+                            user = data.user;
+                            callback(user);
+                        }).error(function(error) {
+                            console.log(error);
+                        });
+                    } else {
+                        callback(user);
+                    }
                 },
                 watchUser: function(callback) {
                     userWatch.push(callback);
+                    
                     if (this.isLoggedIn()) {
-                        if (user === undefined) {
-                            $http.get('/api/users/current').success(function(data) {
-                                user = data.user;
+                        this.getUser(function(user) {
+                            if (user !== undefined) {
                                 callback(user);
-                            }).error(function(error) {
-                                console.log(error);
-                            });
-                        } else  {
-                            callback(user);
-                        }
+                            }
+                        });
                     }
                 }
             };

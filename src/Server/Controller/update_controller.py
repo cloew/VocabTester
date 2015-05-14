@@ -19,7 +19,11 @@ class UpdateController(AuthJSONController):
         """ Remove the record """
         json = kwargs['json']
         user = kwargs['user']
+        record = self.update(id, json, user)
+        return {"record":toJson(record)}
         
+    def update(self, id, json, user):
+        """ Update the record """
         record = self.modelCls.query.filter(self.modelCls.id==id).first()
         recordValues = self.recordValueProvider.getRecordValues(json)
         for key in recordValues:
@@ -27,4 +31,4 @@ class UpdateController(AuthJSONController):
             
         db.session.add(record)
         db.session.commit()
-        return {"record":toJson(record)}
+        return record

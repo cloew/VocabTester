@@ -12,6 +12,7 @@
             this.add({name: 'wordLists', path:'/', templateUrl:'static/partials/index.html', controller:'IndexController'});
             this.add({name: 'login', path:'/login', templateUrl:'static/partials/login.html', controller:'LoginController'});
             this.add({name: 'register', path:'/register', templateUrl:'static/partials/register.html', controller:'RegisterController'});
+            this.add({name: 'profile', path:'/profile', templateUrl:'static/partials/profile.html', controller:'ProfileController'});
             this.add({name: 'words', path:'/words', templateUrl:'static/partials/learned_words.html', controller:'LearnedFormsController'});
             this.add({name: 'symbols', path:'/symbols', templateUrl:'static/partials/learned_symbols.html', controller:'LearnedFormsController'});
             this.add({name: 'symbolLists', path:'/symbollists', templateUrl:'static/partials/symbol_lists.html'});

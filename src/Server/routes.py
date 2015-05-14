@@ -2,6 +2,7 @@ from Data.concept import Concept
 from Data.language import Language
 from Data.symbol import Symbol
 from Data.symbol_list import SymbolList
+from Data.user import User
 from Data.word import Word
 from Data.word_list import WordList
 
@@ -17,6 +18,7 @@ from Server.Controller.quiz_controller import QuizController
 from Server.Controller.random_quiz_controller import RandomQuizController
 from Server.Controller.register_controller import RegisterController
 from Server.Controller.search_controller import SearchController
+from Server.Controller.update_user_controller import UpdateUserController
 
 from kao_flask.endpoint import Endpoint
 from kao_flask.controllers.html_controller import HTMLController
@@ -25,7 +27,7 @@ routes = [Endpoint('/', get=HTMLController('Server/templates/index.html')),
           # Auth
           Endpoint('/api/login', post=LoginController()),
           Endpoint('/api/users', post=RegisterController()),
-          Endpoint('/api/users/current', get=CurrentUserController()),
+          Endpoint('/api/users/current', get=CurrentUserController(), put=UpdateUserController()),
           # Symbols
           Endpoint('/api/symbols', get=LearnedConceptsController(Symbol)),
           # Symbollists

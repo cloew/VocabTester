@@ -1,0 +1,20 @@
+<div class="col-md-6 col-md-push-3">
+    <form ng-submit="update();">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title">Update Your Information</h3>
+            </div>
+            <div class="panel-body">
+                <div class="form-group">
+                    <label for="firstName">First Name</label>
+                    <input id="firstName" class="form-control" type="text" name="firstName" ng-model="user.givenName" placeholder="First Name"/></label>
+                </div>
+                <div class="form-group">
+                    <label for="lastName">Last Name</label>
+                    <input id="lastName" class="form-control" type="text" name="lastName" ng-model="user.lastName" placeholder="Last Name" />
+                </div>
+                <button type="submit" class="btn btn-default btn-primary">Save</button>
+            </div>
+        </div>
+    </form>
+</div>
