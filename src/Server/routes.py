@@ -24,7 +24,7 @@ from kao_flask.controllers.html_controller import HTMLController
 routes = [Endpoint('/', get=HTMLController('Server/templates/index.html')),
           # Auth
           Endpoint('/api/login', post=LoginController()),
-          Endpoint('/api/register', post=RegisterController()),
+          Endpoint('/api/users', post=RegisterController()),
           Endpoint('/api/users/current', get=CurrentUserController()),
           # Symbols
           Endpoint('/api/symbols', get=LearnedConceptsController(Symbol)),

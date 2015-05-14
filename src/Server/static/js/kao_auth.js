@@ -49,7 +49,7 @@
                     responseHandler($http.post('/api/login', {'email':email, 'password':password}), successCallback, errorCallback);
                 },
                 register: function (params, successCallback, errorCallback) {
-                    responseHandler($http.post('/api/register', {'email':params.email, 'password':params.password, 'givenName':params.firstName, 'lastName':params.lastName}), successCallback, errorCallback);
+                    responseHandler($http.post('/api/users', {'email':params.email, 'password':params.password, 'givenName':params.firstName, 'lastName':params.lastName}), successCallback, errorCallback);
                 },
                 logout: function () {
                     delete $window.sessionStorage.token;
