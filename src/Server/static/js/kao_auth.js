@@ -26,7 +26,7 @@
         })
         .controller('ProfileController', function ($scope, $location, userService) {
             userService.getUser(function(user) {
-                $scope.user = {givenName:user.givenName, lastName:user.lastName};
+                a.copy(user, $scope.user);
             });
             
             $scope.update = function() {
