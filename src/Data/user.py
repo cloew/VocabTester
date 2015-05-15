@@ -1,5 +1,6 @@
 from kao_decorators import lazy_property
-from learned_tracker import LearnedTracker
+from .language import Language
+from .learned_tracker import LearnedTracker
 
 from kao_flask.ext.sqlalchemy.database import db
 
@@ -24,6 +25,8 @@ class User(db.Model):
     password = db.Column(db.UnicodeText(), nullable=False)
     givenName = db.Column(db.UnicodeText())
     lastName = db.Column(db.UnicodeText())
+    native_language_id = db.Column(db.Integer, db.ForeignKey('languages.id'))
+    nativeLanguage = db.relationship("Language")
     learnedSymbols = db.relationship("Symbol", secondary=learned_symbols)
     learnedWords = db.relationship("Word", secondary=learned_words)
     

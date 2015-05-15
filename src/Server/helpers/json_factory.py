@@ -1,6 +1,7 @@
 from kao_json import JsonFactory, JsonAttr, FieldAttr, StaticAttr
 
 from Data.concept_pair import ConceptPair
+from Data.language import Language
 from Data.symbol import Symbol
 from Data.symbol_list import SymbolList
 from Data.user import User
@@ -37,10 +38,11 @@ jsonFactory = JsonFactory([
                            (ConceptPair,[FieldAttr('foreign'), FieldAttr('native')]),
                            ([SymbolList, WordList],[FieldAttr('id'), FieldAttr('name'), JsonAttr('concepts', lambda s, u: s.getConceptPairs(u), args=["user"])]),
                            (UserConceptList,[FieldAttr('id'), FieldAttr('name'), FieldAttr('concepts'), FieldAttr('averageMastery')]),
-                           ([User, UserProxy], [FieldAttr('id'), FieldAttr('email'), FieldAttr('givenName'), FieldAttr('lastName')]),
+                           ([User, UserProxy], [FieldAttr('id'), FieldAttr('email'), FieldAttr('givenName'), FieldAttr('lastName'), FieldAttr('nativeLanguage')]),
                            (OptionsQuestion, [FieldAttr('subject'), FieldAttr('queryWord'), FieldAttr('options'), FieldAttr('answerIndex'), StaticAttr('questionType', 'options'), JsonAttr('answerUrl', answerUrl, args=["user"])]),
                            (ForeignPromptQuestion, [FieldAttr('subject'), FieldAttr('prompt'), FieldAttr('answer'), FieldAttr('displayAnswer'), StaticAttr('questionType', 'prompt'), JsonAttr('answerUrl', answerUrl, args=["user"])]),
-                           (Quiz, [FieldAttr('name'), FieldAttr('questions'), JsonAttr('isWords', IsWordsQuiz)])
+                           (Quiz, [FieldAttr('name'), FieldAttr('questions'), JsonAttr('isWords', IsWordsQuiz)]),
+                           (Language, [FieldAttr('id'), FieldAttr('name')])
                           ])
                          
 def toJson(object, **kwargs):

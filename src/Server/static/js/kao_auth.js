@@ -64,7 +64,7 @@
                     responseHandler($http.post('/api/users', {'email':params.email, 'password':params.password, 'givenName':params.firstName, 'lastName':params.lastName}), successCallback, errorCallback);
                 },
                 update: function (user, successCallback, errorCallback) {
-                    responseHandler($http.put('/api/users/current', {'givenName':user.givenName, 'lastName':user.lastName}), successCallback, errorCallback);
+                    responseHandler($http.put('/api/users/current', user), successCallback, errorCallback);
                 },
                 logout: function () {
                     delete $window.sessionStorage.token;

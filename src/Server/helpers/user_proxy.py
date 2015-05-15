@@ -8,7 +8,8 @@ from Data.word import Word
 
 from kao_flask.ext.sqlalchemy.database import db
 
-@proxy_for('user', ["id", "email", "givenName", "lastName", "learnedSymbols", "learnedWords", "hasLearnedSymbol", "tryToLearnSymbol", "hasLearnedWord", "tryToLearnWord"])
+@proxy_for('user', ["id", "email", "givenName", "lastName", "nativeLanguage", 
+                    "learnedSymbols", "learnedWords", "hasLearnedSymbol", "tryToLearnSymbol", "hasLearnedWord", "tryToLearnWord"])
 class UserProxy:
     """ Represents a proxy to lazy load a User object """
     
@@ -20,11 +21,6 @@ class UserProxy:
     def user(self):
         """ Lazy load the user """
         return User.query.filter_by(id=self.userInfo[u'id']).first()
-        
-    @lazy_property
-    def nativeLanguage(self):
-        """ Return the user's native language """
-        return Language.query.filter_by(name='English').first()
         
     @lazy_property
     def foreignLanguage(self):
