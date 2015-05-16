@@ -19,7 +19,6 @@ class CreateController(AuthJSONController):
     def performWithJSON(self, **kwargs):
         """ Convert the records to JSON """
         json = kwargs['json']
-        user = kwargs['user']
         
         recordValues = {self.routeParams[routeParam]:kwargs[routeParam] for routeParam in self.routeParams}
         providedRecordValues = self.recordValueProvider.getRecordValues(json)
@@ -29,3 +28,4 @@ class CreateController(AuthJSONController):
         db.session.add(record)
         db.session.commit()
         return {"record":toJson(record)}
+        

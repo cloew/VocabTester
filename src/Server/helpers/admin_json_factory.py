@@ -3,6 +3,7 @@ from kao_json import JsonFactory, JsonAttr, FieldAttr
 from Data.concept import Concept
 from Data.concept_pair import ConceptPair
 from Data.language import Language
+from Data.language_enrollment import LanguageEnrollment
 from Data.symbol import Symbol
 from Data.user import User
 from Data.word import Word
@@ -20,7 +21,8 @@ jsonFactory = JsonFactory([(Concept, [FieldAttr('id'), JsonAttr('native', GetNat
                            ([Symbol, Word], [FieldAttr('id'), JsonAttr('text', unicode), FieldAttr('language')]),
                            (ConceptPair, [FieldAttr('foreign'), FieldAttr('native')]),
                            ([User, UserProxy], [FieldAttr('id'), FieldAttr('email'), FieldAttr('givenName'), FieldAttr('lastName')]),
-                           (Language, [FieldAttr('id'), FieldAttr('name')])
+                           (Language, [FieldAttr('id'), FieldAttr('name')]),
+                           (LanguageEnrollment, [FieldAttr('id'), FieldAttr('language'), FieldAttr('default')])
                           ])
                          
 def toJson(object, **kwargs):

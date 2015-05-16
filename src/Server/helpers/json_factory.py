@@ -2,6 +2,7 @@ from kao_json import JsonFactory, JsonAttr, FieldAttr, StaticAttr
 
 from Data.concept_pair import ConceptPair
 from Data.language import Language
+from Data.language_enrollment import LanguageEnrollment
 from Data.symbol import Symbol
 from Data.symbol_list import SymbolList
 from Data.user import User
@@ -42,7 +43,8 @@ jsonFactory = JsonFactory([
                            (OptionsQuestion, [FieldAttr('subject'), FieldAttr('queryWord'), FieldAttr('options'), FieldAttr('answerIndex'), StaticAttr('questionType', 'options'), JsonAttr('answerUrl', answerUrl, args=["user"])]),
                            (ForeignPromptQuestion, [FieldAttr('subject'), FieldAttr('prompt'), FieldAttr('answer'), FieldAttr('displayAnswer'), StaticAttr('questionType', 'prompt'), JsonAttr('answerUrl', answerUrl, args=["user"])]),
                            (Quiz, [FieldAttr('name'), FieldAttr('questions'), JsonAttr('isWords', IsWordsQuiz)]),
-                           (Language, [FieldAttr('id'), FieldAttr('name')])
+                           (Language, [FieldAttr('id'), FieldAttr('name')]),
+                           (LanguageEnrollment, [FieldAttr('id'), FieldAttr('language'), FieldAttr('default')])
                           ])
                          
 def toJson(object, **kwargs):

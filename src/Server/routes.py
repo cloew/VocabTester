@@ -9,6 +9,7 @@ from Data.word_list import WordList
 from Server.helpers.crud_endpoints import CrudEndpoints
 
 from Server.Controller.concept_lists_controller import ConceptListsController
+from Server.Controller.create_user_enrollment import CreateUserEnrollment
 from Server.Controller.current_user_controller import CurrentUserController
 from Server.Controller.learned_concepts_controller import LearnedConceptsController
 from Server.Controller.learn_word_controller import LearnWordController
@@ -19,6 +20,7 @@ from Server.Controller.random_quiz_controller import RandomQuizController
 from Server.Controller.register_controller import RegisterController
 from Server.Controller.search_controller import SearchController
 from Server.Controller.update_user_controller import UpdateUserController
+from Server.Controller.user_enrollments import UserEnrollments
 
 from kao_flask.endpoint import Endpoint
 from kao_flask.controllers.html_controller import HTMLController
@@ -28,6 +30,7 @@ routes = [Endpoint('/', get=HTMLController('Server/templates/index.html')),
           Endpoint('/api/login', post=LoginController()),
           Endpoint('/api/users', post=RegisterController()),
           Endpoint('/api/users/current', get=CurrentUserController(), put=UpdateUserController()),
+          Endpoint('/api/users/current/enrollments', get=UserEnrollments(), post=CreateUserEnrollment()),
           # Symbols
           Endpoint('/api/symbols', get=LearnedConceptsController(Symbol)),
           # Symbollists

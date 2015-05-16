@@ -15,11 +15,6 @@ learned_words = db.Table('learned_words', db.Model.metadata,
                                   db.Column('user_id', db.Integer, db.ForeignKey('users.id')),
                                   db.Column('word_id', db.Integer, db.ForeignKey('words.id')))
 
-language_enrollments = db.Table('language_enrollments', db.Model.metadata,
-                                  db.Column('user_id', db.Integer, db.ForeignKey('users.id')),
-                                  db.Column('language_id', db.Integer, db.ForeignKey('languages.id')),
-                                  db.Column('default', db.Boolean))
-
 
 class User(db.Model):
     """ Represents a user """
@@ -34,7 +29,6 @@ class User(db.Model):
     nativeLanguage = db.relationship("Language")
     learnedSymbols = db.relationship("Symbol", secondary=learned_symbols)
     learnedWords = db.relationship("Word", secondary=learned_words)
-    enrolledLanguages = db.relationship("Language", secondary=language_enrollments)
     
     def __init__(self, **kwargs):
         """ Initialize the User """
