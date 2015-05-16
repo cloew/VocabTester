@@ -25,6 +25,7 @@
             };
         })
         .controller('ProfileController', function ($scope, $location, userService) {
+            $scope.user = {};
             userService.getUser(function(user) {
                 a.copy(user, $scope.user);
             });
@@ -34,6 +35,38 @@
                 }, function(error) {
                     $scope.errorMessage = error.message;
                 });
+            };
+        })
+        .controller('ChooseEnrollmentController', function ($scope, $location, CrudApiService, LanguageEnrollmentsService, navService) {
+            var crudApi = CrudApiService.getApiFor('Language');
+            $scope.languages = [];
+            crudApi.getAll().success(function(data) {
+                $scope.languages = data.records;
+            }).error(function(error) {
+                console.log(error);
+            });
+            
+            $scope.enroll = function(language) {
+                LanguageEnrollmentsService.create(language).then(function(data) {
+                    $location.path(navService.profile.path);
+                }, function(error) {
+                    console.log(error);
+                });
+            }
+        })
+        .factory('LanguageEnrollmentsService', function($http, $q) {
+            var enrollments = [];
+            return {
+                create: function(language, callback) {
+                    var deferred = $q.defer();
+                    $http.post('/api/users/current/enrollments', {language:language}).success(function(data) {
+                        enrollments.push(data.record);
+                        deferred.resolve(data);
+                    }).error(function(error) {
+                        deferred.reject(error);
+                    });
+                    return deferred.promise;
+                }
             };
         })
         .factory('userService', function($http, $window, $route) {
