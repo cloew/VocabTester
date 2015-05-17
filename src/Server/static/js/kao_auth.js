@@ -55,12 +55,31 @@
             }
         })
         .factory('LanguageEnrollmentsService', function($http, $q) {
-            var enrollments = [];
             return {
+                loadEnrollments: function(callback) {
+                    var self = this;
+                    $http.get('/api/users/current/enrollments').success(function(data) {
+                        self.enrollments = data.enrollments;
+                        callback(self.enrollments);
+                    }).error(function(error) {
+                        console.log(error);
+                    });
+                },
+                enrollments: undefined,
+                requestEnrollments: function(callback) {
+                    if (this.enrollments === undefined) {
+                        this.loadEnrollments(callback);
+                    } else {
+                        callback(this.enrollments);
+                    }
+                },
                 create: function(language, callback) {
                     var deferred = $q.defer();
+                    var self = this;
                     $http.post('/api/users/current/enrollments', {language:language}).success(function(data) {
-                        enrollments.push(data.record);
+                        self.requestEnrollments(function(enrollments) {
+                            enrollments.push(data.record);
+                        });
                         deferred.resolve(data);
                     }).error(function(error) {
                         deferred.reject(error);
