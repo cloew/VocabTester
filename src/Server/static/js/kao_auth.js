@@ -24,8 +24,11 @@
                 });
             };
         })
-        .controller('ProfileController', function ($scope, $location, userService) {
+        .controller('ProfileController', function ($scope, $location, userService, LanguageEnrollmentsService) {
             $scope.user = {};
+            LanguageEnrollmentsService.requestEnrollments(function(enrollments) {
+                $scope.enrollments = enrollments;
+            });
             userService.getUser(function(user) {
                 a.copy(user, $scope.user);
             });
