@@ -25,6 +25,8 @@
         .factory('Form', function(LanguageService, KaoPromise) {
             function Form(config) {
                 this.config = config;
+                this.name = config.name;
+                this.randomQuizPath = config.randomQuizPath;
             };
             Form.prototype.getLearned = function() {
                 var deferred = KaoPromise();
@@ -36,16 +38,18 @@
             };
             return Form;
         })
-        .factory('Word', function(Form) {
-            var config = {isWords: true, 
+        .factory('Word', function(Form, navService) {
+            var config = {name: "Words",
+                          randomQuizPath: navService.randomWordQuiz.path, 
                           getLearned: function(language) {
                             return language.getWords();
                             }
                          };
             return new Form(config);
         })
-        .factory('Symbol', function(Form) {
-            var config = {isWords: false, 
+        .factory('Symbol', function(Form, navService) {
+            var config = {name: "Symbols",
+                          randomQuizPath: navService.randomSymbolQuiz.path,
                           getLearned: function(language) {
                             return language.getSymbols();
                             }

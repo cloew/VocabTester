@@ -2,12 +2,15 @@
     "use strict";
     a.module('Concepts', ['ui.bootstrap', 'kao.table', 'VocabNav', 'Language', 'Forms'])
         .controller('LearnedFormsController', function ($scope, FormsService) {
-            FormsService.current().getLearned().success(function(data) {
+            var form = FormsService.current();
+            form.getLearned().success(function(data) {
                 $scope.concepts = data.concepts;
                 $scope.isWords = data.isWords;
             }).error(function(error) {
                 console.log(error);
             });
+            $scope.formName = form.name;
+            $scope.quizUrl = form.randomQuizPath;
         })
         .factory('conceptTableService', function() {
             return {

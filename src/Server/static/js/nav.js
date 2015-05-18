@@ -14,8 +14,8 @@
             this.add({name: 'register', path:'/register', templateUrl:'static/partials/register.html', controller:'RegisterController'});
             this.add({name: 'profile', path:'/profile', templateUrl:'static/partials/profile.html', controller:'ProfileController'});
             this.add({name: 'enroll', path:'/enroll', templateUrl:'static/partials/enroll.html', controller:'ChooseEnrollmentController'});
-            this.add({name: 'words', path:'/words', templateUrl:'static/partials/learned_words.html', controller:'LearnedFormsController'});
-            this.add({name: 'symbols', path:'/symbols', templateUrl:'static/partials/learned_symbols.html', controller:'LearnedFormsController'});
+            this.add({name: 'words', path:'/words', templateUrl:'static/partials/learned_concepts.html', controller:'LearnedFormsController'});
+            this.add({name: 'symbols', path:'/symbols', templateUrl:'static/partials/learned_concepts.html', controller:'LearnedFormsController'});
             this.add({name: 'symbolLists', path:'/symbollists', templateUrl:'static/partials/symbol_lists.html'});
             this.add({name: 'search', path:'/search', templateUrl:'static/partials/search.html', controller:'SearchController'});
             this.add({name: 'adminLanguages', path:'/admin/languages', templateUrl:'static/partials/admin/list_records.html'});
