@@ -11,7 +11,7 @@ class RandomQuizController(AuthJSONController):
         AuthJSONController.__init__(self)
         self.formModel = formModel
     
-    def performWithJSON(self, json=None, user=None):
+    def performWithJSON(self, languageId, json=None, user=None):
         """ Convert the quiz to JSON """
-        quiz = RandomQuizFactory.buildQuiz(self.formModel, user)
+        quiz = RandomQuizFactory.buildQuiz(self.formModel, user, languageId)
         return {"quiz":toJson(quiz, user=user)}
