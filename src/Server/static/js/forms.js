@@ -30,11 +30,7 @@
                 var deferred = KaoPromise();
                 var self = this;
                 LanguageService.withCurrentLanguage(function(language) {
-                    self.config.getLearned(language).success(function(data) {
-                        deferred.resolve(data);
-                    }).error(function(error) {
-                        deferred.reject(error);
-                    });
+                    self.config.getLearned(language).success(deferred.resolve).error(deferred.reject);
                 });
                 return deferred.promise;
             };
