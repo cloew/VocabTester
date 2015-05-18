@@ -56,7 +56,6 @@
                             }
                         });
                     });
-                    // $scope.languages = data.records;
                 }).error(function(error) {
                     console.log(error);
                 });
