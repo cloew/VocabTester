@@ -9,7 +9,7 @@
             }).error(function(error) {
                 console.log(error);
             });
-            $scope.formName = form.name;
+            $scope.formName = form.pluralName;
             $scope.quizUrl = form.randomQuizPath;
         })
         .factory('conceptTableService', function() {
