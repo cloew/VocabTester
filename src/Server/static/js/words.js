@@ -5,11 +5,13 @@
             return {
                 restrict: 'E',
                 replace: true,
-                controller: function($scope, $http) {
-                    $http.get("/api/wordlists").success(function(data) {
-                        $scope.wordLists = data.lists;
-                    }).error(function(error) {
-                        console.log(error);
+                controller: function($scope, LanguageService) {
+                    LanguageService.withCurrentLanguage(function(language) {
+                        language.getWordLists().success(function(data) {
+                            $scope.wordLists = data.lists;
+                        }).error(function(error) {
+                            console.log(error);
+                        });
                     });
                 },
                 templateUrl: 'static/partials/directives/word_lists.html'

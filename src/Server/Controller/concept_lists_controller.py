@@ -12,7 +12,7 @@ class ConceptListsController(AuthJSONController):
         AuthJSONController.__init__(self)
         self.listModel = listModel
     
-    def performWithJSON(self, json=None, user=None):
+    def performWithJSON(self, languageId, json=None, user=None):
         """ Convert the existing Concept Lists to JSON """
         lists = self.listModel.query.all()
         userLists = [UserConceptList(l, user) for l in lists]

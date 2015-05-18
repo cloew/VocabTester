@@ -9,8 +9,14 @@
             Langauge.prototype.getSymbols = function() {
                 return $http.get(this.baseApiUrl+'/symbols');
             };
+            Langauge.prototype.getSymbolLists = function() {
+                return $http.get(this.baseApiUrl+'/symbollists');
+            };
             Langauge.prototype.getWords = function() {
                 return $http.get(this.baseApiUrl+'/words');
+            };
+            Langauge.prototype.getWordLists = function() {
+                return $http.get(this.baseApiUrl+'/wordlists');
             };
             return Langauge;
         })
