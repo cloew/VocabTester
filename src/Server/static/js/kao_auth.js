@@ -80,12 +80,36 @@
                         console.log(error);
                     });
                 },
+                loadEnrollments: function(callback) {
+                    var self = this;
+                    $http.get('/api/users/current/enrollments').success(function(data) {
+                        self.enrollments = data.enrollments;
+                        callback(self.enrollments);
+                    }).error(function(error) {
+                        console.log(error);
+                    });
+                },
                 enrollments: undefined,
                 requestEnrollments: function(callback) {
                     if (this.enrollments === undefined) {
                         this.loadEnrollments(callback);
                     } else {
                         callback(this.enrollments);
+                    }
+                },
+                withCurrentEnrollment: function(callback) {
+                    var findCurrentEnrollment = function(enrollments) {
+                        a.forEach(enrollments, function(enrollment) {
+                            if (enrollment.default) {
+                                callback(enrollment);
+                                return
+                            }
+                        });
+                    };
+                    if (this.enrollments === undefined) {
+                        this.loadEnrollments(findCurrentEnrollment);
+                    } else {
+                        findCurrentEnrollment(this.enrollments);
                     }
                 },
                 create: function(language, callback) {
