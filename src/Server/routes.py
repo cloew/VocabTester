@@ -35,7 +35,7 @@ routes = [Endpoint('/', get=HTMLController('Server/templates/index.html')),
           Endpoint('/api/languages/<int:languageId>/symbols', get=LearnedConceptsController(Symbol)),
           # Symbollists
           Endpoint('/api/languages/<int:languageId>/symbollists', get=ConceptListsController(SymbolList)),
-          Endpoint('/api/symbollist/<int:listId>/quiz', get=QuizController(SymbolList)),
+          Endpoint('/api/languages/<int:languageId>/symbollist/<int:listId>/quiz', get=QuizController(SymbolList)),
           Endpoint('/api/symbollist/random/quiz', get=RandomQuizController(Symbol)),
           # Words
           Endpoint('/api/languages/<int:languageId>/words', get=LearnedConceptsController(Word)),
@@ -43,7 +43,7 @@ routes = [Endpoint('/', get=HTMLController('Server/templates/index.html')),
           Endpoint('/api/search', post=SearchController()),
           # Wordlists
           Endpoint('/api/languages/<int:languageId>/wordlists', get=ConceptListsController(WordList)),
-          Endpoint('/api/wordlist/<int:listId>/quiz', get=QuizController(WordList)),
+          Endpoint('/api/languages/<int:languageId>/wordlist/<int:listId>/quiz', get=QuizController(WordList)),
           Endpoint('/api/wordlist/random/quiz', get=RandomQuizController(Word)),
           # Mastery
           Endpoint('/api/mastery/<int:masteryId>/answer', post=QuizAnswerController())]

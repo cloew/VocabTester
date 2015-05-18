@@ -39,30 +39,31 @@
             
             return PromptQuestion;
         })
-        .factory('quizService', function($http, $location, $routeParams, navService, OptionsQuestion, PromptQuestion) {
-            function Quiz(wordListId) {
-                this.wordListId = wordListId;
+        .factory('quizService', function($http, navService, LanguageService, OptionsQuestion, PromptQuestion) {
+            function Quiz() {
                 this.quiz = undefined;
                 this.currentQuestionIndex = 0;
                 this.correctAnswers = 0;
                 this.returnTo = navService.getReturnTo();
                 
                 var self = this;
-                $http.get(navService.getApiUrl()).success(function(data) {
-                    self.quiz = data.quiz;
-                    self.questions = [];
-                    self.numberOfQuestions = self.quiz.questions.length;
-                    for (var i = 0; i < self.numberOfQuestions; i++) {
-                        var question = self.quiz.questions[i];
-                        if (question.questionType === 'options') {
-                            self.questions.push(new OptionsQuestion(question));
-                        } else if (question.questionType === 'prompt') {
-                            self.questions.push(new PromptQuestion(question));
+                LanguageService.withCurrentLanguage(function(language) {
+                    language.getQuiz().success(function(data) {
+                        self.quiz = data.quiz;
+                        self.questions = [];
+                        self.numberOfQuestions = self.quiz.questions.length;
+                        for (var i = 0; i < self.numberOfQuestions; i++) {
+                            var question = self.quiz.questions[i];
+                            if (question.questionType === 'options') {
+                                self.questions.push(new OptionsQuestion(question));
+                            } else if (question.questionType === 'prompt') {
+                                self.questions.push(new PromptQuestion(question));
+                            }
                         }
-                    }
-                    self.currentQuestion =  self.questions[self.currentQuestionIndex];
-                }).error(function(error) {
-                    console.log(error);
+                        self.currentQuestion =  self.questions[self.currentQuestionIndex];
+                    }).error(function(error) {
+                        console.log(error);
+                    });
                 });
             };
             Quiz.prototype.answer = function() {
@@ -94,7 +95,7 @@
             
             return {
                 buildQuiz: function () {
-                    return new Quiz($routeParams.listId);
+                    return new Quiz();
                 }
             };
         })
