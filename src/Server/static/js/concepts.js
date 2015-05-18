@@ -1,16 +1,21 @@
 (function(a) {
     "use strict";
-    a.module('Concepts', ['ui.bootstrap', 'kao.table', 'VocabNav'])
-        .controller('LearnedFormsController', function ($scope, $http, $location, navService) {
-            $http.get(navService.getApiUrl()).success(function(data) {
+    a.module('Concepts', ['ui.bootstrap', 'kao.table', 'VocabNav', 'Language'])
+        .controller('LearnedFormsController', function ($scope, conceptNavService, LanguageService) {
+            LanguageService.withCurrentLanguage(function(language) {
+                var promise = undefined;
+                if (conceptNavService.current().isWords) {
+                    promise = language.getWords();
+                } else {
+                    promise = language.getSymbols();
+                }
+                promise.success(function(data) {
                     $scope.concepts = data.concepts;
                     $scope.isWords = data.isWords;
                 }).error(function(error) {
                     console.log(error);
-                });
-            $scope.goTo = function(path) {
-                $location.path(path);
-            }
+                });                
+            });
         })
         .controller('FormsController', function ($scope, $http, $location, navService) {
             $http.get(navService.getApiUrl()).success(function(data) {

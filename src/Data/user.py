@@ -27,8 +27,8 @@ class User(db.Model):
     lastName = db.Column(db.UnicodeText())
     native_language_id = db.Column(db.Integer, db.ForeignKey('languages.id'))
     nativeLanguage = db.relationship("Language")
-    learnedSymbols = db.relationship("Symbol", secondary=learned_symbols)
-    learnedWords = db.relationship("Word", secondary=learned_words)
+    learnedSymbols = db.relationship("Symbol", secondary=learned_symbols, lazy='dynamic')
+    learnedWords = db.relationship("Word", secondary=learned_words, lazy='dynamic')
     
     def __init__(self, **kwargs):
         """ Initialize the User """
@@ -40,6 +40,10 @@ class User(db.Model):
         """ Check if the password is this users password """
         return check_password(rawPassword, self.password)
         
+    def getLearnedSymbolsFor(self, languageId):
+        """ Return the learned symbols for this user that are for the given language """
+        return self.learnedSymbols.filter_by(language_id=languageId).all()
+        
     def hasLearnedSymbol(self, symbol):
         """ Return if the symbol has already been learned """
         return self.learnedSymbolTracker.hasLearned(symbol.id)
@@ -47,6 +51,10 @@ class User(db.Model):
     def tryToLearnSymbol(self, symbol):
         """ Try to learn the symbol """
         self.learnedSymbolTracker.tryToLearn(symbol)
+        
+    def getLearnedWordsFor(self, languageId):
+        """ Return the learned words for this user that are for the given language """
+        return self.learnedWords.filter_by(language_id=languageId).all()
         
     def hasLearnedWord(self, word):
         """ Return if the word has already been learned """

@@ -32,13 +32,13 @@ routes = [Endpoint('/', get=HTMLController('Server/templates/index.html')),
           Endpoint('/api/users/current', get=CurrentUserController(), put=UpdateUserController()),
           Endpoint('/api/users/current/enrollments', get=UserEnrollments(), post=CreateUserEnrollment()),
           # Symbols
-          Endpoint('/api/symbols', get=LearnedConceptsController(Symbol)),
+          Endpoint('/api/languages/<int:languageId>/symbols', get=LearnedConceptsController(Symbol)),
           # Symbollists
           Endpoint('/api/symbollists', get=ConceptListsController(SymbolList)),
           Endpoint('/api/symbollist/<int:listId>/quiz', get=QuizController(SymbolList)),
           Endpoint('/api/symbollist/random/quiz', get=RandomQuizController(Symbol)),
           # Words
-          Endpoint('/api/words', get=LearnedConceptsController(Word)),
+          Endpoint('/api/languages/<int:languageId>/words', get=LearnedConceptsController(Word)),
           Endpoint('/api/words/<int:wordId>/learn', post=LearnWordController()),
           Endpoint('/api/search', post=SearchController()),
           # Wordlists

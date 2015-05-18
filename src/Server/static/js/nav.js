@@ -78,5 +78,13 @@
                     {name: 'Symbols', path: navService.symbols.path},
                     {name: 'Symbol Lists', path: navService.symbolLists.path},
                     {name: 'Search', path: navService.search.path}];
+        })
+        .service('conceptNavService', function($route, navService) {
+            var service = {current: function() {
+                return this[$route.current.$$route.path];
+            }};
+            service[navService.words.path] = {isWords: true};
+            service[navService.symbols.path] = {isWords: false};
+            return service;
         });
 })(angular);
