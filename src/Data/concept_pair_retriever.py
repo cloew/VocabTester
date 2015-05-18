@@ -14,7 +14,7 @@ class ConceptPairRetriever(object):
             return self
         return functools.partial(self.getConceptPairs, obj)
     
-    def getConceptPairs(self, parent, user):
+    def getConceptPairs(self, parent, nativeLanguage, foreignLanguage):
         """ Return the concept pairs """
         conceptIds = [concept.id for concept in parent.concepts]
-        return self.conceptManager.getConceptPairs(conceptIds, user)
+        return self.conceptManager.getConceptPairs(conceptIds, nativeLanguage, foreignLanguage)

@@ -20,7 +20,7 @@ class RandomQuizFactory:
         formsByRating = self.organizeByMastery(learnedForms, user)
         sample = self.getSampleForQuiz(formsByRating)
         conceptIds = [form.concept_id for form in sample]
-        pairs = conceptManager.getConceptPairs(conceptIds, user)
+        pairs = conceptManager.getConceptPairs(conceptIds, user.nativeLanguage, foreignLanguage)
         
         return Quiz("Random List", pairs, user)
         

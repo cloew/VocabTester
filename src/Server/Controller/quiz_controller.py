@@ -1,3 +1,4 @@
+from Data.language import Language
 from Quiz.quiz import Quiz
 from Server.helpers.json_factory import toJson
 
@@ -13,7 +14,8 @@ class QuizController(AuthJSONController):
     
     def performWithJSON(self, languageId, listId, json=None, user=None):
         """ Convert the quiz to JSON """
+        language = Language(id=languageId)
         conceptList = self.listModel.query.filter_by(id=listId).first()
-        pairs = conceptList.getConceptPairs(user)
+        pairs = conceptList.getConceptPairs(user.nativeLanguage, language)
         quiz = Quiz(conceptList.name, pairs, user)
         return {"quiz":toJson(quiz, user=user)}

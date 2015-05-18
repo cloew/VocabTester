@@ -23,11 +23,6 @@ class UserProxy:
         """ Lazy load the user """
         return User.query.filter_by(id=self.userInfo[u'id']).first()
         
-    @lazy_property
-    def foreignLanguage(self):
-        """ Return the user's foreign language """
-        return Language.query.filter_by(name='Japanese').first()
-        
     def exists(self):
         """ Return if the User record actually exists """
         return self.user is not None

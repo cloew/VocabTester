@@ -20,5 +20,5 @@ class LearnedConceptsController(AuthJSONController):
         language = Language(id=languageId)
         learnedForms = user.getLearnedFor(self.formModel, language)
         conceptIds = [form.concept_id for form in learnedForms]
-        pairs = self.conceptManager.getConceptPairs(conceptIds, user)
+        pairs = self.conceptManager.getConceptPairs(conceptIds, user.nativeLanguage, language)
         return {"concepts":toJson(pairs, user=user), "isWords":self.formModel is Word}
