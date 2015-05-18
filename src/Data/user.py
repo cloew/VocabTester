@@ -40,9 +40,9 @@ class User(db.Model):
         """ Check if the password is this users password """
         return check_password(rawPassword, self.password)
         
-    def getLearnedSymbolsFor(self, languageId):
+    def getLearnedSymbolsFor(self, language):
         """ Return the learned symbols for this user that are for the given language """
-        return self.learnedSymbols.filter_by(language_id=languageId).all()
+        return self.learnedSymbols.filter_by(language_id=language.id).all()
         
     def hasLearnedSymbol(self, symbol):
         """ Return if the symbol has already been learned """
@@ -52,9 +52,9 @@ class User(db.Model):
         """ Try to learn the symbol """
         self.learnedSymbolTracker.tryToLearn(symbol)
         
-    def getLearnedWordsFor(self, languageId):
+    def getLearnedWordsFor(self, language):
         """ Return the learned words for this user that are for the given language """
-        return self.learnedWords.filter_by(language_id=languageId).all()
+        return self.learnedWords.filter_by(language_id=language.id).all()
         
     def hasLearnedWord(self, word):
         """ Return if the word has already been learned """

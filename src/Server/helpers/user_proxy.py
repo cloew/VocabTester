@@ -10,7 +10,7 @@ from kao_flask.ext.sqlalchemy.database import db
 
 @proxy_for('user', ["id", "email", "givenName", "lastName", "nativeLanguage", "languageEnrollments",
                     "getLearnedSymbolsFor", "hasLearnedSymbol", "tryToLearnSymbol", 
-                    "learnedWords", "hasLearnedWord", "tryToLearnWord"])
+                    "getLearnedWordsFor", "hasLearnedWord", "tryToLearnWord"])
 class UserProxy:
     """ Represents a proxy to lazy load a User object """
     
@@ -41,12 +41,12 @@ class UserProxy:
             db.session.commit()
         return mastery
         
-    def getLearnedFor(self, modelClass, languageId):
+    def getLearnedFor(self, modelClass, language):
         """ Return the learned forms for the given model class """
         if modelClass is Symbol:
-            return self.getLearnedSymbolsFor(languageId)
+            return self.getLearnedSymbolsFor(language)
         elif modelClass is Word:
-            return self.learnedWords
+            return self.getLearnedWordsFor(language)
     
     def __nonzero__(self):
         """ Return if the object is true """

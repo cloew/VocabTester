@@ -12,11 +12,11 @@ class RandomQuizFactory:
                      (4, .1),
                      (5, .1)]
     
-    def buildQuiz(self, formModel, user, foreignLanguageId):
+    def buildQuiz(self, formModel, user, foreignLanguage):
         """ Build a quiz using the from given and the user provided """
         conceptManager = ConceptManager(formModel)
         
-        learnedForms = user.getLearnedFor(formModel, foreignLanguageId)
+        learnedForms = user.getLearnedFor(formModel, foreignLanguage)
         formsByRating = self.organizeByMastery(learnedForms, user)
         sample = self.getSampleForQuiz(formsByRating)
         conceptIds = [form.concept_id for form in sample]
