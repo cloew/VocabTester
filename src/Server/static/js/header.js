@@ -35,5 +35,20 @@
                 },
                 templateUrl: 'static/partials/directives/header_nav.html'
             };
+        })
+        .directive('languagePicker', function() {
+            return {
+                restrict: 'E',
+                replace: true,
+                controller: function($scope, LanguageEnrollmentsService) {
+                    LanguageEnrollmentsService.withCurrentEnrollment(function(currentEnrollment) {
+                        $scope.currentEnrollment = currentEnrollment;
+                    });
+                    LanguageEnrollmentsService.requestEnrollments(function(enrollments) {
+                        $scope.enrollments = enrollments;
+                    });
+                },
+                templateUrl: 'static/partials/directives/language_picker.html'
+            };
         });
 })(angular);
