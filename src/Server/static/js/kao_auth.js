@@ -40,13 +40,26 @@
                 });
             };
         })
-        .controller('ChooseEnrollmentController', function ($scope, $location, CrudApiService, LanguageEnrollmentsService, navService) {
+        .controller('ChooseEnrollmentController', function ($scope, $location, CrudApiService, userService, LanguageEnrollmentsService, navService) {
             var crudApi = CrudApiService.getApiFor('Language');
             $scope.languages = [];
-            crudApi.getAll().success(function(data) {
-                $scope.languages = data.records;
-            }).error(function(error) {
-                console.log(error);
+            userService.getUser(function(user) {
+                crudApi.getAll().success(function(data) {
+                    LanguageEnrollmentsService.requestEnrollments(function(enrollments) {
+                        var enrolledLanguageIds = [];
+                        a.forEach(enrollments, function(enrollment, key) {
+                            enrolledLanguageIds.push(enrollment.language.id);
+                        });
+                        a.forEach(data.records, function(language, key) {
+                            if (language.id !== user.nativeLanguage.id && enrolledLanguageIds.indexOf(language.id) === -1) {
+                                $scope.languages.push(language);
+                            }
+                        });
+                    });
+                    // $scope.languages = data.records;
+                }).error(function(error) {
+                    console.log(error);
+                });
             });
             
             $scope.enroll = function(language) {
