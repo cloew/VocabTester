@@ -7,7 +7,7 @@
                 <header-nav></header-nav>
             </div>
             <div class="col-md-3 header-buttons">
-                Welcome back, {{user.givenName}}
+                Welcome back, <a href="#/profile" class="header-anchor">{{user.givenName}}</a>
                 <button ng-click="logout();" class="btn btn-primary">Logout</button>
             </div>
         </div>

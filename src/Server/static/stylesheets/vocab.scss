@@ -72,13 +72,18 @@ $danger-bg: #d9534f;
     width: 100px;
 }
 
-.nav-anchor {
+.header-anchor, .header-anchor:visited, .header-anchor:focus, .header-anchor:hover, .header-anchor:active {
     color: #fff;
-    padding: 8px 15px;
-    text-decoration: none  !important;
+    text-decoration: underline;
 }
 
-.nav-anchor:hover, .nav-anchor:visited, .nav-anchor:focus, .nav-anchor:active  {
+.nav-anchor {
+    @extend .header-anchor;
+    text-decoration: none !important;
+    padding: 8px 15px;
+}
+
+.nav-anchor:visited, .nav-anchor:focus, .nav-anchor:hover, .nav-anchor:active {
     color: #fff;
     text-decoration: none;
     @include border-radius(200px);
