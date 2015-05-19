@@ -23,11 +23,29 @@
             };
             return Langauge;
         })
-        .service('LanguageService', function(Language, LanguageEnrollmentsService) {
-            return {withCurrentLanguage: function(callback) {
-                LanguageEnrollmentsService.withCurrentEnrollment(function(enrollment) {
-                    callback(new Language(enrollment.language));
-                });
+        .service('LanguageService', function($rootScope, Language, LanguageEnrollmentsService) {
+            var currentLanguage = undefined;
+            var service = {
+                currentLanguageChangedEventType: 'current-language-changed',
+                withCurrentLanguage: function(callback) {
+                    if (currentLanguage !== undefined) {
+                        callback(currentLanguage);
+                    } else {
+                        LanguageEnrollmentsService.withCurrentEnrollment(function(enrollment) {
+                            callback(new Language(enrollment.language));
+                        });
+                    }
+                },
+                watchCurrentLanguage: function(scope, callback) {
+                    scope.$on(this.currentLanguageChangedEventType, callback);
+                    if (currentLanguage !== undefined) {
+                        callback(undefined, currentLanguage);
+                    }
             }};
+            LanguageEnrollmentsService.watchCurrentEnrollment($rootScope, function(event, enrollment) {
+                currentLanguage = new Language(enrollment.language);
+                $rootScope.$broadcast(service.currentLanguageChangedEventType, currentLanguage);
+            });
+            return service;
         });
 })(angular);
