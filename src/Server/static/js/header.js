@@ -41,7 +41,7 @@
                 restrict: 'E',
                 replace: true,
                 controller: function($scope, LanguageEnrollmentsService) {
-                    LanguageEnrollmentsService.watchCurrentEnrollment(function(currentEnrollment) {
+                    LanguageEnrollmentsService.watchCurrentEnrollment($scope, function(event, currentEnrollment) {
                         $scope.currentEnrollment = currentEnrollment;
                     });
                     LanguageEnrollmentsService.requestEnrollments(function(enrollments) {

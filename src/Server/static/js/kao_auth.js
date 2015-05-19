@@ -69,9 +69,9 @@
                 });
             }
         })
-        .factory('LanguageEnrollmentsService', function($http, $q) {
-            var enrollmentCallbacks = [];
+        .factory('LanguageEnrollmentsService', function($http, $q, $rootScope) {
             return {
+                currentChangedEventType: 'current-enrollment-changed',
                 loadEnrollments: function(callback) {
                     var self = this;
                     $http.get('/api/users/current/enrollments').success(function(data) {
@@ -114,9 +114,11 @@
                         findCurrentEnrollment(this.enrollments);
                     }
                 },
-                watchCurrentEnrollment: function(callback) {
-                    enrollmentCallbacks.push(callback);
-                    this.withCurrentEnrollment(callback);
+                watchCurrentEnrollment: function(scope, callback) {
+                    scope.$on(this.currentChangedEventType, callback);
+                    this.withCurrentEnrollment(function(currentEnrollment) {
+                        callback(undefined, currentEnrollment);
+                    });
                 },
                 create: function(language, callback) {
                     var deferred = $q.defer();
@@ -132,12 +134,11 @@
                     return deferred.promise;
                 },
                 changeCurrentEnrollment: function(newEnrollment) {
+                    var self = this;
                     this.withCurrentEnrollment(function(currentEnrollment) {
                         currentEnrollment.default = false;
                         newEnrollment.default = true;
-                        a.forEach(enrollmentCallbacks, function(callback) {
-                            callback(newEnrollment);
-                        });
+                        $rootScope.$broadcast(self.currentChangedEventType, newEnrollment);
                     });
                 }
             };
