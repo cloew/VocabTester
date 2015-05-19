@@ -2,26 +2,26 @@
     "use strict";
     a.module('Language', ['kao.auth'])
         .factory('Language', function($http, $location) {
-            function Langauge(language) {
+            function Language(language) {
                 this.language = language;
                 this.baseApiUrl = '/api/languages/'+this.language.id;
             };
-            Langauge.prototype.getSymbols = function() {
+            Language.prototype.getSymbols = function() {
                 return $http.get(this.baseApiUrl+'/symbols');
             };
-            Langauge.prototype.getSymbolLists = function() {
+            Language.prototype.getSymbolLists = function() {
                 return $http.get(this.baseApiUrl+'/symbollists');
             };
-            Langauge.prototype.getWords = function() {
+            Language.prototype.getWords = function() {
                 return $http.get(this.baseApiUrl+'/words');
             };
-            Langauge.prototype.getWordLists = function() {
+            Language.prototype.getWordLists = function() {
                 return $http.get(this.baseApiUrl+'/wordlists');
             };
-            Langauge.prototype.getQuiz = function() {
+            Language.prototype.getQuiz = function() {
                 return $http.get(this.baseApiUrl+$location.path());
             };
-            return Langauge;
+            return Language;
         })
         .service('LanguageService', function($rootScope, Language, LanguageEnrollmentsService) {
             var currentLanguage = undefined;
