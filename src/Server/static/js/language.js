@@ -7,6 +7,7 @@
                 this.baseApiUrl = '/api/languages/'+this.language.id;
             };
             Langauge.prototype.getSymbols = function() {
+                console.log(this.baseApiUrl+'/symbols');
                 return $http.get(this.baseApiUrl+'/symbols');
             };
             Langauge.prototype.getSymbolLists = function() {

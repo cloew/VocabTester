@@ -47,6 +47,13 @@
                     LanguageEnrollmentsService.requestEnrollments(function(enrollments) {
                         $scope.enrollments = enrollments;
                     });
+                    $scope.changeCurrentEnrollment = function(newEnrollment) {
+                        LanguageEnrollmentsService.withCurrentEnrollment(function(currentEnrollment) {
+                            currentEnrollment.default = false;
+                            newEnrollment.default = true;
+                            $scope.currentEnrollment = newEnrollment;
+                        });
+                    };
                 },
                 templateUrl: 'static/partials/directives/language_picker.html'
             };
