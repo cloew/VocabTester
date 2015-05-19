@@ -3,6 +3,8 @@
     a.module('Concepts', ['ui.bootstrap', 'kao.table', 'VocabNav', 'Language', 'Forms'])
         .controller('LearnedFormsController', function ($scope, FormsService, LanguageService) {
             var form = FormsService.current();
+            $scope.formName = form.pluralName;
+            $scope.quizUrl = form.randomQuizPath;
             
             LanguageService.watchCurrentLanguage($scope, function(event, language) {
                 form.getLearned().success(function(data) {
@@ -12,9 +14,6 @@
                     console.log(error);
                 });
             });
-            
-            $scope.formName = form.pluralName;
-            $scope.quizUrl = form.randomQuizPath;
         })
         .factory('conceptTableService', function() {
             return {

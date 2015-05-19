@@ -95,14 +95,17 @@
             return {
                 restrict: 'E',
                 replace: true,
-                controller: function($scope, FormsService) {
+                controller: function($scope, FormsService, LanguageService) {
                     var form = FormsService.current();
-                    form.getLists().success(function(data) {
-                        $scope.lists = data.lists;
-                    }).error(function(error) {
-                        console.log(error);
-                    });
                     $scope.formName = form.name;
+            
+                    LanguageService.watchCurrentLanguage($scope, function(event, language) {
+                        form.getLists().success(function(data) {
+                            $scope.lists = data.lists;
+                        }).error(function(error) {
+                            console.log(error);
+                        });
+                    });
                 },
                 templateUrl: 'static/partials/directives/form_lists.html'
             }
