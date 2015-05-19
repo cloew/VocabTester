@@ -206,7 +206,15 @@
                 }
             };
         })
-        .factory('authInterceptor', function ($rootScope, $q, $window, $location) {
+        .service('AuthRejected', function ($location) {
+            return {
+                toLogin: function () {
+                    var returnToPath = $location.path();
+                    $location.path('/login').search('returnTo', returnToPath);
+                }
+            };
+        })
+        .factory('authInterceptor', function ($rootScope, $q, $window, AuthRejected) {
             return {
                 request: function (config) {
                     config.headers = config.headers || {};
@@ -217,8 +225,7 @@
                 },
                 responseError: function (rejection) {
                     if (rejection.status === 401) {
-                        var returnToPath = $location.path();
-                        $location.path('/login').search('returnTo', returnToPath);
+                        AuthRejected.toLogin();
                     }
                     return $q.reject(rejection);
                 }
