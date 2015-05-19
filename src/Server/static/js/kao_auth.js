@@ -143,7 +143,7 @@
                 }
             };
         })
-        .factory('userService', function($http, $window, $route) {
+        .factory('userService', function($http, $window, $location, navService) {
             var user = undefined;
             var userWatch = [];
             var responseHandler = function(promise, successCallback, errorCallback) {
@@ -176,7 +176,7 @@
                 logout: function () {
                     delete $window.localStorage.token;
                     user = undefined;
-                    $route.reload();
+                    $location.path(navService.login.path);
                 },
                 isLoggedIn: function () {
                     return $window.localStorage.token !== undefined;
@@ -228,6 +228,14 @@
                         AuthRejected.toLogin();
                     }
                     return $q.reject(rejection);
+                }
+            };
+        })
+        .service('requireAuth', function(userService, AuthRejected) {
+            return function(event) {
+                if (!userService.isLoggedIn()) {
+                    event.preventDefault();
+                    AuthRejected.toLogin();
                 }
             };
         })

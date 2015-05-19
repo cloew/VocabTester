@@ -5,7 +5,7 @@
             var form = FormsService.current();
             $scope.formName = form.pluralName;
             $scope.quizUrl = form.randomQuizPath;
-            
+            console.log('In Controller');
             LanguageService.watchCurrentLanguage($scope, function(event, language) {
                 form.getLearned().success(function(data) {
                     $scope.concepts = data.concepts;
