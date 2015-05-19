@@ -41,18 +41,14 @@
                 restrict: 'E',
                 replace: true,
                 controller: function($scope, LanguageEnrollmentsService) {
-                    LanguageEnrollmentsService.withCurrentEnrollment(function(currentEnrollment) {
+                    LanguageEnrollmentsService.watchCurrentEnrollment(function(currentEnrollment) {
                         $scope.currentEnrollment = currentEnrollment;
                     });
                     LanguageEnrollmentsService.requestEnrollments(function(enrollments) {
                         $scope.enrollments = enrollments;
                     });
                     $scope.changeCurrentEnrollment = function(newEnrollment) {
-                        LanguageEnrollmentsService.withCurrentEnrollment(function(currentEnrollment) {
-                            currentEnrollment.default = false;
-                            newEnrollment.default = true;
-                            $scope.currentEnrollment = newEnrollment;
-                        });
+                        LanguageEnrollmentsService.changeCurrentEnrollment(newEnrollment);
                     };
                 },
                 templateUrl: 'static/partials/directives/language_picker.html'

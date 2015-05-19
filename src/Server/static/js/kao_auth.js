@@ -70,6 +70,7 @@
             }
         })
         .factory('LanguageEnrollmentsService', function($http, $q) {
+            var enrollmentCallbacks = [];
             return {
                 loadEnrollments: function(callback) {
                     var self = this;
@@ -99,18 +100,23 @@
                 },
                 withCurrentEnrollment: function(callback) {
                     var findCurrentEnrollment = function(enrollments) {
-                        a.forEach(enrollments, function(enrollment) {
+                        for (var i = 0; i < enrollments.length; i++) {
+                            var enrollment = enrollments[i];
                             if (enrollment.default) {
                                 callback(enrollment);
-                                return
+                                return;
                             }
-                        });
+                        }
                     };
                     if (this.enrollments === undefined) {
                         this.loadEnrollments(findCurrentEnrollment);
                     } else {
                         findCurrentEnrollment(this.enrollments);
                     }
+                },
+                watchCurrentEnrollment: function(callback) {
+                    enrollmentCallbacks.push(callback);
+                    this.withCurrentEnrollment(callback);
                 },
                 create: function(language, callback) {
                     var deferred = $q.defer();
@@ -124,6 +130,15 @@
                         deferred.reject(error);
                     });
                     return deferred.promise;
+                },
+                changeCurrentEnrollment: function(newEnrollment) {
+                    this.withCurrentEnrollment(function(currentEnrollment) {
+                        currentEnrollment.default = false;
+                        newEnrollment.default = true;
+                        a.forEach(enrollmentCallbacks, function(callback) {
+                            callback(newEnrollment);
+                        });
+                    });
                 }
             };
         })
