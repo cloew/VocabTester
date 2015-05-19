@@ -32,5 +32,22 @@
               "text":"きいろ"},
              {"concept":7,
               "text":"オレンジ"}]
+},
+{
+    "language":"German",
+    "words":[{"concept":1,
+              "text":"rot"},
+             {"concept":2,
+              "text":"blau"},
+             {"concept":3,
+              "text":"schwarz"},
+             {"concept":4,
+              "text":"weiß"},
+             {"concept":5,
+              "text":"braun"},
+             {"concept":6,
+              "text":"gelb"},
+             {"concept":7,
+              "text":"orange"}]
 }
 ]
