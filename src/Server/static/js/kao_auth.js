@@ -152,7 +152,7 @@
                         errorCallback(data.error);
                     } else {
                         user = data.user;
-                        $window.sessionStorage.token = data.token;
+                        $window.localStorage.token = data.token;
                         successCallback();
                         for (var i = 0; i < userWatch.length; i++) {
                             userWatch[i](user);
@@ -174,12 +174,12 @@
                     responseHandler($http.put('/api/users/current', user), successCallback, errorCallback);
                 },
                 logout: function () {
-                    delete $window.sessionStorage.token;
+                    delete $window.localStorage.token;
                     user = undefined;
                     $route.reload();
                 },
                 isLoggedIn: function () {
-                    return $window.sessionStorage.token !== undefined;
+                    return $window.localStorage.token !== undefined;
                 },
                 getUser: function (callback) {
                     if (this.isLoggedIn() && (user === undefined)) {
@@ -210,8 +210,8 @@
             return {
                 request: function (config) {
                     config.headers = config.headers || {};
-                    if ($window.sessionStorage.token) {
-                        config.headers.Authorization = 'Bearer ' + $window.sessionStorage.token;
+                    if ($window.localStorage.token) {
+                        config.headers.Authorization = 'Bearer ' + $window.localStorage.token;
                     }
                     return config;
                 },
