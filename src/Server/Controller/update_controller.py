@@ -18,11 +18,10 @@ class UpdateController(JSONController):
     def performWithJSON(self, id, **kwargs):
         """ Remove the record """
         json = kwargs['json']
-        user = kwargs['user']
-        record = self.update(id, json, user)
+        record = self.update(id, json)
         return {"record":toJson(record)}
         
-    def update(self, id, json, user):
+    def update(self, id, json):
         """ Update the record """
         record = self.modelCls.query.filter(self.modelCls.id==id).first()
         recordValues = self.recordValueProvider.getRecordValues(json)

@@ -12,5 +12,4 @@ class RecordController(JSONController):
     def performWithJSON(self, id, **kwargs):
         """ Convert the records to JSON """
         json = kwargs['json']
-        user = kwargs['user']
-        return {"record":toJson(self.modelCls.query.filter(self.modelCls.id==id).first(), user=user)}
+        return {"record":toJson(self.modelCls.query.filter(self.modelCls.id==id).first(), **kwargs)}

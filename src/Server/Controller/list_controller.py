@@ -13,6 +13,6 @@ class ListController(JSONController):
     def performWithJSON(self, *args, **kwargs):
         """ Convert the records to JSON """
         json = kwargs['json']
-        user = kwargs['user']
+        
         query = self.modelCls.query.filter_by(**{self.routeParams[routeParam]:kwargs[routeParam] for routeParam in self.routeParams})
-        return {"records":toJson(query.all(), user=user)}
+        return {"records":toJson(query.all(), **kwargs)}

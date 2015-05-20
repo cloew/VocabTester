@@ -14,7 +14,6 @@ class DeleteController(JSONController):
     def performWithJSON(self, id, **kwargs):
         """ Remove the record """
         json = kwargs['json']
-        user = kwargs['user']
         
         record = self.modelCls.query.filter(self.modelCls.id==id).first()
         db.session.delete(record)

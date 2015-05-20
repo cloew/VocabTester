@@ -14,5 +14,5 @@ class UpdateUserController(UpdateController):
     def performWithJSON(self, **kwargs):
         """ Remove the record """
         user = kwargs['user']
-        updatedUser = UpdateController.update(self, user.id, **kwargs)
+        updatedUser = UpdateController.update(self, user.id, kwargs['json'])
         return {"token": BuildToken(updatedUser), "user": toJson(updatedUser)}
