@@ -1,15 +1,16 @@
 (function(a) {
     "use strict";
     a.module('Words', ['Concepts'])
-        .controller('SearchController', function ($scope, $http) {
+        .controller('SearchController', function ($scope, $http, LanguageService) {
             $scope.results = undefined;
             $scope.isWords = true;
             $scope.search = function(text) {
-                $http.post('/api/search', {'text':text}).success(function(data) {
-                    $scope.results = data.results;
-                    console.log($scope.results);
-                }).error(function(error) {
-                    console.log(error);
+                LanguageService.withCurrentLanguage(function(language) {
+                    language.search({'text':text}).success(function(data) {
+                        $scope.results = data.results;
+                    }).error(function(error) {
+                        console.log(error);
+                    });
                 });
             };
         })

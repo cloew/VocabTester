@@ -44,7 +44,7 @@ routes = [Endpoint('/', get=HTMLController('Server/templates/index.html')),
           # Words
           Endpoint('/api/languages/<int:languageId>/words', get=LearnedConceptsController(Word)),
           Endpoint('/api/words/<int:wordId>/learn', post=LearnWordController()),
-          Endpoint('/api/search', post=SearchController()),
+          Endpoint('/api/languages/<int:languageId>/search', post=SearchController()),
           # Wordlists
           Endpoint('/api/languages/<int:languageId>/wordlists', get=ConceptListsController(WordList)),
           Endpoint('/api/languages/<int:languageId>/wordlist/<int:listId>/quiz', get=QuizController(WordList)),

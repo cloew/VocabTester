@@ -1,4 +1,5 @@
 from Data.concept_manager import ConceptManager
+from Data.language import Language
 from Data.word import Word
 
 from Server.helpers.json_factory import toJson
@@ -14,8 +15,9 @@ class SearchController(AuthJSONController):
         AuthJSONController.__init__(self)
         self.conceptManager = ConceptManager(Word)
     
-    def performWithJSON(self, json=None, user=None):
+    def performWithJSON(self, languageId, json=None, user=None):
         """ Convert the quiz to JSON """
+        language = Language(id=languageId)
         conceptIds = [form.concept_id for form in Word.query.filter(func.lower(Word.text) == func.lower(json['text']))]
-        pairs = self.conceptManager.getConceptPairs(conceptIds, user)
+        pairs = self.conceptManager.getConceptPairs(conceptIds, user.nativeLanguage, language)
         return {"results":toJson(pairs, user=user)}

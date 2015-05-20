@@ -21,6 +21,9 @@
             Language.prototype.getQuiz = function() {
                 return $http.get(this.baseApiUrl+$location.path());
             };
+            Language.prototype.search = function(data) {
+                return $http.post(this.baseApiUrl+'/search', data);
+            };
             return Language;
         })
         .service('LanguageService', function($rootScope, Language, LanguageEnrollmentsService) {
