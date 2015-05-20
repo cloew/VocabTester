@@ -47,5 +47,8 @@
                 $rootScope.$broadcast(service.currentLanguageChangedEventType, currentLanguage);
             });
             return service;
+        })
+        .service('languages', function($http) {
+            return function() {return $http.get('/api/languages');}
         });
 })(angular);

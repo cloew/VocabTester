@@ -14,6 +14,7 @@ from Server.Controller.create_user_enrollment import CreateUserEnrollment
 from Server.Controller.current_user_controller import CurrentUserController
 from Server.Controller.learned_concepts_controller import LearnedConceptsController
 from Server.Controller.learn_word_controller import LearnWordController
+from Server.Controller.list_controller import ListController
 from Server.Controller.login_controller import LoginController
 from Server.Controller.quiz_answer_controller import QuizAnswerController
 from Server.Controller.quiz_controller import QuizController
@@ -32,6 +33,8 @@ routes = [Endpoint('/', get=HTMLController('Server/templates/index.html')),
           Endpoint('/api/users', post=RegisterController()),
           Endpoint('/api/users/current', get=CurrentUserController(), put=UpdateUserController()),
           Endpoint('/api/users/current/enrollments', get=UserEnrollments(), post=CreateUserEnrollment()),
+          # Languages
+          Endpoint('/api/languages', get=ListController(Language)),
           # Symbols
           Endpoint('/api/languages/<int:languageId>/symbols', get=LearnedConceptsController(Symbol)),
           # Symbollists

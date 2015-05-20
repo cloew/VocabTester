@@ -40,11 +40,10 @@
                 });
             };
         })
-        .controller('ChooseEnrollmentController', function ($scope, $location, CrudApiService, userService, LanguageEnrollmentsService, navService) {
-            var crudApi = CrudApiService.getApiFor('Language');
+        .controller('ChooseEnrollmentController', function ($scope, $location, languages, userService, LanguageEnrollmentsService, navService) {
             $scope.languages = [];
             userService.getUser(function(user) {
-                crudApi.getAll().success(function(data) {
+                languages().success(function(data) {
                     LanguageEnrollmentsService.requestEnrollments(function(enrollments) {
                         var enrolledLanguageIds = [];
                         a.forEach(enrollments, function(enrollment, key) {
