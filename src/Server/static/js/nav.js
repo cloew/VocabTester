@@ -48,7 +48,7 @@
                     return undefined;
                 },
                 getCurrentNav: function() {
-                    return getNavFor($route.current.$$route.path);
+                    return this.getNavFor($route.current.$$route.path);
                 },
                 getReturnTo: function() {
                     var currentConfig = this.getCurrentNav();
