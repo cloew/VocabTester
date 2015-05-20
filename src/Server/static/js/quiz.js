@@ -1,6 +1,6 @@
 (function(a) {
     "use strict";
-    a.module('Quiz', ['ui.bootstrap', 'kao.input', 'kao.table', 'Concepts', 'VocabNav'])
+    a.module('Quiz', ['autofocus', 'ui.bootstrap', 'kao.input', 'kao.table', 'Concepts', 'VocabNav'])
         .factory('OptionsQuestion', function() {
             function OptionsQuestion(question) {
                 this.question = question;
