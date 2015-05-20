@@ -1,13 +1,12 @@
 from Server.helpers.admin_json_factory import toJson
+from kao_flask.controllers.json_controller import JSONController
 
-from auth_json_controller import AuthJSONController
-
-class ListController(AuthJSONController):
+class ListController(JSONController):
     """ Controller to return the list of all records for a particular model """
     
-    def __init__(self, modelCls, routeParams={}):
+    def __init__(self, modelCls, routeParams={}, decorators=[]):
         """ Initialize the List Controller """
-        AuthJSONController.__init__(self)
+        JSONController.__init__(self, decorators=decorators)
         self.modelCls = modelCls
         self.routeParams = routeParams
     

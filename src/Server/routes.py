@@ -6,6 +6,7 @@ from Data.user import User
 from Data.word import Word
 from Data.word_list import WordList
 
+from Server.decorators import requires_auth
 from Server.helpers.crud_endpoints import CrudEndpoints
 
 from Server.Controller.concept_lists_controller import ConceptListsController
@@ -48,11 +49,13 @@ routes = [Endpoint('/', get=HTMLController('Server/templates/index.html')),
           # Mastery
           Endpoint('/api/mastery/<int:masteryId>/answer', post=QuizAnswerController())]
           
-routes += CrudEndpoints('/api/admin/languages', Language).endpoints
-routes += CrudEndpoints('/api/admin/concepts', Concept).endpoints
+routes += CrudEndpoints('/api/admin/languages', Language, decorators=[requires_auth]).endpoints
+routes += CrudEndpoints('/api/admin/concepts', Concept, decorators=[requires_auth]).endpoints
 routes += CrudEndpoints('/api/admin/concepts/<int:conceptId>/words', Word, 
                         routeParams={'conceptId':'concept_id'}, 
-                        jsonColumnMap={'language': lambda value: ('language_id', value['id'])}).endpoints
+                        jsonColumnMap={'language': lambda value: ('language_id', value['id'])}, 
+                        decorators=[requires_auth]).endpoints
 routes += CrudEndpoints('/api/admin/concepts/<int:conceptId>/symbols', Symbol, 
                         routeParams={'conceptId':'concept_id'}, 
-                        jsonColumnMap={'language': lambda value: ('language_id', value['id'])}).endpoints
+                        jsonColumnMap={'language': lambda value: ('language_id', value['id'])}, 
+                        decorators=[requires_auth]).endpoints

@@ -1,14 +1,14 @@
 from Server.helpers.admin_json_factory import toJson
 
-from auth_json_controller import AuthJSONController
+from kao_flask.controllers.json_controller import JSONController
 from kao_flask.ext.sqlalchemy.database import db
 
-class DeleteController(AuthJSONController):
+class DeleteController(JSONController):
     """ Controller to delete a record for a particular model """
     
-    def __init__(self, modelCls):
+    def __init__(self, modelCls, decorators=[]):
         """ Initialize the Delete Controller """
-        AuthJSONController.__init__(self)
+        JSONController.__init__(self, decorators=decorators)
         self.modelCls = modelCls
     
     def performWithJSON(self, id, **kwargs):
