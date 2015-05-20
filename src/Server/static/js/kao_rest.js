@@ -328,6 +328,30 @@
                 templateUrl: 'static/partials/directives/admin/save_button.html'
             }
         })
+        .directive('kaoSelect', function() {
+            return {
+                restrict: 'E',
+                replace: true,
+                scope: {
+                  model: '=',
+                  url: '@',
+                  displayField: '@'
+                },
+                controller: function($scope, $http) {
+                    $scope.records = [];
+                
+                    $scope.getRecords = function() {
+                        $http.get($scope.url).success(function(data) {
+                            $scope.records = data.records;
+                        }).error(function(error) {
+                            console.log(error);
+                        });
+                    };
+                    $scope.getRecords();
+                },
+                templateUrl: 'static/partials/directives/admin/model_select.html'
+            }
+        })
         .directive('modelSelect', function() {
             return {
                 restrict: 'E',
@@ -337,7 +361,7 @@
                   type: '@',
                   displayField: '@'
                 },
-                controller: function($scope, CrudApiService) {                    
+                controller: function($scope, CrudApiService) {
                     var crudApi = CrudApiService.getApiFor($scope.type);
                     $scope.records = [];
                 
