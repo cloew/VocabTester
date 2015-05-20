@@ -17,4 +17,4 @@ class ConceptListsController(AuthJSONController):
         language = Language(id=languageId)
         conceptLists = self.listModel.query.all()
         userLists = [UserConceptList(conceptList, user, language) for conceptList in conceptLists]
-        return {"lists":toJson(userLists, user=user)}
+        return {"lists":toJson([userList for userList in userLists if len(userList.concepts) > 0], user=user)}
