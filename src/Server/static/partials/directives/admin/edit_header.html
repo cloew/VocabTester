@@ -1,4 +1,5 @@
 <div>
-    <h1 class="col-md-8 col-md-push-2">Edit {{dataType}}</h1>
-    <delete-button delete-method="delete" id="record.id" data-type="{{dataType}}" class="btn-lg pull-right"></delete-button>
+    <kao-header title="Edit {{dataType}}">
+        <delete-button delete-method="delete" id="record.id" data-type="{{dataType}}" fills-transclude="right" class="btn-lg pull-right"></delete-button>
+    </kao-header>
 </div>
