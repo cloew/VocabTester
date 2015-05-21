@@ -110,6 +110,7 @@
                 
                 this.tableDirective = config.tableDirective;
                 this.formDirective = config.formDirective;
+                this.afterEditDirective = config.afterEditDirective;
             };
             CrudFrontEnd.prototype.getProperNestedConfig = function(varName) {
                 var nested = this.nested;
@@ -257,6 +258,7 @@
                 $scope.record = {};
                 $scope.dataType = frontEndCrud.name;
                 $scope.formDirective = frontEndCrud.formDirective;
+                $scope.afterEditDirective = frontEndCrud.afterEditDirective;
                 
                 $scope.goTo = function(path) {
                     $location.path(path);

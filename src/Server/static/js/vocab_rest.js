@@ -9,11 +9,11 @@
                                                                 {path:config.adminEditConceptWords.path, param: 'conceptId'}]);
                 
                 CrudApiConfig.add('/api/admin/languages', 'Language');
-                FrontEndCrudConfig.add({'name':'Language', 'listUrl':config.adminLanguages.path, 'newUrl':config.adminNewLanguages.path, 'editUrl':config.adminEditLanguages.path,
-                                        'formDirective':'language-form', 'tableDirective':'language-table'});
+                FrontEndCrudConfig.add({name:'Language', listUrl:config.adminLanguages.path, newUrl:config.adminNewLanguages.path, editUrl:config.adminEditLanguages.path,
+                                        formDirective:'language-form', tableDirective:'language-table'});
                 CrudApiConfig.add('/api/admin/concepts', 'Concept');
-                FrontEndCrudConfig.add({'name':'Concept', 'listUrl':config.adminConcepts.path, 'newUrl':config.adminNewConcepts.path, 'editUrl':config.adminEditConcepts.path,
-                                        'formDirective':'admin-concept-form', 'tableDirective':'admin-concept-table'});
+                FrontEndCrudConfig.add({name:'Concept', listUrl:config.adminConcepts.path, newUrl:config.adminNewConcepts.path, editUrl:config.adminEditConcepts.path,
+                                        formDirective:'admin-concept-form', tableDirective:'admin-concept-table', afterEditDirective:'concept-forms-list'});
                 CrudApiConfig.add('/api/admin/concepts/:conceptId/words', 'Word', [{param: 'conceptId', provider: CrudParamFromRouteConfig.forParam('conceptId')}]);
                 FrontEndCrudConfig.add({name:'Word', listUrl:config.adminEditConcepts.path, newUrl:config.adminNewConceptWords.path, editUrl:config.adminEditConceptWords.path,
                                         formDirective:'admin-concept-form-form', tableDirective:'admin-concept-form-table',
@@ -45,6 +45,13 @@
                 restrict: 'E',
                 replace: true,
                 templateUrl: 'static/partials/directives/admin/concept_table.html'
+            }
+        })
+        .directive('conceptFormsList', function() {
+            return {
+                restrict: 'E',
+                replace: true,
+                templateUrl: 'static/partials/directives/admin/concept_forms.html'
             }
         })
         .directive('adminConceptForm', function() {
