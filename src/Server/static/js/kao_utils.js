@@ -12,9 +12,9 @@
                         element.append(el);
                     }
                 }
-            }
+            };
         })
-        .directive('placeholder', function() {
+        .directive('transcludePlaceholder', function() {
             return {
                 restrict: 'A',
                 replace: true,
@@ -25,7 +25,7 @@
                     var attach = function(clone){
                         for(var i = 0; i < clone.length; i++) {
                             var el = angular.element(clone[i]);
-                            if(el.attr('binds-to') === attrs.placeholder){
+                            if(el.attr('fills-transclude') === attrs.transcludePlaceholder){
                                 element.empty();
                                 element.append(el);
                             }
@@ -35,6 +35,15 @@
                         attach(clone);
                     });
                 }
-            }
+            };
+        })
+        .directive('kaoHeader', function() {
+            return {
+                restrict: 'E',
+                replace: true,
+                transclude: true,
+                scope: {title: '@'},
+                templateUrl: 'static/partials/directives/kao_header.html'
+            };
         });
 })(angular);

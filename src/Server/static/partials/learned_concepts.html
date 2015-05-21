@@ -1,7 +1,6 @@
-<div class="col-md-8 col-md-push-2" style="text-align:center;">
-    <div class="col-md-12">
-        <h1 class="col-md-8 col-md-push-2">Your Learned {{formName}}</h1>
-        <a ng-href="#{{quizUrl}}" class="btn btn-primary btn-lg pull-right">Random Quiz</a>
-    </div>
+<div class="col-md-8 col-md-push-2">
+    <kao-header title="Your Learned {{formName}}">
+        <a ng-href="#{{quizUrl}}" class="btn btn-primary btn-lg" fills-transclude="right">Random Quiz</a>
+    </kao-header>
     <concept-table concepts="concepts" is-words="isWords"></concept-table>
 </div>
