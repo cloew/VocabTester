@@ -27,5 +27,5 @@ class CreateController(JSONController):
         
         db.session.add(record)
         db.session.commit()
-        return {"record":toJson(record)}
+        return {"record":toJson(record, **kwargs)}
         

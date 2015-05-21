@@ -19,7 +19,7 @@ class UpdateController(JSONController):
         """ Remove the record """
         json = kwargs['json']
         record = self.update(id, json)
-        return {"record":toJson(record)}
+        return {"record":toJson(record, **kwargs)}
         
     def update(self, id, json):
         """ Update the record """
