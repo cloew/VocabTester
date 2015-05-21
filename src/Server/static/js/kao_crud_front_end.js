@@ -218,6 +218,37 @@
                 }
             }
         })
+        .directive('placeholder', function() {
+            return {
+                restrict: 'A',
+                replace: true,
+                controller: function($transclude) {
+                    this.$transclude = $transclude;
+                },
+                link: function(scope, element, attrs, controller) {
+                    var attach = function(clone){
+                        for(var i = 0; i < clone.length; i++) {
+                            var el = angular.element(clone[i]);
+                            if(el.attr('binds-to') === attrs.placeholder){
+                                element.empty();
+                                element.append(el);
+                            }
+                        }
+                    };
+                    controller.$transclude(function(clone) {
+                        attach(clone);
+                    });
+                }
+            }
+        })
+        .directive('temp', function() {
+            return {
+                restrict: 'E',
+                replace: true,
+                transclude: true,
+                templateUrl: 'static/partials/directives/admin/temp.html'
+            }
+        })
         .directive('listHeader', function() {
             return {
                 restrict: 'E',
