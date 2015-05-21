@@ -1,6 +1,6 @@
 (function(a) {
     'use strict';
-    a.module('vocab.rest', ['kao.rest', 'VocabNav'])
+    a.module('vocab.rest', ['kao.crud.api', 'kao.crud.frontend', 'VocabNav'])
         .config(['CrudApiConfigProvider', 'FrontEndCrudConfigProvider', 'CrudParamFromRouteConfigProvider', 'navConfigProvider',
             function(CrudApiConfig, FrontEndCrudConfig, CrudParamFromRouteConfig, navConfig) {
                 var config = navConfig.config;
