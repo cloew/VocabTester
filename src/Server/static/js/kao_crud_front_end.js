@@ -239,6 +239,20 @@
                 templateUrl: 'static/partials/directives/admin/edit_header.html'
             }
         })
+        .directive('modelTable', function() {
+            return {
+                restrict: 'E',
+                replace: true,
+                templateUrl: 'static/partials/directives/admin/model_table.html'
+            }
+        })
+        .directive('modelForm', function() {
+            return {
+                restrict: 'E',
+                replace: true,
+                templateUrl: 'static/partials/directives/admin/model_form.html'
+            }
+        })
         .directive('toNewPage', function() {
             return {
                 restrict: 'E',
