@@ -210,9 +210,11 @@
                 restrict: 'E',
                 replace: true,
                 link: function(scope, element, attrs) {
-                    var dom = '<'+attrs.directive+'>'+'</'+attrs.directive+'>'
-                    var el = $compile(dom)(scope);
-                    element.append(el);
+                    if(attrs.directive) {
+                        var dom = '<'+attrs.directive+'>'+'</'+attrs.directive+'>'
+                        var el = $compile(dom)(scope);
+                        element.append(el);
+                    }
                 }
             }
         })
