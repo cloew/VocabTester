@@ -241,14 +241,6 @@
                 }
             }
         })
-        .directive('temp', function() {
-            return {
-                restrict: 'E',
-                replace: true,
-                transclude: true,
-                templateUrl: 'static/partials/directives/admin/temp.html'
-            }
-        })
         .directive('listHeader', function() {
             return {
                 restrict: 'E',
