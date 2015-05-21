@@ -218,6 +218,27 @@
                 }
             }
         })
+        .directive('listHeader', function() {
+            return {
+                restrict: 'E',
+                replace: true,
+                templateUrl: 'static/partials/directives/admin/list_header.html'
+            }
+        })
+        .directive('newHeader', function() {
+            return {
+                restrict: 'E',
+                replace: true,
+                templateUrl: 'static/partials/directives/admin/new_header.html'
+            }
+        })
+        .directive('editHeader', function() {
+            return {
+                restrict: 'E',
+                replace: true,
+                templateUrl: 'static/partials/directives/admin/edit_header.html'
+            }
+        })
         .directive('toNewPage', function() {
             return {
                 restrict: 'E',
