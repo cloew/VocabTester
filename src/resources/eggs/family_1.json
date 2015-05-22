@@ -24,5 +24,18 @@
               "text":"おばあさん"},
              {"concept":5,
               "text":"あかちゃん"}]
-}
+},
+{
+    "language":"German",
+    "words":[{"concept":1,
+              "text":"Mutter"},
+             {"concept":2,
+              "text":"Vater"},
+             {"concept":3,
+              "text":"Großvater"},
+             {"concept":4,
+              "text":"Großmutter"},
+             {"concept":5,
+              "text":"Baby"}]
+},
 ]

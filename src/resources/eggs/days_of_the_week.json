@@ -32,5 +32,22 @@
               "text":"どようび"},
              {"concept":7,
               "text":"にちようび"}]
-}
+},
+{
+    "language":"German",
+    "words":[{"concept":1,
+              "text":"Montag"},
+             {"concept":2,
+              "text":"Dienstag"},
+             {"concept":3,
+              "text":"Mittwoch"},
+             {"concept":4,
+              "text":"Donnerstag"},
+             {"concept":5,
+              "text":"Freitag"},
+             {"concept":6,
+              "text":"Samstag"},
+             {"concept":7,
+              "text":"Sonntag"}]
+},
 ]
