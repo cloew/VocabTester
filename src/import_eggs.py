@@ -50,9 +50,6 @@ def ImportEggs(filename, listName):
     conceptMap = CreateConcepts(eggs[0].words)
     conceptMap.update(CreateConcepts(eggs[0].symbols))
     
-    english = Language.query.filter_by(name="English").first()
-    japanese = Language.query.filter_by(name="Japanese").first()
-    
     for egg in eggs:
         CreateSymbols(egg.symbols, conceptMap, languageMap[egg.language])
         
