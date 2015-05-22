@@ -4,7 +4,7 @@
     </button>
     <ul class="dropdown-menu" role="menu">
         <li ng-repeat="enrollment in enrollments" ng-class="{'bg-primary':enrollment.id === currentEnrollment.id}">
-            <a style="cursor: pointer;" ng-click="changeCurrentEnrollment(enrollment);">{{enrollment.language.name}}</a>
+            <a style="cursor: pointer;" ng-click="changeCurrentEnrollment($index);">{{enrollment.language.name}}</a>
         </li>
     </ul>
 </div>

@@ -132,12 +132,12 @@
                     });
                     return deferred.promise;
                 },
-                changeCurrentEnrollment: function(newEnrollment) {
+                changeCurrentEnrollment: function(index) {
                     var self = this;
                     this.withCurrentEnrollment(function(currentEnrollment) {
                         currentEnrollment.default = false;
-                        newEnrollment.default = true;
-                        $rootScope.$broadcast(self.currentChangedEventType, newEnrollment);
+                        self.enrollments[index].default = true;
+                        $rootScope.$broadcast(self.currentChangedEventType, self.enrollments[index]);
                     });
                 }
             };

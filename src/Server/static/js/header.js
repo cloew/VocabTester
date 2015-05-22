@@ -47,8 +47,8 @@
                     LanguageEnrollmentsService.requestEnrollments(function(enrollments) {
                         $scope.enrollments = enrollments;
                     });
-                    $scope.changeCurrentEnrollment = function(newEnrollment) {
-                        LanguageEnrollmentsService.changeCurrentEnrollment(newEnrollment);
+                    $scope.changeCurrentEnrollment = function(index) {
+                        LanguageEnrollmentsService.changeCurrentEnrollment(index);
                     };
                 },
                 templateUrl: 'static/partials/directives/language_picker.html'
