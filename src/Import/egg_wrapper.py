@@ -11,8 +11,8 @@ class EggWrapper:
         """ Initialize the wrapper """
         self.egg = egg
         self.language = LanguageWrapper(self.egg.language)
-        self.symbolsWrapper = FormsWrapper(self.egg.symbols, Symbol)
-        self.wordsWrapper = FormsWrapper(self.egg.words, Word)
+        self.symbolsWrapper = FormsWrapper(self.egg.symbols, Symbol, self.language)
+        self.wordsWrapper = FormsWrapper(self.egg.words, Word, self.language)
         
     def loadExisting(self):
         """ Load the existing words and symbols specified in the egg """
@@ -25,5 +25,5 @@ class EggWrapper:
             
     def load(self, concepts):
         """ Load the egg into the database """
-        self.symbolsWrapper.load(concepts, self.language)
-        self.wordsWrapper.load(concepts, self.language)
+        self.symbolsWrapper.load(concepts)
+        self.wordsWrapper.load(concepts)
