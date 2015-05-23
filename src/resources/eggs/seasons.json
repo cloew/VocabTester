@@ -1,0 +1,35 @@
+[
+{
+    "language":"English",
+    "words":[{"concept":1,
+              "text":"spring"},
+             {"concept":2,
+              "text":"summer"},
+             {"concept":3,
+              "text":"fall"},
+             {"concept":4,
+              "text":"winter"}]
+},
+{
+    "language":"Japanese",
+    "words":[{"concept":1,
+              "text":"はる"},
+             {"concept":2,
+              "text":"なつ"},
+             {"concept":3,
+              "text":"あき"},
+             {"concept":4,
+              "text":"ふゆ"}]
+},
+{
+    "language":"German",
+    "words":[{"concept":1,
+              "text":"Frühling"},
+             {"concept":2,
+              "text":"Sommer"},
+             {"concept":3,
+              "text":"Herbst"},
+             {"concept":4,
+              "text":"Winter"}]
+}
+]
