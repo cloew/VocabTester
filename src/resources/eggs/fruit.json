@@ -32,5 +32,22 @@
               "text":"もも"},
              {"concept":7,
               "text":"ぶどう"}]
+},
+{
+    "language":"German",
+    "words":[{"concept":1,
+              "text":"Erdbeere"},
+             {"concept":2,
+              "text":"Apfel"},
+             {"concept":3,
+              "text":"Banane"},
+             {"concept":4,
+              "text":"Wassermelone"},
+             {"concept":5,
+              "text":"Zitrone"},
+             {"concept":6,
+              "text":"Pfirsich"},
+             {"concept":7,
+              "text":"Trauben"}]
 }
 ]
