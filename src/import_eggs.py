@@ -18,7 +18,7 @@ def ImportEggs(filename, listName=None):
 def main(args):
     """ Run the main file """
     with server.app.app_context():
-        ImportEggs(args[0], listName=args[1] if len(args) > 0 else None)
+        ImportEggs(args[0], listName=args[1] if len(args) > 1 else None)
 
 if __name__ == "__main__":
     main(sys.argv[1:])
