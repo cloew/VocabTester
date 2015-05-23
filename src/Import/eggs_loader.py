@@ -8,13 +8,13 @@ from leggs.egg_loader import LoadEggs
 class EggsLoader:
     """ Class to load Language Eggs """
     
-    def __init__(self, filename):
+    def __init__(self, eggs):
         """ Initialize the eggs loader with the file to load eggs from """
-        self.eggs = [EggWrapper(egg) for egg in LoadEggs(filename)]
+        self.eggs = [EggWrapper(egg) for egg in eggs]
+        self.concepts = ConceptDictionary(self.eggs)
         
     def load(self):
         """ Load the eggs into the database """
-        concepts = ConceptDictionary(self.eggs)
         for egg in self.eggs:
-            egg.load(concepts)
+            egg.load(self.concepts)
         server.db.session.commit()
