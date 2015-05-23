@@ -37,7 +37,7 @@ def main():
     with server.app.app_context():
         AddStalenessPeriods()
         for filename in glob.glob(os.path.join(EGG_DIR, '*.json')):
-            ImportEggs(filename, GetListName(filename))
+            ImportEggs(filename, listName=GetListName(filename))
             
 if __name__ == "__main__":
     main()
