@@ -15,7 +15,6 @@ class FormsWrapper:
         for eggForm in self.eggForms:
             if eggForm.conceptId not in self.conceptIdToForm:
                 form = self.FormCls(text=eggForm.text, concept=concepts[eggForm.conceptId], language=self.languageWrapper.language)
-                print "Adding {0}:".format(self.FormCls), eggForm.text, self.languageWrapper.languageName
                 self.conceptIdToForm[eggForm.conceptId] = form
                 server.db.session.add(form)
         
