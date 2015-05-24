@@ -70,7 +70,7 @@
             service[navService.symbolLists.path] = Symbol;
             return service;
         })
-        .directive('formLists', function(LoadingTracker) {
+        .directive('formLists', function() {
             return {
                 restrict: 'E',
                 replace: true,

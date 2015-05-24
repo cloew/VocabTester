@@ -1,12 +1,14 @@
 (function(a) {
     "use strict";
-    a.module('Words', ['Concepts'])
-        .controller('SearchController', function ($scope, $http, LanguageService) {
+    a.module('Words', ['kao.loading', 'Concepts'])
+        .controller('SearchController', function ($scope, $http, LanguageService, LoadingTrackerService) {
             $scope.results = undefined;
             $scope.isWords = true;
+            var tracker = LoadingTrackerService.get('search');
+            
             $scope.search = function(text) {
                 LanguageService.withCurrentLanguage(function(language) {
-                    language.search({'text':text}).success(function(data) {
+                    tracker.load(language.search({'text':text})).success(function(data) {
                         $scope.results = data.results;
                     }).error(function(error) {
                         console.log(error);

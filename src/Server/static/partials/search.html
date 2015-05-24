@@ -11,13 +11,15 @@
             <button type="submit" ng-click="search(text)" class="btn btn-default btn-primary">Search</button>
         </form>
     </div>
-    <div class="col-md-12" ng-if="results" style="text-align:center;">
-        <h2 class="col-md-8 col-md-push-2">Results</h2>
-        <div class="col-md-12">
-            <search-result ng-repeat="result in results" result="result"></search-result>
+    <loading-div loading="search">
+        <div class="col-md-12" ng-if="results" style="text-align:center;">
+            <h2 class="col-md-8 col-md-push-2">Results</h2>
+            <div class="col-md-12">
+                <search-result ng-repeat="result in results" result="result"></search-result>
+            </div>
         </div>
-    </div>
-    <div class="col-md-12" ng-if="results.length === 0" style="text-align:center;">
-        <h3 class="col-md-8 col-md-push-2">Sorry, no results were found</h3>
-    </div>
+        <div class="col-md-12" ng-if="results.length === 0" style="text-align:center;">
+            <h3 class="col-md-8 col-md-push-2">Sorry, no results were found</h3>
+        </div>
+    </loading-div>
 </div>

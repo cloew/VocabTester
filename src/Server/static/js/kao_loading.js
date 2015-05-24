@@ -10,7 +10,7 @@
                 var deferred = KaoPromise();
                 var self = this;
                 
-                promise.then(deferred.resolve, deferred.reject);
+                promise.success(deferred.resolve).error(deferred.reject);
                 deferred.promise.finally(null).finally(function() {
                     self.isLoading = false;
                 });
