@@ -1,6 +1,27 @@
 (function(a) {
     "use strict";
     a.module('kao.utils', [])
+        .factory('KaoPromise', function($q) {
+            function KaoPromise() {
+                var defer = $q.defer();
+                defer.promise.success = function(fn) {
+                    defer.promise.then(function() {
+                        fn.apply(this, arguments)
+                    });
+                    return defer.promise;
+                };
+
+                defer.promise.error = function(fn) {
+                    defer.promise.then(null, function() {
+                        fn.apply(this, arguments);
+                    });
+                    return defer.promise;
+                };
+
+                return defer;
+            };
+            return KaoPromise;
+        })
         .directive('dynamicDirective', function($compile) {
             return {
                 restrict: 'E',

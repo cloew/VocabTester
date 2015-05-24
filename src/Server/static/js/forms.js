@@ -1,27 +1,6 @@
 (function(a) {
     "use strict";
-    a.module('Forms', ['VocabNav', 'Language'])
-        .factory('KaoPromise', function($q) {
-            function KaoPromise() {
-                var defer = $q.defer();
-                defer.promise.success = function(fn) {
-                    defer.promise.then(function() {
-                        fn.apply(this, arguments)
-                    });
-                    return defer.promise;
-                };
-
-                defer.promise.error = function(fn) {
-                    defer.promise.then(null, function() {
-                        fn.apply(this, arguments);
-                    });
-                    return defer.promise;
-                };
-
-                return defer;
-            };
-            return KaoPromise;
-        })
+    a.module('Forms', ['kao.utils', 'kao.loading', 'VocabNav', 'Language'])
         .factory('Form', function(LanguageService, KaoPromise) {
             function Form(config) {
                 this.config = config;
@@ -91,14 +70,14 @@
             service[navService.symbolLists.path] = Symbol;
             return service;
         })
-        .directive('formLists', function() {
+        .directive('formLists', function(LoadingTracker) {
             return {
                 restrict: 'E',
                 replace: true,
                 controller: function($scope, FormsService, LanguageService) {
                     var form = FormsService.current();
                     $scope.formName = form.name;
-            
+                    
                     LanguageService.watchCurrentLanguage($scope, function(event, language) {
                         form.getLists().success(function(data) {
                             $scope.lists = data.lists;
