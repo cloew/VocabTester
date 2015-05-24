@@ -19,6 +19,19 @@
             };
             return LoadingTracker;
         })
+        .service('LoadingTrackerService', function(LoadingTracker) {
+            var trackers = {};
+            return {
+                get: function(name) {
+                    var tracker = trackers[name];
+                    if (tracker === undefined) {
+                        tracker = new LoadingTracker();
+                        trackers[name] = tracker;
+                    }
+                    return tracker;
+                }
+            };
+        })
         .directive('spinner', function() {
             return {
                 restrict: 'E',
