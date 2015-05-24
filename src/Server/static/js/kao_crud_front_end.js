@@ -1,6 +1,6 @@
 (function(a) {
     'use strict';
-    a.module('kao.crud.frontend', ['kao.crud.api', 'kao.utils'])
+    a.module('kao.crud.frontend', ['kao.crud.api', 'kao.utils', 'kao.loading'])
         .provider('FrontEndCrudConfig', function() {
             var crudConfigs = [];
             this.add = function(config) {
@@ -85,7 +85,7 @@
             scope: {
                 type: '@'
             },
-            controller: function ($scope, $location, CrudApiService, FrontEndCrudService) {
+            controller: function ($scope, $location, CrudApiService, FrontEndCrudService, LoadingTrackerService) {
                 var frontEndCrud;
                 if ($scope.type) {
                     frontEndCrud = FrontEndCrudService.getFrontEndFor($scope.type);
@@ -93,6 +93,8 @@
                     frontEndCrud = FrontEndCrudService.getCurrentCrud();
                 }
                 var crudApi = CrudApiService.getApiFor(frontEndCrud.name);
+                var tracker =  LoadingTrackerService.get('list');
+                
                 $scope.records = [];
                 $scope.dataType = frontEndCrud.name;
                 $scope.pluralDataType = frontEndCrud.pluralName;
@@ -116,7 +118,7 @@
                 };
                 
                 $scope.getRecords = function() {
-                    crudApi.getAll().success(function(data) {
+                    tracker.load(crudApi.getAll()).success(function(data) {
                         $scope.records = data.records;
                     }).error(function(error) {
                         console.log(error);
