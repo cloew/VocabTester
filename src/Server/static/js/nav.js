@@ -83,13 +83,15 @@
         })
         .run(function($injector, $rootScope, navService) {
             $rootScope.$on('$routeChangeStart', function(event, next, current) {
-                var nav = navService.getNavFor(next.$$route.originalPath);
-                if (nav !== undefined) {
-                    a.forEach(nav.onLoad, function(serviceName) {
-                        if (!event.defaultPrevented) {
-                            $injector.get(serviceName)(event);
-                        }
-                    });
+                if (next && next.$$route && next.$$route.originalPath) {
+                    var nav = navService.getNavFor(next.$$route.originalPath);
+                    if (nav !== undefined) {
+                        a.forEach(nav.onLoad, function(serviceName) {
+                            if (!event.defaultPrevented) {
+                                $injector.get(serviceName)(event);
+                            }
+                        });
+                    }
                 }
             });
         });
