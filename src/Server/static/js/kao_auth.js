@@ -1,6 +1,6 @@
 (function(a) {
     "use strict";
-    a.module('kao.auth', [])
+    a.module('kao.auth', ['kao.loading'])
         .controller('LoginController', function ($scope, $location, userService) {
             $scope.login = function() {
                 userService.login($scope.email, $scope.password, function() {
@@ -40,10 +40,11 @@
                 });
             };
         })
-        .controller('ChooseEnrollmentController', function ($scope, $location, languages, userService, LanguageEnrollmentsService, navService) {
+        .controller('ChooseEnrollmentController', function ($scope, $location, languages, userService, LanguageEnrollmentsService, navService, LoadingTrackerService) {
             $scope.languages = [];
+            var tracker = LoadingTrackerService.get('enrollments');
             userService.getUser(function(user) {
-                languages().success(function(data) {
+                tracker.load(languages()).success(function(data) {
                     LanguageEnrollmentsService.requestEnrollments(function(enrollments) {
                         var enrolledLanguageIds = [];
                         a.forEach(enrollments, function(enrollment, key) {

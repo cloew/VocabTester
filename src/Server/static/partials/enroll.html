@@ -1,9 +1,9 @@
 <div class="col-md-8 col-md-push-2" style="text-align:center;">
     <kao-header title="Enroll in a Language"></kao-header>
-    <div class="col-md-6 col-md-push-3" style="text-align: left;">
+    <loading-div loading="enrollments" class="col-md-6 col-md-push-3" style="text-align: left;">
         <div ng-repeat="language in languages" style="marign: 10px; height: 70px;">
             <span>{{language.name}}</span>
             <button ng-click="enroll(language);" class="btn btn-lg btn-primary pull-right">Enroll</button>
         </div>
-    </div>
+    </loading-div>
 </div>
