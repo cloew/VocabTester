@@ -1,0 +1,6 @@
+<div>
+    <div class="loading-container">
+        <spinner ng-if="isLoading"></spinner>
+    </div>
+    <ng-transclude ng-if="!isLoading"></ng-transclude>
+</div>
