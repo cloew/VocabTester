@@ -1,13 +1,14 @@
 (function(a) {
     "use strict";
-    a.module('Concepts', ['ui.bootstrap', 'kao.table', 'VocabNav', 'Language', 'Forms'])
-        .controller('LearnedFormsController', function ($scope, FormsService, LanguageService) {
+    a.module('Concepts', ['ui.bootstrap', 'kao.loading', 'kao.table', 'VocabNav', 'Language', 'Forms'])
+        .controller('LearnedFormsController', function ($scope, FormsService, LanguageService, LoadingTrackerService) {
             var form = FormsService.current();
             $scope.formName = form.pluralName;
             $scope.quizUrl = form.randomQuizPath;
+            var tracker = LoadingTrackerService.get('learned');
             
             LanguageService.watchCurrentLanguage($scope, function(event, language) {
-                form.getLearned().success(function(data) {
+                tracker.load(form.getLearned()).success(function(data) {
                     $scope.concepts = data.concepts;
                     $scope.isWords = data.isWords;
                 }).error(function(error) {
