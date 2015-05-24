@@ -47,8 +47,8 @@
                 scope: {
                     loading: '@'
                 },
-                controller: function($scope) {
-                    $scope.isLoading = true;
+                controller: function($scope, LoadingTrackerService, $timeout) {
+                    $scope.tracker = LoadingTrackerService.get($scope.loading);
                 },
                 templateUrl: 'static/partials/directives/loading_div.html'
             };

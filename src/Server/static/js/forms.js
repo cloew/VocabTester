@@ -74,12 +74,13 @@
             return {
                 restrict: 'E',
                 replace: true,
-                controller: function($scope, FormsService, LanguageService) {
+                controller: function($scope, FormsService, LanguageService, LoadingTrackerService) {
                     var form = FormsService.current();
                     $scope.formName = form.name;
+                    var tracker = LoadingTrackerService.get('forms');
                     
                     LanguageService.watchCurrentLanguage($scope, function(event, language) {
-                        form.getLists().success(function(data) {
+                        tracker.load(form.getLists()).success(function(data) {
                             $scope.lists = data.lists;
                         }).error(function(error) {
                             console.log(error);
