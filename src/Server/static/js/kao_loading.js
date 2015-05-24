@@ -52,5 +52,28 @@
                 },
                 templateUrl: 'static/partials/directives/loading_div.html'
             };
+        })
+        .directive('loadingButton', function() {
+            return {
+                restrict: 'E',
+                replace: true,
+                transclude: true,
+                scope: {
+                    loading: '@'
+                },
+                controller: function($scope, $element, LoadingTrackerService) {
+                    $scope.tracker = LoadingTrackerService.get($scope.loading);
+                    $scope.$watch(function(scope) {return scope.tracker.isLoading;},
+                        function(value) {
+                            if (value) {
+                                a.element($element[0]).button('loading');
+                            } else {
+                                a.element($element[0]).button('reset');
+                            }
+                        }
+                    );
+                },
+                template: '<button><ng-transclude></ng-transclude></button>'
+            };
         });
 })(angular);

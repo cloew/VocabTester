@@ -135,7 +135,7 @@
             scope: {
                 type: '@'
             },
-            controller: function ($scope, $location, CrudApiService, FrontEndCrudService) {
+            controller: function ($scope, $location, CrudApiService, FrontEndCrudService, LoadingTrackerService) {
                 var frontEndCrud;
                 if ($scope.type) {
                     frontEndCrud = FrontEndCrudService.getFrontEndFor($scope.type);
@@ -146,9 +146,10 @@
                 $scope.record = {};
                 $scope.dataType = frontEndCrud.name;
                 $scope.formDirective = frontEndCrud.formDirective;
+                var tracker = LoadingTrackerService.get('saving');
                 
                 $scope.save = function() {
-                    crudApi.create($scope.record).success(function(data) {
+                    tracker.load(crudApi.create($scope.record)).success(function(data) {
                         $location.path(frontEndCrud.getEditUrl(data.record.id));
                     }).error(function(error) {
                         console.log(error);
@@ -164,7 +165,7 @@
             scope: {
                 type: '@'
             },
-            controller: function ($scope, $location, $routeParams, CrudApiService, FrontEndCrudService) {
+            controller: function ($scope, $location, $routeParams, CrudApiService, FrontEndCrudService, LoadingTrackerService) {
                 var frontEndCrud;
                 if ($scope.type) {
                     frontEndCrud = FrontEndCrudService.getFrontEndFor($scope.type);
@@ -176,13 +177,14 @@
                 $scope.dataType = frontEndCrud.name;
                 $scope.formDirective = frontEndCrud.formDirective;
                 $scope.afterEditDirective = frontEndCrud.afterEditDirective;
+                var tracker = LoadingTrackerService.get('saving');
                 
                 $scope.goTo = function(path) {
                     $location.path(path);
                 };
                 
                 $scope.save = function() {
-                    crudApi.update($scope.record).success(function(data) {
+                    tracker.load(crudApi.update($scope.record)).success(function(data) {
                         $scope.record = data.record;
                     }).error(function(error) {
                         console.log(error);
