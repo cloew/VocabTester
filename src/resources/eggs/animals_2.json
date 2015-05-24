@@ -32,5 +32,22 @@
               "text":"あひろ"},
              {"concept":7,
               "text":"かに"}]
+},
+{
+    "language":"German",
+    "words":[{"concept":1,
+              "text":"Goldfisch"},
+             {"concept":2,
+              "text":"Schildkröte"},
+             {"concept":3,
+              "text":"Frosch"},
+             {"concept":4,
+              "text":"Schwein"},
+             {"concept":5,
+              "text":"Taube"},
+             {"concept":6,
+              "text":"Ente"},
+             {"concept":7,
+              "text":"Krabbe"}]
 }
 ]
