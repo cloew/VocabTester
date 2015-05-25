@@ -32,5 +32,22 @@
               "text":"きつね"},
              {"concept":7,
               "text":"くま"}]
+},
+{
+    "language":"German",
+    "words":[{"concept":1,
+              "text":"Löwe"},
+             {"concept":2,
+              "text":"Giraffe"},
+             {"concept":3,
+              "text":"Kuh"},
+             {"concept":4,
+              "text":"Affe"},
+             {"concept":5,
+              "text":"Schaf"},
+             {"concept":6,
+              "text":"Fuchs"},
+             {"concept":7,
+              "text":"Bär"}]
 }
 ]
