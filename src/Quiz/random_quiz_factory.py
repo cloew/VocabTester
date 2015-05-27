@@ -5,28 +5,30 @@ from sampler import sample_at_most
 class RandomQuizFactory:
     """ Represents method to contstruct a Quiz from random learned Words or Symbols """
     MAX_QUESTIONS = 10
-    RATING_RATIOS = [(0, .4),
-                     (1, .3),
+    RATING_RATIOS = [(0, .3),
+                     (1, .2),
                      (2, .2),
-                     (3, .1)]
+                     (3, .1),
+                     (4, .1),
+                     (5, .1)]
     
-    def buildQuiz(self, formModel, user):
+    def buildQuiz(self, formModel, user, foreignLanguage):
         """ Build a quiz using the from given and the user provided """
         conceptManager = ConceptManager(formModel)
         
-        learnedForms = user.getLearnedFor(formModel)
+        learnedForms = user.getLearnedFor(formModel, foreignLanguage)
         formsByRating = self.organizeByMastery(learnedForms, user)
         sample = self.getSampleForQuiz(formsByRating)
         conceptIds = [form.concept_id for form in sample]
-        pairs = conceptManager.getConceptPairs(conceptIds, user)
+        pairs = conceptManager.getConceptPairs(conceptIds, user.nativeLanguage, foreignLanguage)
         
-        return Quiz("Random List", pairs)
+        return Quiz("Random List", pairs, user)
         
     def organizeByMastery(self, learnedForms, user):
         """ Return the learned forms organized by their mastery rating """
         forms = {}
         for form in learnedForms:
-            rating = form.getMasteryRating(user)
+            rating = form.getMastery(user).rating
             if rating not in forms:
                 forms[rating] = [form]
             else:

@@ -26,6 +26,12 @@
                     <label for="lastName">Last Name</label>
                     <input id="lastName" class="form-control" type="text" name="lastName" ng-model="lastName" placeholder="Last Name" />
                 </div>
+                <div class="form-group">
+                    <label for="language">Language</label>
+                    <div>
+                        <kao-select id="language" class="form-control" model="user.nativeLanguage" url="/api/languages" display-field="name"></kao-select>
+                    </div>
+                </div>
             </div>
             <div class="panel-footer footer-with-button">
                 <input class="pull-right btn btn-primary" type="submit" />

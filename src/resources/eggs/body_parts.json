@@ -44,5 +44,28 @@
               "text":"あたま"},
              {"concept":10,
               "text":"は"}]
+},
+{
+    "language":"German",
+    "words":[{"concept":1,
+              "text":"Mund"},
+             {"concept":2,
+              "text":"Auge"},
+             {"concept":3,
+              "text":"Ohr"},
+             {"concept":4,
+              "text":"Nase"},
+             {"concept":5,
+              "text":"Gesicht"},
+             {"concept":6,
+              "text":"Hand"},
+             {"concept":7,
+              "text":"Fuß"},
+             {"concept":8,
+              "text":"Finger"},
+             {"concept":9,
+              "text":"Kopf"},
+             {"concept":10,
+              "text":"Zahn"}]
 }
 ]

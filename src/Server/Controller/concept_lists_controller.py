@@ -1,5 +1,5 @@
+from Data.language import Language
 from Data.user_concept_list import UserConceptList
-from Data.word_list import WordList
 
 from Server.helpers.json_factory import toJson
 from auth_json_controller import AuthJSONController
@@ -12,8 +12,9 @@ class ConceptListsController(AuthJSONController):
         AuthJSONController.__init__(self)
         self.listModel = listModel
     
-    def performWithJSON(self, json=None, user=None):
+    def performWithJSON(self, languageId, json=None, user=None):
         """ Convert the existing Concept Lists to JSON """
-        lists = self.listModel.query.all()
-        userLists = [UserConceptList(l, user) for l in lists]
-        return {"lists":toJson(userLists, user=user)}
+        language = Language(id=languageId)
+        conceptLists = self.listModel.query.all()
+        userLists = [UserConceptList(conceptList, user, language) for conceptList in conceptLists]
+        return {"lists":toJson([userList for userList in userLists if len(userList.concepts) > 0], user=user)}

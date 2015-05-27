@@ -1,28 +1,76 @@
 (function(a) {
     "use strict";
-    a.module('Quiz', ['ui.bootstrap', 'kao.input', 'kao.table', 'Concepts', 'VocabNav'])
-        .factory('quizService', function($http, $location, $routeParams, navService) {
-            function Quiz(wordListId) {
-                this.wordListId = wordListId;
+    a.module('Quiz', ['autofocus', 'ui.bootstrap', 'kao.input', 'kao.table', 'Concepts', 'VocabNav'])
+        .factory('OptionsQuestion', function() {
+            function OptionsQuestion(question) {
+                this.question = question;
+                this.answerIndex = question.answerIndex;
+                this.answerUrl = question.answerUrl;
+                this.queryWord = question.queryWord;
+                this.options = question.options;
+                this.subject = question.subject;
+                this.type = question.questionType;
+            };
+            OptionsQuestion.prototype.isCorrect = function() {
+                return this.selectedIndex == this.question.answerIndex;
+            };
+            OptionsQuestion.prototype.canSubmit = function() {
+                return this.selectedIndex >= 0;
+            };
+            
+            return OptionsQuestion;
+        })
+        .factory('PromptQuestion', function() {
+            function PromptQuestion(question) {
+                this.question = question;
+                this.answerUrl = question.answerUrl;
+                this.prompt = question.prompt;
+                this.answer = question.answer;
+                this.displayAnswer = question.displayAnswer;
+                this.subject = question.subject;
+                this.type = question.questionType;
+            };
+            PromptQuestion.prototype.isCorrect = function() {
+                return this.enteredText.toLowerCase() == this.question.answer;
+            };
+            PromptQuestion.prototype.canSubmit = function() {
+                return this.enteredText;
+            };
+            
+            return PromptQuestion;
+        })
+        .factory('quizService', function($http, navService, LanguageService, OptionsQuestion, PromptQuestion) {
+            function Quiz() {
                 this.quiz = undefined;
                 this.currentQuestionIndex = 0;
                 this.correctAnswers = 0;
                 this.returnTo = navService.getReturnTo();
                 
                 var self = this;
-                $http.get(navService.getApiUrl()).success(function(data) {
-                    self.quiz = data.quiz;
-                    self.currentQuestion =  self.quiz.questions[self.currentQuestionIndex];
-                    self.numberOfQuestions = self.quiz.questions.length;
-                }).error(function(error) {
-                    console.log(error);
+                LanguageService.withCurrentLanguage(function(language) {
+                    language.getQuiz().success(function(data) {
+                        self.quiz = data.quiz;
+                        self.questions = [];
+                        self.numberOfQuestions = self.quiz.questions.length;
+                        for (var i = 0; i < self.numberOfQuestions; i++) {
+                            var question = self.quiz.questions[i];
+                            if (question.questionType === 'options') {
+                                self.questions.push(new OptionsQuestion(question));
+                            } else if (question.questionType === 'prompt') {
+                                self.questions.push(new PromptQuestion(question));
+                            }
+                        }
+                        self.currentQuestion =  self.questions[self.currentQuestionIndex];
+                    }).error(function(error) {
+                        console.log(error);
+                    });
                 });
             };
             Quiz.prototype.answer = function() {
                 var question = this.currentQuestion;
                 var self = this;
-                if (question.selectedIndex !== undefined) {
-                    var correct = question.selectedIndex == this.currentQuestion.answerIndex;
+                if (question.canSubmit()) {
+                    var correct = question.isCorrect();
                     self.grading = true;
                     $http.post(question.answerUrl, {'correct':correct}).success(function(data) {
                         question.results = {"correct":correct};
@@ -38,16 +86,16 @@
             };
             Quiz.prototype.next = function() {
                 this.currentQuestionIndex = this.currentQuestionIndex+1;
-                this.currentQuestion =  this.quiz.questions[this.currentQuestionIndex];
-                this.completed = (this.currentQuestionIndex == this.quiz.questions.length);
+                this.currentQuestion =  this.questions[this.currentQuestionIndex];
+                this.completed = (this.currentQuestionIndex == this.questions.length);
             };
             Quiz.prototype.canSubmit = function() {
-                return this.currentQuestion && (this.currentQuestion.selectedIndex >= 0) && !this.grading;
+                return this.currentQuestion && this.currentQuestion.canSubmit() && !this.grading;
             };
             
             return {
                 buildQuiz: function () {
-                    return new Quiz($routeParams.listId);
+                    return new Quiz();
                 }
             };
         })
@@ -55,13 +103,13 @@
             return {
                 buildEntries: function (quiz) {
                     var concepts = [];
-                    for (var i = 0; i < quiz.quiz.questions.length; i++) {
-                        var question = quiz.quiz.questions[i];
+                    for (var i = 0; i < quiz.questions.length; i++) {
+                        var question = quiz.questions[i];
                         concepts.push(question.subject);
                     }
                     var table = conceptTableService.buildEntries(concepts, quiz.isWords);
-                    for (var i = 0; i < quiz.quiz.questions.length; i++) {
-                        var question = quiz.quiz.questions[i];
+                    for (var i = 0; i < quiz.questions.length; i++) {
+                        var question = quiz.questions[i];
                         if (question.results.correct) {
                             table.entries[i].rowClass = 'success';
                         }
@@ -77,6 +125,15 @@
             $scope.quiz = quizService.buildQuiz();
         })
         .directive('question', function() {
+          return {
+              restrict: 'E',
+              replace: true,
+              scope: {
+                  question: '='
+              },
+              templateUrl: 'static/partials/directives/question.html'
+          }})
+        .directive('optionsQuestion', function() {
           return {
               restrict: 'E',
               replace: true,
@@ -110,7 +167,16 @@
                         }
                   };
               },
-              templateUrl: 'static/partials/directives/question.html'
+              templateUrl: 'static/partials/directives/options_question.html'
+          }})
+        .directive('promptQuestion', function() {
+          return {
+              restrict: 'E',
+              replace: true,
+              scope: {
+                  question: '='
+              },
+              templateUrl: 'static/partials/directives/prompt_question.html'
           }})
         .directive('option', function() {
           return {
@@ -137,12 +203,22 @@
               scope: {
                   quiz: '='
               },
-              controller: function($scope, $location, quizResultsTableService) {
+              controller: function($scope, quizResultsTableService) {
                   $scope.table = quizResultsTableService.buildEntries($scope.quiz);
-                  $scope.back = function() {
-                    $location.path($scope.quiz.returnTo);
-                  };
               },
               templateUrl: 'static/partials/directives/quiz_results.html'
+          }})
+        .directive('quizBackButton', function() {
+          return {
+              restrict: 'E',
+              replace: true,
+              controller: function($scope, $element, $timeout) {
+                  $scope.click = function() {
+                    $timeout(function() {
+                        a.element($element)[0].click();
+                    }, 0);
+                  };
+              },
+              templateUrl: 'static/partials/directives/quiz_back_button.html'
           }});
 })(angular);

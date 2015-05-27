@@ -4,7 +4,7 @@
         <h3 class="panel-title">{{quiz.quiz.name}} Quiz</h3>
     </div>
     <div class="panel-body">
-        <question question="quiz.currentQuestion" selectOption="selectOption"></question>
+        <question question="quiz.currentQuestion"></question>
     </div>
     <div class="panel-footer footer-with-button" ng-if="!quiz.currentQuestion.results">
         <button class="pull-right btn btn-primary quiz-button" on-enter-key="quiz.answer();" ng-click="quiz.answer();" ng-disabled="!quiz.canSubmit();" ng-if="!quiz.grading">Submit</button>

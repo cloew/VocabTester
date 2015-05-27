@@ -8,7 +8,9 @@ from Data.word import Word
 
 from kao_flask.ext.sqlalchemy.database import db
 
-@proxy_for('user', ["id", "email", "givenName", "lastName", "learnedSymbols", "learnedWords", "tryToLearnSymbol", "tryToLearnWord"])
+@proxy_for('user', ["id", "email", "givenName", "lastName", "nativeLanguage", "languageEnrollments",
+                    "getLearnedSymbolsFor", "hasLearnedSymbol", "tryToLearnSymbol", 
+                    "getLearnedWordsFor", "hasLearnedWord", "tryToLearnWord"])
 class UserProxy:
     """ Represents a proxy to lazy load a User object """
     
@@ -20,16 +22,6 @@ class UserProxy:
     def user(self):
         """ Lazy load the user """
         return User.query.filter_by(id=self.userInfo[u'id']).first()
-        
-    @lazy_property
-    def nativeLanguage(self):
-        """ Return the user's native language """
-        return Language.query.filter_by(name='English').first()
-        
-    @lazy_property
-    def foreignLanguage(self):
-        """ Return the user's foreign language """
-        return Language.query.filter_by(name='Japanese').first()
         
     def exists(self):
         """ Return if the User record actually exists """
@@ -44,12 +36,12 @@ class UserProxy:
             db.session.commit()
         return mastery
         
-    def getLearnedFor(self, modelClass):
+    def getLearnedFor(self, modelClass, language):
         """ Return the learned forms for the given model class """
         if modelClass is Symbol:
-            return self.learnedSymbols
+            return self.getLearnedSymbolsFor(language)
         elif modelClass is Word:
-            return self.learnedWords
+            return self.getLearnedWordsFor(language)
     
     def __nonzero__(self):
         """ Return if the object is true """

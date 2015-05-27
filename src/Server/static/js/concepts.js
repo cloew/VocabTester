@@ -1,27 +1,20 @@
 (function(a) {
     "use strict";
-    a.module('Concepts', ['ui.bootstrap', 'kao.table', 'VocabNav'])
-        .controller('LearnedFormsController', function ($scope, $http, $location, navService) {
-            $http.get(navService.getApiUrl()).success(function(data) {
+    a.module('Concepts', ['ui.bootstrap', 'kao.loading', 'kao.table', 'VocabNav', 'Language', 'Forms'])
+        .controller('LearnedFormsController', function ($scope, FormsService, LanguageService, LoadingTrackerService) {
+            var form = FormsService.current();
+            $scope.formName = form.pluralName;
+            $scope.quizUrl = form.randomQuizPath;
+            var tracker = LoadingTrackerService.get('learned');
+            
+            LanguageService.watchCurrentLanguage($scope, function(event, language) {
+                tracker.load(form.getLearned()).success(function(data) {
                     $scope.concepts = data.concepts;
                     $scope.isWords = data.isWords;
                 }).error(function(error) {
                     console.log(error);
                 });
-            $scope.goTo = function(path) {
-                $location.path(path);
-            }
-        })
-        .controller('FormsController', function ($scope, $http, $location, navService) {
-            $http.get(navService.getApiUrl()).success(function(data) {
-                    $scope.concepts = data.concepts;
-                    $scope.isWords = data.isWords;
-                }).error(function(error) {
-                    console.log(error);
-                });
-            $scope.goTo = function(path) {
-                $location.path(path);
-            }
+            });
         })
         .factory('conceptTableService', function() {
             return {

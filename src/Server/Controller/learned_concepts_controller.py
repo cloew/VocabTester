@@ -1,4 +1,5 @@
 from Data.concept_manager import ConceptManager
+from Data.language import Language
 from Data.word import Word
 
 from Server.helpers.json_factory import toJson
@@ -14,9 +15,10 @@ class LearnedConceptsController(AuthJSONController):
         self.formModel = formModel
         self.conceptManager = ConceptManager(formModel)
     
-    def performWithJSON(self, json=None, user=None):
+    def performWithJSON(self, languageId, json=None, user=None):
         """ Convert the quiz to JSON """
-        learnedForms = user.getLearnedFor(self.formModel)
+        language = Language(id=languageId)
+        learnedForms = user.getLearnedFor(self.formModel, language)
         conceptIds = [form.concept_id for form in learnedForms]
-        pairs = self.conceptManager.getConceptPairs(conceptIds, user)
+        pairs = self.conceptManager.getConceptPairs(conceptIds, user.nativeLanguage, language)
         return {"concepts":toJson(pairs, user=user), "isWords":self.formModel is Word}

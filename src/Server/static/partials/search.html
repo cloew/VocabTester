@@ -1,0 +1,25 @@
+<div class="col-md-8 col-md-push-2" style="text-align:center;">
+    <kao-header title="Search for a Word"></kao-header>
+    <div class="col-md-12">
+        <form class="form-horizontal">
+            <div class="form-group">
+                <label for="text" class="col-sm-2 control-label">Text</label>
+                <div class="col-sm-10">
+                    <input id="text" type="text" class="form-control" ng-model="text" placeholder="Text"/>
+                </div>
+            </div>
+            <button type="submit" ng-click="search(text)" class="btn btn-default btn-primary">Search</button>
+        </form>
+    </div>
+    <loading-div loading="search">
+        <div class="col-md-12" ng-if="results" style="text-align:center;">
+            <h2 class="col-md-8 col-md-push-2">Results</h2>
+            <div class="col-md-12">
+                <search-result ng-repeat="result in results" result="result"></search-result>
+            </div>
+        </div>
+        <div class="col-md-12" ng-if="results.length === 0" style="text-align:center;">
+            <h3 class="col-md-8 col-md-push-2">Sorry, no results were found</h3>
+        </div>
+    </loading-div>
+</div>

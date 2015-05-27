@@ -32,5 +32,22 @@
               "text":"パンだ"},
              {"concept":7,
               "text":"ねずみ"}]
+},
+{
+    "language":"German",
+    "words":[{"concept":1,
+              "text":"Hund"},
+             {"concept":2,
+              "text":"Katze"},
+             {"concept":3,
+              "text":"Elefant"},
+             {"concept":4,
+              "text":"Pferd"},
+             {"concept":5,
+              "text":"Kaninchen"},
+             {"concept":6,
+              "text":"Panda"},
+             {"concept":7,
+              "text":"Maus"}]
 }
 ]

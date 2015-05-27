@@ -32,5 +32,22 @@
               "text":"かがみ"},
              {"concept":7,
               "text":"まど"}]
+},
+{
+    "language":"German",
+    "words":[{"concept":1,
+              "text":"Kissen"},
+             {"concept":2,
+              "text":"Futon"},
+             {"concept":3,
+              "text":"Decke"},
+             {"concept":4,
+              "text":"Bad"},
+             {"concept":5,
+              "text":"Seife"},
+             {"concept":6,
+              "text":"Spiegel"},
+             {"concept":7,
+              "text":"Fenster"}]
 }
 ]

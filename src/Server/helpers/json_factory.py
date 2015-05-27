@@ -1,6 +1,8 @@
-from kao_json import JsonFactory, JsonAttr, FieldAttr
+from kao_json import JsonFactory, JsonAttr, FieldAttr, StaticAttr
 
 from Data.concept_pair import ConceptPair
+from Data.language import Language
+from Data.language_enrollment import LanguageEnrollment
 from Data.symbol import Symbol
 from Data.symbol_list import SymbolList
 from Data.user import User
@@ -9,7 +11,8 @@ from Data.word import Word
 from Data.word_list import WordList
 
 from Quiz.quiz import Quiz
-from Quiz.Question.question import Question
+from Quiz.Question.options_question import OptionsQuestion
+from Quiz.Question.foreign_prompt_question import ForeignPromptQuestion
 
 from Server.helpers.user_proxy import UserProxy
 
@@ -20,15 +23,28 @@ def answerUrl(question, user):
 def IsWordsQuiz(quiz):
     """ Returns if the quiz is for words """    
     return len(quiz.questions) == 0 or quiz.questions[0].subject.foreign.__class__ is Word
+    
+def GetMateryRating(form, user):
+    """ Return the mastery rating for the given form """    
+    return form.getMastery(user).rating
+    
+def HasLearned(form, user):
+    """ Return if the user has learned the given form """
+    hasLearnedMethod = {Word: user.hasLearnedWord, Symbol: user.hasLearnedSymbol}
+    return hasLearnedMethod[form.__class__](form)
 
 jsonFactory = JsonFactory([
-                           ([Symbol, Word],[FieldAttr('id'), JsonAttr('text', unicode), JsonAttr('mastery', lambda s, u: s.getMasteryRating(u), args=["user"])]),
+                           ([Symbol, Word],[FieldAttr('id'), JsonAttr('text', unicode), JsonAttr('mastery', GetMateryRating, args=["user"]), 
+                                            JsonAttr('learned', HasLearned, args=["user"])]),
                            (ConceptPair,[FieldAttr('foreign'), FieldAttr('native')]),
                            ([SymbolList, WordList],[FieldAttr('id'), FieldAttr('name'), JsonAttr('concepts', lambda s, u: s.getConceptPairs(u), args=["user"])]),
                            (UserConceptList,[FieldAttr('id'), FieldAttr('name'), FieldAttr('concepts'), FieldAttr('averageMastery')]),
-                           ([User, UserProxy], [FieldAttr('id'), FieldAttr('email'), FieldAttr('givenName'), FieldAttr('lastName')]),
-                           (Question, [FieldAttr('subject'), FieldAttr('queryWord'), FieldAttr('options'), FieldAttr('answerIndex'), JsonAttr('answerUrl', answerUrl, args=["user"])]),
-                           (Quiz, [FieldAttr('name'), FieldAttr('questions'), JsonAttr('isWords', IsWordsQuiz)])
+                           ([User, UserProxy], [FieldAttr('id'), FieldAttr('email'), FieldAttr('givenName'), FieldAttr('lastName'), FieldAttr('nativeLanguage')]),
+                           (OptionsQuestion, [FieldAttr('subject'), FieldAttr('queryWord'), FieldAttr('options'), FieldAttr('answerIndex'), StaticAttr('questionType', 'options'), JsonAttr('answerUrl', answerUrl, args=["user"])]),
+                           (ForeignPromptQuestion, [FieldAttr('subject'), FieldAttr('prompt'), FieldAttr('answer'), FieldAttr('displayAnswer'), StaticAttr('questionType', 'prompt'), JsonAttr('answerUrl', answerUrl, args=["user"])]),
+                           (Quiz, [FieldAttr('name'), FieldAttr('questions'), JsonAttr('isWords', IsWordsQuiz)]),
+                           (Language, [FieldAttr('id'), FieldAttr('name')]),
+                           (LanguageEnrollment, [FieldAttr('id'), FieldAttr('language'), FieldAttr('default')])
                           ])
                          
 def toJson(object, **kwargs):

@@ -1,5 +1,6 @@
 from kao_decorators import lazy_property
-from learned_tracker import LearnedTracker
+from .language import Language
+from .learned_tracker import LearnedTracker
 
 from kao_flask.ext.sqlalchemy.database import db
 
@@ -24,8 +25,10 @@ class User(db.Model):
     password = db.Column(db.UnicodeText(), nullable=False)
     givenName = db.Column(db.UnicodeText())
     lastName = db.Column(db.UnicodeText())
-    learnedSymbols = db.relationship("Symbol", secondary=learned_symbols)
-    learnedWords = db.relationship("Word", secondary=learned_words)
+    native_language_id = db.Column(db.Integer, db.ForeignKey('languages.id'))
+    nativeLanguage = db.relationship("Language")
+    learnedSymbols = db.relationship("Symbol", secondary=learned_symbols, lazy='dynamic')
+    learnedWords = db.relationship("Word", secondary=learned_words, lazy='dynamic')
     
     def __init__(self, **kwargs):
         """ Initialize the User """
@@ -37,17 +40,29 @@ class User(db.Model):
         """ Check if the password is this users password """
         return check_password(rawPassword, self.password)
         
-    def tryToLearnSymbol(self, mastery):
-        """ Try to learn the symbol related to the given mastery """
-        if mastery.symbol_id is not None:
-            if not self.learnedSymbolTracker.hasLearned(mastery.symbol_id):
-                self.learnedSymbolTracker.learn(mastery.symbol)
+    def getLearnedSymbolsFor(self, language):
+        """ Return the learned symbols for this user that are for the given language """
+        return self.learnedSymbols.filter_by(language_id=language.id).all()
         
-    def tryToLearnWord(self, mastery):
-        """ Try to learn the word related to the given mastery """
-        if mastery.word_id is not None:
-            if not self.learnedWordTracker.hasLearned(mastery.word_id):
-                self.learnedWordTracker.learn(mastery.word)
+    def hasLearnedSymbol(self, symbol):
+        """ Return if the symbol has already been learned """
+        return self.learnedSymbolTracker.hasLearned(symbol.id)
+        
+    def tryToLearnSymbol(self, symbol):
+        """ Try to learn the symbol """
+        self.learnedSymbolTracker.tryToLearn(symbol)
+        
+    def getLearnedWordsFor(self, language):
+        """ Return the learned words for this user that are for the given language """
+        return self.learnedWords.filter_by(language_id=language.id).all()
+        
+    def hasLearnedWord(self, word):
+        """ Return if the word has already been learned """
+        return self.learnedWordTracker.hasLearned(word.id)
+        
+    def tryToLearnWord(self, word):
+        """ Try to learn the word """
+        self.learnedWordTracker.tryToLearn(word)
         
     def save(self):
         """ Save the Underlying User Data Object """

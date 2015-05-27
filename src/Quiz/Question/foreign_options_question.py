@@ -1,6 +1,6 @@
-from question import Question
+from options_question import OptionsQuestion
 
-class ForeignOptionsQuestion(Question):
+class ForeignOptionsQuestion(OptionsQuestion):
     """ Represents a question where all the options are in the foreign language """
     
     def getQuestionForm(self, subject):

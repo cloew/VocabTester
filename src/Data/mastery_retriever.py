@@ -1,24 +1,28 @@
 from mastery import Mastery
 from kao_flask.ext.sqlalchemy.database import db
 
-def mastery_retriever(masteryFieldName):
-    def addMastery(cls):
-        def getMastery(self, user):
-            """ Return the object's mastery record for the given user """
-            kwargs = {'user_id':user.id, masteryFieldName+'_id':self.id}
-            mastery = Mastery.query.filter_by(**kwargs).first()
-            if mastery is None:
-                kwargs = {'user':user, masteryFieldName:self}
-                mastery = Mastery(**kwargs)
-                db.session.add(mastery)
-                db.session.commit()
-            return mastery
+import functools
+
+class MasteryRetriever(object):
+    """ Helper descriptor to provide method to retrieve the mastery for a user """
+
+    def __init__(self, masteryFieldName):
+        """ Initialize the Mastery Retriever with the prefix for the mastery id """
+        self.masteryFieldName = masteryFieldName
         
-        def getMasteryRating(self, user):
-            """ Return the user's mastery rating for this object """ 
-            return self.getMastery(user).rating
-            
-        cls.getMastery = getMastery
-        cls.getMasteryRating = getMasteryRating
-        return cls
-    return addMastery
+    def __get__(self, obj, objtype=None):
+        """ Return this descriptor or the getMastery method """
+        if obj is None:
+            return self
+        return functools.partial(self.getMastery, obj)
+
+    def getMastery(self, obj, user):
+        """ Return the object's mastery record for the given user """
+        kwargs = {'user_id':user.id, self.masteryFieldName+'_id':obj.id}
+        mastery = Mastery.query.filter_by(**kwargs).first()
+        if mastery is None:
+            kwargs = {'user':user, self.masteryFieldName:obj}
+            mastery = Mastery(**kwargs)
+            db.session.add(mastery)
+            db.session.commit()
+        return mastery

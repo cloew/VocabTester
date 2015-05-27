@@ -1,0 +1,47 @@
+[
+{
+    "language":"English",
+    "words":[{"concept":1,
+              "text":"tornado"},
+             {"concept":2,
+              "text":"cloudy"},
+             {"concept":3,
+              "text":"thunder"},
+             {"concept":4,
+              "text":"cloud"},
+             {"concept":5,
+              "text":"wind"},
+             {"concept":6,
+              "text":"earthquake"}]
+},
+{
+    "language":"Japanese",
+    "words":[{"concept":1,
+              "text":"たつまき"},
+             {"concept":2,
+              "text":"くもり"},
+             {"concept":3,
+              "text":"かみなり"},
+             {"concept":4,
+              "text":"くも"},
+             {"concept":5,
+              "text":"かぜ"},
+             {"concept":6,
+              "text":"じしん"}]
+},
+{
+    "language":"German",
+    "words":[{"concept":1,
+              "text":"Tornado"},
+             {"concept":2,
+              "text":"bewölkt"},
+             {"concept":3,
+              "text":"Donner"},
+             {"concept":4,
+              "text":"Wolke"},
+             {"concept":5,
+              "text":"Wind"},
+             {"concept":6,
+              "text":"Erdbeben"}]
+}
+]

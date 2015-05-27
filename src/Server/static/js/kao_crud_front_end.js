@@ -1,39 +1,6 @@
 (function(a) {
     'use strict';
-    a.module('kao.rest', [])
-        .provider('CrudParamFromRouteConfig', function() {
-            var paramToConfig = {};
-            var CrudParamFromRoute = function(pathConfigs) {
-                this.pathConfigs = {};
-                for (var i = 0; i < pathConfigs.length; i++) {
-                    this.pathConfigs[pathConfigs[i].path] = pathConfigs[i].param;
-                }
-            };
-            CrudParamFromRoute.prototype.get = function($injector) {
-                return $injector.invoke(function($route, $routeParams) {
-                    return $routeParams[this.pathConfigs[$route.current.$$route.path]];
-                }, this);
-            };
-            
-            this.register = function(param, pathConfigs) {
-                paramToConfig[param] = new CrudParamFromRoute(pathConfigs);
-            };
-            this.forParam = function(param) {
-                return paramToConfig[param];
-            };
-            this.$get = function() {
-                return this;
-            };
-        })
-        .provider('CrudApiConfig', function() {
-            var crudConfigs = [];
-            this.add = function(apiUrl, dataType, nested) {
-                crudConfigs.push({apiUrl: apiUrl, dataType: dataType, nested: nested});
-            };
-            this.$get = function() {
-                return crudConfigs;
-            };
-        })
+    a.module('kao.crud.frontend', ['kao.crud.api', 'kao.utils', 'kao.loading'])
         .provider('FrontEndCrudConfig', function() {
             var crudConfigs = [];
             this.add = function(config) {
@@ -42,58 +9,6 @@
             this.$get = function() {
                 return crudConfigs;
             };
-        })
-        .factory('NestedRouteService', function($injector) {
-            this.getUrl = function(apiUrl, nested) {
-                var apiUrl = apiUrl;
-                if (nested) {
-                    for (var i = 0; i < nested.length; i++) {
-                        apiUrl = apiUrl.replace(':'+nested[i].param, nested[i].provider.get($injector))
-                    }
-                }
-                return apiUrl;
-            }
-            return this;
-        })
-        .factory('CrudApi', function($http, NestedRouteService) {
-            function CrudApi(apiUrl, nested) {
-                this.apiUrl = apiUrl;
-                this.nested = nested;
-            };
-            CrudApi.prototype.getBaseUrl = function() {
-                return NestedRouteService.getUrl(this.apiUrl, this.nested);
-            };
-            CrudApi.prototype.getAll = function() {
-                return $http.get(this.getBaseUrl());
-            };
-            CrudApi.prototype.create = function(record) {
-                return $http.post(this.getBaseUrl(), record);
-            };
-            CrudApi.prototype.get = function(recordId) {
-                return $http.get(this.getBaseUrl()+'/'+recordId);
-            };
-            CrudApi.prototype.update = function(record) {
-                return $http.put(this.getBaseUrl()+'/'+record.id, record);
-            };
-            CrudApi.prototype.delete = function(recordId) {
-                return $http.delete(this.getBaseUrl()+'/'+recordId);
-            };
-            return CrudApi;
-        })
-        .factory('CrudApiService', function($route, CrudApi, CrudApiConfig) {
-            var dataTypeToApi = {}
-            var service = {
-                addCrud: function(apiUrl, dataType, nested) {
-                    dataTypeToApi[dataType] = new CrudApi(apiUrl, nested);
-                },
-                getApiFor: function(dataType) {
-                    return dataTypeToApi[dataType];
-                }
-            };
-            for (var i = 0; i < CrudApiConfig.length; i++) {
-                service.addCrud(CrudApiConfig[i].apiUrl, CrudApiConfig[i].dataType, CrudApiConfig[i].nested);
-            }
-            return service;
         })
         .factory('FrontEndCrud', function(NestedRouteService) {
             function CrudFrontEnd(config) {
@@ -110,6 +25,7 @@
                 
                 this.tableDirective = config.tableDirective;
                 this.formDirective = config.formDirective;
+                this.afterEditDirective = config.afterEditDirective;
             };
             CrudFrontEnd.prototype.getProperNestedConfig = function(varName) {
                 var nested = this.nested;
@@ -169,7 +85,7 @@
             scope: {
                 type: '@'
             },
-            controller: function ($scope, $location, CrudApiService, FrontEndCrudService) {
+            controller: function ($scope, $location, CrudApiService, FrontEndCrudService, LoadingTrackerService) {
                 var frontEndCrud;
                 if ($scope.type) {
                     frontEndCrud = FrontEndCrudService.getFrontEndFor($scope.type);
@@ -177,6 +93,8 @@
                     frontEndCrud = FrontEndCrudService.getCurrentCrud();
                 }
                 var crudApi = CrudApiService.getApiFor(frontEndCrud.name);
+                var tracker =  LoadingTrackerService.get('list');
+                
                 $scope.records = [];
                 $scope.dataType = frontEndCrud.name;
                 $scope.pluralDataType = frontEndCrud.pluralName;
@@ -200,7 +118,7 @@
                 };
                 
                 $scope.getRecords = function() {
-                    crudApi.getAll().success(function(data) {
+                    tracker.load(crudApi.getAll()).success(function(data) {
                         $scope.records = data.records;
                     }).error(function(error) {
                         console.log(error);
@@ -217,7 +135,7 @@
             scope: {
                 type: '@'
             },
-            controller: function ($scope, $location, CrudApiService, FrontEndCrudService) {
+            controller: function ($scope, $location, CrudApiService, FrontEndCrudService, LoadingTrackerService) {
                 var frontEndCrud;
                 if ($scope.type) {
                     frontEndCrud = FrontEndCrudService.getFrontEndFor($scope.type);
@@ -228,9 +146,10 @@
                 $scope.record = {};
                 $scope.dataType = frontEndCrud.name;
                 $scope.formDirective = frontEndCrud.formDirective;
+                var tracker = LoadingTrackerService.get('saving');
                 
                 $scope.save = function() {
-                    crudApi.create($scope.record).success(function(data) {
+                    tracker.load(crudApi.create($scope.record)).success(function(data) {
                         $location.path(frontEndCrud.getEditUrl(data.record.id));
                     }).error(function(error) {
                         console.log(error);
@@ -246,7 +165,7 @@
             scope: {
                 type: '@'
             },
-            controller: function ($scope, $location, $routeParams, CrudApiService, FrontEndCrudService) {
+            controller: function ($scope, $location, $routeParams, CrudApiService, FrontEndCrudService, LoadingTrackerService) {
                 var frontEndCrud;
                 if ($scope.type) {
                     frontEndCrud = FrontEndCrudService.getFrontEndFor($scope.type);
@@ -257,13 +176,15 @@
                 $scope.record = {};
                 $scope.dataType = frontEndCrud.name;
                 $scope.formDirective = frontEndCrud.formDirective;
+                $scope.afterEditDirective = frontEndCrud.afterEditDirective;
+                var tracker = LoadingTrackerService.get('saving');
                 
                 $scope.goTo = function(path) {
                     $location.path(path);
                 };
                 
                 $scope.save = function() {
-                    crudApi.update($scope.record).success(function(data) {
+                    tracker.load(crudApi.update($scope.record)).success(function(data) {
                         $scope.record = data.record;
                     }).error(function(error) {
                         console.log(error);
@@ -288,15 +209,39 @@
                 $scope.getRecord();
             }
         }})
-        .directive('dynamicDirective', function($compile) {
+        .directive('listHeader', function() {
             return {
                 restrict: 'E',
                 replace: true,
-                link: function(scope, element, attrs) {
-                    var dom = '<'+attrs.directive+'>'+'</'+attrs.directive+'>'
-                    var el = $compile(dom)(scope);
-                    element.append(el);
-                }
+                templateUrl: 'static/partials/directives/admin/list_header.html'
+            }
+        })
+        .directive('newHeader', function() {
+            return {
+                restrict: 'E',
+                replace: true,
+                templateUrl: 'static/partials/directives/admin/new_header.html'
+            }
+        })
+        .directive('editHeader', function() {
+            return {
+                restrict: 'E',
+                replace: true,
+                templateUrl: 'static/partials/directives/admin/edit_header.html'
+            }
+        })
+        .directive('modelTable', function() {
+            return {
+                restrict: 'E',
+                replace: true,
+                templateUrl: 'static/partials/directives/admin/model_table.html'
+            }
+        })
+        .directive('modelForm', function() {
+            return {
+                restrict: 'E',
+                replace: true,
+                templateUrl: 'static/partials/directives/admin/model_form.html'
             }
         })
         .directive('toNewPage', function() {
@@ -328,6 +273,30 @@
                 templateUrl: 'static/partials/directives/admin/save_button.html'
             }
         })
+        .directive('kaoSelect', function() {
+            return {
+                restrict: 'E',
+                replace: true,
+                scope: {
+                  model: '=',
+                  url: '@',
+                  displayField: '@'
+                },
+                controller: function($scope, $http) {
+                    $scope.records = [];
+                
+                    $scope.getRecords = function() {
+                        $http.get($scope.url).success(function(data) {
+                            $scope.records = data.records;
+                        }).error(function(error) {
+                            console.log(error);
+                        });
+                    };
+                    $scope.getRecords();
+                },
+                templateUrl: 'static/partials/directives/admin/model_select.html'
+            }
+        })
         .directive('modelSelect', function() {
             return {
                 restrict: 'E',
@@ -337,7 +306,7 @@
                   type: '@',
                   displayField: '@'
                 },
-                controller: function($scope, CrudApiService) {                    
+                controller: function($scope, CrudApiService) {
                     var crudApi = CrudApiService.getApiFor($scope.type);
                     $scope.records = [];
                 

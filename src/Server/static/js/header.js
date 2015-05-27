@@ -35,5 +35,23 @@
                 },
                 templateUrl: 'static/partials/directives/header_nav.html'
             };
+        })
+        .directive('languagePicker', function() {
+            return {
+                restrict: 'E',
+                replace: true,
+                controller: function($scope, LanguageEnrollmentsService) {
+                    LanguageEnrollmentsService.watchCurrentEnrollment($scope, function(event, currentEnrollment) {
+                        $scope.currentEnrollment = currentEnrollment;
+                    });
+                    LanguageEnrollmentsService.requestEnrollments(function(enrollments) {
+                        $scope.enrollments = enrollments;
+                    });
+                    $scope.changeCurrentEnrollment = function(index) {
+                        LanguageEnrollmentsService.changeCurrentEnrollment(index);
+                    };
+                },
+                templateUrl: 'static/partials/directives/language_picker.html'
+            };
         });
 })(angular);

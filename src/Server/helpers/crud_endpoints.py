@@ -11,14 +11,14 @@ from kao_flask.endpoint import Endpoint
 class CrudEndpoints:
     """ Represents the standard CRUD Endpoints for a particualr model class """
     
-    def __init__(self, rootUrl, modelCls, routeParams={}, jsonColumnMap={}):
+    def __init__(self, rootUrl, modelCls, routeParams={}, jsonColumnMap={}, decorators=[]):
         """ Initialize with the root URL and the model class to wrap """
         recordValueProvider = RecordValueProvider(jsonColumnMap)
-        self.listEndpoint = Endpoint(rootUrl, get=ListController(modelCls, routeParams=routeParams), 
-                                              post=CreateController(modelCls, routeParams=routeParams, recordValueProvider=recordValueProvider))
-        self.recordEndpoint = Endpoint(rootUrl+'/<int:id>', get=RecordController(modelCls), 
-                                                            put=UpdateController(modelCls, recordValueProvider=recordValueProvider), 
-                                                            delete=DeleteController(modelCls))
+        self.listEndpoint = Endpoint(rootUrl, get=ListController(modelCls, routeParams=routeParams, decorators=decorators), 
+                                              post=CreateController(modelCls, routeParams=routeParams, recordValueProvider=recordValueProvider, decorators=decorators))
+        self.recordEndpoint = Endpoint(rootUrl+'/<int:id>', get=RecordController(modelCls, decorators=decorators), 
+                                                            put=UpdateController(modelCls, recordValueProvider=recordValueProvider, decorators=decorators), 
+                                                            delete=DeleteController(modelCls, decorators=decorators))
         
     @property
     def endpoints(self):

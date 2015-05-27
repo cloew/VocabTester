@@ -1,0 +1,10 @@
+<div class="btn-group" dropdown>
+    <button type="button" class="btn btn-primary" dropdown-toggle>
+        {{currentEnrollment.language.name}} <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu" role="menu">
+        <li ng-repeat="enrollment in enrollments" ng-class="{'bg-primary':enrollment.id === currentEnrollment.id}">
+            <a style="cursor: pointer;" ng-click="changeCurrentEnrollment($index);">{{enrollment.language.name}}</a>
+        </li>
+    </ul>
+</div>

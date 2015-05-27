@@ -3,25 +3,31 @@ from foreign_options_question import ForeignOptionsQuestion
 
 from Quiz.ratio_picker import RatioPicker
 
+from .options_question_builder import OptionsQuestionBuilder
+from .prompt_question_builder import PromptQuestionBuilder
+
+from itertools import groupby
 import random
 
 class QuestionFactory:
     """ Constructs Questions """
-    questionClassRatio = RatioPicker([(ForeignOptionsQuestion, .5),
-                                      (NativeOptionsQuestion, .5)])
-                     
-    def buildQuestions(self, pairs):
-        """ Build the questions for use in the quiz """
-        random.shuffle(pairs)
-        questionClasses = self.getQuestionClasses(pairs)
+                                      
+    def __init__(self):
+        """ Initialize the question factory with the builders for each question type """
+        self.optionsQuestionBuilder = OptionsQuestionBuilder()
+        self.promptQuestionBuilder = PromptQuestionBuilder()
         
-        setOfPairs = set(pairs)
-        return [questionClass(pair, setOfPairs) for pair, questionClass in zip(pairs, questionClasses)]
-    
-    def getQuestionClasses(self, pairs):
-        """ Return the question classes """
-        questionClasses = self.questionClassRatio.getResults(len(pairs))
-        random.shuffle(questionClasses)
-        return questionClasses
+        self.optionsRange = range(0,4)
+        self.promptRange = range(4,6)
+                     
+    def buildQuestions(self, pairs, user):
+        """ Build the questions for use in the quiz """
+        questions = []
+        for mastery, conceptPairs in groupby(pairs, lambda pair: pair.foreign.getMastery(user).answerRating):
+            if mastery in self.optionsRange:
+                questions += self.optionsQuestionBuilder.buildQuestions(list(conceptPairs), pairs)
+            if mastery in self.promptRange:
+                questions += self.promptQuestionBuilder.buildQuestions(list(conceptPairs))
+        return questions
     
 QuestionFactory = QuestionFactory()

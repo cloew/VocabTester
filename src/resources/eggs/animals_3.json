@@ -28,5 +28,20 @@
               "text":"さかな"},
              {"concept":6,
               "text":"きょうりゅう"}]
+},
+{
+    "language":"German",
+    "words":[{"concept":1,
+              "text":"Schlange"},
+             {"concept":2,
+              "text":"Vogel"},
+             {"concept":3,
+              "text":"Hummer"},
+             {"concept":4,
+              "text":"Eidechse"},
+             {"concept":5,
+              "text":"Fisch"},
+             {"concept":6,
+              "text":"Dinosaurier"}]
 }
 ]

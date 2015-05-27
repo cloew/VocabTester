@@ -9,7 +9,7 @@ import datetime
 class Mastery(db.Model):
     """ Represents the mastery of some skill """
     __tablename__ = 'masteries'
-    MAX_ANSWERS = 3
+    MAX_ANSWERS = 5
     
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
