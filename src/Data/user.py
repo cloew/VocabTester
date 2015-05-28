@@ -23,6 +23,7 @@ class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.Text(), nullable=False, unique=True)
     password = db.Column(db.UnicodeText(), nullable=False)
+    is_admin = db.Column(db.Boolean, default=False)
     givenName = db.Column(db.UnicodeText())
     lastName = db.Column(db.UnicodeText())
     native_language_id = db.Column(db.Integer, db.ForeignKey('languages.id'))
