@@ -8,7 +8,7 @@ from Data.word import Word
 
 from kao_flask.ext.sqlalchemy.database import db
 
-@proxy_for('user', ["id", "email", "givenName", "lastName", "nativeLanguage", "languageEnrollments",
+@proxy_for('user', ["id", "email", "is_admin", "givenName", "lastName", "nativeLanguage", "languageEnrollments",
                     "getLearnedSymbolsFor", "hasLearnedSymbol", "tryToLearnSymbol", 
                     "getLearnedWordsFor", "hasLearnedWord", "tryToLearnWord"])
 class UserProxy:
