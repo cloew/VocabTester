@@ -20,7 +20,7 @@ def GetNativeForm(concept, user):
 jsonFactory = JsonFactory([(Concept, [FieldAttr('id'), JsonAttr('native', GetNativeForm, args=["user"])]),
                            ([Symbol, Word], [FieldAttr('id'), JsonAttr('text', unicode), FieldAttr('language')]),
                            (ConceptPair, [FieldAttr('foreign'), FieldAttr('native')]),
-                           ([User, UserProxy], [FieldAttr('id'), FieldAttr('email'), FieldAttr('givenName'), FieldAttr('lastName')]),
+                           ([User, UserProxy], [FieldAttr('id'), FieldAttr('email'), FieldAttr('is_admin'), FieldAttr('givenName'), FieldAttr('lastName'), FieldAttr('nativeLanguage')]),
                            (Language, [FieldAttr('id'), FieldAttr('name')]),
                            (LanguageEnrollment, [FieldAttr('id'), FieldAttr('language'), FieldAttr('default')])
                           ])
