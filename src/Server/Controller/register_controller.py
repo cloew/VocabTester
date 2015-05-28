@@ -13,6 +13,7 @@ class RegisterController(JSONController):
     def performWithJSON(self, json=None):
         """ Create a User record with the given credentials """
         try:
+            json['is_admin'] = False
             user = User(**json)
             db.session.add(user)
             db.session.commit()
