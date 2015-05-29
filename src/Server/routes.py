@@ -52,6 +52,7 @@ routes = [Endpoint('/', get=HTMLController('Server/templates/index.html')),
           # Mastery
           Endpoint('/api/mastery/<int:masteryId>/answer', post=QuizAnswerController())]
           
+routes += CrudEndpoints('/api/admin/users', User, decorators=[requires_auth, requires_admin]).endpoints
 routes += CrudEndpoints('/api/admin/languages', Language, decorators=[requires_auth, requires_admin]).endpoints
 routes += CrudEndpoints('/api/admin/concepts', Concept, decorators=[requires_auth, requires_admin]).endpoints
 routes += CrudEndpoints('/api/admin/concepts/<int:conceptId>/words', Word, 
