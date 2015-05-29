@@ -8,6 +8,10 @@
                                                                 {path:config.adminNewConceptWords.path, param: 'conceptId'},
                                                                 {path:config.adminEditConceptWords.path, param: 'conceptId'}]);
                 
+                CrudApiConfig.add('/api/admin/users', 'User');
+                FrontEndCrudConfig.add({name:'User', listUrl:config.adminUsers.path, newUrl:config.adminNewUsers.path, editUrl:config.adminEditUsers.path,
+                                        formDirective:'user-form', tableDirective:'user-table'});
+                CrudApiConfig.add('/api/admin/concepts', 'Concept');
                 CrudApiConfig.add('/api/admin/languages', 'Language');
                 FrontEndCrudConfig.add({name:'Language', listUrl:config.adminLanguages.path, newUrl:config.adminNewLanguages.path, editUrl:config.adminEditLanguages.path,
                                         formDirective:'language-form', tableDirective:'language-table'});
@@ -26,6 +30,20 @@
                                         primaryPaths:[config.adminNewConceptSymbols.path, config.adminEditConceptSymbols.path]});
             }
         ])
+        .directive('userTable', function() {
+            return {
+                restrict: 'E',
+                replace: true,
+                templateUrl: 'static/partials/directives/admin/user_table.html'
+            }
+        })
+        .directive('userForm', function() {
+            return {
+                restrict: 'E',
+                replace: true,
+                templateUrl: 'static/partials/directives/admin/user_form.html'
+            }
+        })
         .directive('languageTable', function() {
             return {
                 restrict: 'E',

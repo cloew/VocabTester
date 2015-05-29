@@ -18,6 +18,9 @@
             this.add({name: 'symbols', path:'/symbols', templateUrl:'static/partials/learned_concepts.html', controller:'LearnedFormsController', onLoad: ['requireAuth']});
             this.add({name: 'symbolLists', path:'/symbollists', template:'<form-lists></form-lists>', onLoad: ['requireAuth']});
             this.add({name: 'search', path:'/search', templateUrl:'static/partials/search.html', controller:'SearchController', onLoad: ['requireAuth']});
+            this.add({name: 'adminUsers', path:'/admin/users', templateUrl:'static/partials/admin/list_records.html', onLoad: ['requireAuth']});
+            this.add({name: 'adminNewUsers', path:'/admin/users/new', templateUrl:'static/partials/admin/new_record.html', onLoad: ['requireAuth']});
+            this.add({name: 'adminEditUsers', path:'/admin/users/:id', templateUrl:'static/partials/admin/edit_record.html', onLoad: ['requireAuth']});
             this.add({name: 'adminLanguages', path:'/admin/languages', templateUrl:'static/partials/admin/list_records.html', onLoad: ['requireAuth']});
             this.add({name: 'adminNewLanguages', path:'/admin/languages/new', templateUrl:'static/partials/admin/new_record.html', onLoad: ['requireAuth']});
             this.add({name: 'adminEditLanguages', path:'/admin/languages/:id', templateUrl:'static/partials/admin/edit_record.html', onLoad: ['requireAuth']});
