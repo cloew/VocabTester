@@ -4,12 +4,15 @@ from Server.helpers.record_value_provider import RecordValueProvider
 from Server.helpers.token_builder import BuildToken
 from Server.Controller.update_controller import UpdateController
 
+from Server.decorators import requires_auth
+
 class UpdateUserController(UpdateController):
     """ Controller to update a User """
     
     def __init__(self):
         """ Initialize the Update User Controller """
-        UpdateController.__init__(self, User, recordValueProvider=RecordValueProvider({'nativeLanguage': lambda value: ('native_language_id', value['id'])}))
+        UpdateController.__init__(self, User, decorators=[requires_auth], 
+    							  recordValueProvider=RecordValueProvider({'nativeLanguage': lambda value: ('native_language_id', value['id'])}))
     
     def performWithJSON(self, **kwargs):
         """ Remove the record """
