@@ -64,8 +64,5 @@ target/
 # VirtualEnv
 venv/
 
-# Flask
-migrations/
-
 # NPM
 node_modules
