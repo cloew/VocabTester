@@ -1,0 +1,32 @@
+[
+{
+    "language":"English",
+    "symbols":[{"concept":1,
+                "text":"ya"},
+               {"concept":2,
+                "text":"yu"},
+               {"concept":3,
+                "text":"yo"},
+               {"concept":4,
+                "text":"wa"},
+               {"concept":5,
+                "text":"wo"},
+               {"concept":6,
+                "text":"n"}]
+},
+{
+    "language":"Japanese",
+    "symbols":[{"concept":1,
+                "text":"や"},
+               {"concept":2,
+                "text":"ゆ"},
+               {"concept":3,
+                "text":"よ"},
+               {"concept":4,
+                "text":"わ"},
+               {"concept":5,
+                "text":"を"},
+               {"concept":6,
+                "text":"ん"}]
+}
+]

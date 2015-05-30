@@ -1,0 +1,28 @@
+[
+{
+    "language":"English",
+    "symbols":[{"concept":1,
+                "text":"na"},
+               {"concept":2,
+                "text":"ni"},
+               {"concept":3,
+                "text":"nu"},
+               {"concept":4,
+                "text":"ne"},
+               {"concept":5,
+                "text":"no"}]
+},
+{
+    "language":"Japanese",
+    "symbols":[{"concept":1,
+                "text":"ナ"},
+               {"concept":2,
+                "text":"ニ"},
+               {"concept":3,
+                "text":"ヌ"},
+               {"concept":4,
+                "text":"ネ"},
+               {"concept":5,
+                "text":"ノ"}]
+}
+]

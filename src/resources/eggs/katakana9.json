@@ -1,0 +1,28 @@
+[
+{
+    "language":"English",
+    "symbols":[{"concept":1,
+                "text":"ra"},
+               {"concept":2,
+                "text":"ri"},
+               {"concept":3,
+                "text":"ru"},
+               {"concept":4,
+                "text":"re"},
+               {"concept":5,
+                "text":"ro"}]
+},
+{
+    "language":"Japanese",
+    "symbols":[{"concept":1,
+                "text":"ラ"},
+               {"concept":2,
+                "text":"リ"},
+               {"concept":3,
+                "text":"ル"},
+               {"concept":4,
+                "text":"レ"},
+               {"concept":5,
+                "text":"ロ"}]
+}
+]
