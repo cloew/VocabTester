@@ -7,7 +7,7 @@ from Data.staleness_period import StalenessPeriod
 import glob
 import os
 
-EGG_DIR = os.path.join(os.path.dirname(__file__), 'resources/eggs')
+EGG_DIR = os.path.join(os.path.dirname(__file__), 'resources')
 
 def AddStalenessPeriods():
     """ Add the staleness periods """
