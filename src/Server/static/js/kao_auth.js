@@ -16,8 +16,9 @@
             };
         })
         .controller('RegisterController', function ($scope, $location, userService) {
+            $scope.user = {};
             $scope.register = function() {
-                userService.register($scope, function() {
+                userService.register($scope.user, function() {
                     $location.path('/');
                 }, function(error) {
                     $scope.errorMessage = error.message;
@@ -167,8 +168,8 @@
                 login: function (email, password, successCallback, errorCallback) {
                     responseHandler($http.post('/api/login', {'email':email, 'password':password}), successCallback, errorCallback);
                 },
-                register: function (params, successCallback, errorCallback) {
-                    responseHandler($http.post('/api/users', {'email':params.email, 'password':params.password, 'givenName':params.firstName, 'lastName':params.lastName}), successCallback, errorCallback);
+                register: function (user, successCallback, errorCallback) {
+                    responseHandler($http.post('/api/users', user), successCallback, errorCallback);
                 },
                 update: function (user, successCallback, errorCallback) {
                     responseHandler($http.put('/api/users/current', user), successCallback, errorCallback);
