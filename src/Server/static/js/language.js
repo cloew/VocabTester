@@ -34,7 +34,7 @@
                     if (currentLanguage !== undefined) {
                         callback(currentLanguage);
                     } else {
-                        LanguageEnrollmentsService.withCurrentEnrollment(function(enrollment) {
+                        LanguageEnrollmentsService.withCurrentEnrollment().success(function(enrollment) {
                             callback(new Language(enrollment.language));
                         });
                     }

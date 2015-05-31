@@ -1,6 +1,6 @@
 (function(a) {
     "use strict";
-    a.module('kao.auth', ['kao.loading'])
+    a.module('kao.auth', ['kao.loading', 'kao.utils'])
         .controller('LoginController', function ($scope, $location, userService) {
             $scope.login = function() {
                 userService.login($scope.email, $scope.password, function() {
@@ -70,7 +70,7 @@
                 });
             }
         })
-        .factory('LanguageEnrollmentsService', function($http, $q, $rootScope) {
+        .factory('LanguageEnrollmentsService', function($http, $q, $rootScope, $timeout, KaoPromise) {
             return {
                 currentChangedEventType: 'current-enrollment-changed',
                 loadEnrollments: function(callback) {
@@ -99,25 +99,31 @@
                         callback(this.enrollments);
                     }
                 },
-                withCurrentEnrollment: function(callback) {
+                withCurrentEnrollment: function() {
+                    var deferred = KaoPromise();
                     var findCurrentEnrollment = function(enrollments) {
                         for (var i = 0; i < enrollments.length; i++) {
                             var enrollment = enrollments[i];
                             if (enrollment.default) {
-                                callback(enrollment);
+                                deferred.resolve(enrollment);
                                 return;
                             }
                         }
+                        deferred.reject();
                     };
-                    if (this.enrollments === undefined) {
-                        this.loadEnrollments(findCurrentEnrollment);
-                    } else {
-                        findCurrentEnrollment(this.enrollments);
-                    }
+                    var self = this;
+                    $timeout(function() {
+                        if (self.enrollments === undefined) {
+                            self.loadEnrollments(findCurrentEnrollment);
+                        } else {
+                            findCurrentEnrollment(self.enrollments);
+                        }
+                    }, 0);
+                    return deferred.promise;
                 },
                 watchCurrentEnrollment: function(scope, callback) {
                     scope.$on(this.currentChangedEventType, callback);
-                    this.withCurrentEnrollment(function(currentEnrollment) {
+                    this.withCurrentEnrollment().success(function(currentEnrollment) {
                         callback(undefined, currentEnrollment);
                     });
                 },
@@ -136,7 +142,7 @@
                 },
                 changeCurrentEnrollment: function(index) {
                     var self = this;
-                    this.withCurrentEnrollment(function(currentEnrollment) {
+                    this.withCurrentEnrollment().success(function(currentEnrollment) {
                         currentEnrollment.default = false;
                         self.enrollments[index].default = true;
                         $rootScope.$broadcast(self.currentChangedEventType, self.enrollments[index]);
