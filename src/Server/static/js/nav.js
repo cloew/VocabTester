@@ -12,8 +12,8 @@
             this.add({name: 'index', path:'/', templateUrl:'static/partials/index.html', controller:'IndexController'});
             this.add({name: 'login', path:'/login', templateUrl:'static/partials/login.html', controller:'LoginController'});
             this.add({name: 'register', path:'/register', templateUrl:'static/partials/register.html', controller:'RegisterController'});
-            this.add({name: 'profile', path:'/profile', templateUrl:'static/partials/profile.html', controller:'ProfileController', onLoad: ['requireAuth', 'requireEnrollment']});
             this.add({name: 'enroll', path:'/enroll', templateUrl:'static/partials/enroll.html', controller:'ChooseEnrollmentController', onLoad: ['requireAuth']});
+            this.add({name: 'profile', path:'/profile', templateUrl:'static/partials/profile.html', controller:'ProfileController', onLoad: ['requireAuth', 'requireEnrollment']});
             this.add({name: 'words', path:'/words', templateUrl:'static/partials/learned_concepts.html', controller:'LearnedFormsController', onLoad: ['requireAuth', 'requireEnrollment']});
             this.add({name: 'wordLists', path:'/wordlists', template:'<form-lists></form-lists>', onLoad: ['requireAuth', 'requireEnrollment']});
             this.add({name: 'symbols', path:'/symbols', templateUrl:'static/partials/learned_concepts.html', controller:'LearnedFormsController', onLoad: ['requireAuth', 'requireEnrollment']});

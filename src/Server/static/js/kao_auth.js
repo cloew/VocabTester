@@ -19,7 +19,7 @@
             $scope.user = {};
             $scope.register = function() {
                 userService.register($scope.user, function() {
-                    $location.path(navService.wordLists.path);
+                    $location.path(navService.enroll.path);
                 }, function(error) {
                     $scope.errorMessage = error.message;
                 });
