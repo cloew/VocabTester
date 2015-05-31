@@ -12,12 +12,12 @@
             this.add({name: 'wordLists', path:'/', templateUrl:'static/partials/index.html', controller:'IndexController'});
             this.add({name: 'login', path:'/login', templateUrl:'static/partials/login.html', controller:'LoginController'});
             this.add({name: 'register', path:'/register', templateUrl:'static/partials/register.html', controller:'RegisterController'});
-            this.add({name: 'profile', path:'/profile', templateUrl:'static/partials/profile.html', controller:'ProfileController', onLoad: ['requireAuth']});
+            this.add({name: 'profile', path:'/profile', templateUrl:'static/partials/profile.html', controller:'ProfileController', onLoad: ['requireAuth', 'requireEnrollment']});
             this.add({name: 'enroll', path:'/enroll', templateUrl:'static/partials/enroll.html', controller:'ChooseEnrollmentController', onLoad: ['requireAuth']});
-            this.add({name: 'words', path:'/words', templateUrl:'static/partials/learned_concepts.html', controller:'LearnedFormsController', onLoad: ['requireAuth']});
-            this.add({name: 'symbols', path:'/symbols', templateUrl:'static/partials/learned_concepts.html', controller:'LearnedFormsController', onLoad: ['requireAuth']});
-            this.add({name: 'symbolLists', path:'/symbollists', template:'<form-lists></form-lists>', onLoad: ['requireAuth']});
-            this.add({name: 'search', path:'/search', templateUrl:'static/partials/search.html', controller:'SearchController', onLoad: ['requireAuth']});
+            this.add({name: 'words', path:'/words', templateUrl:'static/partials/learned_concepts.html', controller:'LearnedFormsController', onLoad: ['requireAuth', 'requireEnrollment']});
+            this.add({name: 'symbols', path:'/symbols', templateUrl:'static/partials/learned_concepts.html', controller:'LearnedFormsController', onLoad: ['requireAuth', 'requireEnrollment']});
+            this.add({name: 'symbolLists', path:'/symbollists', template:'<form-lists></form-lists>', onLoad: ['requireAuth', 'requireEnrollment']});
+            this.add({name: 'search', path:'/search', templateUrl:'static/partials/search.html', controller:'SearchController', onLoad: ['requireAuth', 'requireEnrollment']});
             this.add({name: 'adminUsers', path:'/admin/users', templateUrl:'static/partials/admin/list_records.html', onLoad: ['requireAuth']});
             this.add({name: 'adminNewUsers', path:'/admin/users/new', templateUrl:'static/partials/admin/new_record.html', onLoad: ['requireAuth']});
             this.add({name: 'adminEditUsers', path:'/admin/users/:id', templateUrl:'static/partials/admin/edit_record.html', onLoad: ['requireAuth']});
@@ -31,10 +31,10 @@
             this.add({name: 'adminEditConceptWords', path:'/admin/concepts/:conceptId/words/:id', templateUrl:'static/partials/admin/edit_record.html', onLoad: ['requireAuth']});
             this.add({name: 'adminNewConceptSymbols', path:'/admin/concepts/:conceptId/symbols/new', templateUrl:'static/partials/admin/new_record.html', onLoad: ['requireAuth']});
             this.add({name: 'adminEditConceptSymbols', path:'/admin/concepts/:conceptId/symbols/:id', templateUrl:'static/partials/admin/edit_record.html', onLoad: ['requireAuth']});
-            this.add({name: 'randomSymbolQuiz', path:'/symbollist/random/quiz', templateUrl:'static/partials/quiz.html', controller:'QuizController', onLoad: ['requireAuth'], returnTo:this.config.symbols.path});
-            this.add({name: 'symbolListQuiz', path:'/symbollist/:listId/quiz', templateUrl:'static/partials/quiz.html', controller:'QuizController', onLoad: ['requireAuth'], returnTo:this.config.symbolLists.path});
-            this.add({name: 'randomWordQuiz', path:'/wordlist/random/quiz', templateUrl:'static/partials/quiz.html', controller:'QuizController', onLoad: ['requireAuth'], returnTo:this.config.words.path});
-            this.add({name: 'wordListQuiz', path:'/wordlist/:listId/quiz', templateUrl:'static/partials/quiz.html', controller:'QuizController', onLoad: ['requireAuth'], returnTo:this.config.wordLists.path});
+            this.add({name: 'randomSymbolQuiz', path:'/symbollist/random/quiz', templateUrl:'static/partials/quiz.html', controller:'QuizController', onLoad: ['requireAuth', 'requireEnrollment'], returnTo:this.config.symbols.path});
+            this.add({name: 'symbolListQuiz', path:'/symbollist/:listId/quiz', templateUrl:'static/partials/quiz.html', controller:'QuizController', onLoad: ['requireAuth', 'requireEnrollment'], returnTo:this.config.symbolLists.path});
+            this.add({name: 'randomWordQuiz', path:'/wordlist/random/quiz', templateUrl:'static/partials/quiz.html', controller:'QuizController', onLoad: ['requireAuth', 'requireEnrollment'], returnTo:this.config.words.path});
+            this.add({name: 'wordListQuiz', path:'/wordlist/:listId/quiz', templateUrl:'static/partials/quiz.html', controller:'QuizController', onLoad: ['requireAuth', 'requireEnrollment'], returnTo:this.config.wordLists.path});
             
             this.$get = function() {
                 return this;

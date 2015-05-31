@@ -246,6 +246,13 @@
                 }
             };
         })
+        .service('requireEnrollment', function($location, LanguageEnrollmentsService, navService) {
+            return function(event) {
+                LanguageEnrollmentsService.withCurrentEnrollment().error(function() {
+                    $location.path(navService.enroll.path);
+                });
+            };
+        })
         .config(function ($httpProvider) {
             $httpProvider.interceptors.push('authInterceptor');
         });
