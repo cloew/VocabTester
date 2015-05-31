@@ -71,7 +71,7 @@
             }
         })
         .factory('LanguageEnrollmentsService', function($http, $q, $rootScope, $timeout, KaoPromise) {
-            return {
+            var service = {
                 currentChangedEventType: 'current-enrollment-changed',
                 loadEnrollments: function(callback) {
                     var self = this;
@@ -149,8 +149,12 @@
                     });
                 }
             };
+            $rootScope.$on('user-logout', function() {
+                service.enrollments = undefined;
+            });
+            return service;
         })
-        .factory('userService', function($http, $window, $location, navService) {
+        .factory('userService', function($http, $window, $location, $rootScope, navService) {
             var user = undefined;
             var userWatch = [];
             var responseHandler = function(promise, successCallback, errorCallback) {
@@ -183,6 +187,7 @@
                 logout: function () {
                     delete $window.localStorage.token;
                     user = undefined;
+                    $rootScope.$broadcast('user-logout');
                     $location.path(navService.login.path);
                 },
                 isLoggedIn: function () {
