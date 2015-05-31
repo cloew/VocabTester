@@ -1,12 +1,12 @@
 (function(a) {
     "use strict";
-    a.module('kao.auth', ['kao.loading', 'kao.utils'])
-        .controller('LoginController', function ($scope, $location, userService) {
+    a.module('kao.auth', ['kao.loading', 'kao.utils', 'VocabNav'])
+        .controller('LoginController', function ($scope, $location, userService, navService) {
             $scope.login = function() {
                 userService.login($scope.email, $scope.password, function() {
                     var next = $location.search().returnTo;
                     if (!next) {
-                        next = '/'
+                        next = navService.wordLists.path;
                     }
                     $location.path(next);
                     $location.search('returnTo', null);
@@ -15,11 +15,11 @@
                 });
             };
         })
-        .controller('RegisterController', function ($scope, $location, userService) {
+        .controller('RegisterController', function ($scope, $location, userService, navService) {
             $scope.user = {};
             $scope.register = function() {
                 userService.register($scope.user, function() {
-                    $location.path('/');
+                    $location.path(navService.wordLists.path);
                 }, function(error) {
                     $scope.errorMessage = error.message;
                 });
