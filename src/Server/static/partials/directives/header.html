@@ -3,21 +3,25 @@
             <div class="col-md-2">
                 <h3>Logged In</h3>
             </div>
-            <div class="col-md-7 header-buttons">
+            <div class="col-md-6 header-buttons">
                 <header-nav></header-nav>
             </div>
             <div class="col-md-3 header-buttons">
-                <language-picker></language-picker>
-                <span>Welcome back, <a href="#/profile" class="header-anchor">{{user.givenName}}</a></span>
-                <button ng-click="logout();" class="btn btn-primary">Logout</button>
+                <div class="pull-right">
+                    <language-picker></language-picker>
+                    <span>Welcome back, <a href="#/profile" class="header-anchor">{{user.givenName}}</a></span>
+                    <button ng-click="logout();" class="btn btn-primary">Logout</button>
+                </div>
             </div>
         </div>
         <div ng-if="!isLoggedIn();" class="header-bar">
-            <div class="col-md-9">
+            <div class="col-md-8">
                 <h3>Not Logged In</h3>
             </div>
             <div class="col-md-3 header-buttons">
-                <a href="#/login" class="btn btn-primary">Login</a>
+                <div class="pull-right">
+                    <a href="#/login" class="btn btn-primary">Login</a>
+                </div>
             </div>
         </div>
 </header>
