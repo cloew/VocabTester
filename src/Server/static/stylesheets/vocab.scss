@@ -88,11 +88,9 @@ $danger-bg: #d9534f;
 .nav-anchor:visited, .nav-anchor:focus, .nav-anchor:hover, .nav-anchor:active {
     color: #fff;
     text-decoration: none;
-    @include border-radius(200px);
-    background: #286090;
 }
 
-.active {
+.active, .nav-anchor:hover {
     color: #fff;
     @include border-radius(200px);
     background: #286090;
