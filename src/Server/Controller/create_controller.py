@@ -19,10 +19,10 @@ class CreateController(JSONController):
     def performWithJSON(self, **kwargs):
         """ Convert the records to JSON """
         json = kwargs['json']
-        record = self.create(json)
+        record = self.create(json, kwargs=kwargs)
         return {"record":toJson(record, **kwargs)}
 
-    def create(self, json):
+    def create(self, json, kwargs={}):
         """ Create the record """
         recordValues = {self.routeParams[routeParam]:kwargs[routeParam] for routeParam in self.routeParams}
         providedRecordValues = self.recordValueProvider.getRecordValues(json)
