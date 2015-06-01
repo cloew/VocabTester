@@ -82,15 +82,6 @@
                         console.log(error);
                     });
                 },
-                loadEnrollments: function(callback) {
-                    var self = this;
-                    $http.get('/api/users/current/enrollments').success(function(data) {
-                        self.enrollments = data.enrollments;
-                        callback(self.enrollments);
-                    }).error(function(error) {
-                        console.log(error);
-                    });
-                },
                 enrollments: undefined,
                 requestEnrollments: function(callback) {
                     if (this.enrollments === undefined) {
@@ -133,6 +124,10 @@
                     $http.post('/api/users/current/enrollments', {language:language}).success(function(data) {
                         self.requestEnrollments(function(enrollments) {
                             enrollments.push(data.record);
+                            if (enrollments.length === 1) {
+                                data.record.default = true;
+                                $rootScope.$broadcast(self.currentChangedEventType, data.record);
+                            }
                         });
                         deferred.resolve(data);
                     }).error(function(error) {
