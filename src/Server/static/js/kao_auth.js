@@ -73,6 +73,7 @@
         .factory('LanguageEnrollmentsService', function($http, $q, $rootScope, $timeout, KaoPromise) {
             var service = {
                 currentChangedEventType: 'current-enrollment-changed',
+                enrollmentsChangedEventType: 'enrollments-changed',
                 loadEnrollments: function(callback) {
                     var self = this;
                     $http.get('/api/users/current/enrollments').success(function(data) {
@@ -89,6 +90,12 @@
                     } else {
                         callback(this.enrollments);
                     }
+                },
+                watchEnrollments: function(scope, callback) {
+                    scope.$on(this.enrollmentsChangedEventType, callback);
+                    this.requestEnrollments(function(enrollments) {
+                        callback(undefined, enrollments);
+                    });
                 },
                 withCurrentEnrollment: function() {
                     var deferred = KaoPromise();
@@ -123,11 +130,12 @@
                     var self = this;
                     $http.post('/api/users/current/enrollments', {language:language}).success(function(data) {
                         self.requestEnrollments(function(enrollments) {
-                            enrollments.push(data.record);
-                            if (enrollments.length === 1) {
+                            if (enrollments.length === 0) {
                                 data.record.default = true;
                                 $rootScope.$broadcast(self.currentChangedEventType, data.record);
                             }
+                            enrollments.push(data.record);
+                            $rootScope.$broadcast(self.enrollmentsChangedEventType, enrollments);
                         });
                         deferred.resolve(data);
                     }).error(function(error) {
