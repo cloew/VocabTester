@@ -3,9 +3,9 @@
         <span class="pull-right question-progress">{{quiz.currentQuestionIndex+1}} of {{quiz.quiz.questions.length}}</span>
         <h3 class="panel-title">{{quiz.quiz.name}} Quiz</h3>
     </div>
-    <div class="panel-body">
+    <loading-div class="panel-body" loading="quiz">
         <question question="quiz.currentQuestion"></question>
-    </div>
+    </loading-div>
     <div class="panel-footer footer-with-button" ng-if="!quiz.currentQuestion.results">
         <button class="pull-right btn btn-primary quiz-button" on-enter-key="quiz.answer();" ng-click="quiz.answer();" ng-disabled="!quiz.canSubmit();" ng-if="!quiz.grading">Submit</button>
         <button class="pull-right btn btn-primary quiz-button" ng-disabled="true" ng-if="quiz.grading">Grading...</button>
