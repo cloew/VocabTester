@@ -1,6 +1,6 @@
 <div class="panel panel-primary">
     <div class="panel-heading">
-        <span class="pull-right question-progress">{{quiz.currentQuestionIndex+1}} of {{quiz.quiz.questions.length}}</span>
+        <span class="pull-right question-progress" ng-show="quiz.quiz.questions">{{quiz.currentQuestionIndex+1}} of {{quiz.quiz.questions.length}}</span>
         <h3 class="panel-title">{{quiz.quiz.name}} Quiz</h3>
     </div>
     <loading-div class="panel-body" loading="quiz">
