@@ -13,21 +13,20 @@
   margin-top: -17px; }
 
 .option {
-  width: 100px;
   padding: 5px;
   margin: 5px; }
 
-.selection, .selected, .answer {
+.selection, .selected span, .answer span {
   -webkit-border-radius: 10px;
   -moz-border-radius: 10px;
   -ms-border-radius: 10px;
   border-radius: 10px;
   color: #fff; }
 
-.selected {
+.selected span {
   background-color: #428bca; }
 
-.answer {
+.answer span {
   background-color: #5cb85c; }
 
 .word-list-panel-heading {

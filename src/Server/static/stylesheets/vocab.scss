@@ -30,7 +30,6 @@ $danger-bg: #d9534f;
 }
 
 .option {
-    width: 100px;
     padding: 5px;
     margin: 5px;
 }
@@ -40,12 +39,12 @@ $danger-bg: #d9534f;
     color: #fff;
 }
 
-.selected {
+.selected span {
     @extend .selection;
     background-color: $primary-bg;
 }
 
-.answer {
+.answer span {
     @extend .selection;
     background-color: $success-bg;
 }

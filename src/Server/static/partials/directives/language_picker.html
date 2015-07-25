@@ -6,5 +6,8 @@
         <li ng-repeat="enrollment in enrollments" ng-class="{'bg-primary':enrollment.id === currentEnrollment.id}">
             <a style="cursor: pointer;" ng-click="changeCurrentEnrollment($index);">{{enrollment.language.name}}</a>
         </li>
+        <li>
+            <a style="cursor: pointer;" href="#/enroll">Enroll in a new Language</a>
+        </li>
     </ul>
 </div>

@@ -7,14 +7,13 @@ from Data.word import Word
 from Data.word_list import WordList
 
 from Server.decorators import requires_auth, requires_admin
-from Server.helpers.crud_endpoints import CrudEndpoints
+from Server.helpers.admin_json_factory import toJson
 
 from Server.Controller.concept_lists_controller import ConceptListsController
 from Server.Controller.create_user_enrollment import CreateUserEnrollment
 from Server.Controller.current_user_controller import CurrentUserController
 from Server.Controller.learned_concepts_controller import LearnedConceptsController
 from Server.Controller.learn_word_controller import LearnWordController
-from Server.Controller.list_controller import ListController
 from Server.Controller.login_controller import LoginController
 from Server.Controller.quiz_answer_controller import QuizAnswerController
 from Server.Controller.quiz_controller import QuizController
@@ -26,6 +25,7 @@ from Server.Controller.user_enrollments import UserEnrollments
 
 from kao_flask.endpoint import Endpoint
 from kao_flask.controllers.html_controller import HTMLController
+from kao_flask.ext.sqlalchemy import CrudEndpoints, ListController
 
 routes = [Endpoint('/', get=HTMLController('Server/templates/index.html')),
           # Auth
@@ -34,7 +34,7 @@ routes = [Endpoint('/', get=HTMLController('Server/templates/index.html')),
           Endpoint('/api/users/current', get=CurrentUserController(), put=UpdateUserController()),
           Endpoint('/api/users/current/enrollments', get=UserEnrollments(), post=CreateUserEnrollment()),
           # Languages
-          Endpoint('/api/languages', get=ListController(Language)),
+          Endpoint('/api/languages', get=ListController(Language, toJson)),
           # Symbols
           Endpoint('/api/languages/<int:languageId>/symbols', get=LearnedConceptsController(Symbol)),
           # Symbollists
@@ -52,14 +52,14 @@ routes = [Endpoint('/', get=HTMLController('Server/templates/index.html')),
           # Mastery
           Endpoint('/api/mastery/<int:masteryId>/answer', post=QuizAnswerController())]
           
-routes += CrudEndpoints('/api/admin/users', User, decorators=[requires_auth, requires_admin]).endpoints
-routes += CrudEndpoints('/api/admin/languages', Language, decorators=[requires_auth, requires_admin]).endpoints
-routes += CrudEndpoints('/api/admin/concepts', Concept, decorators=[requires_auth, requires_admin]).endpoints
-routes += CrudEndpoints('/api/admin/concepts/<int:conceptId>/words', Word, 
+routes += CrudEndpoints('/api/admin/users', User, toJson, decorators=[requires_auth, requires_admin]).endpoints
+routes += CrudEndpoints('/api/admin/languages', Language, toJson, decorators=[requires_auth, requires_admin]).endpoints
+routes += CrudEndpoints('/api/admin/concepts', Concept, toJson, decorators=[requires_auth, requires_admin]).endpoints
+routes += CrudEndpoints('/api/admin/concepts/<int:conceptId>/words', Word, toJson, 
                         routeParams={'conceptId':'concept_id'}, 
                         jsonColumnMap={'language': lambda value: ('language_id', value['id'])}, 
                         decorators=[requires_auth, requires_admin]).endpoints
-routes += CrudEndpoints('/api/admin/concepts/<int:conceptId>/symbols', Symbol, 
+routes += CrudEndpoints('/api/admin/concepts/<int:conceptId>/symbols', Symbol, toJson, 
                         routeParams={'conceptId':'concept_id'}, 
                         jsonColumnMap={'language': lambda value: ('language_id', value['id'])}, 
                         decorators=[requires_auth, requires_admin]).endpoints

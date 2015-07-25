@@ -44,7 +44,7 @@
                     LanguageEnrollmentsService.watchCurrentEnrollment($scope, function(event, currentEnrollment) {
                         $scope.currentEnrollment = currentEnrollment;
                     });
-                    LanguageEnrollmentsService.requestEnrollments(function(enrollments) {
+                    LanguageEnrollmentsService.watchEnrollments($scope, function(event, enrollments) {
                         $scope.enrollments = enrollments;
                     });
                     $scope.changeCurrentEnrollment = function(index) {
