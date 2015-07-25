@@ -29,12 +29,18 @@
             };
             CrudFrontEnd.prototype.getProperNestedConfig = function(varName) {
                 var nested = this.nested;
+                var newNested = [];
+                
                 if (nested) {
-                    if (nested[varName]) {
-                        nested = {param: nested[varName], provider: nested.provider};
+                    for (var i = 0; i < nested.length; i++) {
+                        var config = nested[i];
+                        if (nested[i][varName]) {
+                            config = {param: nested[i][varName], provider: nested[i].provider};
+                        }
+                        newNested.push(config);
                     }
                 }
-                return nested;
+                return newNested;
             };
             CrudFrontEnd.prototype.getListUrl = function() {
                 return NestedRouteService.getUrl(this.listUrl, this.getProperNestedConfig('list'));
@@ -146,6 +152,8 @@
                 $scope.record = {};
                 $scope.dataType = frontEndCrud.name;
                 $scope.formDirective = frontEndCrud.formDirective;
+                $scope.listUrl = '#'+frontEndCrud.getListUrl();
+                console.log($scope.listUrl);
                 var tracker = LoadingTrackerService.get('saving');
                 
                 $scope.save = function() {
@@ -177,6 +185,8 @@
                 $scope.dataType = frontEndCrud.name;
                 $scope.formDirective = frontEndCrud.formDirective;
                 $scope.afterEditDirective = frontEndCrud.afterEditDirective;
+                $scope.listUrl = '#'+frontEndCrud.getListUrl();
+                console.log($scope.listUrl);
                 var tracker = LoadingTrackerService.get('saving');
                 
                 $scope.goTo = function(path) {
@@ -244,12 +254,23 @@
                 templateUrl: 'static/partials/directives/admin/model_form.html'
             }
         })
+        .directive('toListPage', function() {
+            return {
+                restrict: 'E',
+                replace: true,
+                scope: {
+                  listUrl: '@'
+                },
+                templateUrl: 'static/partials/directives/admin/to_list_page.html'
+            }
+        })
         .directive('toNewPage', function() {
             return {
                 restrict: 'E',
                 replace: true,
                 scope: {
-                  newUrl: '@'
+                  newUrl: '@',
+                  typeName: '@'
                 },
                 templateUrl: 'static/partials/directives/admin/to_new_page.html'
             }
