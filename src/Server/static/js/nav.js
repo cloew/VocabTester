@@ -83,7 +83,8 @@
                     {name: 'Word Lists', path: navService.wordLists.path},
                     {name: 'Symbols', path: navService.symbols.path},
                     {name: 'Symbol Lists', path: navService.symbolLists.path},
-                    {name: 'Search', path: navService.search.path}];
+                    {name: 'Search', path: navService.search.path},
+                    {name: 'Admin', path: navService.adminConcepts.path, if: "userService.isLoggedIn()"}];
         })
         .run(function($injector, $rootScope, navService) {
             $rootScope.$on('$routeChangeStart', function(event, next, current) {

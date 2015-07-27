@@ -26,7 +26,7 @@
             return {
                 restrict: 'E',
                 replace: true,
-                controller: function($scope, $location, $route, headerNavService) {
+                controller: function($scope, $location, $route, headerNavService, userService) {
                     $scope.currentPath = $location.path();
                     $scope.navSections = headerNavService;
                     $scope.$on('$routeChangeSuccess', function(event, next, current) {
