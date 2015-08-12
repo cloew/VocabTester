@@ -1,4 +1,4 @@
-from auth_json_controller import AuthJSONController
+from .auth_json_controller import AuthJSONController
 
 from Data.user import User
 from Server.error import NO_USER

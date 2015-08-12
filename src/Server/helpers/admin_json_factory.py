@@ -1,5 +1,3 @@
-from kao_json import JsonFactory, JsonAttr, FieldAttr
-
 from Data.concept import Concept
 from Data.concept_pair import ConceptPair
 from Data.language import Language
@@ -9,6 +7,7 @@ from Data.user import User
 from Data.word import Word
 
 from Server.helpers.user_proxy import UserProxy
+from kao_json import JsonFactory, JsonAttr, FieldAttr
 
 def GetNativeForm(concept, user):
     """ Return the native form of the concept """
@@ -18,7 +17,7 @@ def GetNativeForm(concept, user):
     return form.text if form is not None else ''
 
 jsonFactory = JsonFactory([(Concept, [FieldAttr('id'), JsonAttr('native', GetNativeForm, args=["user"])]),
-                           ([Symbol, Word], [FieldAttr('id'), JsonAttr('text', unicode), FieldAttr('language')]),
+                           ([Symbol, Word], [FieldAttr('id'), FieldAttr('text'), FieldAttr('language')]),
                            (ConceptPair, [FieldAttr('foreign'), FieldAttr('native')]),
                            ([User, UserProxy], [FieldAttr('id'), FieldAttr('email'), FieldAttr('is_admin'), FieldAttr('givenName'), FieldAttr('lastName'), FieldAttr('nativeLanguage')]),
                            (Language, [FieldAttr('id'), FieldAttr('name')]),

@@ -1,4 +1,4 @@
-from options_question import OptionsQuestion
+from .options_question import OptionsQuestion
 
 class NativeOptionsQuestion(OptionsQuestion):
     """ Represents a question where all the options are in the native language """

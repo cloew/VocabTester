@@ -1,4 +1,4 @@
-from auth_json_controller import AuthJSONController
+from .auth_json_controller import AuthJSONController
 from Server.helpers.json_factory import toJson
 
 class UserEnrollments(AuthJSONController):

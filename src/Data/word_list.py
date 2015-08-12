@@ -1,6 +1,6 @@
-from concept_list import concept_list_proxy, query_via_concept_list
-from concept_pair_retriever import ConceptPairRetriever
-from word import Word
+from .concept_list import concept_list_proxy, query_via_concept_list
+from .concept_pair_retriever import ConceptPairRetriever
+from .word import Word
 
 from kao_flask.ext.sqlalchemy.database import db
 

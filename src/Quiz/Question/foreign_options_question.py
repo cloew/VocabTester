@@ -1,4 +1,4 @@
-from options_question import OptionsQuestion
+from .options_question import OptionsQuestion
 
 class ForeignOptionsQuestion(OptionsQuestion):
     """ Represents a question where all the options are in the foreign language """

@@ -1,4 +1,3 @@
-from kao_json import JsonFactory, JsonAttr, FieldAttr, StaticAttr
 
 from Data.concept_pair import ConceptPair
 from Data.language import Language
@@ -15,6 +14,7 @@ from Quiz.Question.options_question import OptionsQuestion
 from Quiz.Question.foreign_prompt_question import ForeignPromptQuestion
 
 from Server.helpers.user_proxy import UserProxy
+from kao_json import JsonFactory, JsonAttr, FieldAttr, StaticAttr
 
 def answerUrl(question, user):
     """ Returns the mastery rating for the word and user """    
@@ -34,7 +34,7 @@ def HasLearned(form, user):
     return hasLearnedMethod[form.__class__](form)
 
 jsonFactory = JsonFactory([
-                           ([Symbol, Word],[FieldAttr('id'), JsonAttr('text', unicode), JsonAttr('mastery', GetMateryRating, args=["user"]), 
+                           ([Symbol, Word],[FieldAttr('id'), FieldAttr('text'), JsonAttr('mastery', GetMateryRating, args=["user"]), 
                                             JsonAttr('learned', HasLearned, args=["user"])]),
                            (ConceptPair,[FieldAttr('foreign'), FieldAttr('native')]),
                            ([SymbolList, WordList],[FieldAttr('id'), FieldAttr('name'), JsonAttr('concepts', lambda s, u: s.getConceptPairs(u), args=["user"])]),

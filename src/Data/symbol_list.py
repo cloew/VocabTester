@@ -1,6 +1,6 @@
-from concept_list import concept_list_proxy, query_via_concept_list
-from concept_pair_retriever import ConceptPairRetriever
-from symbol import Symbol
+from .concept_list import concept_list_proxy, query_via_concept_list
+from .concept_pair_retriever import ConceptPairRetriever
+from .symbol import Symbol
 
 from kao_flask.ext.sqlalchemy.database import db
 

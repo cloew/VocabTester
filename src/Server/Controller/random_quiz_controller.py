@@ -1,8 +1,8 @@
+from .auth_json_controller import AuthJSONController
 from Data.language import Language
 from Quiz.random_quiz_factory import RandomQuizFactory
 from Server.helpers.json_factory import toJson
 
-from auth_json_controller import AuthJSONController
 
 class RandomQuizController(AuthJSONController):
     """ Controller to return a quiz built from random forms the user has learned """

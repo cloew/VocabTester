@@ -1,4 +1,4 @@
-from Quiz.Question.question_factory import QuestionFactory
+from .Question.question_factory import QuestionFactory
 
 class Quiz:
     """ Represents a quiz for a list of words """

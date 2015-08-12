@@ -1,10 +1,10 @@
+from .auth_json_controller import AuthJSONController
 from Data.concept_manager import ConceptManager
 from Data.language import Language
 from Data.word import Word
 
 from Server.helpers.json_factory import toJson
 
-from auth_json_controller import AuthJSONController
 from sqlalchemy import func
 
 class SearchController(AuthJSONController):

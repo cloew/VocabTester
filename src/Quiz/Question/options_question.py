@@ -1,5 +1,5 @@
-from Quiz.sampler import sample_at_most
-from options_finder import OptionsFinder
+from .options_finder import OptionsFinder
+from ..sampler import sample_at_most
 
 import random
 

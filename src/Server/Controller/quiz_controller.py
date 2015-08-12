@@ -1,8 +1,7 @@
+from .auth_json_controller import AuthJSONController
 from Data.language import Language
 from Quiz.quiz import Quiz
 from Server.helpers.json_factory import toJson
-
-from auth_json_controller import AuthJSONController
 
 class QuizController(AuthJSONController):
     """ Controller to return the quiz """

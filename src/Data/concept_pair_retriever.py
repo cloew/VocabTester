@@ -1,4 +1,4 @@
-from concept_manager import ConceptManager
+from .concept_manager import ConceptManager
 import functools
 
 class ConceptPairRetriever(object):

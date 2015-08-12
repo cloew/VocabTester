@@ -1,7 +1,7 @@
-from mastery_retriever import MasteryRetriever
+from .mastery_retriever import MasteryRetriever
 
-from concept import Concept
-from language import Language
+from .concept import Concept
+from .language import Language
 
 from kao_flask.ext.sqlalchemy.database import db
 

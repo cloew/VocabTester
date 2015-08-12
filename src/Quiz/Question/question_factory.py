@@ -1,10 +1,10 @@
-from native_options_question import NativeOptionsQuestion
-from foreign_options_question import ForeignOptionsQuestion
-
-from Quiz.ratio_picker import RatioPicker
-
+from .native_options_question import NativeOptionsQuestion
+from .foreign_options_question import ForeignOptionsQuestion
 from .options_question_builder import OptionsQuestionBuilder
 from .prompt_question_builder import PromptQuestionBuilder
+
+from ..ratio_picker import RatioPicker
+
 
 from itertools import groupby
 import random

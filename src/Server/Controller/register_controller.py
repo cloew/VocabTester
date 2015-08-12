@@ -2,8 +2,6 @@ from Data.user import User
 from Server.error import EMAIL_IN_USE
 from Server.Controller.login_controller import LoginController
 
-from Server.decorators import requires_auth
-
 from kao_flask.ext.sqlalchemy import db, CreateController, RecordValueProvider
 
 from sqlalchemy.exc import IntegrityError

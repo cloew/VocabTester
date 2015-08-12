@@ -1,4 +1,4 @@
-from mastery import Mastery
+from .mastery import Mastery
 from kao_flask.ext.sqlalchemy.database import db
 
 import functools

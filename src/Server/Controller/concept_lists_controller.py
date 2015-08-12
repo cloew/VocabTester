@@ -1,8 +1,8 @@
+from .auth_json_controller import AuthJSONController
 from Data.language import Language
 from Data.user_concept_list import UserConceptList
 
 from Server.helpers.json_factory import toJson
-from auth_json_controller import AuthJSONController
 
 class ConceptListsController(AuthJSONController):
     """ Controller to return the concept lists """

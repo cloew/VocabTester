@@ -1,6 +1,6 @@
-from concept import Concept
-from concept_pair import ConceptPair
-from word import Word
+from .concept import Concept
+from .concept_pair import ConceptPair
+from .word import Word
             
 class ConceptManager:
     """ Helper class to get the proper forms from Concepts """
