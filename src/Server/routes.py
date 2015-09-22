@@ -6,6 +6,7 @@ from Data.user import User
 from Data.word import Word
 from Data.word_list import WordList
 
+from .auth import auth
 from Server.decorators import requires_auth, requires_admin
 from Server.helpers.admin_json_factory import toJson
 
@@ -29,9 +30,9 @@ from kao_flask.ext.sqlalchemy import CrudEndpoints, ListController
 
 routes = [Endpoint('/', get=HTMLController('Server/templates/index.html')),
           # Auth
-          Endpoint('/api/login', post=LoginController()),
-          Endpoint('/api/users', post=RegisterController()),
-          Endpoint('/api/users/current', get=CurrentUserController(), put=UpdateUserController()),
+          Endpoint('/api/login', post=auth.LoginController(toJson)),
+          Endpoint('/api/users', post=auth.RegisterController(toJson)),
+          Endpoint('/api/users/current', get=auth.CurrentUserController(toJson), put=auth.UpdateUserController(toJson)),
           Endpoint('/api/users/current/enrollments', get=UserEnrollments(), post=CreateUserEnrollment()),
           # Languages
           Endpoint('/api/languages', get=ListController(Language, toJson)),

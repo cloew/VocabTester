@@ -2,10 +2,8 @@ from kao_decorators import lazy_property
 from .language import Language
 from .learned_tracker import LearnedTracker
 
+from kao_flask.ext.auth.password_utils import make_password, check_password
 from kao_flask.ext.sqlalchemy.database import db
-
-import random
-from hashlib import sha1
 
 learned_symbols = db.Table('learned_symbols', db.Model.metadata,
                                   db.Column('user_id', db.Integer, db.ForeignKey('users.id')),
@@ -79,17 +77,3 @@ class User(db.Model):
     def learnedWordTracker(self):
         """ Return the learned tracker for this user's words """
         return LearnedTracker(self, 'learnedWords', User)
-    
-# borrowing these methods, slightly modified, from flask-peewee which in turn borrowed from django.contrib.auth
-def get_hexdigest(salt, raw_password):
-    data = salt + raw_password
-    return sha1(data.encode('utf8')).hexdigest()
-
-def make_password(raw_password):
-    salt = get_hexdigest(unicode(random.random()), unicode(random.random()))[:5]
-    hsh = get_hexdigest(salt, raw_password)
-    return '%s$%s' % (salt, hsh)
-
-def check_password(raw_password, enc_password):
-    salt, hsh = enc_password.split('$', 1)
-    return hsh == get_hexdigest(salt, raw_password)
