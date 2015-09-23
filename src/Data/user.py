@@ -3,7 +3,7 @@ from .language import Language
 from .learned_tracker import LearnedTracker
 
 from kao_flask.ext.auth.password_utils import make_password, check_password
-from kao_flask.ext.sqlalchemy.database import db
+from kao_flask.ext.sqlalchemy import db
 
 learned_symbols = db.Table('learned_symbols', db.Model.metadata,
                                   db.Column('user_id', db.Integer, db.ForeignKey('users.id')),

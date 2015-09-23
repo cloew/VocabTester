@@ -1,4 +1,4 @@
-from kao_flask.ext.sqlalchemy.database import db
+from kao_flask.ext.sqlalchemy import db
 
 class LanguageEnrollment(db.Model):
     """ Represents a user's enrollment in a language """

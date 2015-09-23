@@ -2,7 +2,7 @@ from .concept_list import concept_list_proxy, query_via_concept_list
 from .concept_pair_retriever import ConceptPairRetriever
 from .word import Word
 
-from kao_flask.ext.sqlalchemy.database import db
+from kao_flask.ext.sqlalchemy import db
 
 @query_via_concept_list(isWords=True)
 @concept_list_proxy('conceptList')

@@ -1,4 +1,4 @@
-from kao_flask.ext.sqlalchemy.database import db
+from kao_flask.ext.sqlalchemy import db
 
 class Language(db.Model):
     """ Represents a language """

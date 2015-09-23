@@ -3,7 +3,7 @@ from .concept_manager import ConceptManager
 from .query_proxy import query_via
 from kao_decorators import proxy_for
 
-from kao_flask.ext.sqlalchemy.database import db
+from kao_flask.ext.sqlalchemy import db
 
 concept_list_concepts = db.Table('concept_list_concepts', db.Model.metadata,
                                   db.Column('concept_list_id', db.Integer, db.ForeignKey('concept_lists.id')),
