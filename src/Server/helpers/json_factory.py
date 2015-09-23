@@ -1,13 +1,4 @@
-
-from Data.concept_pair import ConceptPair
-from Data.language import Language
-from Data.language_enrollment import LanguageEnrollment
-from Data.symbol import Symbol
-from Data.symbol_list import SymbolList
-from Data.user import User
-from Data.user_concept_list import UserConceptList
-from Data.word import Word
-from Data.word_list import WordList
+from Data import ConceptPair, Language, LanguageEnrollment, Symbol, SymbolList, User, UserConceptList, Word, WordList
 
 from Quiz.quiz import Quiz
 from Quiz.Question.options_question import OptionsQuestion

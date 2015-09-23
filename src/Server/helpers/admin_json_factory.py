@@ -1,10 +1,4 @@
-from Data.concept import Concept
-from Data.concept_pair import ConceptPair
-from Data.language import Language
-from Data.language_enrollment import LanguageEnrollment
-from Data.symbol import Symbol
-from Data.user import User
-from Data.word import Word
+from Data import Concept, ConceptPair, Language, LanguageEnrollment, Symbol, User, Word
 
 from kao_json import JsonFactory, JsonAttr, FieldAttr
 

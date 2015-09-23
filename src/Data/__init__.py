@@ -2,6 +2,7 @@ from .answer import Answer
 from .concept import Concept
 from .concept_list import ConceptList
 from .concept_manager import ConceptManager
+from .concept_pair import ConceptPair
 from .language import Language
 from .language_enrollment import LanguageEnrollment
 from .mastery import Mastery
