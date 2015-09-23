@@ -1,5 +1,4 @@
 from Data import Concept, ConceptPair, Language, LanguageEnrollment, Symbol, User, Word
-
 from kao_json import JsonFactory, JsonAttr, FieldAttr
 
 def GetNativeForm(concept, user):

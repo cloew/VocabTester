@@ -1,9 +1,5 @@
 from Data import ConceptPair, Language, LanguageEnrollment, Symbol, SymbolList, User, UserConceptList, Word, WordList
-
-from Quiz.quiz import Quiz
-from Quiz.Question.options_question import OptionsQuestion
-from Quiz.Question.foreign_prompt_question import ForeignPromptQuestion
-
+from Quiz import Quiz, OptionsQuestion, ForeignPromptQuestion
 from kao_json import JsonFactory, JsonAttr, FieldAttr, StaticAttr
 
 def answerUrl(question, user):
