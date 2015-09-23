@@ -1,7 +1,6 @@
 from .native_options_question import NativeOptionsQuestion
 from .foreign_options_question import ForeignOptionsQuestion
-
-from Quiz.ratio_picker import RatioPicker
+from ..ratio_picker import RatioPicker
 
 import random
 

@@ -5,7 +5,6 @@ from .prompt_question_builder import PromptQuestionBuilder
 
 from ..ratio_picker import RatioPicker
 
-
 from itertools import groupby
 import random
 

@@ -1,6 +1,6 @@
-from Data.concept_manager import ConceptManager
 from .quiz import Quiz
 from .sampler import sample_at_most
+from Data import ConceptManager
 
 class RandomQuizFactory:
     """ Represents method to contstruct a Quiz from random learned Words or Symbols """
