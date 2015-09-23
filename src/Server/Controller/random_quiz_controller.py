@@ -1,7 +1,7 @@
 from ..auth import auth
 from ..helpers.json_factory import toJson
 from Data import Language
-from Quiz.random_quiz_factory import RandomQuizFactory
+from Quiz import RandomQuizFactory
 
 class RandomQuizController(auth.JSONController):
     """ Controller to return a quiz built from random forms the user has learned """
