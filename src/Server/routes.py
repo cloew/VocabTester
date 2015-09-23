@@ -1,8 +1,8 @@
-from Data import Concept, Language, Symbol, SymbolList, User, Word, WordList
 from .auth import auth
+from .decorators import requires_admin
+from .helpers.admin_json_factory import toJson
 
-from Server.decorators import requires_auth, requires_admin
-from Server.helpers.admin_json_factory import toJson
+from Data import Concept, Language, Symbol, SymbolList, User, Word, WordList
 
 from Server.Controller.concept_lists_controller import ConceptListsController
 from Server.Controller.create_user_enrollment import CreateUserEnrollment
@@ -45,14 +45,14 @@ routes = [Endpoint('/', get=HTMLController('Server/templates/index.html')),
           
 routes += CrudEndpoints('/api/admin/users', User, toJson,
                         jsonColumnMap={'nativeLanguage': lambda value: ('native_language_id', value['id'])}, 
-                        decorators=[requires_auth, requires_admin]).endpoints
-routes += CrudEndpoints('/api/admin/languages', Language, toJson, decorators=[requires_auth, requires_admin]).endpoints
-routes += CrudEndpoints('/api/admin/concepts', Concept, toJson, decorators=[requires_auth, requires_admin]).endpoints
+                        decorators=[auth.requires_auth, requires_admin]).endpoints
+routes += CrudEndpoints('/api/admin/languages', Language, toJson, decorators=[auth.requires_auth, requires_admin]).endpoints
+routes += CrudEndpoints('/api/admin/concepts', Concept, toJson, decorators=[auth.requires_auth, requires_admin]).endpoints
 routes += CrudEndpoints('/api/admin/concepts/<int:conceptId>/words', Word, toJson, 
                         routeParams={'conceptId':'concept_id'}, 
                         jsonColumnMap={'language': lambda value: ('language_id', value['id'])}, 
-                        decorators=[requires_auth, requires_admin]).endpoints
+                        decorators=[auth.requires_auth, requires_admin]).endpoints
 routes += CrudEndpoints('/api/admin/concepts/<int:conceptId>/symbols', Symbol, toJson, 
                         routeParams={'conceptId':'concept_id'}, 
                         jsonColumnMap={'language': lambda value: ('language_id', value['id'])}, 
-                        decorators=[requires_auth, requires_admin]).endpoints
+                        decorators=[auth.requires_auth, requires_admin]).endpoints

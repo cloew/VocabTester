@@ -2,7 +2,6 @@ from kao_flask.ext.sqlalchemy import db
 
 from .answer import Answer
 from .staleness_period import StalenessPeriod
-from .user import User
 
 import datetime
 

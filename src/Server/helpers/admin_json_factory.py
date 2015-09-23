@@ -6,7 +6,6 @@ from Data.symbol import Symbol
 from Data.user import User
 from Data.word import Word
 
-from Server.helpers.user_proxy import UserProxy
 from kao_json import JsonFactory, JsonAttr, FieldAttr
 
 def GetNativeForm(concept, user):
@@ -19,7 +18,7 @@ def GetNativeForm(concept, user):
 jsonFactory = JsonFactory([(Concept, [FieldAttr('id'), JsonAttr('native', GetNativeForm, args=["user"])]),
                            ([Symbol, Word], [FieldAttr('id'), FieldAttr('text'), FieldAttr('language')]),
                            (ConceptPair, [FieldAttr('foreign'), FieldAttr('native')]),
-                           ([User, UserProxy], [FieldAttr('id'), FieldAttr('email'), FieldAttr('is_admin'), FieldAttr('givenName'), FieldAttr('lastName'), FieldAttr('nativeLanguage')]),
+                           ([User], [FieldAttr('id'), FieldAttr('email'), FieldAttr('is_admin'), FieldAttr('givenName'), FieldAttr('lastName'), FieldAttr('nativeLanguage')]),
                            (Language, [FieldAttr('id'), FieldAttr('name')]),
                            (LanguageEnrollment, [FieldAttr('id'), FieldAttr('language'), FieldAttr('default')])
                           ])

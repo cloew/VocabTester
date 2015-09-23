@@ -1,17 +1,13 @@
-from .auth_json_controller import AuthJSONController
+from ..auth import auth
+from ..helpers.json_factory import toJson
+from Data import ConceptManager, Language, Word
 
-from Data.concept_manager import ConceptManager
-from Data.language import Language
-from Data.word import Word
-
-from Server.helpers.json_factory import toJson
-
-class LearnedConceptsController(AuthJSONController):
+class LearnedConceptsController(auth.JSONController):
     """ Controller to return the concepts learned in the appropriate form """
     
     def __init__(self, formModel):
         """ Initialize the Quiz Controller """
-        AuthJSONController.__init__(self)
+        auth.JSONController.__init__(self)
         self.formModel = formModel
         self.conceptManager = ConceptManager(formModel)
     

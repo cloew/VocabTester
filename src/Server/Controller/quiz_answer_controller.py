@@ -1,8 +1,8 @@
-from .auth_json_controller import AuthJSONController
-from Data.mastery import Mastery
-from Server.helpers.json_factory import toJson
+from ..auth import auth
+from ..helpers.json_factory import toJson
+from Data import Mastery
 
-class QuizAnswerController(AuthJSONController):
+class QuizAnswerController(auth.JSONController):
     """ Controller to create an answer for the quiz """
     
     def performWithJSON(self, masteryId, json=None, user=None):

@@ -1,9 +1,8 @@
-from .auth_json_controller import AuthJSONController
-from Data.word import Word
+from ..auth import auth
+from ..helpers.json_factory import toJson
+from Data import Word
 
-from Server.helpers.json_factory import toJson
-
-class LearnWordController(AuthJSONController):
+class LearnWordController(auth.JSONController):
     """ Controller to mark a word as learned """
     
     def performWithJSON(self, wordId, json=None, user=None):

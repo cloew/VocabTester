@@ -1,18 +1,15 @@
-from .auth_json_controller import AuthJSONController
-from Data.concept_manager import ConceptManager
-from Data.language import Language
-from Data.word import Word
-
-from Server.helpers.json_factory import toJson
+from ..auth import auth
+from ..helpers.json_factory import toJson
+from Data import ConceptManager, Language, Word
 
 from sqlalchemy import func
 
-class SearchController(AuthJSONController):
+class SearchController(auth.JSONController):
     """ Controller to return the words that match some provided text """
     
     def __init__(self):
         """ Initialize the Search Controller """
-        AuthJSONController.__init__(self)
+        auth.JSONController.__init__(self)
         self.conceptManager = ConceptManager(Word)
     
     def performWithJSON(self, languageId, json=None, user=None):

@@ -1,15 +1,15 @@
-from .auth_json_controller import AuthJSONController
-from Data.language import Language
+from ..auth import auth
+from ..helpers.json_factory import toJson
+from Data import Language
 from Quiz.random_quiz_factory import RandomQuizFactory
-from Server.helpers.json_factory import toJson
 
 
-class RandomQuizController(AuthJSONController):
+class RandomQuizController(auth.JSONController):
     """ Controller to return a quiz built from random forms the user has learned """
     
     def __init__(self, formModel):
         """ Initialize the Quiz Controller """
-        AuthJSONController.__init__(self)
+        auth.JSONController.__init__(self)
         self.formModel = formModel
     
     def performWithJSON(self, languageId, json=None, user=None):

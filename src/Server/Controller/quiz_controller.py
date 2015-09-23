@@ -1,14 +1,14 @@
-from .auth_json_controller import AuthJSONController
-from Data.language import Language
+from ..auth import auth
+from ..helpers.json_factory import toJson
+from Data import Language
 from Quiz.quiz import Quiz
-from Server.helpers.json_factory import toJson
 
-class QuizController(AuthJSONController):
+class QuizController(auth.JSONController):
     """ Controller to return the quiz """
     
     def __init__(self, listModel):
         """ Initialize the Quiz Controller """
-        AuthJSONController.__init__(self)
+        auth.JSONController.__init__(self)
         self.listModel = listModel
     
     def performWithJSON(self, languageId, listId, json=None, user=None):

@@ -1,6 +1,8 @@
 from kao_decorators import lazy_property
 from .language import Language
 from .learned_tracker import LearnedTracker
+from .symbol import Symbol
+from .word import Word
 
 from kao_flask.ext.auth.password_utils import make_password, check_password
 from kao_flask.ext.sqlalchemy import db
@@ -67,6 +69,22 @@ class User(db.Model):
         """ Save the Underlying User Data Object """
         db.session.add(self)
         db.session.commit()
+        
+    def getMastery(self, word):
+        """ Return the User's mastery record of the given word """
+        mastery = Mastery.query.filter_by(user_id=self.id, word_id=word.id).first()
+        if mastery is None:
+            mastery = Mastery(user=self.user, word=word)
+            db.session.add(mastery)
+            db.session.commit()
+        return mastery
+        
+    def getLearnedFor(self, modelClass, language):
+        """ Return the learned forms for the given model class """
+        if modelClass is Symbol:
+            return self.getLearnedSymbolsFor(language)
+        elif modelClass is Word:
+            return self.getLearnedWordsFor(language)
         
     @lazy_property
     def learnedSymbolTracker(self):

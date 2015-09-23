@@ -13,7 +13,6 @@ from Quiz.quiz import Quiz
 from Quiz.Question.options_question import OptionsQuestion
 from Quiz.Question.foreign_prompt_question import ForeignPromptQuestion
 
-from Server.helpers.user_proxy import UserProxy
 from kao_json import JsonFactory, JsonAttr, FieldAttr, StaticAttr
 
 def answerUrl(question, user):
@@ -39,7 +38,7 @@ jsonFactory = JsonFactory([
                            (ConceptPair,[FieldAttr('foreign'), FieldAttr('native')]),
                            ([SymbolList, WordList],[FieldAttr('id'), FieldAttr('name'), JsonAttr('concepts', lambda s, u: s.getConceptPairs(u), args=["user"])]),
                            (UserConceptList,[FieldAttr('id'), FieldAttr('name'), FieldAttr('concepts'), FieldAttr('averageMastery')]),
-                           ([User, UserProxy], [FieldAttr('id'), FieldAttr('email'), FieldAttr('is_admin'), FieldAttr('givenName'), FieldAttr('lastName'), FieldAttr('nativeLanguage')]),
+                           ([User], [FieldAttr('id'), FieldAttr('email'), FieldAttr('is_admin'), FieldAttr('givenName'), FieldAttr('lastName'), FieldAttr('nativeLanguage')]),
                            (OptionsQuestion, [FieldAttr('subject'), FieldAttr('queryWord'), FieldAttr('options'), FieldAttr('answerIndex'), StaticAttr('questionType', 'options'), JsonAttr('answerUrl', answerUrl, args=["user"])]),
                            (ForeignPromptQuestion, [FieldAttr('subject'), FieldAttr('prompt'), FieldAttr('answer'), FieldAttr('displayAnswer'), StaticAttr('questionType', 'prompt'), JsonAttr('answerUrl', answerUrl, args=["user"])]),
                            (Quiz, [FieldAttr('name'), FieldAttr('questions'), JsonAttr('isWords', IsWordsQuiz)]),

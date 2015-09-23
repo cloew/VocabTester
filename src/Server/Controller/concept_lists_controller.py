@@ -1,15 +1,13 @@
-from .auth_json_controller import AuthJSONController
-from Data.language import Language
-from Data.user_concept_list import UserConceptList
+from ..auth import auth
+from ..helpers.json_factory import toJson
+from Data import Language, UserConceptList
 
-from Server.helpers.json_factory import toJson
-
-class ConceptListsController(AuthJSONController):
+class ConceptListsController(auth.JSONController):
     """ Controller to return the concept lists """
     
     def __init__(self, listModel):
         """ Initialize the Concept Lists Controller """
-        AuthJSONController.__init__(self)
+        auth.JSONController.__init__(self)
         self.listModel = listModel
     
     def performWithJSON(self, languageId, json=None, user=None):
