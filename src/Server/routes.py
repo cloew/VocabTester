@@ -1,12 +1,6 @@
-from Data.concept import Concept
-from Data.language import Language
-from Data.symbol import Symbol
-from Data.symbol_list import SymbolList
-from Data.user import User
-from Data.word import Word
-from Data.word_list import WordList
-
+from Data import Concept, Language, Symbol, SymbolList, User, Word, WordList
 from .auth import auth
+
 from Server.decorators import requires_auth, requires_admin
 from Server.helpers.admin_json_factory import toJson
 
