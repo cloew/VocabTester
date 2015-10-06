@@ -1,0 +1,25 @@
+{
+  "name": "VocabTester",
+  "version": "0.0.0",
+  "homepage": "https://github.com/cloew/VocabTester",
+  "authors": [
+    "Chris Loew <cloew123@gmail.com>"
+  ],
+  "description": "Web App to aid in Lanuguage Learning",
+  "main": "",
+  "moduleType": [],
+  "license": "None",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "kao-ng-auth": "cloew/kao-ng-auth",
+    "kao-ng-nav": "cloew/kao-ng-nav",
+    "kao-ng-utils": "cloew/kao-ng-utils"
+  }
+}
