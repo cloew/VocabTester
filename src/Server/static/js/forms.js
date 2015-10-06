@@ -1,7 +1,7 @@
 (function(a) {
     "use strict";
     a.module('Forms', ['kao.utils', 'kao.loading', 'VocabNav', 'Language'])
-        .factory('Form', function(LanguageService, KaoPromise) {
+        .factory('Form', function(LanguageService, KaoDefer) {
             function Form(config) {
                 this.config = config;
                 this.name = config.name;
@@ -10,7 +10,7 @@
                 this.randomQuizPath = config.randomQuizPath;
             };
             Form.prototype.getLearned = function() {
-                var deferred = KaoPromise();
+                var deferred = KaoDefer();
                 var self = this;
                 LanguageService.withCurrentLanguage(function(language) {
                     self.config.getLearned(language).success(deferred.resolve).error(deferred.reject);
@@ -18,7 +18,7 @@
                 return deferred.promise;
             };
             Form.prototype.getLists = function() {
-                var deferred = KaoPromise();
+                var deferred = KaoDefer();
                 var self = this;
                 LanguageService.withCurrentLanguage(function(language) {
                     self.config.getLists(language).success(deferred.resolve).error(deferred.reject);

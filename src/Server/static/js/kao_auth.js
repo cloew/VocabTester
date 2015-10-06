@@ -70,7 +70,7 @@
                 });
             }
         })
-        .factory('LanguageEnrollmentsService', function($http, $q, $rootScope, $timeout, KaoPromise) {
+        .factory('LanguageEnrollmentsService', function($http, $q, $rootScope, $timeout, KaoDefer) {
             var service = {
                 currentChangedEventType: 'current-enrollment-changed',
                 enrollmentsChangedEventType: 'enrollments-changed',
@@ -98,7 +98,7 @@
                     });
                 },
                 withCurrentEnrollment: function() {
-                    var deferred = KaoPromise();
+                    var deferred = KaoDefer();
                     var findCurrentEnrollment = function(enrollments) {
                         for (var i = 0; i < enrollments.length; i++) {
                             var enrollment = enrollments[i];

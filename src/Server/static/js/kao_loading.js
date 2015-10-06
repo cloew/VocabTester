@@ -1,13 +1,13 @@
 (function(a) {
     "use strict";
     a.module('kao.loading', ['kao.utils'])
-        .factory('LoadingTracker', function(KaoPromise) {
+        .factory('LoadingTracker', function(KaoDefer) {
             function LoadingTracker() {
                 this.isLoading = false;
             };
             LoadingTracker.prototype.load = function(promise) {
                 this.isLoading = true;
-                var deferred = KaoPromise();
+                var deferred = KaoDefer();
                 var self = this;
                 
                 promise.success(deferred.resolve).error(deferred.reject);
