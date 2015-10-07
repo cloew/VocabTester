@@ -1,6 +1,6 @@
 (function(a) {
     "use strict";
-    a.module('Concepts', ['ui.bootstrap', 'kao.loading', 'kao.table', 'VocabNav', 'Language', 'Forms'])
+    a.module('Concepts', ['ui.bootstrap', 'kao.loading', 'kao.table', 'Language', 'Forms'])
         .controller('LearnedFormsController', function ($scope, FormsService, LanguageService, LoadingTrackerService) {
             var form = FormsService.current();
             $scope.formName = form.pluralName;

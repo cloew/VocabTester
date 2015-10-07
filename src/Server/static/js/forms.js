@@ -1,6 +1,6 @@
 (function(a) {
     "use strict";
-    a.module('Forms', ['kao.utils', 'kao.loading', 'VocabNav', 'Language'])
+    a.module('Forms', ['kao.utils', 'kao.loading', 'vocab.nav', 'Language'])
         .factory('Form', function(LanguageService, KaoDefer) {
             function Form(config) {
                 this.config = config;
@@ -30,12 +30,12 @@
             };
             return Form;
         })
-        .factory('Word', function(Form, navService) {
+        .factory('Word', function(Form, NavService) {
             var config = {name: "Word",
                           pluralName: "Words",
                           isWords: true,
-                          quizPath: navService.wordListQuiz.path,
-                          randomQuizPath: navService.randomWordQuiz.path,
+                          quizPath: NavService.wordListQuiz.path,
+                          randomQuizPath: NavService.randomWordQuiz.path,
                           getLearned: function(language) {
                             return language.getWords();
                             },
@@ -45,12 +45,12 @@
                          };
             return new Form(config);
         })
-        .factory('Symbol', function(Form, navService) {
+        .factory('Symbol', function(Form, NavService) {
             var config = {name: "Symbol",
                           pluralName: "Symbols",
                           isWords: false,
-                          quizPath: navService.symbolListQuiz.path,
-                          randomQuizPath: navService.randomSymbolQuiz.path,
+                          quizPath: NavService.symbolListQuiz.path,
+                          randomQuizPath: NavService.randomSymbolQuiz.path,
                           getLearned: function(language) {
                             return language.getSymbols();
                             },
@@ -60,14 +60,14 @@
                          };
             return new Form(config);
         })
-        .service('FormsService', function($route, navService, Symbol, Word) {
+        .service('FormsService', function($route, NavService, Symbol, Word) {
             var service = {current: function() {
                 return this[$route.current.$$route.path];
             }};
-            service[navService.words.path] = Word;
-            service[navService.wordLists.path] = Word;
-            service[navService.symbols.path] = Symbol;
-            service[navService.symbolLists.path] = Symbol;
+            service[NavService.words.path] = Word;
+            service[NavService.wordLists.path] = Word;
+            service[NavService.symbols.path] = Symbol;
+            service[NavService.symbolLists.path] = Symbol;
             return service;
         })
         .directive('formLists', function() {

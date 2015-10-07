@@ -1,12 +1,12 @@
 (function(a) {
     "use strict";
-    a.module('kao.auth', ['kao.loading', 'kao.utils', 'VocabNav'])
-        .controller('LoginController', function ($scope, $location, userService, navService) {
+    a.module('kao.auth', ['kao.loading', 'kao.utils', 'vocab.nav'])
+        .controller('LoginController', function ($scope, $location, userService, NavService) {
             $scope.login = function() {
                 userService.login($scope.email, $scope.password, function() {
                     var next = $location.search().returnTo;
                     if (!next) {
-                        next = navService.wordLists.path;
+                        next = NavService.wordLists.path;
                     }
                     $location.path(next);
                     $location.search('returnTo', null);
@@ -15,17 +15,17 @@
                 });
             };
         })
-        .controller('RegisterController', function ($scope, $location, userService, navService) {
+        .controller('RegisterController', function ($scope, userService, NavService) {
             $scope.user = {};
             $scope.register = function() {
                 userService.register($scope.user, function() {
-                    $location.path(navService.enroll.path);
+                    NavService.enroll.goTo();
                 }, function(error) {
                     $scope.errorMessage = error.message;
                 });
             };
         })
-        .controller('ProfileController', function ($scope, $location, userService, LanguageEnrollmentsService) {
+        .controller('ProfileController', function ($scope, userService, LanguageEnrollmentsService) {
             $scope.user = {};
             LanguageEnrollmentsService.requestEnrollments(function(enrollments) {
                 $scope.enrollments = enrollments;
@@ -41,7 +41,7 @@
                 });
             };
         })
-        .controller('ChooseEnrollmentController', function ($scope, $location, languages, userService, LanguageEnrollmentsService, navService, LoadingTrackerService) {
+        .controller('ChooseEnrollmentController', function ($scope, languages, userService, LanguageEnrollmentsService, NavService, LoadingTrackerService) {
             $scope.languages = [];
             var tracker = LoadingTrackerService.get('enrollments');
             userService.getUser(function(user) {
@@ -64,7 +64,7 @@
             
             $scope.enroll = function(language) {
                 LanguageEnrollmentsService.create(language).then(function(data) {
-                    $location.path(navService.profile.path);
+                    NavService.profile.goTo();
                 }, function(error) {
                     console.log(error);
                 });
@@ -157,7 +157,7 @@
             });
             return service;
         })
-        .factory('userService', function($http, $window, $location, $rootScope, navService) {
+        .factory('userService', function($http, $window, $location, $rootScope, NavService) {
             var user = undefined;
             var userWatch = [];
             var responseHandler = function(promise, successCallback, errorCallback) {
@@ -191,7 +191,7 @@
                     delete $window.localStorage.token;
                     user = undefined;
                     $rootScope.$broadcast('user-logout');
-                    $location.path(navService.login.path);
+                    $location.path(NavService.login.path);
                 },
                 isLoggedIn: function () {
                     return $window.localStorage.token !== undefined;
@@ -254,10 +254,10 @@
                 }
             };
         })
-        .service('requireEnrollment', function($location, LanguageEnrollmentsService, navService) {
+        .service('requireEnrollment', function($location, LanguageEnrollmentsService, NavService) {
             return function(event) {
                 LanguageEnrollmentsService.withCurrentEnrollment().error(function() {
-                    $location.path(navService.enroll.path);
+                    $location.path(NavService.enroll.path);
                 });
             };
         })

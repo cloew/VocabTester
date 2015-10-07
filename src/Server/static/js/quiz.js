@@ -1,6 +1,6 @@
 (function(a) {
     "use strict";
-    a.module('Quiz', ['autofocus', 'ui.bootstrap', 'kao.input', 'kao.loading', 'kao.table', 'Concepts', 'VocabNav'])
+    a.module('Quiz', ['autofocus', 'ui.bootstrap', 'kao.input', 'kao.loading', 'kao.table', 'Concepts', 'vocab.nav'])
         .factory('OptionsQuestion', function() {
             function OptionsQuestion(question) {
                 this.question = question;
@@ -39,13 +39,13 @@
             
             return PromptQuestion;
         })
-        .factory('quizService', function($http, navService, LanguageService, OptionsQuestion, PromptQuestion, LoadingTrackerService) {
+        .factory('quizService', function($http, NavService, LanguageService, OptionsQuestion, PromptQuestion, LoadingTrackerService) {
             var tracker =  LoadingTrackerService.get('quiz');
             function Quiz() {
                 this.quiz = undefined;
                 this.currentQuestionIndex = 0;
                 this.correctAnswers = 0;
-                this.returnTo = navService.getReturnTo();
+                this.returnTo = NavService.current().returnTo;
                 
                 var self = this;
                 LanguageService.withCurrentLanguage(function(language) {
