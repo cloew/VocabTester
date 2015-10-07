@@ -20,6 +20,7 @@
   "dependencies": {
     "kao-ng-auth": "cloew/kao-ng-auth",
     "kao-ng-nav": "cloew/kao-ng-nav",
-    "kao-ng-utils": "cloew/kao-ng-utils"
+    "kao-ng-utils": "cloew/kao-ng-utils",
+    "kao-ng-input": "cloew/kao-ng-input#~0.0.0"
   }
 }
