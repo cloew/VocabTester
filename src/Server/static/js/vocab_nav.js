@@ -1,7 +1,7 @@
 (function(a) {
     'use strict';
 
-    var services = angular.module('vocab.nav', ['kao.nav'])
+    var services = angular.module('vocab.nav', ['kao.nav', 'vocab.auth.controllers'])
         .config(['NavConfigProvider', function(navConfig) {
             navConfig.add({name: 'index', path:'/', templateUrl:'static/partials/index.html', controller:'IndexController'});
             navConfig.add({name: 'login', path:'/login', templateUrl:'static/partials/login.html', controller:'LoginController'});

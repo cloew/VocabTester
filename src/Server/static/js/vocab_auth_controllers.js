@@ -1,50 +1,52 @@
 (function(a) {
     "use strict";
-    a.module('kao.auth', ['kao.loading', 'kao.utils', 'vocab.nav'])
-        .controller('LoginController', function ($scope, $location, userService, NavService) {
+    a.module('vocab.auth.controllers', ['kao.loading', 'kao.utils', 'kao.nav'])
+        .controller('LoginController', function ($scope, $location, UserService, NavService) {
             $scope.login = function() {
-                userService.login($scope.email, $scope.password, function() {
+                UserService.login({'email':$scope.email, 'password':$scope.password}).success(function(user) {
                     var next = $location.search().returnTo;
                     if (!next) {
                         next = NavService.wordLists.path;
                     }
                     $location.path(next);
                     $location.search('returnTo', null);
-                }, function(error) {
+                }).error(function(error) {
                     $scope.errorMessage = error.message;
                 });
             };
         })
-        .controller('RegisterController', function ($scope, userService, NavService) {
+        .controller('RegisterController', function ($scope, UserService, NavService) {
             $scope.user = {};
             $scope.register = function() {
-                userService.register($scope.user, function() {
+                UserService.register($scope.user).success(function(user) {
                     NavService.enroll.goTo();
-                }, function(error) {
+                }).error(function(error) {
                     $scope.errorMessage = error.message;
                 });
             };
         })
-        .controller('ProfileController', function ($scope, userService, LanguageEnrollmentsService) {
+        .controller('ProfileController', function ($scope, UserService, LanguageEnrollmentsService) {
             $scope.user = {};
             LanguageEnrollmentsService.requestEnrollments(function(enrollments) {
                 $scope.enrollments = enrollments;
             });
-            userService.getUser(function(user) {
+            UserService.withUser().success(function(user) {
                 a.copy(user, $scope.user);
+            }).error(function(error) {
+                console.log(error);
             });
             
             $scope.update = function() {
-                userService.update($scope.user, function() {
-                }, function(error) {
+                UserService.update($scope.user).success(function(user) {
+                }).error(function(error) {
                     $scope.errorMessage = error.message;
                 });
             };
         })
-        .controller('ChooseEnrollmentController', function ($scope, languages, userService, LanguageEnrollmentsService, NavService, LoadingTrackerService) {
+        .controller('ChooseEnrollmentController', function ($scope, languages, UserService, LanguageEnrollmentsService, NavService, LoadingTrackerService) {
             $scope.languages = [];
             var tracker = LoadingTrackerService.get('enrollments');
-            userService.getUser(function(user) {
+            UserService.withUser().success(function(user) {
                 tracker.load(languages()).success(function(data) {
                     LanguageEnrollmentsService.requestEnrollments(function(enrollments) {
                         var enrolledLanguageIds = [];
@@ -60,6 +62,8 @@
                 }).error(function(error) {
                     console.log(error);
                 });
+            }).error(function(error) {
+                console.log(error);
             });
             
             $scope.enroll = function(language) {
@@ -157,111 +161,11 @@
             });
             return service;
         })
-        .factory('userService', function($http, $window, $location, $rootScope, NavService) {
-            var user = undefined;
-            var userWatch = [];
-            var responseHandler = function(promise, successCallback, errorCallback) {
-                promise.success(function(data) {
-                    if (data.error) {
-                        errorCallback(data.error);
-                    } else {
-                        user = data.user;
-                        $window.localStorage.token = data.token;
-                        successCallback();
-                        for (var i = 0; i < userWatch.length; i++) {
-                            userWatch[i](user);
-                        }
-                    }
-                }).error(function(error) {
-                    console.log(error);
-                });
-            }
-
-            return {
-                login: function (email, password, successCallback, errorCallback) {
-                    responseHandler($http.post('/api/login', {'email':email, 'password':password}), successCallback, errorCallback);
-                },
-                register: function (user, successCallback, errorCallback) {
-                    responseHandler($http.post('/api/users', user), successCallback, errorCallback);
-                },
-                update: function (user, successCallback, errorCallback) {
-                    responseHandler($http.put('/api/users/current', user), successCallback, errorCallback);
-                },
-                logout: function () {
-                    delete $window.localStorage.token;
-                    user = undefined;
-                    $rootScope.$broadcast('user-logout');
-                    $location.path(NavService.login.path);
-                },
-                isLoggedIn: function () {
-                    return $window.localStorage.token !== undefined;
-                },
-                getUser: function (callback) {
-                    if (this.isLoggedIn() && (user === undefined)) {
-                        $http.get('/api/users/current').success(function(data) {
-                            user = data.user;
-                            callback(user);
-                        }).error(function(error) {
-                            console.log(error);
-                        });
-                    } else {
-                        callback(user);
-                    }
-                },
-                watchUser: function(callback) {
-                    userWatch.push(callback);
-                    
-                    if (this.isLoggedIn()) {
-                        this.getUser(function(user) {
-                            if (user !== undefined) {
-                                callback(user);
-                            }
-                        });
-                    }
-                }
-            };
-        })
-        .service('AuthRejected', function ($location) {
-            return {
-                toLogin: function () {
-                    var returnToPath = $location.path();
-                    $location.path('/login').search('returnTo', returnToPath);
-                }
-            };
-        })
-        .factory('authInterceptor', function ($rootScope, $q, $window, AuthRejected) {
-            return {
-                request: function (config) {
-                    config.headers = config.headers || {};
-                    if ($window.localStorage.token) {
-                        config.headers.Authorization = 'Bearer ' + $window.localStorage.token;
-                    }
-                    return config;
-                },
-                responseError: function (rejection) {
-                    if (rejection.status === 401) {
-                        AuthRejected.toLogin();
-                    }
-                    return $q.reject(rejection);
-                }
-            };
-        })
-        .service('requireAuth', function(userService, AuthRejected) {
-            return function(event) {
-                if (!userService.isLoggedIn()) {
-                    event.preventDefault();
-                    AuthRejected.toLogin();
-                }
-            };
-        })
         .service('requireEnrollment', function($location, LanguageEnrollmentsService, NavService) {
             return function(event) {
                 LanguageEnrollmentsService.withCurrentEnrollment().error(function() {
                     $location.path(NavService.enroll.path);
                 });
             };
-        })
-        .config(function ($httpProvider) {
-            $httpProvider.interceptors.push('authInterceptor');
         });
 })(angular);
