@@ -6,7 +6,9 @@
                 var config = navConfig.config;
                 CrudParamFromRouteConfig.register('conceptId', [{path:config.adminEditConcepts.path, param: 'id'},
                                                                 {path:config.adminNewConceptWords.path, param: 'conceptId'},
-                                                                {path:config.adminEditConceptWords.path, param: 'conceptId'}]);
+                                                                {path:config.adminEditConceptWords.path, param: 'conceptId'},
+                                                                {path:config.adminNewConceptSymbols.path, param: 'conceptId'},
+                                                                {path:config.adminEditConceptSymbols.path, param: 'conceptId'}]);
                 
                 CrudApiConfig.add('/api/admin/users', 'User');
                 FrontEndCrudConfig.add({name:'User', listUrl:config.adminUsers.path, newUrl:config.adminNewUsers.path, editUrl:config.adminEditUsers.path,
