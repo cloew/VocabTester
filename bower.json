@@ -21,8 +21,8 @@
     "kao-ng-auth": "cloew/kao-ng-auth",
     "kao-ng-nav": "cloew/kao-ng-nav",
     "kao-ng-utils": "cloew/kao-ng-utils",
-    "kao-ng-input": "cloew/kao-ng-input#~0.0.0",
-    "kao-ng-table": "cloew/kao-ng-table#~0.0.0",
-    "kao-ng-crud": "cloew/kao-ng-crud#~0.0.0"
+    "kao-ng-input": "cloew/kao-ng-input",
+    "kao-ng-table": "cloew/kao-ng-table",
+    "kao-ng-crud": "cloew/kao-ng-crud"
   }
 }

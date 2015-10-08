@@ -5,8 +5,8 @@
         <th>Language</th>
     </tr>
     <tr ng-repeat="record in records">
-        <td><a ng-href="{{getRecordEditUrl(record)}}">{{record.id}}</a></td>
-        <td>{{record.text}}</td>
-        <td>{{record.language.name}}</td>
+        <td><a ng-href="#{{record.getEditUrl()}}">{{record.data.id}}</a></td>
+        <td>{{record.data.text}}</td>
+        <td>{{record.data.language.name}}</td>
     </tr>
 </table>
