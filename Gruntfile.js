@@ -75,4 +75,5 @@ module.exports = function(grunt) {
 
     // Default task(s).
     grunt.registerTask('default', ['bowercopy', 'sass', 'spider_script']);
+    grunt.registerTask('spider', ['spider_script']);
 };
