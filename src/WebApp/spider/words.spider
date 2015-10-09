@@ -1,0 +1,38 @@
+use angular;
+use console;
+    
+angular.module('Words', ['kao.loading', 'Concepts'])
+    .controller('SearchController', fn ($scope, $http, LanguageService, LoadingTracker) {
+        $scope.results = undefined;
+        $scope.isWords = true;
+        $scope.tracker = new LoadingTracker();
+        
+        $scope.search = fn(text) {
+            LanguageService.withCurrentLanguage(fn(language) {
+                $scope.tracker.load(language.search({'text':text})).success(fn(data) {
+                    $scope.results = data.results;
+                }).error(fn(error) {
+                    console.log(error);
+                });
+            });
+        };
+    })
+    .directive('searchResult', fn() {
+        return {
+            restrict: 'E',
+            replace: true,
+            scope: {
+                result: '='
+            },
+            controller: fn($scope, $http) {
+                $scope.learn = fn() {
+                    $http.post('/api/words/'+$scope.result.foreign.id+'/learn').success(fn(data) {
+                        $scope.result.foreign = data.word;
+                    }).error(fn(error) {
+                        console.log(error);
+                    });
+                };
+            },
+            templateUrl: 'static/partials/directives/search_result.html'
+        };
+    });
