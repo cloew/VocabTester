@@ -1,0 +1,109 @@
+use angular;
+use console;
+
+angular.module('Forms', ['kao.utils', 'kao.loading', 'vocab.nav', 'Language'])
+    .factory('Form', fn(LanguageService, KaoDefer) {
+        fn Form(config) {
+            this.config = config;
+            this.name = config.name;
+            this.pluralName = config.pluralName;
+            this.isWords = config.isWords;
+            this.randomQuizPath = config.randomQuizPath;
+        }
+        Form.prototype.getLearned = fn() {
+            var deferred = KaoDefer();
+            var self = this;
+            LanguageService.withCurrentLanguage(fn(language) {
+                self.config.getLearned(language).success(deferred.resolve).error(deferred.reject);
+            });
+            return deferred.promise;
+        };
+        Form.prototype.getLists = fn() {
+            var deferred = KaoDefer();
+            var self = this;
+            LanguageService.withCurrentLanguage(fn(language) {
+                self.config.getLists(language).success(deferred.resolve).error(deferred.reject);
+            });
+            return deferred.promise;
+        };
+        Form.prototype.getQuizUrl = fn(id) {
+            return this.config.quizPath.replace(':listId', id);
+        };
+        return Form;
+    })
+    .factory('Word', fn(Form, NavService) {
+        var config = {name: "Word",
+                      pluralName: "Words",
+                      isWords: true,
+                      quizPath: NavService.wordListQuiz.path,
+                      randomQuizPath: NavService.randomWordQuiz.path,
+                      getLearned: fn(language) {
+                        return language.getWords();
+                        },
+                      getLists: fn(language) {
+                        return language.getWordLists();
+                        }
+                     };
+        return new Form(config);
+    })
+    .factory('Symbol', fn(Form, NavService) {
+        var config = {name: "Symbol",
+                      pluralName: "Symbols",
+                      isWords: false,
+                      quizPath: NavService.symbolListQuiz.path,
+                      randomQuizPath: NavService.randomSymbolQuiz.path,
+                      getLearned: fn(language) {
+                        return language.getSymbols();
+                        },
+                      getLists: fn(language) {
+                        return language.getSymbolLists();
+                        }
+                     };
+        return new Form(config);
+    })
+    .service('FormsService', fn($route, NavService, Symbol, Word) {
+        var service = {current: fn() {
+            return this[$route.current.$$route.path];
+        }};
+        service[NavService.words.path] = Word;
+        service[NavService.wordLists.path] = Word;
+        service[NavService.symbols.path] = Symbol;
+        service[NavService.symbolLists.path] = Symbol;
+        return service;
+    })
+    .directive('formLists', fn() {
+        return {
+            restrict: 'E',
+            replace: true,
+            controller: fn($scope, FormsService, LanguageService, LoadingTracker) {
+                var form = FormsService.current();
+                $scope.formName = form.name;
+                $scope.tracker = new LoadingTracker();
+                
+                LanguageService.watchCurrentLanguage($scope, fn(event, language) {
+                    $scope.tracker.load(form.getLists()).success(fn(data) {
+                        $scope.lists = data.lists;
+                    }).error(fn(error) {
+                        console.log(error);
+                    });
+                });
+            },
+            templateUrl: 'static/partials/directives/form_lists.html'
+        };
+    })
+    .directive('formList', fn() {
+        return {
+            restrict: 'E',
+            replace: true,
+            scope: {
+                conceptList: '='
+            },
+            controller: fn($scope, FormsService) {
+                var form = FormsService.current();
+                $scope.header = form.pluralName.toLowerCase();
+                $scope.isWords = form.isWords;
+                $scope.quizUrl = form.getQuizUrl($scope.conceptList.id);
+            },
+            templateUrl: 'static/partials/directives/concept_list.html'
+        };
+    });
