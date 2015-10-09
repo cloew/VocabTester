@@ -17,28 +17,6 @@ angular.module('Concepts', ['ui.bootstrap', 'kao.loading', 'kao.table', 'Languag
             });
         });
     })
-    .factory('conceptTableService', fn() {
-        return {
-            buildEntries: fn (concepts, isWords) {
-                var columns = [];
-                
-                if isWords {
-                    columns.push({'name':'Word', 'path':'form'});
-                }
-                else {
-                    columns.push({'name':'Symbol', 'path':'form'});
-                }
-                columns.push({'name':'Native', 'path':'native'});
-                columns.push({'name':'Mastery', 'path':'mastery'});
-                
-                var table = {'entries':[], columns:columns};
-                for concept in concepts {
-                    table.entries.push({'form':concept.foreign.text, 'native':concept.native.text, 'mastery':concept.foreign.mastery});
-                }
-                return table;
-            }
-        };
-    })
     .directive('conceptCount', fn() {
         return {
             restrict: 'E',
@@ -61,19 +39,6 @@ angular.module('Concepts', ['ui.bootstrap', 'kao.loading', 'kao.table', 'Languag
             scope: {
                 concepts: '=',
                 isWords: '='
-            },
-            controller: fn($scope, conceptTableService) {
-                var loadTable = fn() {
-                    if $scope.concepts? {
-                        var table = conceptTableService.buildEntries($scope.concepts, $scope.isWords);
-                        $scope.entries = table.entries;
-                        $scope.columns = table.columns;
-                    }
-                };
-                loadTable();
-                $scope.$watch('concepts', fn() {
-                    loadTable();
-                });
             },
             templateUrl: 'static/partials/directives/concept_table.html'
         };
