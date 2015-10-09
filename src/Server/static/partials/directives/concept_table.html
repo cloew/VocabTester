@@ -1,15 +1,6 @@
 <div>
     <table class="table table-striped table-bordered">
-        <tr>
-            <th ng-if="isWords">Word</th>
-            <th ng-if="!isWords">Symbol</th>
-            <th>Native</th>
-            <th>Mastery</th>
-        </tr>
-        <tr ng-repeat="concept in concepts">
-            <td>{{concept.foreign.text}}</td>
-            <td>{{concept.native.text}}</td>
-            <td>{{concept.foreign.mastery}}</td>
-        </tr>
+        <tr concept-table-header is-words="isWords"></tr>
+        <tr concept-table-row ng-repeat="concept in concepts" concept="concept"></tr>
     </table>
 <div>

@@ -1,7 +1,7 @@
 use angular;
 use console;
 
-angular.module('Concepts', ['ui.bootstrap', 'kao.loading', 'kao.table', 'Language', 'Forms'])
+angular.module('Concepts', ['ui.bootstrap', 'kao.loading', 'Language', 'Forms'])
     .controller('LearnedFormsController', fn($scope, FormsService, LanguageService, LoadingTracker) {
         var form = FormsService.current();
         $scope.formName = form.pluralName;
@@ -41,5 +41,30 @@ angular.module('Concepts', ['ui.bootstrap', 'kao.loading', 'kao.table', 'Languag
                 isWords: '='
             },
             templateUrl: 'static/partials/directives/concept_table.html'
+        };
+    })
+    .directive('conceptTableHeader', fn() {
+        return {
+            restrict: 'A',
+            replace: false,
+            scope: {
+                isWords: '='
+            },
+            template:  '<th ng-if="isWords">Word</th>
+                        <th ng-if="!isWords">Symbol</th>
+                        <th>Native</th>
+                        <th>Mastery</th>'
+        };
+    })
+    .directive('conceptTableRow', fn() {
+        return {
+            restrict: 'A',
+            replace: false,
+            scope: {
+                concept: '='
+            },
+            template:  '<td>{{concept.foreign.text}}</td>
+                        <td>{{concept.native.text}}</td>
+                        <td>{{concept.foreign.mastery}}</td>'
         };
     });
