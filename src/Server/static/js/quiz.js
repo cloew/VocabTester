@@ -95,32 +95,6 @@ $traceurRuntime.ModuleStore.getAnonymousModule(function() {
     return {buildQuiz: function() {
         return new Quiz();
       }};
-  }).factory("quizResultsTableService", function(conceptTableService) {
-    return {buildEntries: function(quiz) {
-        var concepts = [];
-        for (var $__0 = quiz.questions[$traceurRuntime.toProperty(Symbol.iterator)](),
-            $__1; !($__1 = $__0.next()).done; ) {
-          var question = $__1.value;
-          {
-            concepts.push(question.subject);
-          }
-        }
-        var table = conceptTableService.buildEntries(concepts, quiz.isWords);
-        var i = 0;
-        for (var $__2 = quiz.questions[$traceurRuntime.toProperty(Symbol.iterator)](),
-            $__3; !($__3 = $__2.next()).done; ) {
-          var question$__4 = $__3.value;
-          {
-            if (question$__4.results.correct) {
-              table.entries[i].rowClass = "success";
-            } else {
-              table.entries[i].rowClass = "danger";
-            }
-            i++;
-          }
-        }
-        return table;
-      }};
   }).controller("QuizController", function($scope, quizService) {
     $scope.quiz = quizService.buildQuiz();
   }).directive("question", function() {
@@ -190,9 +164,6 @@ $traceurRuntime.ModuleStore.getAnonymousModule(function() {
       restrict: "E",
       replace: true,
       scope: {quiz: "="},
-      controller: function($scope, quizResultsTableService) {
-        $scope.table = quizResultsTableService.buildEntries($scope.quiz);
-      },
       templateUrl: "static/partials/directives/quiz_results.html"
     };
   }).directive("quizBackButton", function() {

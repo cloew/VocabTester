@@ -98,25 +98,6 @@ angular.module('Quiz', ['autofocus', 'ui.bootstrap', 'kao.input', 'kao.loading',
             }
         };
     })
-    .factory('quizResultsTableService', fn(conceptTableService) {
-        return {
-            buildEntries: fn (quiz) {
-                var concepts = [];
-                for question in quiz.questions {
-                    concepts.push(question.subject);
-                }
-                var table = conceptTableService.buildEntries(concepts, quiz.isWords);
-                for question, i in quiz.questions {
-                    if question.results.correct {
-                        table.entries[i].rowClass = 'success';
-                    } else {
-                        table.entries[i].rowClass = 'danger';
-                    }
-                }
-                return table;
-            }
-        };
-    })
     .controller('QuizController', fn ($scope, quizService) {
         $scope.quiz = quizService.buildQuiz();
     })
@@ -199,9 +180,6 @@ angular.module('Quiz', ['autofocus', 'ui.bootstrap', 'kao.input', 'kao.loading',
             replace: true,
             scope: {
                 quiz: '='
-            },
-            controller: fn($scope, quizResultsTableService) {
-                $scope.table = quizResultsTableService.buildEntries($scope.quiz);
             },
             templateUrl: 'static/partials/directives/quiz_results.html'
         };
