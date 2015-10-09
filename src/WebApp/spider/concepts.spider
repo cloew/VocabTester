@@ -1,0 +1,80 @@
+use angular;
+use console;
+
+angular.module('Concepts', ['ui.bootstrap', 'kao.loading', 'kao.table', 'Language', 'Forms'])
+    .controller('LearnedFormsController', fn($scope, FormsService, LanguageService, LoadingTracker) {
+        var form = FormsService.current();
+        $scope.formName = form.pluralName;
+        $scope.quizUrl = form.randomQuizPath;
+        $scope.tracker = new LoadingTracker();
+        
+        LanguageService.watchCurrentLanguage($scope, fn(event, language) {
+            $scope.tracker.load(form.getLearned()).success(fn(data) {
+                $scope.concepts = data.concepts;
+                $scope.isWords = data.isWords;
+            }).error(fn(error) {
+                console.log(error);
+            });
+        });
+    })
+    .factory('conceptTableService', fn() {
+        return {
+            buildEntries: fn (concepts, isWords) {
+                var columns = [];
+                
+                if isWords {
+                    columns.push({'name':'Word', 'path':'form'});
+                }
+                else {
+                    columns.push({'name':'Symbol', 'path':'form'});
+                }
+                columns.push({'name':'Native', 'path':'native'});
+                columns.push({'name':'Mastery', 'path':'mastery'});
+                
+                var table = {'entries':[], columns:columns};
+                for concept in concepts {
+                    table.entries.push({'form':concept.foreign.text, 'native':concept.native.text, 'mastery':concept.foreign.mastery});
+                }
+                return table;
+            }
+        };
+    })
+    .directive('conceptCount', fn() {
+        return {
+            restrict: 'E',
+            replace: true,
+            scope: {
+                conceptList: '=',
+                header: '=',
+                isWords: '='
+            },
+            controller: fn($scope) {
+                $scope.isOpen = false;
+            },
+            templateUrl: 'static/partials/directives/concept_count.html'
+        };
+    })
+    .directive('conceptTable', fn() {
+        return {
+            restrict: 'E',
+            replace: true,
+            scope: {
+                concepts: '=',
+                isWords: '='
+            },
+            controller: fn($scope, conceptTableService) {
+                var loadTable = fn() {
+                    if $scope.concepts? {
+                        var table = conceptTableService.buildEntries($scope.concepts, $scope.isWords);
+                        $scope.entries = table.entries;
+                        $scope.columns = table.columns;
+                    }
+                };
+                loadTable();
+                $scope.$watch('concepts', fn() {
+                    loadTable();
+                });
+            },
+            templateUrl: 'static/partials/directives/concept_table.html'
+        };
+    });
