@@ -39,17 +39,17 @@
             
             return PromptQuestion;
         })
-        .factory('quizService', function($http, NavService, LanguageService, OptionsQuestion, PromptQuestion, LoadingTrackerService) {
-            var tracker =  LoadingTrackerService.get('quiz');
+        .factory('quizService', function($http, NavService, LanguageService, OptionsQuestion, PromptQuestion, LoadingTracker) {
             function Quiz() {
                 this.quiz = undefined;
                 this.currentQuestionIndex = 0;
                 this.correctAnswers = 0;
                 this.returnTo = NavService.current().returnTo;
+                this.tracker = new LoadingTracker();
                 
                 var self = this;
                 LanguageService.withCurrentLanguage(function(language) {
-                    tracker.load(language.getQuiz()).success(function(data) {
+                    self.tracker.load(language.getQuiz()).success(function(data) {
                         self.quiz = data.quiz;
                         self.questions = [];
                         self.numberOfQuestions = self.quiz.questions.length;

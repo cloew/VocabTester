@@ -43,11 +43,11 @@
                 });
             };
         })
-        .controller('ChooseEnrollmentController', function ($scope, languages, UserService, LanguageEnrollmentsService, NavService, LoadingTrackerService) {
+        .controller('ChooseEnrollmentController', function ($scope, languages, UserService, LanguageEnrollmentsService, NavService, LoadingTracker) {
             $scope.languages = [];
-            var tracker = LoadingTrackerService.get('enrollments');
+            $scope.tracker = new LoadingTracker();
             UserService.withUser().success(function(user) {
-                tracker.load(languages()).success(function(data) {
+                $scope.tracker.load(languages()).success(function(data) {
                     LanguageEnrollmentsService.requestEnrollments(function(enrollments) {
                         var enrolledLanguageIds = [];
                         a.forEach(enrollments, function(enrollment, key) {

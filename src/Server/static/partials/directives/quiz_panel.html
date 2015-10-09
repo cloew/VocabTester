@@ -3,7 +3,7 @@
         <span class="pull-right question-progress" ng-show="quiz.quiz.questions">{{quiz.currentQuestionIndex+1}} of {{quiz.quiz.questions.length}}</span>
         <h3 class="panel-title">{{quiz.quiz.name}} Quiz</h3>
     </div>
-    <loading-div class="panel-body" loading="quiz">
+    <loading-div class="panel-body" tracker="quiz.tracker">
         <question question="quiz.currentQuestion"></question>
     </loading-div>
     <div class="panel-footer footer-with-button" ng-if="!quiz.currentQuestion.results">
