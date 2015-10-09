@@ -1,0 +1,56 @@
+use angular;
+
+angular.module('Language', ['kao.auth'])
+    .factory('Language', fn($http, $location) {
+        fn Language(language) {
+            this.language = language;
+            this.baseApiUrl = '/api/languages/'+this.language.id;
+        }
+        Language.prototype.getSymbols = fn() {
+            return $http.get(this.baseApiUrl+'/symbols');
+        };
+        Language.prototype.getSymbolLists = fn() {
+            return $http.get(this.baseApiUrl+'/symbollists');
+        };
+        Language.prototype.getWords = fn() {
+            return $http.get(this.baseApiUrl+'/words');
+        };
+        Language.prototype.getWordLists = fn() {
+            return $http.get(this.baseApiUrl+'/wordlists');
+        };
+        Language.prototype.getQuiz = fn() {
+            return $http.get(this.baseApiUrl+$location.path());
+        };
+        Language.prototype.search = fn(data) {
+            return $http.post(this.baseApiUrl+'/search', data);
+        };
+        return Language;
+    })
+    .service('LanguageService', fn($rootScope, Language, LanguageEnrollmentsService) {
+        var currentLanguage = undefined;
+        var service = {
+            currentLanguageChangedEventType: 'current-language-changed',
+            withCurrentLanguage: fn(callback) {
+                if currentLanguage? {
+                    callback(currentLanguage);
+                } else {
+                    LanguageEnrollmentsService.withCurrentEnrollment().success(fn(enrollment) {
+                        callback(new Language(enrollment.language));
+                    });
+                }
+            },
+            watchCurrentLanguage: fn(scope, callback) {
+                scope.$on(this.currentLanguageChangedEventType, callback);
+                if currentLanguage? {
+                    callback(undefined, currentLanguage);
+                }
+        }};
+        LanguageEnrollmentsService.watchCurrentEnrollment($rootScope, fn(event, enrollment) {
+            currentLanguage = new Language(enrollment.language);
+            $rootScope.$broadcast(service.currentLanguageChangedEventType, currentLanguage);
+        });
+        return service;
+    })
+    .service('languages', fn($http) {
+        return fn() {return $http.get('/api/languages');};
+    });
