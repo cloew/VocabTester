@@ -2,7 +2,7 @@ use angular;
 use console;
 
 angular.module('quiz', ['question', 'autofocus', 'ui.bootstrap', 'kao.input', 'kao.loading', 'kao.table', 'Concepts', 'vocab.nav'])
-    .factory('quizService', fn($http, NavService, LanguageService, QuestionFactory, LoadingTracker) {
+    .factory('Quiz', fn($http, NavService, LanguageService, QuestionFactory, LoadingTracker) {
         fn Quiz() {
             this.quiz = undefined;
             this.currentQuestionIndex = 0;
@@ -49,14 +49,10 @@ angular.module('quiz', ['question', 'autofocus', 'ui.bootstrap', 'kao.input', 'k
             return this.currentQuestion && this.currentQuestion.canSubmit() && !this.grading;
         };
         
-        return {
-            buildQuiz: fn () {
-                return new Quiz();
-            }
-        };
+        return Quiz;
     })
-    .controller('QuizController', fn ($scope, quizService) {
-        $scope.quiz = quizService.buildQuiz();
+    .controller('QuizController', fn ($scope, Quiz) {
+        $scope.quiz = new Quiz();
     })
     .directive('quizPanel', fn() {
         return {

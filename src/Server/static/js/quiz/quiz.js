@@ -1,6 +1,6 @@
 $traceurRuntime.ModuleStore.getAnonymousModule(function() {
   "use strict";
-  angular.module("quiz", ["question", "autofocus", "ui.bootstrap", "kao.input", "kao.loading", "kao.table", "Concepts", "vocab.nav"]).factory("quizService", function($http, NavService, LanguageService, QuestionFactory, LoadingTracker) {
+  angular.module("quiz", ["question", "autofocus", "ui.bootstrap", "kao.input", "kao.loading", "kao.table", "Concepts", "vocab.nav"]).factory("Quiz", function($http, NavService, LanguageService, QuestionFactory, LoadingTracker) {
     function Quiz() {
       this.quiz = void 0;
       this.currentQuestionIndex = 0;
@@ -45,11 +45,9 @@ $traceurRuntime.ModuleStore.getAnonymousModule(function() {
     Quiz.prototype.canSubmit = function() {
       return !!(!!this.currentQuestion && !!this.currentQuestion.canSubmit()) && !this.grading;
     };
-    return {buildQuiz: function() {
-        return new Quiz();
-      }};
-  }).controller("QuizController", function($scope, quizService) {
-    $scope.quiz = quizService.buildQuiz();
+    return Quiz;
+  }).controller("QuizController", function($scope, Quiz) {
+    $scope.quiz = new Quiz();
   }).directive("quizPanel", function() {
     return {
       restrict: "E",
