@@ -1,7 +1,5 @@
 <div on-up-key="selectPreviousOption();" on-down-key="selectNextOption();">
     <div>
-        <!--<alert type="successType" ng-if="question.results.correct">Correct</alert>
-        <alert class="alert-danger" type="danger" ng-if="question.results && !question.results.correct">Wrong</alert>-->
         <h4 style="display:inline-block;">Translate {{question.queryWord.text}}</h4>
     </div>
     <div ng-repeat="option in question.options">

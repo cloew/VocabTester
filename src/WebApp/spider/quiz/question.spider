@@ -1,0 +1,97 @@
+use angular;
+use console;
+
+angular.module('question', ['autofocus', 'ui.bootstrap', 'kao.input', 'kao.loading', 'kao.table', 'Concepts', 'vocab.nav'])
+    .factory('OptionsQuestion', fn() {
+        fn OptionsQuestion(question) {
+            for attr, value of question {
+                this[attr] = value;
+            }
+            this.type = question.questionType;
+        }
+        OptionsQuestion.prototype.isCorrect = fn() {
+            return this.selectedIndex == this.answerIndex;
+        };
+        OptionsQuestion.prototype.canSubmit = fn() {
+            return this.selectedIndex >= 0;
+        };
+        return OptionsQuestion;
+    })
+    .factory('PromptQuestion', fn() {
+        fn PromptQuestion(question) {
+            for attr, value of question {
+                this[attr] = value;
+            }
+            this.type = question.questionType;
+        }
+        PromptQuestion.prototype.isCorrect = fn() {
+            return this.enteredText.toLowerCase() == this.answer;
+        };
+        PromptQuestion.prototype.canSubmit = fn() {
+            return this.enteredText;
+        };
+        return PromptQuestion;
+    })
+    .directive('question', fn() {
+        return {
+            restrict: 'E',
+            replace: true,
+            scope: {
+                question: '='
+            },
+            templateUrl: 'static/partials/directives/question.html'
+        };
+    })
+    .directive('optionsQuestion', fn() {
+        return {
+            restrict: 'E',
+            replace: true,
+            scope: {
+                question: '='
+            },
+            controller: fn($scope) {
+                $scope.selectOption = fn(index) {
+                    $scope.question.selectedIndex = index;
+                };
+                $scope.selectPreviousOption = fn() {
+                    if !$scope.question.selectedIndex? {
+                        $scope.question.selectedIndex = 0;
+                    } else if $scope.question.selectedIndex > 0 {
+                        $scope.question.selectedIndex -= 1;
+                    } else {
+                        $scope.question.selectedIndex = 0;
+                    }
+                };
+                $scope.selectNextOption = fn() {
+                    if !$scope.question.selectedIndex? {
+                        $scope.question.selectedIndex = 0;
+                    } else if $scope.question.selectedIndex < ($scope.question.options.length-1) {
+                        $scope.question.selectedIndex += 1;
+                    } else {
+                        $scope.question.selectedIndex = $scope.question.options.length-1;
+                    }
+                };
+            },
+            templateUrl: 'static/partials/directives/options_question.html'
+        };
+    })
+    .directive('promptQuestion', fn() {
+        return {
+            restrict: 'E',
+            replace: true,
+            scope: {
+                question: '='
+            },
+            templateUrl: 'static/partials/directives/prompt_question.html'
+        };
+    })
+    .directive('option', fn() {
+        return {
+            restrict: 'E',
+            replace: true,
+            scope: {
+                option: '='
+            },
+            templateUrl: 'static/partials/directives/option.html'
+        };
+    });

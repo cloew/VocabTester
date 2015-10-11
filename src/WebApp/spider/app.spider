@@ -1,6 +1,6 @@
 use angular;
 
-angular.module('VocabTester', ['ui.bootstrap', 'ngRoute', 'Header', 'Concepts', 'Words', 'Quiz', 'kao.auth', 'kao.crud.api', 'vocab.nav', 'vocab.rest'])
+angular.module('VocabTester', ['ui.bootstrap', 'ngRoute', 'Header', 'Concepts', 'Words', 'quiz', 'kao.auth', 'kao.crud.api', 'vocab.nav', 'vocab.rest'])
 	.config(['$routeProvider', 'NavConfigProvider', fn($routeProvider, navConfig) {
             for route in navConfig.routes {
                 $routeProvider.when(route.path, route);

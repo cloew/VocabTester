@@ -1,6 +1,6 @@
 $traceurRuntime.ModuleStore.getAnonymousModule(function() {
   "use strict";
-  angular.module("VocabTester", ["ui.bootstrap", "ngRoute", "Header", "Concepts", "Words", "Quiz", "kao.auth", "kao.crud.api", "vocab.nav", "vocab.rest"]).config(["$routeProvider", "NavConfigProvider", function($routeProvider, navConfig) {
+  angular.module("VocabTester", ["ui.bootstrap", "ngRoute", "Header", "Concepts", "Words", "quiz", "kao.auth", "kao.crud.api", "vocab.nav", "vocab.rest"]).config(["$routeProvider", "NavConfigProvider", function($routeProvider, navConfig) {
     for (var $__0 = navConfig.routes[$traceurRuntime.toProperty(Symbol.iterator)](),
         $__1; !($__1 = $__0.next()).done; ) {
       var route = $__1.value;

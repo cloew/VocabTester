@@ -1,43 +1,7 @@
 use angular;
 use console;
 
-angular.module('Quiz', ['autofocus', 'ui.bootstrap', 'kao.input', 'kao.loading', 'kao.table', 'Concepts', 'vocab.nav'])
-    .factory('OptionsQuestion', fn() {
-        fn OptionsQuestion(question) {
-            this.question = question;
-            this.answerIndex = question.answerIndex;
-            this.answerUrl = question.answerUrl;
-            this.queryWord = question.queryWord;
-            this.options = question.options;
-            this.subject = question.subject;
-            this.type = question.questionType;
-        }
-        OptionsQuestion.prototype.isCorrect = fn() {
-            return this.selectedIndex == this.question.answerIndex;
-        };
-        OptionsQuestion.prototype.canSubmit = fn() {
-            return this.selectedIndex >= 0;
-        };
-        return OptionsQuestion;
-    })
-    .factory('PromptQuestion', fn() {
-        fn PromptQuestion(question) {
-            this.question = question;
-            this.answerUrl = question.answerUrl;
-            this.prompt = question.prompt;
-            this.answer = question.answer;
-            this.displayAnswer = question.displayAnswer;
-            this.subject = question.subject;
-            this.type = question.questionType;
-        }
-        PromptQuestion.prototype.isCorrect = fn() {
-            return this.enteredText.toLowerCase() == this.question.answer;
-        };
-        PromptQuestion.prototype.canSubmit = fn() {
-            return this.enteredText;
-        };
-        return PromptQuestion;
-    })
+angular.module('quiz', ['question', 'autofocus', 'ui.bootstrap', 'kao.input', 'kao.loading', 'kao.table', 'Concepts', 'vocab.nav'])
     .factory('quizService', fn($http, NavService, LanguageService, OptionsQuestion, PromptQuestion, LoadingTracker) {
         fn Quiz() {
             this.quiz = undefined;
@@ -100,69 +64,6 @@ angular.module('Quiz', ['autofocus', 'ui.bootstrap', 'kao.input', 'kao.loading',
     })
     .controller('QuizController', fn ($scope, quizService) {
         $scope.quiz = quizService.buildQuiz();
-    })
-    .directive('question', fn() {
-        return {
-            restrict: 'E',
-            replace: true,
-            scope: {
-                question: '='
-            },
-            templateUrl: 'static/partials/directives/question.html'
-        };
-    })
-    .directive('optionsQuestion', fn() {
-        return {
-            restrict: 'E',
-            replace: true,
-            scope: {
-                question: '='
-            },
-            controller: fn($scope) {
-                $scope.selectOption = fn(index) {
-                    $scope.question.selectedIndex = index;
-                };
-                $scope.selectPreviousOption = fn() {
-                    if !$scope.question.selectedIndex? {
-                        $scope.question.selectedIndex = 0;
-                    } else if $scope.question.selectedIndex > 0 {
-                        $scope.question.selectedIndex -= 1;
-                    } else {
-                        $scope.question.selectedIndex = 0;
-                    }
-                };
-                $scope.selectNextOption = fn() {
-                    if !$scope.question.selectedIndex? {
-                        $scope.question.selectedIndex = 0;
-                    } else if $scope.question.selectedIndex < ($scope.question.options.length-1) {
-                        $scope.question.selectedIndex += 1;
-                    } else {
-                        $scope.question.selectedIndex = $scope.question.options.length-1;
-                    }
-                };
-            },
-            templateUrl: 'static/partials/directives/options_question.html'
-        };
-    })
-    .directive('promptQuestion', fn() {
-        return {
-            restrict: 'E',
-            replace: true,
-            scope: {
-                question: '='
-            },
-            templateUrl: 'static/partials/directives/prompt_question.html'
-        };
-    })
-    .directive('option', fn() {
-        return {
-            restrict: 'E',
-            replace: true,
-            scope: {
-                option: '='
-            },
-            templateUrl: 'static/partials/directives/option.html'
-        };
     })
     .directive('quizPanel', fn() {
         return {
