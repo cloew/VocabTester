@@ -1,6 +1,25 @@
 $traceurRuntime.ModuleStore.getAnonymousModule(function() {
   "use strict";
-  angular.module("question", ["autofocus", "ui.bootstrap", "kao.input", "kao.loading", "kao.table", "Concepts", "vocab.nav"]).factory("OptionsQuestion", function() {
+  angular.module("question", ["autofocus", "kao.input"]).service("QuestionFactory", function(OptionsQuestion, PromptQuestion) {
+    var questionCls = {
+      "options": OptionsQuestion,
+      "prompt": PromptQuestion
+    };
+    this.build = function(questionJson) {
+      return new questionCls[questionJson.questionType](questionJson);
+    };
+    this.buildAll = function(questionsJson) {
+      var questions = [];
+      for (var $__0 = questionsJson[$traceurRuntime.toProperty(Symbol.iterator)](),
+          $__1; !($__1 = $__0.next()).done; ) {
+        var question = $__1.value;
+        {
+          questions.push(this.build(question));
+        }
+      }
+      return questions;
+    };
+  }).factory("OptionsQuestion", function() {
     function OptionsQuestion(question) {
       for (var $__0 = Object.keys(question)[$traceurRuntime.toProperty(Symbol.iterator)](),
           $__1; !($__1 = $__0.next()).done; ) {

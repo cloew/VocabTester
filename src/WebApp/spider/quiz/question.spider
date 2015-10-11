@@ -1,7 +1,22 @@
 use angular;
 use console;
 
-angular.module('question', ['autofocus', 'ui.bootstrap', 'kao.input', 'kao.loading', 'kao.table', 'Concepts', 'vocab.nav'])
+angular.module('question', ['autofocus', 'kao.input'])
+    .service('QuestionFactory', fn(OptionsQuestion, PromptQuestion) {
+        var questionCls = {'options':OptionsQuestion,
+                           'prompt':PromptQuestion};
+    
+        this.build = fn(questionJson) {
+            return new questionCls[questionJson.questionType](questionJson);
+        };
+        this.buildAll = fn(questionsJson) {
+            var questions = [];
+            for question in questionsJson {
+                questions <- this.build(question);
+            }
+            return questions;
+        };
+    })
     .factory('OptionsQuestion', fn() {
         fn OptionsQuestion(question) {
             for attr, value of question {

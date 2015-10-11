@@ -1,6 +1,6 @@
 $traceurRuntime.ModuleStore.getAnonymousModule(function() {
   "use strict";
-  angular.module("quiz", ["question", "autofocus", "ui.bootstrap", "kao.input", "kao.loading", "kao.table", "Concepts", "vocab.nav"]).factory("quizService", function($http, NavService, LanguageService, OptionsQuestion, PromptQuestion, LoadingTracker) {
+  angular.module("quiz", ["question", "autofocus", "ui.bootstrap", "kao.input", "kao.loading", "kao.table", "Concepts", "vocab.nav"]).factory("quizService", function($http, NavService, LanguageService, QuestionFactory, LoadingTracker) {
     function Quiz() {
       this.quiz = void 0;
       this.currentQuestionIndex = 0;
@@ -11,21 +11,8 @@ $traceurRuntime.ModuleStore.getAnonymousModule(function() {
       LanguageService.withCurrentLanguage(function(language) {
         self.tracker.load(language.getQuiz()).success(function(data) {
           self.quiz = data.quiz;
-          self.questions = [];
+          self.questions = QuestionFactory.buildAll(self.quiz.questions);
           self.numberOfQuestions = self.quiz.questions.length;
-          for (var $__0 = self.quiz.questions[$traceurRuntime.toProperty(Symbol.iterator)](),
-              $__1; !($__1 = $__0.next()).done; ) {
-            var question = $__1.value;
-            {
-              if (question.questionType === "options") {
-                self.questions.push(new OptionsQuestion(question));
-              } else {
-                if (question.questionType === "prompt") {
-                  self.questions.push(new PromptQuestion(question));
-                }
-              }
-            }
-          }
           self.currentQuestion = self.questions[self.currentQuestionIndex];
         }).error(function(error) {
           console.log(error);

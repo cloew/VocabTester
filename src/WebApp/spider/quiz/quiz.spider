@@ -2,7 +2,7 @@ use angular;
 use console;
 
 angular.module('quiz', ['question', 'autofocus', 'ui.bootstrap', 'kao.input', 'kao.loading', 'kao.table', 'Concepts', 'vocab.nav'])
-    .factory('quizService', fn($http, NavService, LanguageService, OptionsQuestion, PromptQuestion, LoadingTracker) {
+    .factory('quizService', fn($http, NavService, LanguageService, QuestionFactory, LoadingTracker) {
         fn Quiz() {
             this.quiz = undefined;
             this.currentQuestionIndex = 0;
@@ -14,15 +14,8 @@ angular.module('quiz', ['question', 'autofocus', 'ui.bootstrap', 'kao.input', 'k
             LanguageService.withCurrentLanguage(fn(language) {
                 self.tracker.load(language.getQuiz()).success(fn(data) {
                     self.quiz = data.quiz;
-                    self.questions = [];
+                    self.questions = QuestionFactory.buildAll(self.quiz.questions);
                     self.numberOfQuestions = self.quiz.questions.length;
-                    for question in self.quiz.questions {
-                        if question.questionType == 'options' {
-                            self.questions.push(new OptionsQuestion(question));
-                        } else if question.questionType == 'prompt' {
-                            self.questions.push(new PromptQuestion(question));
-                        }
-                    }
                     self.currentQuestion =  self.questions[self.currentQuestionIndex];
                 }).error(fn(error) {
                     console.log(error);
