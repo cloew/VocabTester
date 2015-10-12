@@ -55,12 +55,35 @@ $traceurRuntime.ModuleStore.getAnonymousModule(function() {
       scope: {quiz: "="},
       templateUrl: "static/partials/directives/quiz_panel.html"
     };
+  }).directive("quizHeader", function() {
+    return {
+      restrict: "E",
+      replace: true,
+      template: "<div>     <span class=\"pull-right question-progress\" ng-if=\"quiz.completed\">{{quiz.correctAnswers}} of {{quiz.numberOfQuestions}}</span>     <span class=\"pull-right question-progress\" ng-if=\"!quiz.completed\" ng-show=\"quiz.quiz.questions\">{{quiz.currentQuestionIndex+1}} of {{quiz.quiz.questions.length}}</span>     <h3 class=\"panel-title\">{{quiz.quiz.name}} Quiz</h3> </div>"
+    };
+  }).directive("quizBody", function() {
+    return {
+      restrict: "E",
+      replace: true,
+      template: "<div><loading-div tracker=\"quiz.tracker\">     <question question=\"quiz.currentQuestion\"></question> </loading-div></div>"
+    };
   }).directive("quizResults", function() {
     return {
       restrict: "E",
       replace: true,
-      scope: {quiz: "="},
       templateUrl: "static/partials/directives/quiz_results.html"
+    };
+  }).directive("answerButton", function() {
+    return {
+      restrict: "E",
+      replace: true,
+      template: "<div>     <button class=\"pull-right btn btn-primary quiz-button\" on-enter-key=\"quiz.answer();\" ng-click=\"quiz.answer();\" ng-disabled=\"!quiz.canSubmit();\" ng-if=\"!quiz.grading\">Submit</button>     <button class=\"pull-right btn btn-primary quiz-button\" ng-disabled=\"true\" ng-if=\"quiz.grading\">Grading...</button> </div>"
+    };
+  }).directive("nextQuestionButton", function() {
+    return {
+      restrict: "E",
+      replace: true,
+      template: "<button class=\"pull-right btn btn-success quiz-button\" on-enter-key=\"quiz.next();\" ng-click=\"quiz.next();\">Next</button>"
     };
   }).directive("quizBackButton", function() {
     return {
@@ -73,7 +96,7 @@ $traceurRuntime.ModuleStore.getAnonymousModule(function() {
           }, 0);
         };
       },
-      templateUrl: "static/partials/directives/quiz_back_button.html"
+      template: "<a ng-href=\"#{{quiz.returnTo}}\" class=\"pull-right btn btn-success quiz-button\" on-enter-key=\"click();\">Back</a>"
     };
   });
   return {};
