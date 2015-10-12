@@ -1,6 +1,6 @@
 
 class OptionsGrader:
-    """ Represents the method of grading of Option Questions """
+    """ Grades an Option Question by checking the proper option was selected """
     
     def grade(self, guess, answer):
         """ Return if the guess matches the answer """
