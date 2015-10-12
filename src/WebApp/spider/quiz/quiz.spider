@@ -61,7 +61,7 @@ angular.module('quiz', ['question', 'autofocus', 'ui.bootstrap', 'kao.input', 'k
             scope: {
                 quiz: '='
             },
-            templateUrl: 'static/partials/directives/quiz_panel.html'
+            templateUrl: 'static/partials/directives/quiz/quiz_panel.html'
         };
     })
     .directive('quizHeader', fn() {
@@ -88,7 +88,7 @@ angular.module('quiz', ['question', 'autofocus', 'ui.bootstrap', 'kao.input', 'k
         return {
             restrict: 'E',
             replace: true,
-            templateUrl: 'static/partials/directives/quiz_results.html'
+            templateUrl: 'static/partials/directives/quiz/quiz_results.html'
         };
     })
     .directive('answerButton', fn() {

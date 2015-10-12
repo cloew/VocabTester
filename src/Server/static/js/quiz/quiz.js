@@ -53,7 +53,7 @@ $traceurRuntime.ModuleStore.getAnonymousModule(function() {
       restrict: "E",
       replace: true,
       scope: {quiz: "="},
-      templateUrl: "static/partials/directives/quiz_panel.html"
+      templateUrl: "static/partials/directives/quiz/quiz_panel.html"
     };
   }).directive("quizHeader", function() {
     return {
@@ -71,7 +71,7 @@ $traceurRuntime.ModuleStore.getAnonymousModule(function() {
     return {
       restrict: "E",
       replace: true,
-      templateUrl: "static/partials/directives/quiz_results.html"
+      templateUrl: "static/partials/directives/quiz/quiz_results.html"
     };
   }).directive("answerButton", function() {
     return {
