@@ -31,6 +31,13 @@ $traceurRuntime.ModuleStore.getAnonymousModule(function() {
       }
       this.type = question.questionType;
     }
+    OptionsQuestion.prototype.buildAnswer = function() {
+      return {
+        type: this.type,
+        guess: this.selectedIndex,
+        answer: this.answerIndex
+      };
+    };
     OptionsQuestion.prototype.isCorrect = function() {
       return this.selectedIndex === this.answerIndex;
     };
@@ -50,6 +57,13 @@ $traceurRuntime.ModuleStore.getAnonymousModule(function() {
       }
       this.type = question.questionType;
     }
+    PromptQuestion.prototype.buildAnswer = function() {
+      return {
+        type: this.type,
+        guess: this.enteredText,
+        answer: this.answer
+      };
+    };
     PromptQuestion.prototype.isCorrect = function() {
       return this.enteredText.toLowerCase() === this.answer;
     };
@@ -63,9 +77,9 @@ $traceurRuntime.ModuleStore.getAnonymousModule(function() {
     }
     AnswerHelper.prototype.answer = function() {
       var self = this;
-      var correct = this.question.isCorrect();
-      return $http.post(this.question.answerUrl, {"correct": correct}).success(function(data) {
-        self.question.results = {"correct": correct};
+      var answer = this.question.buildAnswer();
+      return $http.post(this.question.answerUrl, answer).success(function(data) {
+        self.question.results = {"correct": data.correct};
         self.question.subject.foreign.mastery = data.rating;
       });
     };
