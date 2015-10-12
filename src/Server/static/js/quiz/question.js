@@ -62,7 +62,7 @@ $traceurRuntime.ModuleStore.getAnonymousModule(function() {
       restrict: "E",
       replace: true,
       scope: {question: "="},
-      templateUrl: "static/partials/directives/question.html"
+      templateUrl: "static/partials/directives/quiz/questions/question.html"
     };
   }).directive("optionsQuestion", function() {
     return {
@@ -96,21 +96,21 @@ $traceurRuntime.ModuleStore.getAnonymousModule(function() {
           }
         };
       },
-      templateUrl: "static/partials/directives/options_question.html"
+      templateUrl: "static/partials/directives/quiz/questions/options_question.html"
     };
   }).directive("promptQuestion", function() {
     return {
       restrict: "E",
       replace: true,
       scope: {question: "="},
-      templateUrl: "static/partials/directives/prompt_question.html"
+      templateUrl: "static/partials/directives/quiz/questions/prompt_question.html"
     };
   }).directive("option", function() {
     return {
       restrict: "E",
       replace: true,
       scope: {option: "="},
-      templateUrl: "static/partials/directives/option.html"
+      templateUrl: "static/partials/directives/quiz/questions/option.html"
     };
   });
   return {};

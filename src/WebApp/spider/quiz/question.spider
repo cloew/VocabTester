@@ -54,7 +54,7 @@ angular.module('question', ['autofocus', 'kao.input'])
             scope: {
                 question: '='
             },
-            templateUrl: 'static/partials/directives/question.html'
+            templateUrl: 'static/partials/directives/quiz/questions/question.html'
         };
     })
     .directive('optionsQuestion', fn() {
@@ -87,7 +87,7 @@ angular.module('question', ['autofocus', 'kao.input'])
                     }
                 };
             },
-            templateUrl: 'static/partials/directives/options_question.html'
+            templateUrl: 'static/partials/directives/quiz/questions/options_question.html'
         };
     })
     .directive('promptQuestion', fn() {
@@ -97,7 +97,7 @@ angular.module('question', ['autofocus', 'kao.input'])
             scope: {
                 question: '='
             },
-            templateUrl: 'static/partials/directives/prompt_question.html'
+            templateUrl: 'static/partials/directives/quiz/questions/prompt_question.html'
         };
     })
     .directive('option', fn() {
@@ -107,6 +107,6 @@ angular.module('question', ['autofocus', 'kao.input'])
             scope: {
                 option: '='
             },
-            templateUrl: 'static/partials/directives/option.html'
+            templateUrl: 'static/partials/directives/quiz/questions/option.html'
         };
     });
