@@ -6,7 +6,7 @@
             <span class="glyphicon glyphicon-remove" ng-if="question.results && !question.results.correct" style="color: #a94442"></span>
         </h4>
     </div>
-    <div ng-class="{'has-success':question.results.correct, 'has-error':(question.results && !question.results.correct)}">
+    <div ng-class="{'has-success':question.results.correct, 'has-error':(question.results && (!question.results.correct || question.results.imperfect))}">
         <input id="translation" type="text" class="form-control" ng-model="question.enteredText" placeholder="Translation" autofocus />
     </div>
 </div>
