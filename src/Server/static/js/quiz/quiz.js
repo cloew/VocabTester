@@ -7,6 +7,7 @@ $traceurRuntime.ModuleStore.getAnonymousModule(function() {
       this.correctAnswers = 0;
       this.returnTo = NavService.current().returnTo;
       this.tracker = new LoadingTracker();
+      this.gradeTracker = new LoadingTracker();
       var self = this;
       LanguageService.withCurrentLanguage(function(language) {
         self.tracker.load(language.getQuiz()).success(function(data) {
@@ -24,14 +25,12 @@ $traceurRuntime.ModuleStore.getAnonymousModule(function() {
       var self = this;
       if (question.canSubmit()) {
         var correct = question.isCorrect();
-        self.grading = true;
-        $http.post(question.answerUrl, {"correct": correct}).success(function(data) {
+        this.gradeTracker.load($http.post(question.answerUrl, {"correct": correct})).success(function(data) {
           question.results = {"correct": correct};
           if (correct) {
             self.correctAnswers += 1;
           }
           question.subject.foreign.mastery = data.rating;
-          self.grading = false;
         }).error(function(error) {
           console.log(error);
         });
@@ -77,7 +76,7 @@ $traceurRuntime.ModuleStore.getAnonymousModule(function() {
     return {
       restrict: "E",
       replace: true,
-      template: "<div>     <button class=\"pull-right btn btn-primary quiz-button\" on-enter-key=\"quiz.answer();\" ng-click=\"quiz.answer();\" ng-disabled=\"!quiz.canSubmit();\" ng-if=\"!quiz.grading\">Submit</button>     <button class=\"pull-right btn btn-primary quiz-button\" ng-disabled=\"true\" ng-if=\"quiz.grading\">Grading...</button> </div>"
+      template: "<div>     <loading-button class=\"pull-right btn btn-primary quiz-button\" tracker=\"quiz.gradeTracker\" data-loading-text=\"Grading...\" on-enter-key=\"quiz.answer();\" ng-click=\"quiz.answer();\" ng-disabled=\"!quiz.canSubmit();\">Submit</loading-button> </div>"
     };
   }).directive("nextQuestionButton", function() {
     return {
