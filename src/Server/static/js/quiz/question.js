@@ -57,6 +57,19 @@ $traceurRuntime.ModuleStore.getAnonymousModule(function() {
       return this.enteredText;
     };
     return PromptQuestion;
+  }).factory("AnswerHelper", function($http) {
+    function AnswerHelper(question) {
+      this.question = question;
+    }
+    AnswerHelper.prototype.answer = function() {
+      var self = this;
+      var correct = this.question.isCorrect();
+      return $http.post(this.question.answerUrl, {"correct": correct}).success(function(data) {
+        self.question.results = {"correct": correct};
+        self.question.subject.foreign.mastery = data.rating;
+      });
+    };
+    return AnswerHelper;
   }).directive("question", function() {
     return {
       restrict: "E",

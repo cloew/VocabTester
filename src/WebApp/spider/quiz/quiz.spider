@@ -2,7 +2,7 @@ use angular;
 use console;
 
 angular.module('quiz', ['question', 'autofocus', 'ui.bootstrap', 'kao.input', 'kao.loading', 'kao.table', 'Concepts', 'vocab.nav'])
-    .factory('Quiz', fn($http, NavService, LanguageService, QuestionFactory, LoadingTracker) {
+    .factory('Quiz', fn(NavService, LanguageService, QuestionFactory, AnswerHelper, LoadingTracker) {
         fn Quiz() {
             this.quiz = undefined;
             this.currentQuestionIndex = 0;
@@ -24,16 +24,13 @@ angular.module('quiz', ['question', 'autofocus', 'ui.bootstrap', 'kao.input', 'k
             });
         }
         Quiz.prototype.answer = fn() {
-            var question = this.currentQuestion;
             var self = this;
+            var question = this.currentQuestion;
             if question.canSubmit() {
-                var correct = question.isCorrect();
-                this.gradeTracker.load($http.post(question.answerUrl, {'correct':correct})).success(fn(data) {
-                    question.results = {"correct":correct};
-                    if correct {
+                this.gradeTracker.load(new AnswerHelper(question).answer()).success(fn(data) {
+                    if question.results.correct {
                         self.correctAnswers += 1;
                     }
-                    question.subject.foreign.mastery = data.rating;
                 }).error(fn(error) {
                     console.log(error);
                 });

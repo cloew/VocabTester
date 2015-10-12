@@ -47,6 +47,20 @@ angular.module('question', ['autofocus', 'kao.input'])
         };
         return PromptQuestion;
     })
+    .factory('AnswerHelper', fn($http) {
+        fn AnswerHelper(question) {
+            this.question = question;
+        }
+        AnswerHelper.prototype.answer = fn() {
+            var self = this;
+            var correct = this.question.isCorrect();
+            return $http.post(this.question.answerUrl, {'correct':correct}).success(fn(data) {
+                self.question.results = {"correct":correct};
+                self.question.subject.foreign.mastery = data.rating;
+            });
+        };
+        return AnswerHelper;
+    })
     .directive('question', fn() {
         return {
             restrict: 'E',

@@ -1,6 +1,6 @@
 $traceurRuntime.ModuleStore.getAnonymousModule(function() {
   "use strict";
-  angular.module("quiz", ["question", "autofocus", "ui.bootstrap", "kao.input", "kao.loading", "kao.table", "Concepts", "vocab.nav"]).factory("Quiz", function($http, NavService, LanguageService, QuestionFactory, LoadingTracker) {
+  angular.module("quiz", ["question", "autofocus", "ui.bootstrap", "kao.input", "kao.loading", "kao.table", "Concepts", "vocab.nav"]).factory("Quiz", function(NavService, LanguageService, QuestionFactory, AnswerHelper, LoadingTracker) {
     function Quiz() {
       this.quiz = void 0;
       this.currentQuestionIndex = 0;
@@ -21,16 +21,13 @@ $traceurRuntime.ModuleStore.getAnonymousModule(function() {
       });
     }
     Quiz.prototype.answer = function() {
-      var question = this.currentQuestion;
       var self = this;
+      var question = this.currentQuestion;
       if (question.canSubmit()) {
-        var correct = question.isCorrect();
-        this.gradeTracker.load($http.post(question.answerUrl, {"correct": correct})).success(function(data) {
-          question.results = {"correct": correct};
-          if (correct) {
+        this.gradeTracker.load(new AnswerHelper(question).answer()).success(function(data) {
+          if (question.results.correct) {
             self.correctAnswers += 1;
           }
-          question.subject.foreign.mastery = data.rating;
         }).error(function(error) {
           console.log(error);
         });
