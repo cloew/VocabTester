@@ -1,9 +1,10 @@
-from ..auth import auth
-from ..helpers.json_factory import toJson
+from Server.auth import auth
+from Server.helpers.json_factory import toJson
+
 from Data import Language
 from Quiz import Quiz
 
-class QuizController(auth.JSONController):
+class GetQuiz(auth.JSONController):
     """ Controller to return the quiz """
     
     def __init__(self, listModel):

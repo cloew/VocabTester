@@ -4,7 +4,8 @@ from .helpers.admin_json_factory import toJson
 
 from Data import Concept, Language, Symbol, SymbolList, User, Word, WordList
 
-from .Controller import ConceptListsController, CreateUserEnrollment, LearnedConceptsController, LearnWordController, QuizAnswerController, QuizController, RandomQuizController, SearchController, UserEnrollments
+from .Controller import ConceptListsController, CreateUserEnrollment, LearnedConceptsController, LearnWordController, SearchController, UserEnrollments
+from .Quiz.Controller import AnswerQuestion, GetQuiz, GetRandomQuiz
 
 from kao_flask.endpoint import Endpoint
 from kao_flask.controllers.html_controller import HTMLController
@@ -22,18 +23,18 @@ routes = [Endpoint('/', get=HTMLController('Server/templates/index.html')),
           Endpoint('/api/languages/<int:languageId>/symbols', get=LearnedConceptsController(Symbol)),
           # Symbollists
           Endpoint('/api/languages/<int:languageId>/symbollists', get=ConceptListsController(SymbolList)),
-          Endpoint('/api/languages/<int:languageId>/symbollist/<int:listId>/quiz', get=QuizController(SymbolList)),
-          Endpoint('/api/languages/<int:languageId>/symbollist/random/quiz', get=RandomQuizController(Symbol)),
+          Endpoint('/api/languages/<int:languageId>/symbollist/<int:listId>/quiz', get=GetQuiz(SymbolList)),
+          Endpoint('/api/languages/<int:languageId>/symbollist/random/quiz', get=GetRandomQuiz(Symbol)),
           # Words
           Endpoint('/api/languages/<int:languageId>/words', get=LearnedConceptsController(Word)),
           Endpoint('/api/words/<int:wordId>/learn', post=LearnWordController()),
           Endpoint('/api/languages/<int:languageId>/search', post=SearchController()),
           # Wordlists
           Endpoint('/api/languages/<int:languageId>/wordlists', get=ConceptListsController(WordList)),
-          Endpoint('/api/languages/<int:languageId>/wordlist/<int:listId>/quiz', get=QuizController(WordList)),
-          Endpoint('/api/languages/<int:languageId>/wordlist/random/quiz', get=RandomQuizController(Word)),
+          Endpoint('/api/languages/<int:languageId>/wordlist/<int:listId>/quiz', get=GetQuiz(WordList)),
+          Endpoint('/api/languages/<int:languageId>/wordlist/random/quiz', get=GetRandomQuiz(Word)),
           # Mastery
-          Endpoint('/api/mastery/<int:masteryId>/answer', post=QuizAnswerController())]
+          Endpoint('/api/mastery/<int:masteryId>/answer', post=AnswerQuestion())]
           
 routes += CrudEndpoints('/api/admin/users', User, toJson,
                         jsonColumnMap={'nativeLanguage': lambda value: ('native_language_id', value['id'])}, 
