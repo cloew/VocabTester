@@ -9,16 +9,16 @@ class QuizAnswerController(auth.JSONController):
     
     def performWithJSON(self, masteryId, json=None, user=None):
         """ Create an answer for the mastery """
-        correct = self.grade(json)
+        result = self.grade(json)
         
         mastery = Mastery.query.filter_by(id=masteryId).first()
-        mastery.addAnswer(correct)
+        mastery.addAnswer(result.correct)
         
         if mastery.word_id is not None:
             user.tryToLearnWord(mastery.word)
         elif mastery.symbol_id is not None:
             user.tryToLearnSymbol(mastery.symbol)
-        return {'correct':correct,
+        return {'results':toJson(result),
                 'rating':mastery.rating}
         
     def grade(self, json):

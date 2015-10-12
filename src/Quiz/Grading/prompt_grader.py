@@ -1,3 +1,4 @@
+from .grade_result import GradeResult
 from fuzzywuzzy import fuzz
 
 class PromptGrader:
@@ -5,4 +6,4 @@ class PromptGrader:
     
     def grade(self, guess, answer):
         """ Return if the guess matches the answer """
-        return fuzz.ratio(guess.lower(), answer) >= 80
+        return GradeResult(fuzz.ratio(guess.lower(), answer) >= 80)

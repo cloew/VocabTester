@@ -38,9 +38,6 @@ $traceurRuntime.ModuleStore.getAnonymousModule(function() {
         answer: this.answerIndex
       };
     };
-    OptionsQuestion.prototype.isCorrect = function() {
-      return this.selectedIndex === this.answerIndex;
-    };
     OptionsQuestion.prototype.canSubmit = function() {
       return this.selectedIndex >= 0;
     };
@@ -64,9 +61,6 @@ $traceurRuntime.ModuleStore.getAnonymousModule(function() {
         answer: this.answer
       };
     };
-    PromptQuestion.prototype.isCorrect = function() {
-      return this.enteredText.toLowerCase() === this.answer;
-    };
     PromptQuestion.prototype.canSubmit = function() {
       return this.enteredText;
     };
@@ -79,7 +73,7 @@ $traceurRuntime.ModuleStore.getAnonymousModule(function() {
       var self = this;
       var answer = this.question.buildAnswer();
       return $http.post(this.question.answerUrl, answer).success(function(data) {
-        self.question.results = {"correct": data.correct};
+        self.question.results = data.results;
         self.question.subject.foreign.mastery = data.rating;
       });
     };
