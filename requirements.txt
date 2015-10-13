@@ -10,7 +10,7 @@ gunicorn==19.3.0
 itsdangerous==0.24
 Jinja2==2.7.3
 git+git://github.com/cloew/KaoDecorators.git
-git+git://github.com/cloew/KaoExt.git
+git+git://github.com/cloew/KaoExtensions.git
 git+git://github.com/cloew/KaoFactory.git
 git+git://github.com/cloew/KaoFlask.git
 git+git://github.com/cloew/KaoFlaskAuth.git
