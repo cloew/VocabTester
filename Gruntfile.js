@@ -18,9 +18,6 @@ module.exports = function(grunt) {
                 srcPrefix: 'bower_components'
             },
             js: {
-                options: {
-                    destPrefix: 'src/Server/static/lib'
-                },
                 files: {
                   'src/Server/static/lib': '*/dist/*.js'
                 }
@@ -36,9 +33,6 @@ module.exports = function(grunt) {
                 }
             },
             "traceur-runtime": {
-                options: {
-                    destPrefix: 'src/Server/static/lib'
-                },
                 files: {
                   'src/Server/static/lib': 'traceur-runtime/traceur-runtime.js'
                 }
