@@ -25,6 +25,14 @@ module.exports = function(grunt) {
                   'src/Server/static/lib': '*/dist/*.js'
                 }
             },
+            "traceur-runtime": {
+                options: {
+                    destPrefix: 'src/Server/static/lib'
+                },
+                files: {
+                  'src/Server/static/lib': 'traceur-runtime/traceur-runtime.js'
+                }
+            },
             css: {
                 files: [{
                     expand: true,
