@@ -18,13 +18,13 @@
     "tests"
   ],
   "dependencies": {
-    "traceur-runtime": "traceur-runtime",
     "kao-ng-auth": "cloew/kao-ng-auth",
     "kao-ng-nav": "cloew/kao-ng-nav",
     "kao-ng-utils": "cloew/kao-ng-utils",
     "kao-ng-input": "cloew/kao-ng-input",
     "kao-ng-table": "cloew/kao-ng-table",
     "kao-ng-crud": "cloew/kao-ng-crud",
-    "kao-ng-loading": "cloew/kao-ng-loading"
+    "kao-ng-loading": "cloew/kao-ng-loading",
+    "traceur-runtime": "~0.0.91"
   }
 }
