@@ -72,3 +72,7 @@ node_modules
 
 # Bower
 bower_components
+
+# Server static
+src/Server/static/js
+src/Server/static/stylesheets
