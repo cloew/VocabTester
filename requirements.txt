@@ -12,6 +12,9 @@ Jinja2==2.7.3
 git+git://github.com/cloew/KaoDecorators.git
 git+git://github.com/cloew/KaoFactory.git
 git+git://github.com/cloew/KaoFlask.git
+git+git://github.com/cloew/KaoFlaskAuth.git
+git+git://github.com/cloew/KaoFlaskSQLAlchemy.git
+git+git://github.com/cloew/KaoFlaskSSLify.git
 git+git://github.com/cloew/KaoFn.git
 git+git://github.com/cloew/KaoJson.git
 git+git://github.com/cloew/LanguageEggs.git
