@@ -25,6 +25,11 @@ module.exports = function(grunt) {
                   'src/Server/static/lib': '*/dist/*.js'
                 }
             },
+            "kao-ng-crud": {
+                files: {
+                  'src/Server/static/lib/kao-crud': '*/dist/*.js'
+                }
+            },
             "traceur-runtime": {
                 options: {
                     destPrefix: 'src/Server/static/lib'
