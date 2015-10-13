@@ -25,6 +25,11 @@ module.exports = function(grunt) {
                   'src/Server/static/lib': '*/dist/*.js'
                 }
             },
+            "ng-autofocus": {
+                files: {
+                  'src/Server/static/lib/': 'ng-autofocus/dist/ng-autofocus.min.js'
+                }
+            },
             "kao-ng-crud": {
                 files: {
                   'src/Server/static/lib/kao-crud': '*/dist/*.js'

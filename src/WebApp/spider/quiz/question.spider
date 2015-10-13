@@ -1,7 +1,7 @@
 use angular;
 use console;
 
-angular.module('question', ['autofocus', 'kao.input'])
+angular.module('question', ['ng-autofocus', 'kao.input'])
     .service('QuestionFactory', fn(OptionsQuestion, PromptQuestion) {
         var questionCls = {'options':OptionsQuestion,
                            'prompt':PromptQuestion};

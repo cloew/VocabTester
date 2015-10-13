@@ -1,7 +1,7 @@
 use angular;
 use console;
 
-angular.module('quiz', ['question', 'autofocus', 'ui.bootstrap', 'kao.input', 'kao.loading', 'kao.table', 'Concepts', 'vocab.nav'])
+angular.module('quiz', ['question', 'ui.bootstrap', 'kao.input', 'kao.loading', 'kao.table', 'Concepts', 'vocab.nav'])
     .factory('Quiz', fn(NavService, LanguageService, QuestionFactory, AnswerHelper, LoadingTracker) {
         fn Quiz() {
             this.quiz = undefined;

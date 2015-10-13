@@ -1,6 +1,6 @@
 $traceurRuntime.ModuleStore.getAnonymousModule(function() {
   "use strict";
-  angular.module("quiz", ["question", "autofocus", "ui.bootstrap", "kao.input", "kao.loading", "kao.table", "Concepts", "vocab.nav"]).factory("Quiz", function(NavService, LanguageService, QuestionFactory, AnswerHelper, LoadingTracker) {
+  angular.module("quiz", ["question", "ui.bootstrap", "kao.input", "kao.loading", "kao.table", "Concepts", "vocab.nav"]).factory("Quiz", function(NavService, LanguageService, QuestionFactory, AnswerHelper, LoadingTracker) {
     function Quiz() {
       this.quiz = void 0;
       this.currentQuestionIndex = 0;

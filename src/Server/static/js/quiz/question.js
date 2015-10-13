@@ -1,6 +1,6 @@
 $traceurRuntime.ModuleStore.getAnonymousModule(function() {
   "use strict";
-  angular.module("question", ["autofocus", "kao.input"]).service("QuestionFactory", function(OptionsQuestion, PromptQuestion) {
+  angular.module("question", ["ng-autofocus", "kao.input"]).service("QuestionFactory", function(OptionsQuestion, PromptQuestion) {
     var questionCls = {
       "options": OptionsQuestion,
       "prompt": PromptQuestion
