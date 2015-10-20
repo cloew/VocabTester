@@ -17,9 +17,9 @@ class Mastery(db.Model):
     word = db.relationship("Word")
     symbol_id = db.Column(db.Integer, db.ForeignKey('symbols.id'))
     symbol = db.relationship("Symbol")
-    answers = db.relationship("Answer", order_by=Answer.createdDate, backref=db.backref('mastery'))
+    answers = db.relationship("Answer", order_by=Answer.createdDate, backref=db.backref('mastery'), lazy='subquery')
     staleness_period_id = db.Column(db.Integer, db.ForeignKey('staleness_periods.id'))
-    stalenessPeriod = db.relationship("StalenessPeriod")
+    stalenessPeriod = db.relationship("StalenessPeriod", lazy='subquery')
     
     def __init__(self, *args, **kwargs):
         """ Initialize the mastery """
