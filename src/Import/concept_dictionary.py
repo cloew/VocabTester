@@ -1,9 +1,6 @@
 from Data.concept import Concept
 from Server import server
 
-from kao_decorators import proxy_for
-
-@proxy_for('idToConcept', ['values'])
 class ConceptDictionary:
     """ Represents a dictionary of the concept Language Egg id to the Concept Data Model object """
     
@@ -23,3 +20,7 @@ class ConceptDictionary:
             server.db.session.add(concept)
             self.idToConcept[conceptId] = concept
             return concept
+            
+    def values(self):
+        """ Return the list of values in the Dictionary """
+        return list(self.idToConcept.values())
