@@ -1,4 +1,5 @@
 from ..auth import auth
+from ..helpers import BuildLanguageContext
 from ..helpers.json_factory import toJson
 from Data import Language, Word
 from Data.Query import PrequeriedFormsHelper
@@ -14,10 +15,8 @@ class SearchController(auth.JSONController):
     
     def performWithJSON(self, languageId, json=None, user=None):
         """ Convert the quiz to JSON """
-        foreignLanguage = Language(id=languageId)
-        nativeLanguage = Language(id=user.native_language_id)
-        
+        languageContext = BuildLanguageContext(languageId, user)
         matchingForms = Word.query.filter(func.lower(Word.text) == func.lower(json['text'])).all()
-        matchingHelper = PrequeriedFormsHelper(matchingForms, Word, foreign=foreignLanguage, native=nativeLanguage)
+        matchingHelper = PrequeriedFormsHelper(matchingForms, Word, languageContext)
         pairs = matchingHelper.getConceptPairs()
         return {"results":toJson(pairs, user=user)}

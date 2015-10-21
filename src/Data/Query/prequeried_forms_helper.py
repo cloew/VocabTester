@@ -7,26 +7,25 @@ from kao_decorators import lazy_property
 class PrequeriedFormsHelper:
     """ Helper class to manage properly querying for Learned Forms """
     
-    def __init__(self, forms, modelCls, *, foreign, native):
+    def __init__(self, forms, modelCls, languages):
         """ Initialize with the initial Forms, Model Class and the Languages """
         self.items = forms
         self.modelCls = modelCls
-        self.foreignLanguage = foreign
-        self.nativeLanguage = native
+        self.languages = languages
         
     @lazy_property
     def cache(self):
         """ Return the Concept Form Cache """
-        languageNeedsConcepts = {self.foreignLanguage:[], self.nativeLanguage:[]}
+        languageNeedsConcepts = {self.languages.foreign:[], self.languages.native:[]}
         for form in self.items:
             concept = Concept(id=form.concept_id)
-            if form.language_id != self.foreignLanguage.id:
-                languageNeedsConcepts[self.foreignLanguage].append(concept)
+            if form.language_id != self.languages.foreign.id:
+                languageNeedsConcepts[self.languages.foreign].append(concept)
             else:
-                languageNeedsConcepts[self.nativeLanguage].append(concept)
+                languageNeedsConcepts[self.languages.native].append(concept)
                 
-        nativeCache = self._buildCacheFor(self.nativeLanguage, languageNeedsConcepts[self.nativeLanguage])
-        foreignCache = self._buildCacheFor(self.foreignLanguage, languageNeedsConcepts[self.foreignLanguage])
+        nativeCache = self._buildCacheFor(self.languages.native, languageNeedsConcepts[self.languages.native])
+        foreignCache = self._buildCacheFor(self.languages.foreign, languageNeedsConcepts[self.languages.foreign])
         nativeCache.add(self.items)
         nativeCache.add(foreignCache.results.values())
         return nativeCache
@@ -38,7 +37,7 @@ class PrequeriedFormsHelper:
     @lazy_property
     def conceptManager(self):
         """ Return the Concept Manager """
-        return ConceptManager(self.cache, self.nativeLanguage, self.foreignLanguage)
+        return ConceptManager(self.cache, self.languages)
         
     def getConceptPairs(self):
         """ Return the learned Concept Pairs """

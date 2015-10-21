@@ -4,6 +4,7 @@ from .concept_list import ConceptList
 from .concept_manager import ConceptManager
 from .concept_pair import ConceptPair
 from .language import Language
+from .language_context import LanguageContext
 from .language_enrollment import LanguageEnrollment
 from .mastery import Mastery
 from .staleness_period import StalenessPeriod

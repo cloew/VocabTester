@@ -1,4 +1,5 @@
 from Server.auth import auth
+from Server.helpers import BuildLanguageContext
 from Server.helpers.json_factory import toJson
 
 from Data import Language
@@ -15,10 +16,9 @@ class GetQuiz(auth.JSONController):
     
     def performWithJSON(self, languageId, listId, json=None, user=None):
         """ Convert the quiz to JSON """
-        foreignLanguage = Language(id=languageId)
-        nativeLanguage = Language(id=user.native_language_id)
+        languageContext = BuildLanguageContext(languageId, user)
         
-        conceptListHelper = ConceptListQueryHelper(self.listModel, self.listModel.query.filter_by(id=listId), native=nativeLanguage, foreign=foreignLanguage)
+        conceptListHelper = ConceptListQueryHelper(self.listModel, self.listModel.query.filter_by(id=listId), languageContext)
         userList = conceptListHelper.buildUserLists(user)[0]
         
         quiz = Quiz(userList.name, userList.concepts, user)
