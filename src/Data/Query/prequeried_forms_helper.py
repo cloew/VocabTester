@@ -17,10 +17,23 @@ class PrequeriedFormsHelper:
     @lazy_property
     def cache(self):
         """ Return the Concept Form Cache """
-        concepts = [Concept(id=form.concept_id) for form in self.items]
-        cache = ConceptFormCache(self.modelCls, concepts, [self.nativeLanguage])
-        cache.add(self.items)
-        return cache
+        languageNeedsConcepts = {self.foreignLanguage:[], self.nativeLanguage:[]}
+        for form in self.items:
+            concept = Concept(id=form.concept_id)
+            if form.language_id != self.foreignLanguage.id:
+                languageNeedsConcepts[self.foreignLanguage].append(concept)
+            else:
+                languageNeedsConcepts[self.nativeLanguage].append(concept)
+                
+        nativeCache = self._buildCacheFor(self.nativeLanguage, languageNeedsConcepts[self.nativeLanguage])
+        foreignCache = self._buildCacheFor(self.foreignLanguage, languageNeedsConcepts[self.foreignLanguage])
+        nativeCache.add(self.items)
+        nativeCache.add(foreignCache.results.values())
+        return nativeCache
+        
+    def _buildCacheFor(self, language, concepts):
+        """ Build the cache for the given language """
+        return ConceptFormCache(self.modelCls, concepts, [language])
         
     @lazy_property
     def conceptManager(self):
