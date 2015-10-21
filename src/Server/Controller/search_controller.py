@@ -14,8 +14,10 @@ class SearchController(auth.JSONController):
     
     def performWithJSON(self, languageId, json=None, user=None):
         """ Convert the quiz to JSON """
-        language = Language(id=languageId)
+        foreignLanguage = Language(id=languageId)
+        nativeLanguage = Language(id=user.native_language_id)
+        
         matchingForms = Word.query.filter(func.lower(Word.text) == func.lower(json['text'])).all()
-        mathcingHelper = PrequeriedFormsHelper(matchingForms, Word, foreign=language, native=user.nativeLanguage)
-        pairs = mathcingHelper.getConceptPairs()
+        matchingHelper = PrequeriedFormsHelper(matchingForms, Word, foreign=foreignLanguage, native=nativeLanguage)
+        pairs = matchingHelper.getConceptPairs()
         return {"results":toJson(pairs, user=user)}

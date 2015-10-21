@@ -13,8 +13,10 @@ class LearnedConceptsController(auth.JSONController):
     
     def performWithJSON(self, languageId, json=None, user=None):
         """ Convert the quiz to JSON """
-        language = Language(id=languageId)
-        learnedForms = user.getLearnedFor(self.formModel, language)
-        learnedFormsHelper = PrequeriedFormsHelper(learnedForms, self.formModel, foreign=language, native=user.nativeLanguage)
+        foreignLanguage = Language(id=languageId)
+        nativeLanguage = Language(id=user.native_language_id)
+        
+        learnedForms = user.getLearnedFor(self.formModel, foreignLanguage)
+        learnedFormsHelper = PrequeriedFormsHelper(learnedForms, self.formModel, foreign=foreignLanguage, native=nativeLanguage)
         pairs = learnedFormsHelper.getConceptPairs()
         return {"concepts":toJson(pairs, user=user), "isWords":self.formModel is Word}

@@ -14,6 +14,8 @@ class ConceptListsController(auth.JSONController):
     def performWithJSON(self, languageId, json=None, user=None):
         """ Convert the existing Concept Lists to JSON """
         foreignLanguage = Language(id=languageId)
-        conceptListHelper = ConceptListQueryHelper(self.listModel, self.listModel.query, native=user.nativeLanguage, foreign=foreignLanguage)
+        nativeLanguage = Language(id=user.native_language_id)
+        
+        conceptListHelper = ConceptListQueryHelper(self.listModel, self.listModel.query, native=nativeLanguage, foreign=foreignLanguage)
         userLists = conceptListHelper.buildUserLists(user)
         return {"lists":toJson([userList for userList in userLists if len(userList.concepts) > 0], user=user)}
