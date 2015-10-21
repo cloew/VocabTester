@@ -1,1 +1,2 @@
 from .concept_list_query_helper import ConceptListQueryHelper
+from .learned_forms_query_helper import LearnedFormsQueryHelper

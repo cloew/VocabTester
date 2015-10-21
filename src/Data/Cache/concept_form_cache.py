@@ -13,7 +13,10 @@ class ConceptFormCache:
     @lazy_property
     def results(self):
         """ Return the results """
-        results = self.formCls.query.filter(self.formCls.language_id.in_(self.languageIds), self.formCls.concept_id.in_(self.conceptIds)).all()
+        if len(self.conceptIds) > 0 and len(self.languageIds) > 0:
+            results = self.formCls.query.filter(self.formCls.language_id.in_(self.languageIds), self.formCls.concept_id.in_(self.conceptIds)).all()
+        else:
+            results = []
         return self._buildResultsDictionary(results)
         
     def _buildResultsDictionary(self, results):
@@ -22,7 +25,7 @@ class ConceptFormCache:
         
     def add(self, conceptForms):
         """ Add the given forms to the results """
-        self.results.extend(self._buildResultsDictionary(conceptForms))
+        self.results.update(self._buildResultsDictionary(conceptForms))
         
     def get(self, *, conceptId, languageId):
         """ Return the Concept Form for the given values """

@@ -1,11 +1,7 @@
 from ..auth import auth
 from ..helpers.json_factory import toJson
-from Data import ConceptManager, Language, UserConceptList
-from Data.Cache import ConceptFormCache
+from Data import Language
 from Data.Query import ConceptListQueryHelper
-
-from sqlalchemy.orm import subqueryload
-import itertools
 
 class ConceptListsController(auth.JSONController):
     """ Controller to return the concept lists """
