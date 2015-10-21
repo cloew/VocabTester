@@ -21,3 +21,7 @@ class Symbol(db.Model):
     def __unicode__(self):
         """ Return the string representation of the Word """
         return unicode(self.text)
+        
+    def __repr__(self):
+        """ Return the String representation of the Symbol """
+        return "<Symbol({0}, {1})>".format(self.text, self.language.name)
