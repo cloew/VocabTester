@@ -13,15 +13,29 @@ class ConceptFormCache:
     @lazy_property
     def results(self):
         """ Return the results """
-        def keyfunc(form):
-            return (form.concept_id, form.language_id)
         results = self.formCls.query.filter(self.formCls.language_id.in_(self.languageIds), self.formCls.concept_id.in_(self.conceptIds)).all()
-        return {keyfunc(result):result for result in results}
+        return self._buildResultsDictionary(results)
+        
+    def _buildResultsDictionary(self, results):
+        """ Return the results dictionary """
+        return {self.getKey(result):result for result in results}
+        
+    def add(self, conceptForms):
+        """ Add the given forms to the results """
+        self.results.extend(self._buildResultsDictionary(conceptForms))
         
     def get(self, *, conceptId, languageId):
         """ Return the Concept Form for the given values """
-        return self[(conceptId, languageId)]
+        return self[self.getIdKey(concetpId=conceptId, languageId=languageId)]
         
     def getAll(self, *, conceptIds, languageId):
         """ Return the Concept Form for the given values """
-        return [self[(conceptId, languageId)] for conceptId in conceptIds]
+        return [self[self.getIdKey(conceptId=conceptId, languageId=languageId)] for conceptId in conceptIds]
+        
+    def getKey(self, form):
+        """ Return the key for the given form """
+        return self.getIdKey(conceptId=form.concept_id, languageId=form.language_id)
+        
+    def getIdKey(self, *, conceptId, languageId):
+        """ Return the key for the given form """
+        return (conceptId, languageId)
