@@ -5,13 +5,13 @@ from .word import Word
 class ConceptManager:
     """ Helper class to get the proper forms from Concepts """
     
-    def __init__(self, conceptFormClass):
+    def __init__(self, conceptFormCache):
         """ Initialize the Concept Manager """
-        self.conceptFormClass = conceptFormClass
+        self.conceptFormCache = conceptFormCache
     
     def findConceptMatches(self, conceptIds, language):
         """ Return the words matching the given concepts """
-        return self.conceptFormClass.query.filter(self.conceptFormClass.concept_id.in_(conceptIds), self.conceptFormClass.language_id==language.id).order_by(self.conceptFormClass.concept_id).all()
+        return self.conceptFormCache.getAll(conceptIds=conceptIds, languageId=language.id)
     
     def getNativeForms(self, conceptIds, nativeLanguage):
         """ Return the native forms for the list """
