@@ -10,7 +10,7 @@ class SearchController(auth.JSONController):
     def __init__(self):
         """ Initialize the Search Controller """
         auth.JSONController.__init__(self)
-        self.conceptManager = ConceptManager(Word)
+        # self.conceptManager = ConceptManager(Word)
     
     def performWithJSON(self, languageId, json=None, user=None):
         """ Convert the quiz to JSON """

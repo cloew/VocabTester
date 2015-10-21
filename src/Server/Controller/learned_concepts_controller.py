@@ -9,7 +9,7 @@ class LearnedConceptsController(auth.JSONController):
         """ Initialize the Quiz Controller """
         auth.JSONController.__init__(self)
         self.formModel = formModel
-        self.conceptManager = ConceptManager(formModel)
+        # self.conceptManager = ConceptManager(formModel)
     
     def performWithJSON(self, languageId, json=None, user=None):
         """ Convert the quiz to JSON """
