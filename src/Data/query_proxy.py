@@ -34,3 +34,8 @@ class QueryProxy:
     def filter_by(self, *args, **kwargs):
         """ Return the new filtered query """
         return self.query.filter_by(*args, **kwargs)
+        
+    @new_proxy
+    def options(self, *args, **kwargs):
+        """ Return the query with the new options """
+        return self.query.options(*args, **kwargs)
