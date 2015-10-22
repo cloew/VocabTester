@@ -1,5 +1,3 @@
-from .mastery_retriever import MasteryRetriever
-
 from .concept import Concept
 from .language import Language
 
@@ -15,8 +13,6 @@ class Symbol(db.Model):
     concept = db.relationship("Concept")
     language_id = db.Column(db.Integer, db.ForeignKey('languages.id'))
     language = db.relationship("Language")
-    
-    getMastery = MasteryRetriever('symbol')
     
     def __unicode__(self):
         """ Return the string representation of the Word """
