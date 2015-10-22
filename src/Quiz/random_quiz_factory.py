@@ -1,6 +1,8 @@
 from .quiz import Quiz
 from .sampler import sample_at_most
 from Data import ConceptManager
+from Data.Cache import BuildMasteryCache
+from Data.Query import PrequeriedFormsHelper
 
 class RandomQuizFactory:
     """ Represents method to contstruct a Quiz from random learned Words or Symbols """
@@ -12,23 +14,24 @@ class RandomQuizFactory:
                      (4, .1),
                      (5, .1)]
     
-    def buildQuiz(self, formModel, user, foreignLanguage):
+    def buildQuiz(self, formModel, user, languageContext):
         """ Build a quiz using the from given and the user provided """
-        conceptManager = ConceptManager(formModel)
+        learnedForms = user.getLearnedFor(formModel, languageContext.foreign)
+        masteryCache = BuildMasteryCache.ViaForms(learnedForms, formModel, user)
+        learnedFormsHelper = PrequeriedFormsHelper(learnedForms, formModel, languageContext)
         
-        learnedForms = user.getLearnedFor(formModel, foreignLanguage)
-        formsByRating = self.organizeByMastery(learnedForms, user)
+        formsByRating = self.organizeByMastery(learnedForms, masteryCache)
         sample = self.getSampleForQuiz(formsByRating)
         conceptIds = [form.concept_id for form in sample]
-        pairs = conceptManager.getConceptPairs(conceptIds, user.nativeLanguage, foreignLanguage)
+        pairs = learnedFormsHelper.conceptManager.getConceptPairs(conceptIds)
         
-        return Quiz("Random List", pairs, user)
+        return Quiz("Random List", pairs, masteryCache), masteryCache
         
-    def organizeByMastery(self, learnedForms, user):
+    def organizeByMastery(self, learnedForms, masteryCache):
         """ Return the learned forms organized by their mastery rating """
         forms = {}
         for form in learnedForms:
-            rating = form.getMastery(user).rating
+            rating = masteryCache[form.id].rating
             if rating not in forms:
                 forms[rating] = [form]
             else:

@@ -1,4 +1,5 @@
 from Server.auth import auth
+from Server.helpers import BuildLanguageContext
 from Server.helpers.json_factory import toJson
 
 from Data import Language
@@ -14,6 +15,6 @@ class GetRandomQuiz(auth.JSONController):
     
     def performWithJSON(self, languageId, json=None, user=None):
         """ Convert the quiz to JSON """
-        language = Language(id=languageId)
-        quiz = RandomQuizFactory.buildQuiz(self.formModel, user, language)
-        return {"quiz":toJson(quiz, user=user)}
+        languageContext = BuildLanguageContext(languageId, user)
+        quiz, masteryCache = RandomQuizFactory.buildQuiz(self.formModel, user, languageContext)
+        return {"quiz":toJson(quiz, user=user, masteryCache=masteryCache)}
