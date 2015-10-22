@@ -2,23 +2,26 @@ from ..mastery import Mastery
 from ..symbol import Symbol
 from ..word import Word
 
-from kao_decorators import lazy_property
+from kao_decorators import proxy_for, lazy_property
+from kao_flask.ext.sqlalchemy import db
 
-@proxy_for('results', ['__iter__', '__contains__', '__len__', '__getitem__'])
+@proxy_for('results', ['__iter__', '__contains__', '__len__'])
 class MasteryCache:
     """ Helper class to request all the relevant Masteries """
     mastery_fields = {Symbol: 'symbol_id', Word:'word_id'}
     
-    def __init__(self, forms, user):
+    def __init__(self, forms, formCls, user):
         """ Initialize with the Concept Forms and User """
         self.forms = forms
+        self.formCls = formCls
         self.user = user
         
     @lazy_property
     def results(self):
         """ Return the Masteries """
         items = self.loadMasteries()
-        return {getattr(item, self.masteryFieldName):item for item in items}
+        results = {getattr(item, self.masteryFieldName):item for item in items}
+        return results
         
     def loadMasteries(self):
         """ Load the Masteries """
@@ -31,8 +34,16 @@ class MasteryCache:
         
     @lazy_property
     def masteryFieldName(self):
-        """ Return the amstery field name to use """
-        if len(self.forms) > 0:
-            return self.mastery_fields[self.forms[0].__class__]
-        else:
-            return None
+        """ Return the mastery field name to use """
+        return self.mastery_fields[self.formCls]
+            
+    def __getitem__(self, formId):
+        """ Return the proper Mastery record """
+        if formId not in self:
+            kwargs = {'user':self.user, self.masteryFieldName:formId}
+            mastery = Mastery(**kwargs)
+            db.session.add(mastery)
+            db.session.commit()
+            self.results[formId] = mastery
+            
+        return self.results[formId]

@@ -2,9 +2,9 @@ from Data import ConceptPair, Language, LanguageEnrollment, Symbol, SymbolList, 
 from ..Quiz import QuizJson
 from kao_json import JsonFactory, JsonAttr, FieldAttr, StaticAttr
 
-def GetMateryRating(form, user):
+def GetMateryRating(conceptPair, masteryCache):
     """ Return the mastery rating for the given form """    
-    return form.getMastery(user).rating
+    return masteryCache[conceptPair.foreign.id].rating
     
 def HasLearned(form, user):
     """ Return if the user has learned the given form """
@@ -12,11 +12,10 @@ def HasLearned(form, user):
     return hasLearnedMethod[form.__class__](form)
 
 jsonFactory = JsonFactory([
-                           ([Symbol, Word],[FieldAttr('id'), FieldAttr('text'), JsonAttr('mastery', GetMateryRating, args=["user"]), 
+                           ([Symbol, Word],[FieldAttr('id'), FieldAttr('text'), 
                                             JsonAttr('learned', HasLearned, args=["user"])]),
-                           (ConceptPair,[FieldAttr('foreign'), FieldAttr('native')]),
-                           ([SymbolList, WordList],[FieldAttr('id'), FieldAttr('name'), JsonAttr('concepts', lambda s, u: s.getConceptPairs(u), args=["user"])]),
-                           (UserConceptList,[FieldAttr('id'), FieldAttr('name'), FieldAttr('concepts'), FieldAttr('averageMastery')]),
+                           (ConceptPair,[FieldAttr('foreign'), FieldAttr('native'), JsonAttr('mastery', GetMateryRating, args=["masteryCache"])]),
+                           (UserConceptList,[FieldAttr('id'), FieldAttr('name'), FieldAttr('concepts')]),
                            ([User], [FieldAttr('id'), FieldAttr('email'), FieldAttr('is_admin'), FieldAttr('givenName'), FieldAttr('lastName'), FieldAttr('nativeLanguage')]),
                            (Language, [FieldAttr('id'), FieldAttr('name')]),
                            (LanguageEnrollment, [FieldAttr('id'), FieldAttr('language'), FieldAttr('default')])

@@ -22,13 +22,22 @@ class ConceptListQueryHelper:
     @lazy_property
     def cache(self):
         """ Return the Concept Form Cache """
-        concepts = [concept for conceptList in self.items for concept in conceptList.concepts]
-        return ConceptFormCache(self.listModelCls.conceptFormCls, concepts, self.languages)
+        return ConceptFormCache(self.listModelCls.conceptFormCls, self.concepts, self.languages)
         
     @lazy_property
     def conceptManager(self):
         """ Return the Concept Manager """
         return ConceptManager(self.cache, self.languages)
+        
+    @lazy_property
+    def concepts(self):
+        """ Return the Foreign Forms """
+        return [concept for conceptList in self.items for concept in conceptList.concepts]
+        
+    @lazy_property
+    def foreignForms(self):
+        """ Return the Foreign Forms """
+        return self.conceptManager.getForeignForms([concept.id for concept in self.concepts])
         
     def buildUserLists(self, user):
         """ Return the User Bound Concept Lists """
