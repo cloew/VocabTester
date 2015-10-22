@@ -14,11 +14,11 @@ class RandomQuizFactory:
                      (4, .1),
                      (5, .1)]
     
-    def buildQuiz(self, formModel, user, languageContext):
+    def buildQuiz(self, formInfo, user, languageContext):
         """ Build a quiz using the from given and the user provided """
-        learnedForms = user.getLearnedFor(formModel, languageContext.foreign)
-        masteryCache = BuildMasteryCache.ViaForms(learnedForms, formModel, user)
-        learnedFormsHelper = PrequeriedFormsHelper(learnedForms, formModel, languageContext)
+        learnedForms = user.getLearnedFor(formInfo.formModel, languageContext.foreign)
+        masteryCache = BuildMasteryCache.ViaForms(learnedForms, formInfo, user)
+        learnedFormsHelper = PrequeriedFormsHelper(learnedForms, formInfo, languageContext)
         
         formsByRating = self.organizeByMastery(learnedForms, masteryCache)
         sample = self.getSampleForQuiz(formsByRating)

@@ -10,19 +10,19 @@ from Quiz import Quiz
 class GetQuiz(auth.JSONController):
     """ Controller to return the quiz """
     
-    def __init__(self, listModel):
+    def __init__(self, formInfo):
         """ Initialize the Quiz Controller """
         auth.JSONController.__init__(self)
-        self.listModel = listModel
+        self.formInfo = formInfo
     
     def performWithJSON(self, languageId, listId, json=None, user=None):
         """ Convert the quiz to JSON """
         languageContext = BuildLanguageContext(languageId, user)
         
-        conceptListHelper = ConceptListQueryHelper(self.listModel, self.listModel.query.filter_by(id=listId), languageContext)
+        conceptListHelper = ConceptListQueryHelper(self.formInfo, self.formInfo.listModel.query.filter_by(id=listId), languageContext)
         userList = conceptListHelper.buildUserLists(user)[0]
         
-        masteryCache = BuildMasteryCache.ViaPairs(userList.concepts, self.listModel.conceptFormCls, user)
+        masteryCache = BuildMasteryCache.ViaPairs(userList.concepts, self.formInfo, user)
         quiz = Quiz(userList.name, userList.concepts, masteryCache)
         
         return {"quiz":toJson(quiz, user=user, masteryCache=masteryCache)}

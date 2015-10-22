@@ -2,7 +2,7 @@ from ..auth import auth
 from ..helpers import BuildLanguageContext
 from ..helpers.json_factory import toJson
 
-from Data import Language, Word
+from Data import Language, Word, WordInfo
 from Data.Cache import BuildMasteryCache
 from Data.Query import PrequeriedFormsHelper
 
@@ -19,9 +19,9 @@ class SearchController(auth.JSONController):
         """ Convert the quiz to JSON """
         languageContext = BuildLanguageContext(languageId, user)
         matchingForms = Word.query.filter(func.lower(Word.text) == func.lower(json['text'])).all()
-        matchingHelper = PrequeriedFormsHelper(matchingForms, Word, languageContext)
+        matchingHelper = PrequeriedFormsHelper(matchingForms, WordInfo, languageContext)
         
         pairs = matchingHelper.getConceptPairs()
-        masteryCache = BuildMasteryCache.ViaPairs(pairs, Word, user)
+        masteryCache = BuildMasteryCache.ViaPairs(pairs, WordInfo, user)
         
         return {"results":toJson(pairs, user=user, masteryCache=masteryCache)}

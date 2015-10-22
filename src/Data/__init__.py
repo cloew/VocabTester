@@ -14,3 +14,6 @@ from .user import User
 from .user_concept_list import UserConceptList
 from .word import Word
 from .word_list import WordList
+
+from .symbol_info import SymbolInfo
+from .word_info import WordInfo

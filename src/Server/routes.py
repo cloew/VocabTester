@@ -2,7 +2,7 @@ from .auth import auth
 from .decorators import requires_admin
 from .helpers.admin_json_factory import toJson
 
-from Data import Concept, Language, Symbol, SymbolList, User, Word, WordList
+from Data import Concept, Language, Symbol, SymbolInfo, User, Word, WordInfo
 
 from .Controller import ConceptListsController, CreateUserEnrollment, LearnedConceptsController, LearnWordController, SearchController, UserEnrollments
 from .Quiz.Controller import AnswerQuestion, GetQuiz, GetRandomQuiz
@@ -20,19 +20,19 @@ routes = [Endpoint('/', get=HTMLController('Server/templates/index.html')),
           # Languages
           Endpoint('/api/languages', get=ListController(Language, toJson)),
           # Symbols
-          Endpoint('/api/languages/<int:languageId>/symbols', get=LearnedConceptsController(Symbol)),
+          Endpoint('/api/languages/<int:languageId>/symbols', get=LearnedConceptsController(SymbolInfo)),
           # Symbollists
-          Endpoint('/api/languages/<int:languageId>/symbollists', get=ConceptListsController(SymbolList)),
-          Endpoint('/api/languages/<int:languageId>/symbollist/<int:listId>/quiz', get=GetQuiz(SymbolList)),
-          Endpoint('/api/languages/<int:languageId>/symbollist/random/quiz', get=GetRandomQuiz(Symbol)),
+          Endpoint('/api/languages/<int:languageId>/symbollists', get=ConceptListsController(SymbolInfo)),
+          Endpoint('/api/languages/<int:languageId>/symbollist/<int:listId>/quiz', get=GetQuiz(SymbolInfo)),
+          Endpoint('/api/languages/<int:languageId>/symbollist/random/quiz', get=GetRandomQuiz(SymbolInfo)),
           # Words
-          Endpoint('/api/languages/<int:languageId>/words', get=LearnedConceptsController(Word)),
+          Endpoint('/api/languages/<int:languageId>/words', get=LearnedConceptsController(WordInfo)),
           Endpoint('/api/words/<int:wordId>/learn', post=LearnWordController()),
           Endpoint('/api/languages/<int:languageId>/search', post=SearchController()),
           # Wordlists
-          Endpoint('/api/languages/<int:languageId>/wordlists', get=ConceptListsController(WordList)),
-          Endpoint('/api/languages/<int:languageId>/wordlist/<int:listId>/quiz', get=GetQuiz(WordList)),
-          Endpoint('/api/languages/<int:languageId>/wordlist/random/quiz', get=GetRandomQuiz(Word)),
+          Endpoint('/api/languages/<int:languageId>/wordlists', get=ConceptListsController(WordInfo)),
+          Endpoint('/api/languages/<int:languageId>/wordlist/<int:listId>/quiz', get=GetQuiz(WordInfo)),
+          Endpoint('/api/languages/<int:languageId>/wordlist/random/quiz', get=GetRandomQuiz(WordInfo)),
           # Mastery
           Endpoint('/api/mastery/<int:masteryId>/answer', post=AnswerQuestion())]
           

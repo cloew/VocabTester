@@ -8,9 +8,9 @@ from sqlalchemy.orm import subqueryload
 class ConceptListQueryHelper:
     """ Helper class to manage properly querying for Concept Lists """
     
-    def __init__(self, listModelCls, query, languages):
+    def __init__(self, formInfo, query, languages):
         """ Initialize with the base query and the Language Context """
-        self.listModelCls = listModelCls
+        self.formInfo = formInfo
         self.query = query.options(subqueryload('concepts'))
         self.languages = languages
         
@@ -22,7 +22,7 @@ class ConceptListQueryHelper:
     @lazy_property
     def cache(self):
         """ Return the Concept Form Cache """
-        return ConceptFormCache(self.listModelCls.conceptFormCls, self.concepts, self.languages)
+        return ConceptFormCache(self.formInfo.formModel, self.concepts, self.languages)
         
     @lazy_property
     def conceptManager(self):

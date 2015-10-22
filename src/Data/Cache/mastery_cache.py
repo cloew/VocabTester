@@ -1,6 +1,4 @@
 from ..mastery import Mastery
-from ..symbol import Symbol
-from ..word import Word
 
 from kao_decorators import proxy_for, lazy_property
 from kao_flask.ext.sqlalchemy import db
@@ -8,12 +6,11 @@ from kao_flask.ext.sqlalchemy import db
 @proxy_for('results', ['__iter__', '__contains__', '__len__'])
 class MasteryCache:
     """ Helper class to request all the relevant Masteries """
-    mastery_fields = {Symbol: 'symbol_id', Word:'word_id'}
     
-    def __init__(self, forms, formCls, user):
+    def __init__(self, forms, formInfo, user):
         """ Initialize with the Concept Forms and User """
         self.forms = forms
-        self.formCls = formCls
+        self.formInfo = formInfo
         self.user = user
         
     @lazy_property
@@ -35,7 +32,7 @@ class MasteryCache:
     @lazy_property
     def masteryFieldName(self):
         """ Return the mastery field name to use """
-        return self.mastery_fields[self.formCls]
+        return self.formInfo.masteryFieldName
             
     def __getitem__(self, formId):
         """ Return the proper Mastery record """
