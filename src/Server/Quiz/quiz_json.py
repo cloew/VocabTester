@@ -2,9 +2,9 @@ from Data import Word
 from Quiz import Quiz, OptionsQuestion, ForeignPromptQuestion, QuestionTypes, GradeResult
 from kao_json import JsonFactory, JsonAttr, FieldAttr, StaticAttr
 
-def answerUrl(question, user):
+def answerUrl(question, masteryCache):
     """ Returns the mastery rating for the word and user """    
-    return "/api/mastery/{0}/answer".format(question.subject.getMasteryForUser(user).id)
+    return "/api/mastery/{0}/answer".format(masteryCache[question.subject.foreign.id].id)
     
 def IsWordsQuiz(quiz):
     """ Returns if the quiz is for words """    
@@ -12,7 +12,7 @@ def IsWordsQuiz(quiz):
 
 QuizJson = [
             (GradeResult, [FieldAttr('correct'), FieldAttr('imperfect')]),
-            (OptionsQuestion, [FieldAttr('subject'), FieldAttr('queryWord'), FieldAttr('options'), FieldAttr('answerIndex'), StaticAttr('questionType', QuestionTypes.Options), JsonAttr('answerUrl', answerUrl, args=["user"])]),
-            (ForeignPromptQuestion, [FieldAttr('subject'), FieldAttr('prompt'), FieldAttr('answer'), FieldAttr('displayAnswer'), StaticAttr('questionType', QuestionTypes.Prompt), JsonAttr('answerUrl', answerUrl, args=["user"])]),
+            (OptionsQuestion, [FieldAttr('subject'), FieldAttr('queryWord'), FieldAttr('options'), FieldAttr('answerIndex'), StaticAttr('questionType', QuestionTypes.Options), JsonAttr('answerUrl', answerUrl, args=["masteryCache"])]),
+            (ForeignPromptQuestion, [FieldAttr('subject'), FieldAttr('prompt'), FieldAttr('answer'), FieldAttr('displayAnswer'), StaticAttr('questionType', QuestionTypes.Prompt), JsonAttr('answerUrl', answerUrl, args=["masteryCache"])]),
             (Quiz, [FieldAttr('name'), FieldAttr('questions'), JsonAttr('isWords', IsWordsQuiz)]),
            ]

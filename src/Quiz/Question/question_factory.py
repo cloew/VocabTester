@@ -19,10 +19,10 @@ class QuestionFactory:
         self.optionsRange = range(0,4)
         self.promptRange = range(4,6)
                      
-    def buildQuestions(self, pairs, user):
+    def buildQuestions(self, pairs, masteryCache):
         """ Build the questions for use in the quiz """
         questions = []
-        for mastery, conceptPairs in groupby(pairs, lambda pair: pair.foreign.getMastery(user).answerRating):
+        for mastery, conceptPairs in groupby(pairs, lambda pair: masteryCache[pair.foreign.id].answerRating):
             if mastery in self.optionsRange:
                 questions += self.optionsQuestionBuilder.buildQuestions(list(conceptPairs), pairs)
             if mastery in self.promptRange:

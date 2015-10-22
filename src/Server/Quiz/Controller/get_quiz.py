@@ -3,6 +3,7 @@ from Server.helpers import BuildLanguageContext
 from Server.helpers.json_factory import toJson
 
 from Data import Language
+from Data.Cache import MasteryCache
 from Data.Query import ConceptListQueryHelper
 from Quiz import Quiz
 
@@ -21,5 +22,7 @@ class GetQuiz(auth.JSONController):
         conceptListHelper = ConceptListQueryHelper(self.listModel, self.listModel.query.filter_by(id=listId), languageContext)
         userList = conceptListHelper.buildUserLists(user)[0]
         
-        quiz = Quiz(userList.name, userList.concepts, user)
-        return {"quiz":toJson(quiz, user=user)}
+        masteryCache = MasteryCache([pair.foreign for pair in userList.concepts], self.listModel.conceptFormCls, user)
+        quiz = Quiz(userList.name, userList.concepts, masteryCache)
+        
+        return {"quiz":toJson(quiz, user=user, masteryCache=masteryCache)}
