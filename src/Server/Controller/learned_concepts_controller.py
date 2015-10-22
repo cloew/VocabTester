@@ -1,6 +1,7 @@
 from ..auth import auth
 from ..helpers import BuildLanguageContext
 from ..helpers.json_factory import toJson
+
 from Data import Word
 from Data.Cache import MasteryCache
 from Data.Query import PrequeriedFormsHelper
