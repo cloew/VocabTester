@@ -3,7 +3,7 @@ from ..helpers import BuildLanguageContext
 from ..helpers.json_factory import toJson
 
 from Data import Word
-from Data.Cache import MasteryCache
+from Data.Cache import BuildMasteryCache
 from Data.Query import PrequeriedFormsHelper
 
 class LearnedConceptsController(auth.JSONController):
@@ -21,6 +21,6 @@ class LearnedConceptsController(auth.JSONController):
         learnedFormsHelper = PrequeriedFormsHelper(learnedForms, self.formModel, languageContext)
         
         pairs = learnedFormsHelper.getConceptPairs()
-        masteryCache = MasteryCache([pair.foreign for pair in pairs], self.formModel, user)
+        masteryCache = BuildMasteryCache.ViaPairs(pairs, self.formModel, user)
         
         return {"concepts":toJson(pairs, user=user, masteryCache=masteryCache), "isWords":self.formModel is Word}
