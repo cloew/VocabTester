@@ -3,7 +3,7 @@ from Server.helpers import BuildLanguageContext
 from Server.helpers.json_factory import toJson
 
 from Data import Language
-from Data.Cache import BuildMasteryCache
+from Data.Cache import BuildMasteryCache, LearnedCache
 from Data.Query import ConceptListQueryHelper
 from Quiz import Quiz
 
@@ -23,6 +23,7 @@ class GetQuiz(auth.JSONController):
         userList = conceptListHelper.buildUserLists(user)[0]
         
         masteryCache = BuildMasteryCache.ViaPairs(userList.concepts, self.formInfo, user)
+        learnedCache = LearnedCache(user, self.formInfo)
         quiz = Quiz(userList.name, userList.concepts, masteryCache)
         
-        return {"quiz":toJson(quiz, user=user, masteryCache=masteryCache)}
+        return {"quiz":toJson(quiz, user=user, learnedCache=learnedCache, masteryCache=masteryCache)}

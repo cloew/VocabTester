@@ -13,5 +13,5 @@ class LearnedCache:
     @lazy_property
     def results(self):
         """ Return the results """
-        results = db.session.query(self.table).filter_by(user_id=user.id).all()
+        results = db.session.query(self.table).filter_by(user_id=self.user.id).all()
         return {form_id for user_id, form_id in results}

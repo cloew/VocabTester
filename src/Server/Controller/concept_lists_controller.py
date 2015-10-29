@@ -2,7 +2,7 @@ from ..auth import auth
 from ..helpers import BuildLanguageContext
 from ..helpers.json_factory import toJson
 
-from Data.Cache import BuildMasteryCache
+from Data.Cache import BuildMasteryCache, LearnedCache
 from Data.Query import ConceptListQueryHelper
 
 class ConceptListsController(auth.JSONController):
@@ -20,4 +20,5 @@ class ConceptListsController(auth.JSONController):
         masteryCache = BuildMasteryCache.ViaForms(conceptListHelper.foreignForms, self.formInfo, user)
         userLists = conceptListHelper.buildUserLists(user)
         
-        return {"lists":toJson([userList for userList in userLists if len(userList.concepts) > 0], user=user, masteryCache=masteryCache)}
+        learnedCache = LearnedCache(user, self.formInfo)
+        return {"lists":toJson([userList for userList in userLists if len(userList.concepts) > 0], user=user, learnedCache=learnedCache, masteryCache=masteryCache)}

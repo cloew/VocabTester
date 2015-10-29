@@ -1,6 +1,7 @@
 from ..auth import auth
 from ..helpers.json_factory import toJson
-from Data import Word
+from Data import Word, WordInfo
+from Data.Cache import LearnedCache
 
 class LearnWordController(auth.JSONController):
     """ Controller to mark a word as learned """
@@ -9,4 +10,5 @@ class LearnWordController(auth.JSONController):
         """ Mark a word as learned by the current user """
         word = Word.query.filter_by(id=wordId).first()
         user.tryToLearnWord(word)
-        return {"word":toJson(word, user=user)}
+        learnedCache = LearnedCache(user, WordInfo)
+        return {"word":toJson(word, user=user, learnedCache=learnedCache)}

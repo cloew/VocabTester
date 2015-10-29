@@ -3,7 +3,7 @@ from ..helpers import BuildLanguageContext
 from ..helpers.json_factory import toJson
 
 from Data import Language, Word, WordInfo
-from Data.Cache import BuildMasteryCache
+from Data.Cache import BuildMasteryCache, LearnedCache
 from Data.Query import PrequeriedFormsHelper
 
 from sqlalchemy import func
@@ -23,5 +23,6 @@ class SearchController(auth.JSONController):
         
         pairs = matchingHelper.getConceptPairs()
         masteryCache = BuildMasteryCache.ViaPairs(pairs, WordInfo, user)
+        learnedCache = LearnedCache(user, WordInfo)
         
-        return {"results":toJson(pairs, user=user, masteryCache=masteryCache)}
+        return {"results":toJson(pairs, user=user, learnedCache=learnedCache, masteryCache=masteryCache)}
