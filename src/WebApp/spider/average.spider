@@ -1,0 +1,18 @@
+use angular;
+use console;
+    
+angular.module('average', [ ])
+    .filter('average', fn ($log) {
+        return fn(pairs) {
+            if pairs.length == 0 {
+                return 0;
+            }
+            
+            var sum = 0;
+            angular.forEach(pairs, fn(pair) {
+                sum += pair.mastery;
+            });
+
+            return sum / pairs.length;
+        };
+    });
