@@ -65,6 +65,6 @@ angular.module('Concepts', ['ui.bootstrap', 'kao.loading', 'Language', 'Forms'])
             },
             template:  '<td>{{concept.foreign.text}}</td>
                         <td>{{concept.native.text}}</td>
-                        <td>{{concept.foreign.mastery}}</td>'
+                        <td>{{concept.mastery}}</td>'
         };
     });
