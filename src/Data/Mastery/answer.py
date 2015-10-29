@@ -1,6 +1,5 @@
-from kao_flask.ext.sqlalchemy import db
-
 from datetime import datetime
+from kao_flask.ext.sqlalchemy import db
 
 class Answer(db.Model):
     """ Represents an answer for a skill """

@@ -1,7 +1,7 @@
 from .answer import Answer
 from .staleness_period import StalenessPeriod
-from .symbol_info import SymbolInfo
-from .word_info import WordInfo
+from ..symbol_info import SymbolInfo
+from ..word_info import WordInfo
 
 from kao_flask.ext.sqlalchemy import db
 import datetime

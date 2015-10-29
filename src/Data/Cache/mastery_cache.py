@@ -1,4 +1,4 @@
-from ..mastery import Mastery
+from ..Mastery import Mastery
 
 from kao_decorators import proxy_for, lazy_property
 from kao_flask.ext.sqlalchemy import db
