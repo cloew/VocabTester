@@ -24,5 +24,5 @@ class LearnHelper:
     @property
     def column(self):
         """ Return the proper column """
-        return getattr(self.modelClass, self.formInfo.learnedField)
+        return getattr(self.user, self.formInfo.learnedField)
         
