@@ -1,8 +1,9 @@
-from kao_flask.ext.sqlalchemy import db
-
 from .answer import Answer
 from .staleness_period import StalenessPeriod
+from .symbol_info import SymbolInfo
+from .word_info import WordInfo
 
+from kao_flask.ext.sqlalchemy import db
 import datetime
 
 class Mastery(db.Model):
@@ -54,6 +55,16 @@ class Mastery(db.Model):
         """ Revert the staleness period to the first staleness period """
         self.stalenessPeriod = StalenessPeriod.getFirstStalenessPeriod()
         db.session.add(self)
+    
+    @property
+    def form(self):
+        """ Return the Concept Form associated with the Mastery """
+        return self.word if self.word_id is not None else self.symbol
+    
+    @property
+    def formInfo(self):
+        """ Return the Concept Form Info associated with the Mastery """
+        return WordInfo if self.word_id is not None else SymbolInfo
     
     @property
     def numberOfCorrectAnswers(self):
