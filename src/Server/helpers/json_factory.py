@@ -1,18 +1,18 @@
 from Data import ConceptPair, Language, LanguageEnrollment, Symbol, SymbolList, User, UserConceptList, Word, WordList
 from ..Quiz import QuizJson
 
-from kao_json import JsonFactory, AsObj, ViaAttr
+from kao_json import JsonFactory, AsObj, ViaAttr, ViaFn
 
-def GetMateryRating(context):
+def GetMateryRating(pair, masteryCache):
     """ Return the mastery rating for a Concept Pair """    
-    return context.args.masteryCache[context.obj.foreign.id].rating
+    return masteryCache[pair.foreign.id].rating
     
-def HasLearned(context):
+def HasLearned(form, learnedCache):
     """ Return if the user has learned the given form """
-    return context.obj.id in context.args.learnedCache
+    return form.id in learnedCache
 
-jsonFactory = JsonFactory({(Symbol, Word):AsObj(id=ViaAttr(), text=ViaAttr(), learned=HasLearned),
-                           ConceptPair:AsObj(foreign=ViaAttr(), native=ViaAttr(), mastery=GetMateryRating),
+jsonFactory = JsonFactory({(Symbol, Word):AsObj(id=ViaAttr(), text=ViaAttr(), learned=ViaFn(HasLearned, requires=['learnedCache'])),
+                           ConceptPair:AsObj(foreign=ViaAttr(), native=ViaAttr(), mastery=ViaFn(GetMateryRating, requires=['masteryCache'])),
                            UserConceptList:AsObj(id=ViaAttr(), name=ViaAttr(), concepts=ViaAttr()),
                            User:AsObj(id=ViaAttr(), email=ViaAttr(), is_admin=ViaAttr(), givenName=ViaAttr(), lastName=ViaAttr(), nativeLanguage=ViaAttr()),
                            Language:AsObj(id=ViaAttr(), name=ViaAttr()),
