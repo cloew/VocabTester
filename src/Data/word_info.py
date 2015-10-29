@@ -1,4 +1,4 @@
-from .user import learned_words
+from .learned_tables import learned_words
 from .word import Word
 from .word_list import WordList
 

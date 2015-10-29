@@ -1,29 +1,28 @@
 
-class LearnedTracker:
-    """ Helper Class for tracking learned aspects """
+class LearnHelper:
+    """ Helper Class for learning forms """
     
-    def __init__(self, parent, fieldName, modelClass):
-        """ Initialize the Tracker with the parent and its field to track with """
-        self.parent = parent
-        self.fieldName = fieldName
-        self.modelClass = modelClass
+    def __init__(self, user, formInfo):
+        """ Initialize the Helper with the User and Form Info """
+        self.user = user
+        self.formInfo = formInfo
         
-    def tryToLearn(self, form):
-        """ Learn the form unless it is already being tracked """
-        if not self.hasLearned(form.id):
+    def tryToLearn(self, form, learnedCache):
+        """ Learn the form unless it is already learned """
+        if form.id not in learnedCache:
             self.learn(form)
         
     def learn(self, form):
-        """ Create the connection between the parent and the form """
-        getattr(self.parent, self.fieldName).append(form)
-        self.parent.save()
+        """ Create the connection between the user and the form """
+        getattr(self.user, self.fieldName).append(form)
+        self.user.save()
         
-    def hasLearned(self, id):
-        """ Return if the parent has learned the form related to this id """
-        return self.modelClass.query.filter_by(id=self.parent.id).filter(self.column.any(id=id)).first() != None
+    def formsFor(self, language):
+        """ Return the learned forms for the given language """
+        return self.column.filter_by(language_id=language.id).all()
         
     @property
     def column(self):
         """ Return the proper column """
-        return getattr(self.modelClass, self.fieldName)
+        return getattr(self.modelClass, self.formInfo.learnedField)
         

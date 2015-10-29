@@ -2,6 +2,7 @@ from Server.auth import auth
 from Server.helpers.json_factory import toJson
 
 from Data import Mastery
+from Data.Cache import LearnedCache
 from Quiz import Graders
 
 class AnswerQuestion(auth.JSONController):
@@ -14,10 +15,9 @@ class AnswerQuestion(auth.JSONController):
         mastery = Mastery.query.filter_by(id=masteryId).first()
         mastery.addAnswer(result.correct)
         
-        if mastery.word_id is not None:
-            user.tryToLearnWord(mastery.word)
-        elif mastery.symbol_id is not None:
-            user.tryToLearnSymbol(mastery.symbol)
+        learnedCache = LearnedCache(user, mastery.formInfo)
+        user.tryToLearn(mastery.form, mastery.formInfo, learnedCache)
+        
         return {'results':toJson(result),
                 'rating':mastery.rating}
         

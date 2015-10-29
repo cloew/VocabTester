@@ -1,20 +1,12 @@
-from kao_decorators import lazy_property
 from .language import Language
-from .learned_tracker import LearnedTracker
-from .symbol import Symbol
-from .word import Word
+from .learn_helper import LearnHelper
+from .learned_tables import learned_symbols, learned_words
+from .symbol_info import SymbolInfo
+from .word_info import WordInfo
 
+from kao_decorators import lazy_property
 from kao_flask.ext.auth.password_utils import make_password, check_password
 from kao_flask.ext.sqlalchemy import db
-
-learned_symbols = db.Table('learned_symbols', db.Model.metadata,
-                                  db.Column('user_id', db.Integer, db.ForeignKey('users.id')),
-                                  db.Column('symbol_id', db.Integer, db.ForeignKey('symbols.id')))
-
-learned_words = db.Table('learned_words', db.Model.metadata,
-                                  db.Column('user_id', db.Integer, db.ForeignKey('users.id')),
-                                  db.Column('word_id', db.Integer, db.ForeignKey('words.id')))
-
 
 class User(db.Model):
     """ Represents a user """
@@ -41,57 +33,31 @@ class User(db.Model):
         """ Check if the password is this users password """
         return check_password(rawPassword, self.password)
         
-    def getLearnedSymbolsFor(self, language):
-        """ Return the learned symbols for this user that are for the given language """
-        return self.learnedSymbols.filter_by(language_id=language.id).all()
+    def getLearnedFor(self, formInfo, language):
+        """ Return the learned forms for the given Form Info """
+        helper = self.helperFor(formInfo)
+        return helper.formsFor(language)
         
-    def hasLearnedSymbol(self, symbol):
-        """ Return if the symbol has already been learned """
-        return self.learnedSymbolTracker.hasLearned(symbol.id)
-        
-    def tryToLearnSymbol(self, symbol):
-        """ Try to learn the symbol """
-        self.learnedSymbolTracker.tryToLearn(symbol)
-        
-    def getLearnedWordsFor(self, language):
-        """ Return the learned words for this user that are for the given language """
-        return self.learnedWords.filter_by(language_id=language.id).all()
-        
-    def hasLearnedWord(self, word):
-        """ Return if the word has already been learned """
-        return self.learnedWordTracker.hasLearned(word.id)
-        
-    def tryToLearnWord(self, word):
-        """ Try to learn the word """
-        self.learnedWordTracker.tryToLearn(word)
+    def tryToLearn(self, form, formInfo, learnedCache):
+        """ Learn the form unless it has already been learned """
+        helper = self.helperFor(formInfo)
+        helper.tryToLearn(form, learnedCache)
         
     def save(self):
         """ Save the Underlying User Data Object """
         db.session.add(self)
         db.session.commit()
         
-    def getMastery(self, word):
-        """ Return the User's mastery record of the given word """
-        mastery = Mastery.query.filter_by(user_id=self.id, word_id=word.id).first()
-        if mastery is None:
-            mastery = Mastery(user=self.user, word=word)
-            db.session.add(mastery)
-            db.session.commit()
-        return mastery
-        
-    def getLearnedFor(self, modelClass, language):
-        """ Return the learned forms for the given model class """
-        if modelClass is Symbol:
-            return self.getLearnedSymbolsFor(language)
-        elif modelClass is Word:
-            return self.getLearnedWordsFor(language)
+    def helperFor(self, formInfo):
+        """ Return the Learn Helper for the given Form Info """
+        return self.learnedSymbolsHelper if formInfo is SymbolInfo else self.learnedWordsHelper
         
     @lazy_property
-    def learnedSymbolTracker(self):
-        """ Return the learned tracker for this user's symbols """
-        return LearnedTracker(self, 'learnedSymbols', User)
+    def learnedSymbolsHelper(self):
+        """ Helper to manage Learned Symbols """
+        return LearnHelper(self, SymbolInfo)
         
     @lazy_property
-    def learnedWordTracker(self):
-        """ Return the learned tracker for this user's words """
-        return LearnedTracker(self, 'learnedWords', User)
+    def learnedWordsHelper(self):
+        """ Helper to manage Learned Words """
+        return LearnHelper(self, WordInfo)
