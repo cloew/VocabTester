@@ -1,3 +1,4 @@
+from .user import learned_words
 from .word import Word
 from .word_list import WordList
 
@@ -7,3 +8,4 @@ class WordInfo:
     listModel = WordList
     masteryFieldName = 'word_id'
     learnedField = 'learnedWords'
+    learnedTable = learned_words
