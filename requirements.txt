@@ -17,6 +17,7 @@ git+git://github.com/cloew/KaoFlaskAuth.git
 git+git://github.com/cloew/KaoFlaskSQLAlchemy.git
 git+git://github.com/cloew/KaoFlaskSSLify.git
 git+git://github.com/cloew/KaoFn.git
+git+git://github.com/cloew/KaoDict.git
 git+git://github.com/cloew/KaoJson.git
 git+git://github.com/cloew/LanguageEggs.git
 Mako==1.0.1
