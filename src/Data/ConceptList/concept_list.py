@@ -1,5 +1,5 @@
-from .Concept import Concept
-from .query_proxy import query_via
+from ..Concept import Concept
+from ..query_proxy import query_via
 from kao_decorators import proxy_for
 
 from kao_flask.ext.sqlalchemy import db

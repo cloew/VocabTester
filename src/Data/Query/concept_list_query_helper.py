@@ -1,5 +1,5 @@
 from ..Concept import ConceptManager
-from ..user_concept_list import UserConceptList
+from ..ConceptList import UserConceptList
 from ..Cache import ConceptFormCache
 
 from kao_decorators import lazy_property

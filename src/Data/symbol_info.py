@@ -1,5 +1,5 @@
 from .Concept import Symbol
-from .symbol_list import SymbolList
+from .ConceptList import SymbolList
 from .learned_tables import learned_symbols
 
 class SymbolInfo:

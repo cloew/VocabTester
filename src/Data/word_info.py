@@ -1,6 +1,6 @@
 from .Concept import Word
+from .ConceptList import WordList
 from .learned_tables import learned_words
-from .word_list import WordList
 
 class WordInfo:
     """ Helper class to hold info regarding the Word Form """
