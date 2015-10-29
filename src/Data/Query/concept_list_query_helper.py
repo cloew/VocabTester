@@ -1,4 +1,4 @@
-from ..concept_manager import ConceptManager
+from ..Concept import ConceptManager
 from ..user_concept_list import UserConceptList
 from ..Cache import ConceptFormCache
 

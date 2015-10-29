@@ -1,4 +1,4 @@
-from .symbol import Symbol
+from .Concept import Symbol
 from .symbol_list import SymbolList
 from .learned_tables import learned_symbols
 

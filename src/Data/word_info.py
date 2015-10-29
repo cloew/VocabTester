@@ -1,5 +1,5 @@
+from .Concept import Word
 from .learned_tables import learned_words
-from .word import Word
 from .word_list import WordList
 
 class WordInfo:
