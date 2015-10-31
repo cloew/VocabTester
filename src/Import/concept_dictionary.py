@@ -1,4 +1,4 @@
-from Data.concept import Concept
+from Data import Concept
 from Server import server
 
 class ConceptDictionary:

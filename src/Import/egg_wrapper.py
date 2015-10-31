@@ -1,8 +1,7 @@
 from .language_wrapper import LanguageWrapper
 from .forms_wrapper import FormsWrapper
 
-from Data.symbol import Symbol
-from Data.word import Word
+from Data import Symbol, Word
 
 class EggWrapper:
     """ Helper class to wrap a Language Egg and facilitate its merge into the database """

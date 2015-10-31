@@ -1,4 +1,4 @@
-from Data.concept_list import ConceptList
+from Data import ConceptList
 from Server import server
 
 class ConceptListLoader:

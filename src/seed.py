@@ -2,7 +2,7 @@ from Server import server
 
 from import_eggs import ImportEggs
 
-from Data.staleness_period import StalenessPeriod
+from Data import StalenessPeriod
 
 import glob
 import os
