@@ -5,7 +5,6 @@ from .symbol_info import SymbolInfo
 from .word_info import WordInfo
 
 from kao_decorators import lazy_property
-from kao_flask.ext.auth.password_utils import make_password, check_password
 from kao_flask.ext.sqlalchemy import db
 
 class User(db.Model):
@@ -13,8 +12,8 @@ class User(db.Model):
     __tablename__ = 'users'
     
     id = db.Column(db.Integer, primary_key=True)
-    email = db.Column(db.Text(), nullable=False, unique=True)
-    password = db.Column(db.UnicodeText(), nullable=False)
+    email = db.Column(db.Text(), nullable=False, unique=True, index=True)
+    password = db.Column(db.String(128), nullable=False)
     is_admin = db.Column(db.Boolean, default=False)
     givenName = db.Column(db.UnicodeText())
     lastName = db.Column(db.UnicodeText())
@@ -22,16 +21,6 @@ class User(db.Model):
     nativeLanguage = db.relationship("Language")
     learnedSymbols = db.relationship("Symbol", secondary=learned_symbols, lazy='dynamic')
     learnedWords = db.relationship("Word", secondary=learned_words, lazy='dynamic')
-    
-    def __init__(self, **kwargs):
-        """ Initialize the User """
-        if 'password' in kwargs:
-            kwargs['password'] = make_password(kwargs['password'])
-        db.Model.__init__(self, **kwargs)
-        
-    def checkPassword(self, rawPassword):
-        """ Check if the password is this users password """
-        return check_password(rawPassword, self.password)
         
     def getLearnedFor(self, formInfo, language):
         """ Return the learned forms for the given Form Info """
