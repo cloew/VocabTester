@@ -1,0 +1,43 @@
+use angular;
+use console;
+    
+angular.module('pluck', [ ])
+    .filter('pluck', fn ($log) {
+        return fn(objs, attr) {
+            if !angular.isString(attr) {
+                $log('Pluck filter received non-string attribute');
+                return objs;
+            } else if !angular.isArray(objs) {
+                $log('Pluck filter received non-array objects');
+                return objs;
+            }
+            
+            var results = [];
+            angular.forEach(objs, fn(obj) {
+                results <- obj[attr];
+            });
+
+            return results;
+        };
+    });
+    
+angular.module('average', [ ])
+    .filter('average', fn ($log) {
+        return fn(array) {
+            if !angular.isArray(array) || array.length == 0 {
+                $log.error("Average filter received non-array.");
+                return array;
+            }
+            
+            var sum = 0;
+            angular.forEach(array, fn(number) {
+                if !angular.isNumber(number) {
+                    $log.error("Average filter received non-number.");
+                    return array;
+                }
+                sum += number;
+            });
+
+            return sum / array.length;
+        };
+    });

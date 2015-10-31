@@ -1,7 +1,7 @@
 use angular;
 use console;
 
-angular.module('Forms', ['kao.utils', 'kao.loading', 'average', 'vocab.nav', 'Language'])
+angular.module('Forms', ['kao.utils', 'kao.loading', 'average', 'pluck', 'vocab.nav', 'Language'])
     .factory('Form', fn(LanguageService, KaoDefer) {
         fn Form(config) {
             this.config = config;
