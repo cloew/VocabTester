@@ -14,15 +14,14 @@ class LearnHelper:
         
     def learn(self, form):
         """ Create the connection between the user and the form """
-        getattr(self.user, self.fieldName).append(form)
+        self.field.append(form)
         self.user.save()
         
     def formsFor(self, language):
         """ Return the learned forms for the given language """
-        return self.column.filter_by(language_id=language.id).all()
+        return self.field.filter_by(language_id=language.id).all()
         
     @property
-    def column(self):
-        """ Return the proper column """
+    def field(self):
+        """ Return the proper field """
         return getattr(self.user, self.formInfo.learnedField)
-        
