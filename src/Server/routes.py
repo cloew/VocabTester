@@ -1,16 +1,15 @@
-from .decorators import requires_admin
 from .helpers.admin_json_factory import toJson
 
 from Data import Concept, Language, Symbol, SymbolInfo, User, Word, WordInfo
 
-from .auth import auth
+from .admin.routes import routes as AdminRoutes
 from .auth.routes import routes as AuthRoutes
 from .Controller import ConceptListsController, LearnedConceptsController, LearnWordController, SearchController
 from .Quiz.Controller import AnswerQuestion, GetQuiz, GetRandomQuiz
 
 from kao_flask.endpoint import Endpoint
 from kao_flask.controllers.html_controller import HTMLController
-from kao_flask.ext.sqlalchemy import CrudEndpoints, ListController, RecordValueProvider
+from kao_flask.ext.sqlalchemy import ListController
 
 routes = [Endpoint('/', get=HTMLController('Server/templates/index.html')),
           # Auth
@@ -32,18 +31,5 @@ routes = [Endpoint('/', get=HTMLController('Server/templates/index.html')),
           Endpoint('/api/languages/<int:languageId>/wordlist/<int:listId>/quiz', get=GetQuiz(WordInfo)),
           Endpoint('/api/languages/<int:languageId>/wordlist/random/quiz', get=GetRandomQuiz(WordInfo)),
           # Mastery
-          Endpoint('/api/mastery/<int:masteryId>/answer', post=AnswerQuestion())]
-          
-routes += CrudEndpoints('/api/admin/users', User, toJson,
-                        jsonColumnMap={'nativeLanguage': lambda value: ('native_language_id', value['id'])}, 
-                        decorators=[auth.requires_auth, requires_admin]).endpoints
-routes += CrudEndpoints('/api/admin/languages', Language, toJson, decorators=[auth.requires_auth, requires_admin]).endpoints
-routes += CrudEndpoints('/api/admin/concepts', Concept, toJson, decorators=[auth.requires_auth, requires_admin]).endpoints
-routes += CrudEndpoints('/api/admin/concepts/<int:conceptId>/words', Word, toJson, 
-                        routeParams={'conceptId':'concept_id'}, 
-                        jsonColumnMap={'language': lambda value: ('language_id', value['id'])}, 
-                        decorators=[auth.requires_auth, requires_admin]).endpoints
-routes += CrudEndpoints('/api/admin/concepts/<int:conceptId>/symbols', Symbol, toJson, 
-                        routeParams={'conceptId':'concept_id'}, 
-                        jsonColumnMap={'language': lambda value: ('language_id', value['id'])}, 
-                        decorators=[auth.requires_auth, requires_admin]).endpoints
+          Endpoint('/api/mastery/<int:masteryId>/answer', post=AnswerQuestion()),
+          AdminRoutes]
