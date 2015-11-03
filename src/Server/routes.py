@@ -1,10 +1,11 @@
-from .auth import auth
 from .decorators import requires_admin
 from .helpers.admin_json_factory import toJson
 
 from Data import Concept, Language, Symbol, SymbolInfo, User, Word, WordInfo
 
-from .Controller import ConceptListsController, CreateUserEnrollment, LearnedConceptsController, LearnWordController, SearchController, UserEnrollments
+from .auth import auth
+from .auth.routes import routes as AuthRoutes
+from .Controller import ConceptListsController, LearnedConceptsController, LearnWordController, SearchController
 from .Quiz.Controller import AnswerQuestion, GetQuiz, GetRandomQuiz
 
 from kao_flask.endpoint import Endpoint
@@ -13,10 +14,7 @@ from kao_flask.ext.sqlalchemy import CrudEndpoints, ListController, RecordValueP
 
 routes = [Endpoint('/', get=HTMLController('Server/templates/index.html')),
           # Auth
-          Endpoint('/api/login', post=auth.LoginController(toJson)),
-          Endpoint('/api/users', post=auth.RegisterController(toJson, recordValueProvider=RecordValueProvider({'nativeLanguage': lambda value: ('native_language_id', value['id'])}))),
-          Endpoint('/api/users/current', get=auth.CurrentUserController(toJson), put=auth.UpdateUserController(toJson, recordValueProvider=RecordValueProvider({'nativeLanguage': lambda value: ('native_language_id', value['id'])}))),
-          Endpoint('/api/users/current/enrollments', get=UserEnrollments(), post=CreateUserEnrollment()),
+          AuthRoutes,
           # Languages
           Endpoint('/api/languages', get=ListController(Language, toJson)),
           # Symbols

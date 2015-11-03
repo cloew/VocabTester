@@ -1,7 +1,7 @@
 from ..auth import auth
-from ..helpers.json_factory import toJson
+from Server.helpers.json_factory import toJson
 
-class UserEnrollments(auth.JSONController):
+class GetUserEnrollments(auth.JSONController):
     """ Controller to return the languages the user has enrolled in """
     
     def performWithJSON(self, json=None, user=None):

@@ -1,5 +1,5 @@
 from ..auth import auth
-from ..helpers.json_factory import toJson
+from Server.helpers.json_factory import toJson
 from Data import LanguageEnrollment
 
 from kao_flask.ext.sqlalchemy import CreateController, RecordValueProvider
