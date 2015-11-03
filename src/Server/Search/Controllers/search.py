@@ -1,6 +1,6 @@
-from ..auth import auth
-from ..helpers import BuildLanguageContext
-from ..helpers.json_factory import toJson
+from Server.auth import auth
+from Server.helpers import BuildLanguageContext
+from Server.helpers.json_factory import toJson
 
 from Data import Language, Word, WordInfo
 from Data.Cache import BuildMasteryCache, LearnedCache
@@ -8,7 +8,7 @@ from Data.Query import PrequeriedFormsHelper
 
 from sqlalchemy import func
 
-class SearchController(auth.JSONController):
+class Search(auth.JSONController):
     """ Controller to return the words that match some provided text """
     
     def __init__(self):

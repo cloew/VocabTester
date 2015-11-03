@@ -4,7 +4,8 @@ from Data import Concept, Language, Symbol, SymbolInfo, User, Word, WordInfo
 
 from .admin.routes import routes as AdminRoutes
 from .auth.routes import routes as AuthRoutes
-from .Controller import ConceptListsController, LearnedConceptsController, LearnWordController, SearchController
+from .Controller import ConceptListsController, LearnedConceptsController
+from .Search.routes import routes as SearchRoutes
 from .Quiz.routes import routes as QuizRoutes
 
 from kao_flask.endpoint import Endpoint
@@ -22,8 +23,7 @@ routes = [Endpoint('/', get=HTMLController('Server/templates/index.html')),
           Endpoint('/api/languages/<int:languageId>/symbollists', get=ConceptListsController(SymbolInfo)),
           # Words
           Endpoint('/api/languages/<int:languageId>/words', get=LearnedConceptsController(WordInfo)),
-          Endpoint('/api/words/<int:wordId>/learn', post=LearnWordController()),
-          Endpoint('/api/languages/<int:languageId>/search', post=SearchController()),
           # Wordlists
           Endpoint('/api/languages/<int:languageId>/wordlists', get=ConceptListsController(WordInfo)),
+          SearchRoutes,
           QuizRoutes]

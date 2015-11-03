@@ -1,4 +1,4 @@
-from .Controller import AnswerQuestion, GetQuiz, GetRandomQuiz
+from .Controllers import AnswerQuestion, GetQuiz, GetRandomQuiz
 from Data import SymbolInfo, WordInfo
 
 from kao_flask import Routes, Endpoint
