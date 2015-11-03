@@ -16,7 +16,7 @@ class RandomQuizFactory:
     
     def buildQuiz(self, formInfo, user, languageContext):
         """ Build a quiz using the from given and the user provided """
-        learnedForms = user.getLearnedFor(formInfo.formModel, languageContext.foreign)
+        learnedForms = user.getLearnedFor(formInfo, languageContext.foreign)
         masteryCache = BuildMasteryCache.ViaForms(learnedForms, formInfo, user)
         learnedFormsHelper = PrequeriedFormsHelper(learnedForms, formInfo, languageContext)
         
