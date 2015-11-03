@@ -1,11 +1,11 @@
-from ..auth import auth
-from ..helpers import BuildLanguageContext
-from ..helpers.json_factory import toJson
+from Server.auth import auth
+from Server.helpers import BuildLanguageContext
+from Server.helpers.json_factory import toJson
 
 from Data.Cache import BuildMasteryCache, LearnedCache
 from Data.Query import ConceptListQueryHelper
 
-class ConceptListsController(auth.JSONController):
+class GetConceptLists(auth.JSONController):
     """ Controller to return the concept lists """
     
     def __init__(self, formInfo):

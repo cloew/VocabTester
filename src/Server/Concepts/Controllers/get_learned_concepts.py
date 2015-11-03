@@ -1,12 +1,12 @@
-from ..auth import auth
-from ..helpers import BuildLanguageContext
-from ..helpers.json_factory import toJson
+from Server.auth import auth
+from Server.helpers import BuildLanguageContext
+from Server.helpers.json_factory import toJson
 
 from Data import Word
 from Data.Cache import BuildMasteryCache, LearnedCache
 from Data.Query import PrequeriedFormsHelper
 
-class LearnedConceptsController(auth.JSONController):
+class GetLearnedConcepts(auth.JSONController):
     """ Controller to return the concepts learned in the appropriate form """
     
     def __init__(self, formInfo):
