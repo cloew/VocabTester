@@ -25,9 +25,9 @@ angular.module('vocab.nav', ['kao.nav', 'vocab.auth.controllers'])
         navConfig.add({name: 'adminEditConceptWords', path:'/admin/concepts/:conceptId/words/:id', templateUrl:'static/partials/admin/edit_record.html', onLoad: ['requireAuth']});
         navConfig.add({name: 'adminNewConceptSymbols', path:'/admin/concepts/:conceptId/symbols/new', templateUrl:'static/partials/admin/new_record.html', onLoad: ['requireAuth']});
         navConfig.add({name: 'adminEditConceptSymbols', path:'/admin/concepts/:conceptId/symbols/:id', templateUrl:'static/partials/admin/edit_record.html', onLoad: ['requireAuth']});
-        navConfig.add({name: 'randomSymbolQuiz', path:'/symbollists/random/quiz', templateUrl:'static/partials/quiz.html', controller:'QuizController', onLoad: ['requireAuth', 'requireEnrollment'], returnTo:navConfig.config.symbols.path});
+        navConfig.add({name: 'randomSymbolQuiz', path:'/symbols/random/quiz', templateUrl:'static/partials/quiz.html', controller:'QuizController', onLoad: ['requireAuth', 'requireEnrollment'], returnTo:navConfig.config.symbols.path});
         navConfig.add({name: 'symbolListQuiz', path:'/symbollists/:listId/quiz', templateUrl:'static/partials/quiz.html', controller:'QuizController', onLoad: ['requireAuth', 'requireEnrollment'], returnTo:navConfig.config.symbolLists.path});
-        navConfig.add({name: 'randomWordQuiz', path:'/wordlists/random/quiz', templateUrl:'static/partials/quiz.html', controller:'QuizController', onLoad: ['requireAuth', 'requireEnrollment'], returnTo:navConfig.config.words.path});
+        navConfig.add({name: 'randomWordQuiz', path:'/words/random/quiz', templateUrl:'static/partials/quiz.html', controller:'QuizController', onLoad: ['requireAuth', 'requireEnrollment'], returnTo:navConfig.config.words.path});
         navConfig.add({name: 'wordListQuiz', path:'/wordlists/:listId/quiz', templateUrl:'static/partials/quiz.html', controller:'QuizController', onLoad: ['requireAuth', 'requireEnrollment'], returnTo:navConfig.config.wordLists.path});
     }])
     .factory('headerNavService', fn(NavService) {
