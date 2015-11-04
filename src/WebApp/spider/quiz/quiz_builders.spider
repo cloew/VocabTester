@@ -1,0 +1,67 @@
+use angular;
+use console;
+
+angular.module('quiz.builders', ['question', 'ui.bootstrap', 'kao.input', 'kao.loading', 'kao.table', 'Concepts', 'Forms', 'vocab.nav'])
+    .factory('Quiz', fn(NavService, LanguageService, QuestionFactory, AnswerHelper, LoadingTracker) {
+        fn Quiz(data) {
+            this.quiz = data;
+            this.currentQuestionIndex = 0;
+            this.correctAnswers = 0;
+            this.returnTo = NavService.current().returnTo;
+            this.gradeTracker = new LoadingTracker();
+            this.questions = QuestionFactory.buildAll(this.quiz.questions);
+            this.numberOfQuestions = this.quiz.questions.length;
+            this.currentQuestion =  this.questions[this.currentQuestionIndex];
+        }
+        Quiz.prototype.answer = fn() {
+            var self = this;
+            var question = this.currentQuestion;
+            if question.canSubmit() {
+                this.gradeTracker.load(new AnswerHelper(question).answer()).success(fn(data) {
+                    if question.results.correct {
+                        self.correctAnswers += 1;
+                    }
+                }).error(fn(error) {
+                    console.log(error);
+                });
+            }
+        };
+        Quiz.prototype.next = fn() {
+            this.currentQuestionIndex = this.currentQuestionIndex+1;
+            this.currentQuestion =  this.questions[this.currentQuestionIndex];
+            this.completed = (this.currentQuestionIndex == this.questions.length);
+        };
+        Quiz.prototype.canSubmit = fn() {
+            return this.currentQuestion && this.currentQuestion.canSubmit() && !this.grading;
+        };
+        
+        return Quiz;
+    })
+    .factory('ListQuizBuilder', fn($routeParams, FormsService) {
+        fn ListQuizBuilder() {
+        }
+        ListQuizBuilder.prototype.build = fn() {
+            var form = FormsService.current();
+            return form.getQuiz($routeParams.listId);
+        };
+        return new ListQuizBuilder();
+    })
+    .factory('RandomQuizBuilder', fn(FormsService) {
+        fn RandomQuizBuilder() {
+        }
+        RandomQuizBuilder.prototype.build = fn() {
+            var form = FormsService.current();
+            return form.getRandomQuiz();
+        };
+        return new RandomQuizBuilder();
+    })
+    .service('QuizBuilders', fn($route, NavService, ListQuizBuilder, RandomQuizBuilder) {
+        var service = {current: fn() {
+            return this[$route.current.$$route.path];
+        }};
+        service[NavService.randomWordQuiz.path] = RandomQuizBuilder;
+        service[NavService.wordListQuiz.path] = ListQuizBuilder;
+        service[NavService.randomSymbolQuiz.path] = RandomQuizBuilder;
+        service[NavService.symbolListQuiz.path] = ListQuizBuilder;
+        return service;
+    });
