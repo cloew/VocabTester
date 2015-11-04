@@ -1,7 +1,7 @@
 <div class="panel panel-primary">
     <div class="panel-heading word-list-panel-heading">
         <span class="pull-right">
-            <span class="panel-title">Avg Mastery: {{conceptList.concepts | pluck:'mastery' | average}}</span>
+            <span class="panel-title">Avg Mastery: {{conceptList.concepts | pluck:'mastery' | average | precision:2}}</span>
             <a class="btn btn-primary btn-sm" ng-href="#{{quizUrl}}">Quiz Me!</a>
         </span>
         <div class="word-list-header">

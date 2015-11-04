@@ -1,5 +1,6 @@
 use angular;
 use console;
+use Math;
     
 angular.module('pluck', [ ])
     .filter('pluck', fn ($log) {
@@ -39,5 +40,19 @@ angular.module('average', [ ])
             });
 
             return sum / array.length;
+        };
+    });
+    
+angular.module('precision', [ ])
+    .filter('precision', fn ($log) {
+        return fn (input, places) {
+            if isNaN(input) {
+                return input;
+            }
+            // If we want 1 decimal place, we want to mult/div by 10
+            // If we want 2 decimal places, we want to mult/div by 100, etc
+            // So use the following to create that factor
+            var factor = Math.pow(10, places);
+            return Math.round(input * factor) / factor;
         };
     });
