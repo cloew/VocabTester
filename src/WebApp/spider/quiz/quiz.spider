@@ -1,11 +1,11 @@
 use angular;
 use console;
 
-angular.module('quiz', ['quiz.builders', 'question', 'ui.bootstrap', 'kao.input', 'kao.loading', 'kao.table', 'Concepts', 'Forms', 'vocab.nav'])
+angular.module('quiz', ['quiz.builders', 'ui.bootstrap', 'kao.input', 'kao.loading'])
     .controller('QuizController', fn ($scope, QuizBuilders, Quiz, LoadingTracker) {
         $scope.tracker = new LoadingTracker();
-        $scope.tracker.load(QuizBuilders.current().build()).success(fn(data) {
-            $scope.quiz = new Quiz(data.quiz);
+        $scope.tracker.load(QuizBuilders.current().build()).success(fn(quiz) {
+            $scope.quiz = quiz;
         }).error(fn(error) {
             console.log(error);
         });

@@ -1,7 +1,7 @@
 use angular;
 use console;
 
-angular.module('quiz.builders', ['question', 'ui.bootstrap', 'kao.input', 'kao.loading', 'kao.table', 'Concepts', 'Forms', 'vocab.nav'])
+angular.module('quiz.builders', ['question', 'kao.utils', 'kao.loading', 'Forms', 'vocab.nav'])
     .factory('Quiz', fn(NavService, LanguageService, QuestionFactory, AnswerHelper, LoadingTracker) {
         fn Quiz(data) {
             this.quiz = data;
@@ -37,23 +37,32 @@ angular.module('quiz.builders', ['question', 'ui.bootstrap', 'kao.input', 'kao.l
         
         return Quiz;
     })
-    .factory('ListQuizBuilder', fn($routeParams, FormsService) {
-        fn ListQuizBuilder() {
+    .factory('QuizBuilder', fn(Quiz, KaoDefer) {
+        fn QuizBuilder(getQuizData) {
+            this.getQuizData = getQuizData;
         }
-        ListQuizBuilder.prototype.build = fn() {
+        QuizBuilder.prototype.build = fn() {
+            var deferred = KaoDefer();
+            this.getQuizData().success(fn(data) {
+                deferred.resolve(new Quiz(data.quiz));
+            }).error(deferred.reject);
+            return deferred.promise;
+        };
+        return QuizBuilder;
+    })
+    .factory('ListQuizBuilder', fn($routeParams, FormsService, QuizBuilder) {
+        var getQuiz = fn() {
             var form = FormsService.current();
             return form.getQuiz($routeParams.listId);
         };
-        return new ListQuizBuilder();
+        return new QuizBuilder(getQuiz);
     })
-    .factory('RandomQuizBuilder', fn(FormsService) {
-        fn RandomQuizBuilder() {
-        }
-        RandomQuizBuilder.prototype.build = fn() {
+    .factory('RandomQuizBuilder', fn(FormsService, QuizBuilder) {
+        var getQuiz = fn() {
             var form = FormsService.current();
             return form.getRandomQuiz();
         };
-        return new RandomQuizBuilder();
+        return new QuizBuilder(getQuiz);
     })
     .service('QuizBuilders', fn($route, NavService, ListQuizBuilder, RandomQuizBuilder) {
         var service = {current: fn() {
