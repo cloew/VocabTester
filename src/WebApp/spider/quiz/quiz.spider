@@ -1,27 +1,17 @@
 use angular;
 use console;
 
-angular.module('quiz', ['question', 'ui.bootstrap', 'kao.input', 'kao.loading', 'kao.table', 'Concepts', 'vocab.nav'])
+angular.module('quiz', ['question', 'ui.bootstrap', 'kao.input', 'kao.loading', 'kao.table', 'Concepts', 'Forms', 'vocab.nav'])
     .factory('Quiz', fn(NavService, LanguageService, QuestionFactory, AnswerHelper, LoadingTracker) {
-        fn Quiz() {
-            this.quiz = undefined;
+        fn Quiz(data) {
+            this.quiz = data;
             this.currentQuestionIndex = 0;
             this.correctAnswers = 0;
             this.returnTo = NavService.current().returnTo;
-            this.tracker = new LoadingTracker();
             this.gradeTracker = new LoadingTracker();
-            
-            var self = this;
-            LanguageService.withCurrentLanguage(fn(language) {
-                self.tracker.load(language.getQuiz()).success(fn(data) {
-                    self.quiz = data.quiz;
-                    self.questions = QuestionFactory.buildAll(self.quiz.questions);
-                    self.numberOfQuestions = self.quiz.questions.length;
-                    self.currentQuestion =  self.questions[self.currentQuestionIndex];
-                }).error(fn(error) {
-                    console.log(error);
-                });
-            });
+            this.questions = QuestionFactory.buildAll(this.quiz.questions);
+            this.numberOfQuestions = this.quiz.questions.length;
+            this.currentQuestion =  this.questions[this.currentQuestionIndex];
         }
         Quiz.prototype.answer = fn() {
             var self = this;
@@ -47,8 +37,23 @@ angular.module('quiz', ['question', 'ui.bootstrap', 'kao.input', 'kao.loading', 
         
         return Quiz;
     })
-    .controller('QuizController', fn ($scope, Quiz) {
-        $scope.quiz = new Quiz();
+    .controller('QuizController', fn ($scope, $routeParams, FormsService, Quiz, LoadingTracker) {
+        $scope.tracker = new LoadingTracker();
+        var form = FormsService.current();
+        $scope.tracker.load(form.getQuiz($routeParams.listId)).success(fn(data) {
+            $scope.quiz = new Quiz(data.quiz);
+        }).error(fn(error) {
+            console.log(error);
+        });
+    })
+    .controller('RandomQuizController', fn ($scope, FormsService, Quiz, LoadingTracker) {
+        $scope.tracker = new LoadingTracker();
+        var form = FormsService.current();
+        $scope.tracker.load(form.getRandomQuiz()).success(fn(data) {
+            $scope.quiz = new Quiz(data.quiz);
+        }).error(fn(error) {
+            console.log(error);
+        });
     })
     .directive('quizPanel', fn() {
         return {
@@ -75,9 +80,9 @@ angular.module('quiz', ['question', 'ui.bootstrap', 'kao.input', 'kao.loading', 
         return {
             restrict: 'E',
             replace: true,
-            template:  '<div><loading-div tracker="quiz.tracker">
+            template:  '<div>
                             <question question="quiz.currentQuestion"></question>
-                        </loading-div></div>'
+                        </div>'
         };
     })
     .directive('quizResults', fn() {

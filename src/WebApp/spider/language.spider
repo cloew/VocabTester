@@ -12,14 +12,23 @@ angular.module('Language', ['kao.auth'])
         Language.prototype.getSymbolLists = fn() {
             return $http.get(this.baseApiUrl+'/symbollists');
         };
+        Language.prototype.getRandomSymbolQuiz = fn() {
+            return $http.get(this.baseApiUrl+'/symbols/random/quiz');
+        };
+        Language.prototype.getSymbolListQuiz = fn(symbolListId) {
+            return $http.get(this.baseApiUrl+'/symbollists/'+symbolListId+'/quiz');
+        };
         Language.prototype.getWords = fn() {
             return $http.get(this.baseApiUrl+'/words');
         };
         Language.prototype.getWordLists = fn() {
             return $http.get(this.baseApiUrl+'/wordlists');
         };
-        Language.prototype.getQuiz = fn() {
-            return $http.get(this.baseApiUrl+$location.path());
+        Language.prototype.getRandomWordQuiz = fn() {
+            return $http.get(this.baseApiUrl+'/words/random/quiz');
+        };
+        Language.prototype.getWordListQuiz = fn(wordListId) {
+            return $http.get(this.baseApiUrl+'/wordlists/'+wordListId+'/quiz');
         };
         Language.prototype.search = fn(data) {
             return $http.post(this.baseApiUrl+'/search', data);

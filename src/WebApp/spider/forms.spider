@@ -29,6 +29,22 @@ angular.module('Forms', ['kao.utils', 'kao.loading', 'average', 'pluck', 'precis
         Form.prototype.getQuizUrl = fn(id) {
             return this.config.quizPath.replace(':listId', id);
         };
+        Form.prototype.getRandomQuiz = fn(id) {
+            var deferred = KaoDefer();
+            var self = this;
+            LanguageService.withCurrentLanguage(fn(language) {
+                self.config.getRandomQuiz(language).success(deferred.resolve).error(deferred.reject);
+            });
+            return deferred.promise;
+        };
+        Form.prototype.getQuiz = fn(id) {
+            var deferred = KaoDefer();
+            var self = this;
+            LanguageService.withCurrentLanguage(fn(language) {
+                self.config.getQuiz(language, id).success(deferred.resolve).error(deferred.reject);
+            });
+            return deferred.promise;
+        };
         return Form;
     })
     .factory('Word', fn(Form, NavService) {
@@ -38,10 +54,16 @@ angular.module('Forms', ['kao.utils', 'kao.loading', 'average', 'pluck', 'precis
                       quizPath: NavService.wordListQuiz.path,
                       randomQuizPath: NavService.randomWordQuiz.path,
                       getLearned: fn(language) {
-                        return language.getWords();
+                          return language.getWords();
                         },
                       getLists: fn(language) {
-                        return language.getWordLists();
+                          return language.getWordLists();
+                        },
+                      getRandomQuiz: fn(language) {
+                          return language.getRandomWordQuiz();
+                        },
+                      getQuiz: fn(language, id) {
+                          return language.getWordListQuiz(id);
                         }
                      };
         return new Form(config);
@@ -57,6 +79,12 @@ angular.module('Forms', ['kao.utils', 'kao.loading', 'average', 'pluck', 'precis
                         },
                       getLists: fn(language) {
                         return language.getSymbolLists();
+                        },
+                      getRandomQuiz: fn(language) {
+                          return language.getRandomSymbolQuiz();
+                        },
+                      getQuiz: fn(language, id) {
+                          return language.getSymbolListQuiz(id);
                         }
                      };
         return new Form(config);
@@ -67,8 +95,12 @@ angular.module('Forms', ['kao.utils', 'kao.loading', 'average', 'pluck', 'precis
         }};
         service[NavService.words.path] = Word;
         service[NavService.wordLists.path] = Word;
+        service[NavService.randomWordQuiz.path] = Word;
+        service[NavService.wordListQuiz.path] = Word;
         service[NavService.symbols.path] = Symbol;
         service[NavService.symbolLists.path] = Symbol;
+        service[NavService.randomSymbolQuiz.path] = Symbol;
+        service[NavService.symbolListQuiz.path] = Symbol;
         return service;
     })
     .directive('formLists', fn() {
