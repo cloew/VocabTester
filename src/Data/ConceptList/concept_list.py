@@ -5,8 +5,8 @@ from kao_decorators import proxy_for
 from kao_flask.ext.sqlalchemy import db
 
 concept_list_concepts = db.Table('concept_list_concepts', db.Model.metadata,
-                                  db.Column('concept_list_id', db.Integer, db.ForeignKey('concept_lists.id')),
-                                  db.Column('concept_id', db.Integer, db.ForeignKey('concepts.id')))
+                                  db.Column('concept_list_id', db.Integer, db.ForeignKey('concept_lists.id', ondelete="CASCADE")),
+                                  db.Column('concept_id', db.Integer, db.ForeignKey('concepts.id', ondelete="CASCADE")))
 
 class ConceptList(db.Model):
     """ Represents a list of concepts """

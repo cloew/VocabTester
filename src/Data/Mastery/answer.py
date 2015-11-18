@@ -8,7 +8,7 @@ class Answer(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     correct = db.Column(db.Boolean)
     createdDate = db.Column(db.DateTime, default=datetime.now)
-    mastery_id = db.Column(db.Integer, db.ForeignKey('masteries.id'))
+    mastery_id = db.Column(db.Integer, db.ForeignKey('masteries.id', ondelete="CASCADE"))
     
     def __repr__(self):
         """ Return the String Representation """
