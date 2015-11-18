@@ -29,7 +29,7 @@ module.exports = function(grunt) {
             },
             "kao-ng-crud": {
                 files: {
-                  'src/Server/static/lib/kao-crud': '*/dist/*.js'
+                  'src/Server/static/lib/kao-crud': 'kao-ng-crud/dist/*.js'
                 }
             },
             "traceur-runtime": {

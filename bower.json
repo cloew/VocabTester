@@ -25,7 +25,7 @@
     "kao-ng-table": "cloew/kao-ng-table",
     "kao-ng-crud": "cloew/kao-ng-crud",
     "kao-ng-loading": "cloew/kao-ng-loading",
-    "traceur-runtime": "~0.0.91",
+    "traceur-runtime": "0.0.91",
     "ng-autofocus": "~0.0.2"
   }
 }
