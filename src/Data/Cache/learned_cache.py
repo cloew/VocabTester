@@ -1,7 +1,7 @@
 from kao_decorators import lazy_property, proxy_for
 from kao_flask.ext.sqlalchemy import db
 
-@proxy_for('results', ['__contains__'])
+@proxy_for('results', ['__contains__', 'add'])
 class LearnedCache:
     """ Helper class to manage whether Forms have bee learned """
     

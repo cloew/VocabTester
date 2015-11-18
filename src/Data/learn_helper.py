@@ -11,6 +11,7 @@ class LearnHelper:
         """ Learn the form unless it is already learned """
         if form.id not in learnedCache:
             self.learn(form)
+            learnedCache.add(form.id)
         
     def learn(self, form):
         """ Create the connection between the user and the form """
