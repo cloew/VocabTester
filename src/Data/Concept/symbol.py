@@ -9,9 +9,9 @@ class Symbol(db.Model):
     
     id = db.Column(db.Integer, primary_key=True)
     text = db.Column(db.UnicodeText())
-    concept_id = db.Column(db.Integer, db.ForeignKey('concepts.id'))
+    concept_id = db.Column(db.Integer, db.ForeignKey('concepts.id', ondelete="CASCADE"))
     concept = db.relationship("Concept")
-    language_id = db.Column(db.Integer, db.ForeignKey('languages.id'))
+    language_id = db.Column(db.Integer, db.ForeignKey('languages.id', ondelete="CASCADE"))
     language = db.relationship("Language")
     
     def __unicode__(self):
