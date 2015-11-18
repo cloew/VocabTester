@@ -18,11 +18,24 @@ class Search(auth.JSONController):
     def performWithJSON(self, languageId, json=None, user=None):
         """ Convert the quiz to JSON """
         languageContext = BuildLanguageContext(languageId, user)
-        matchingForms = Word.query.filter(func.lower(Word.text) == func.lower(json['text'])).filter(Word.language_id.in_([l.id for l in languageContext])).all()
-        matchingHelper = PrequeriedFormsHelper(matchingForms, WordInfo, languageContext)
+        uniqueForms = self.getUniqueConcepts(json['text'], languageContext)
+        matchingHelper = PrequeriedFormsHelper(uniqueForms, WordInfo, languageContext)
         
         pairs = matchingHelper.getConceptPairs()
         masteryCache = BuildMasteryCache.ViaPairs(pairs, WordInfo, user)
         learnedCache = LearnedCache(user, WordInfo)
         
         return {"results":toJson(pairs, user=user, learnedCache=learnedCache, masteryCache=masteryCache)}
+        
+    def getUniqueConcepts(self, text, languageContext):
+        """ Return the Unique Concept Forms """
+        matchingForms = Word.query.filter(func.lower(Word.text) == func.lower(text)).filter(Word.language_id.in_([l.id for l in languageContext])).all()
+        
+        conceptIds = set()
+        uniqueForms = []
+        for form in matchingForms:
+            if form.concept_id not in conceptIds:
+                conceptIds.add(form.concept_id)
+                uniqueForms.append(form)
+        return uniqueForms
+        
