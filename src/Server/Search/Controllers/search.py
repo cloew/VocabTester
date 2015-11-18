@@ -18,7 +18,7 @@ class Search(auth.JSONController):
     def performWithJSON(self, languageId, json=None, user=None):
         """ Convert the quiz to JSON """
         languageContext = BuildLanguageContext(languageId, user)
-        matchingForms = Word.query.filter(func.lower(Word.text) == func.lower(json['text'])).all()
+        matchingForms = Word.query.filter(func.lower(Word.text) == func.lower(json['text'])).filter(Word.language_id.in_([l.id for l in languageContext])).all()
         matchingHelper = PrequeriedFormsHelper(matchingForms, WordInfo, languageContext)
         
         pairs = matchingHelper.getConceptPairs()
