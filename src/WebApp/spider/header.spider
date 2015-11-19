@@ -62,4 +62,35 @@ angular.module('Header', ['ui.bootstrap', 'vocab.auth', 'kao.input', 'vocab.nav'
             },
             templateUrl: 'static/partials/directives/language_picker.html'
         };
+    })
+    .factory('AdminHeaderEntry', fn(NavService, UserService, $rootScope, userEvents) {
+        var AdminHeaderEntry = fn(name) {
+            this.name = name;
+            this.path = NavService.adminConcepts.path;
+            this.display = false;
+            
+            var self = this;
+            var updateDisplay = fn(event, user) {
+                self.display = false if !user else user.is_admin;
+            };
+            
+            UserService.withUser().success(fn(user) {
+                updateDisplay(null, user);
+            }).error(fn(error) {
+               console.log(error); 
+            });
+            
+            $rootScope.$on(userEvents.login, updateDisplay);
+            $rootScope.$on(userEvents.update, updateDisplay);
+            $rootScope.$on(userEvents.logout, updateDisplay);
+        };
+        return AdminHeaderEntry;
+    })
+    .factory('headerNavService', fn(NavService, AdminHeaderEntry) {
+        return [{name: 'Words', path: NavService.words.path},
+                {name: 'Word Lists', path: NavService.wordLists.path},
+                {name: 'Symbols', path: NavService.symbols.path},
+                {name: 'Symbol Lists', path: NavService.symbolLists.path},
+                {name: 'Search', path: NavService.search.path},
+                new AdminHeaderEntry('Admin')];
     });

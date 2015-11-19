@@ -29,12 +29,4 @@ angular.module('vocab.nav', ['kao.nav', 'vocab.auth.controllers'])
         navConfig.add({name: 'symbolListQuiz', path:'/symbollists/:listId/quiz', templateUrl:'static/partials/quiz.html', controller:'QuizController', onLoad: ['requireAuth', 'requireEnrollment'], returnTo:navConfig.config.symbolLists.path});
         navConfig.add({name: 'randomWordQuiz', path:'/words/random/quiz', templateUrl:'static/partials/quiz.html', controller:'QuizController', onLoad: ['requireAuth', 'requireEnrollment'], returnTo:navConfig.config.words.path});
         navConfig.add({name: 'wordListQuiz', path:'/wordlists/:listId/quiz', templateUrl:'static/partials/quiz.html', controller:'QuizController', onLoad: ['requireAuth', 'requireEnrollment'], returnTo:navConfig.config.wordLists.path});
-    }])
-    .factory('headerNavService', fn(NavService) {
-        return [{name: 'Words', path: NavService.words.path},
-                {name: 'Word Lists', path: NavService.wordLists.path},
-                {name: 'Symbols', path: NavService.symbols.path},
-                {name: 'Symbol Lists', path: NavService.symbolLists.path},
-                {name: 'Search', path: NavService.search.path},
-                {name: 'Admin', path: NavService.adminConcepts.path, if: "userService.isLoggedIn()"}];
-    });
+    }]);
