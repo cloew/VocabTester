@@ -66,7 +66,7 @@ angular.module('Header', ['ui.bootstrap', 'vocab.auth', 'kao.input', 'vocab.nav'
     .factory('AdminHeaderEntry', fn(NavService, UserService, $rootScope, userEvents) {
         var AdminHeaderEntry = fn(name) {
             this.name = name;
-            this.path = NavService.adminConcepts.path;
+            this.path = NavService.admin.path;
             this.display = false;
             
             var self = this;

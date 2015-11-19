@@ -1,0 +1,8 @@
+<div class="col-md-8 col-md-push-2 text-center">
+    <div class="col-md-12">
+       <kao-header header-title="Admin"></kao-header>
+    </div>
+    <div class="col-md-4" ng-repeat="crud in cruds">
+        <a class="btn btn-primary btn-lg col-md-10" ng-href="#{{crud.getListUrl()}}">{{crud.pluralName}}</a>
+    </div>
+</div>

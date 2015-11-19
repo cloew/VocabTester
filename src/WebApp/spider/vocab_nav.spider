@@ -12,6 +12,7 @@ angular.module('vocab.nav', ['kao.nav', 'vocab.auth.controllers'])
         navConfig.add({name: 'symbols', path:'/symbols', templateUrl:'static/partials/learned_concepts.html', controller:'LearnedFormsController', onLoad: ['requireAuth', 'requireEnrollment']});
         navConfig.add({name: 'symbolLists', path:'/symbollists', template:'<form-lists></form-lists>', onLoad: ['requireAuth', 'requireEnrollment']});
         navConfig.add({name: 'search', path:'/search', templateUrl:'static/partials/search.html', controller:'SearchController', onLoad: ['requireAuth', 'requireEnrollment']});
+        navConfig.add({name: 'admin', path:'/admin', templateUrl:'static/partials/admin/admin.html', controller:'AdminController', onLoad: ['requireAuth']});
         navConfig.add({name: 'adminUsers', path:'/admin/users', templateUrl:'static/partials/admin/list_records.html', onLoad: ['requireAuth']});
         navConfig.add({name: 'adminNewUsers', path:'/admin/users/new', templateUrl:'static/partials/admin/new_record.html', onLoad: ['requireAuth']});
         navConfig.add({name: 'adminEditUsers', path:'/admin/users/:id', templateUrl:'static/partials/admin/edit_record.html', onLoad: ['requireAuth']});
