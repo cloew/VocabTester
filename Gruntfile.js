@@ -9,7 +9,8 @@ module.exports = function(grunt) {
             spider: '<%= project.webapp %>/spider',
             sass: '<%= project.webapp %>/stylesheets',
             sassLib: '<%= project.webapp %>/stylesheets/lib',
-            serverStatic: '<%= project.src %>/Server/static',
+            serverDir: '<%= project.src %>/Server',
+            serverStatic: '<%= project.serverDir %>/static',
             stylesheets: '<%= project.serverStatic %>/stylesheets',
             js: '<%= project.serverStatic %>/js'
         },
@@ -78,14 +79,23 @@ module.exports = function(grunt) {
                     ext: '.js'
                 }]
             }
+        },
+        ngtemplates:  {
+            VocabTester: {
+                cwd: '<%= project.serverDir %>',
+                src: 'static/partials/**/*.html',
+                dest: '<%= project.js %>/templates.js',
+            }
         }
     });
     grunt.loadNpmTasks('grunt-bowercopy');
     grunt.loadNpmTasks('grunt-contrib-sass');
     grunt.loadNpmTasks('grunt-spider-script');
     grunt.loadNpmTasks('grunt-contrib-watch');
+    grunt.loadNpmTasks('grunt-angular-templates');
 
     // Default task(s).
-    grunt.registerTask('default', ['bowercopy', 'sass', 'spider_script']);
+    grunt.registerTask('html', ['ngtemplates']);
     grunt.registerTask('spider', ['spider_script']);
+    grunt.registerTask('default', ['bowercopy', 'sass', 'spider', 'html']);
 };
