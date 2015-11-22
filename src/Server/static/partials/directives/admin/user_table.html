@@ -5,7 +5,7 @@
         <th></th>
     </tr>
     <tr ng-repeat="record in records">
-        <td><a ng-href="#{{record.getEditUrl()}}">{{record.data.givenName + " " + record.data.lastName}}</a></td>
+        <td><a ng-href="#{{record.getEditUrl()}}">{{getFullname(record)}}</a></td>
         <td>{{record.data.nativeLanguage.name}}</td>
         <td style="text-align: center;">
             <delete-button class="btn-sm"></delete-button>

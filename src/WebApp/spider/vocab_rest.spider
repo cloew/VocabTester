@@ -37,6 +37,19 @@ angular.module('vocab.rest', ['kao.crud.api', 'kao.crud.frontend', 'kao.crud.con
         return {
             restrict: 'E',
             replace: true,
+            controller: fn($scope) {
+                $scope.getFullname = fn(record) {
+                    if record.data.givenName && record.data.lastName {
+                        return record.data.givenName + " " + record.data.lastName;
+                    } else if record.data.givenName {
+                        return record.data.givenName;
+                    } else if record.data.lastName {
+                        return record.data.lastName;
+                    } else {
+                        return "(No name provided)";
+                    }
+                };
+            },
             templateUrl: 'static/partials/directives/admin/user_table.html'
         };
     })
