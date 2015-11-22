@@ -1,0 +1,24 @@
+[
+{
+    "language":"English",
+    "words":[{"concept":1,
+              "text":"north"},
+             {"concept":2,
+              "text":"south"},
+             {"concept":3,
+              "text":"east"},
+             {"concept":4,
+              "text":"west"}]
+},
+{
+    "language":"Japanese",
+    "words":[{"concept":1,
+              "text":"きた"},
+             {"concept":2,
+              "text":"みなみ"},
+             {"concept":3,
+              "text":"ひがし"},
+             {"concept":4,
+              "text":"にし"}]
+}
+]
