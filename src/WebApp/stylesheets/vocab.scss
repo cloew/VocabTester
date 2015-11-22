@@ -82,6 +82,8 @@ $danger-bg: #d9534f;
     @extend .header-anchor;
     text-decoration: none !important;
     padding: 8px 15px;
+    margin-left: 5px;
+    margin-right: 5px;
 }
 
 .nav-anchor:visited, .nav-anchor:focus, .nav-anchor:hover, .nav-anchor:active {
