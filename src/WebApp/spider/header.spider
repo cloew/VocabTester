@@ -6,13 +6,8 @@ angular.module('Header', ['ui.bootstrap', 'vocab.auth', 'kao.input', 'vocab.nav'
         return {
             restrict: 'E',
             replace: true,
-            controller: fn($scope, $location, UserService, userEvents, $rootScope) {
-                $scope.toLogin = fn() {
-                    $location.path('/login/');
-                };
-                $scope.toRegister = fn() {
-                    $location.path('/register/');
-                };
+            controller: fn($scope, $location, NavService, UserService, userEvents, $rootScope) {
+                $scope.login = NavService.login.path;
                 $scope.logout = UserService.logout;
                 $scope.isLoggedIn = UserService.isLoggedIn;
                 
