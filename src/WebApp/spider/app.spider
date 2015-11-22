@@ -16,6 +16,9 @@ angular.module('VocabTester', ['ui.bootstrap', 'ngRoute', 'Header', 'Concepts', 
         return {
             restrict: 'E',
             replace: true,
+            controller: fn($scope, NavService) {
+                $scope.register = NavService.register.path;
+            },
             templateUrl: 'static/partials/directives/info.html'
         };
     });
