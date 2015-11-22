@@ -1,0 +1,32 @@
+[
+{
+    "language":"English",
+    "words":[{"concept":1,
+              "text":"Car"},
+             {"concept":2,
+              "text":"airplane"},
+             {"concept":3,
+              "text":"train"},
+             {"concept":4,
+              "text":"bus"},
+             {"concept":5,
+              "text":"ship"},
+             {"concept":6,
+              "text":"bicycle"}]
+},
+{
+    "language":"Japanese",
+    "words":[{"concept":1,
+              "text":"くるま"},
+             {"concept":2,
+              "text":"ひこうき"},
+             {"concept":3,
+              "text":"でんしゃ"},
+             {"concept":4,
+              "text":"バス"},
+             {"concept":5,
+              "text":"ふね"},
+             {"concept":6,
+              "text":"じてんしゃ"}]
+}
+]
