@@ -1,10 +1,9 @@
-from .concept_list import concept_list_proxy, query_via_concept_list
+from .concept_list import ConceptList, bound_concept_list
 
-@query_via_concept_list(isWords=False)
-@concept_list_proxy('conceptList')
-class SymbolList:
+@bound_concept_list(isWords=False)
+class SymbolList(ConceptList):
     """ Represents a list of symbols to quiz """
-    
-    def __init__(self, conceptList):
-        """ Initialize the Symbol List """
-        self.conceptList = conceptList
+        
+    def __repr__(self):
+        """ Return the string representation """
+        return "SymbolList({0})".format(self.name)

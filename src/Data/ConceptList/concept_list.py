@@ -1,6 +1,5 @@
 from ..Concept import Concept
-from ..query_proxy import query_via
-from kao_decorators import proxy_for
+from ..filtered_query import FilteredQuery
 
 from kao_flask.ext.sqlalchemy import db
 
@@ -21,10 +20,12 @@ class ConceptList(db.Model):
         """ Return the concept pairs """
         return conceptManager.getConceptPairs([concept.id for concept in self.concepts])
     
-def query_via_concept_list(isWords=None):
-    def addQuery(cls):
-        return query_via(lambda: ConceptList.query.filter_by(isWords=isWords))(cls)
-    return addQuery
-
-def concept_list_proxy(fieldName):
-    return proxy_for(fieldName, ["id", "name", "concepts", "getConceptPairs"])
+def bound_concept_list(*, isWords):
+    def bind(cls):
+        def init(self, *args, **kwargs):
+            kwargs['isWords'] = isWords
+            ConceptList.__init__(self, *args, **kwargs)
+        cls.__init__ = init
+        cls.query = FilteredQuery(ConceptList, isWords=isWords)
+        return cls
+    return bind

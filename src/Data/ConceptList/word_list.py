@@ -1,10 +1,9 @@
-from .concept_list import concept_list_proxy, query_via_concept_list
+from .concept_list import ConceptList, bound_concept_list
 
-@query_via_concept_list(isWords=True)
-@concept_list_proxy('conceptList')
-class WordList:
+@bound_concept_list(isWords=True)
+class WordList(ConceptList):
     """ Represents a list of words to quiz """
-    
-    def __init__(self, conceptList):
-        """ Initialize the Word List """
-        self.conceptList = conceptList
+        
+    def __repr__(self):
+        """ Return the string representation """
+        return "WordList({0})".format(self.name)
