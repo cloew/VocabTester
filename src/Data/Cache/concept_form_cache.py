@@ -29,7 +29,7 @@ class ConceptFormCache:
         
     def get(self, *, conceptId, languageId):
         """ Return the Concept Form for the given values """
-        return self[self.getIdKey(concetpId=conceptId, languageId=languageId)]
+        return self[self.getIdKey(conceptId=conceptId, languageId=languageId)]
         
     def getAll(self, *, conceptIds, languageId):
         """ Return the Concept Form for the given values """

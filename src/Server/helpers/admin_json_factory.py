@@ -1,14 +1,16 @@
 from Data import Concept, ConceptList, ConceptPair, Language, LanguageEnrollment, Symbol, User, Word
 from kao_json import JsonFactory, AsObj, ViaAttr, ViaFn
 
-def GetNativeForm(concept, user):
+def GetNativeForm(concept, symbolCache, wordCache, user):
     """ Return the native form of the concept """
-    form = Word.query.filter_by(concept_id=concept.id, language_id=user.nativeLanguage.id).first()
-    if form is None:
-        form = Symbol.query.filter_by(concept_id=concept.id, language_id=user.nativeLanguage.id).first()
-    return form.text if form is not None else ''
+    key = symbolCache.getIdKey(conceptId=concept.id, languageId=user.nativeLanguage.id)
+    if key in symbolCache:
+        return symbolCache[key].text
+    elif key in wordCache:
+        return wordCache[key].text
+    return ''
 
-jsonFactory = JsonFactory({Concept:AsObj(id=ViaAttr(), native=ViaFn(GetNativeForm, requires=['user'])),
+jsonFactory = JsonFactory({Concept:AsObj(id=ViaAttr(), native=ViaFn(GetNativeForm, requires=['symbolCache', 'wordCache', 'user'])),
                            (Symbol, Word):AsObj(id=ViaAttr(), text=ViaAttr(), language=ViaAttr()),
                            ConceptList:AsObj(id=ViaAttr(), name=ViaAttr(), isWords=ViaAttr()),
                            ConceptPair:AsObj(foreign=ViaAttr(), native=ViaAttr()),
