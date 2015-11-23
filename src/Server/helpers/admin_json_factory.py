@@ -10,7 +10,7 @@ def GetNativeForm(concept, user):
 
 jsonFactory = JsonFactory({Concept:AsObj(id=ViaAttr(), native=ViaFn(GetNativeForm, requires=['user'])),
                            (Symbol, Word):AsObj(id=ViaAttr(), text=ViaAttr(), language=ViaAttr()),
-                           ConceptList:AsObj(name=ViaAttr(), isWords=ViaAttr()),
+                           ConceptList:AsObj(id=ViaAttr(), name=ViaAttr(), isWords=ViaAttr()),
                            ConceptPair:AsObj(foreign=ViaAttr(), native=ViaAttr()),
                            User:AsObj(id=ViaAttr(), email=ViaAttr(), is_admin=ViaAttr(), givenName=ViaAttr(), lastName=ViaAttr(), nativeLanguage=ViaAttr()),
                            Language:AsObj(id=ViaAttr(), name=ViaAttr()),

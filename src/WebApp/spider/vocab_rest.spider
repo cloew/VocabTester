@@ -32,11 +32,11 @@ angular.module('vocab.rest', ['kao.crud.api', 'kao.crud.frontend', 'kao.crud.con
                                     nested:[{param: 'conceptId', provider: CrudParamFromRouteConfig.forParam('conceptId'), list:'id'}],
                                     primaryPaths:[config.adminNewConceptSymbols.path, config.adminEditConceptSymbols.path]});
             CrudApiConfig.add('/api/admin/symbollists', 'Symbol List');
-            FrontEndCrudConfig.add({name:'Symbol List', listUrl:config.adminSymbolLists.path,
-                                    tableDirective:'admin-concept-list-table'});
+            FrontEndCrudConfig.add({name:'Symbol List', listUrl:config.adminSymbolLists.path, newUrl:config.adminNewSymbolList.path, editUrl:config.adminEditSymbolList.path,
+                                    formDirective:'admin-concept-list-form', tableDirective:'admin-concept-list-table'});
             CrudApiConfig.add('/api/admin/wordlists', 'Word List');
-            FrontEndCrudConfig.add({name:'Word List', listUrl:config.adminWordLists.path,
-                                    tableDirective:'admin-concept-list-table'});
+            FrontEndCrudConfig.add({name:'Word List', listUrl:config.adminWordLists.path, newUrl:config.adminNewWordList.path, editUrl:config.adminEditWordList.path,
+                                    formDirective:'admin-concept-list-form', tableDirective:'admin-concept-list-table'});
         }
     ])
     .directive('userTable', fn() {
@@ -120,6 +120,13 @@ angular.module('vocab.rest', ['kao.crud.api', 'kao.crud.frontend', 'kao.crud.con
             restrict: 'E',
             replace: true,
             templateUrl: 'static/partials/directives/admin/concept_list_table.html'
+        };
+    })
+    .directive('adminConceptListForm', fn() {
+        return {
+            restrict: 'E',
+            replace: true,
+            templateUrl: 'static/partials/directives/admin/concept_list_form.html'
         };
     })
     .controller('AdminController', fn($scope, FrontEndCrudService) {
