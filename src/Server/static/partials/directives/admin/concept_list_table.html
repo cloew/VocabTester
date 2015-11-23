@@ -1,12 +1,10 @@
 <table class="table table-striped table-bordered">
     <tr>
-        <th>Id</th>
-        <th>Native Form</th>
+        <th>Name</th>
         <th></th>
     </tr>
     <tr ng-repeat="record in records">
-        <td><a ng-href="#{{record.getEditUrl()}}">{{record.data.id}}</a></td>
-        <td>{{record.data.native}}</td>
+        <td>{{record.data.name}}</td>
         <td class="text-center">
             <delete-button class="btn-sm"></delete-button>
         </td>

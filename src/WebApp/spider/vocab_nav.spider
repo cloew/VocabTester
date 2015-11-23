@@ -26,6 +26,8 @@ angular.module('vocab.nav', ['kao.nav', 'vocab.auth.controllers'])
         navConfig.add({name: 'adminEditConceptWords', path:'/admin/concepts/:conceptId/words/:id', templateUrl:'kao-ng-crud/admin/edit_record.html', onLoad: ['requireAuth']});
         navConfig.add({name: 'adminNewConceptSymbols', path:'/admin/concepts/:conceptId/symbols/new', templateUrl:'kao-ng-crud/admin/new_record.html', onLoad: ['requireAuth']});
         navConfig.add({name: 'adminEditConceptSymbols', path:'/admin/concepts/:conceptId/symbols/:id', templateUrl:'kao-ng-crud/admin/edit_record.html', onLoad: ['requireAuth']});
+        navConfig.add({name: 'adminSymbolLists', path:'/admin/symbollists', templateUrl:'kao-ng-crud/admin/list_records.html', onLoad: ['requireAuth']});
+        navConfig.add({name: 'adminWordLists', path:'/admin/wordlists', templateUrl:'kao-ng-crud/admin/list_records.html', onLoad: ['requireAuth']});
         navConfig.add({name: 'randomSymbolQuiz', path:'/symbols/random/quiz', templateUrl:'static/partials/quiz.html', controller:'QuizController', onLoad: ['requireAuth', 'requireEnrollment'], returnTo:navConfig.config.symbols.path});
         navConfig.add({name: 'symbolListQuiz', path:'/symbollists/:listId/quiz', templateUrl:'static/partials/quiz.html', controller:'QuizController', onLoad: ['requireAuth', 'requireEnrollment'], returnTo:navConfig.config.symbolLists.path});
         navConfig.add({name: 'randomWordQuiz', path:'/words/random/quiz', templateUrl:'static/partials/quiz.html', controller:'QuizController', onLoad: ['requireAuth', 'requireEnrollment'], returnTo:navConfig.config.words.path});

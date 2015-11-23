@@ -1,7 +1,7 @@
 from ..auth import auth
 from ..decorators import requires_admin
 from ..helpers.admin_json_factory import toJson
-from Data import Concept, Language, Symbol, User, Word
+from Data import Concept, Language, Symbol, SymbolList, User, Word, WordList
 
 from kao_flask import Routes
 from kao_flask.ext.sqlalchemy import CrudEndpoints
@@ -18,4 +18,6 @@ routes = Routes(CrudEndpoints('/api/admin/users', User, toJson,
                 CrudEndpoints('/api/admin/concepts/<int:conceptId>/symbols', Symbol, toJson, 
                             routeParams={'conceptId':'concept_id'}, 
                             jsonColumnMap={'language': lambda value: ('language_id', value['id'])}, 
-                            decorators=[auth.requires_auth, requires_admin]))
+                            decorators=[auth.requires_auth, requires_admin]),
+                CrudEndpoints('/api/admin/symbollists', SymbolList, toJson, decorators=[auth.requires_auth, requires_admin]),
+                CrudEndpoints('/api/admin/wordlists', WordList, toJson, decorators=[auth.requires_auth, requires_admin]))
