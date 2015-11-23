@@ -2,17 +2,17 @@
 {
     "language":"English",
     "words":[{"concept":1,
-              "text":"Snake"},
+              "text":"snake"},
              {"concept":2,
-              "text":"Bird"},
+              "text":"bird"},
              {"concept":3,
-              "text":"Lobster"},
+              "text":"lobster"},
              {"concept":4,
-              "text":"Lizard"},
+              "text":"lizard"},
              {"concept":5,
-              "text":"Fish"},
+              "text":"fish"},
              {"concept":6,
-              "text":"Dinosaur"}]
+              "text":"dinosaur"}]
 },
 {
     "language":"Japanese",

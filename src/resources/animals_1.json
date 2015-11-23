@@ -2,19 +2,19 @@
 {
     "language":"English",
     "words":[{"concept":1,
-              "text":"Dog"},
+              "text":"dog"},
              {"concept":2,
-              "text":"Cat"},
+              "text":"cat"},
              {"concept":3,
-              "text":"Elephant"},
+              "text":"elephant"},
              {"concept":4,
-              "text":"Horse"},
+              "text":"horse"},
              {"concept":5,
-              "text":"Rabbit"},
+              "text":"rabbit"},
              {"concept":6,
-              "text":"Panda"},
+              "text":"panda"},
              {"concept":7,
-              "text":"Mouse"}]
+              "text":"mouse"}]
 },
 {
     "language":"Japanese",

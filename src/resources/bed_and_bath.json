@@ -2,19 +2,19 @@
 {
     "language":"English",
     "words":[{"concept":1,
-              "text":"Pillow"},
+              "text":"pillow"},
              {"concept":2,
-              "text":"Futon"},
+              "text":"futon"},
              {"concept":3,
-              "text":"Blanket"},
+              "text":"blanket"},
              {"concept":4,
-              "text":"Bath"},
+              "text":"bath"},
              {"concept":5,
-              "text":"Soap"},
+              "text":"soap"},
              {"concept":6,
-              "text":"Mirror"},
+              "text":"mirror"},
              {"concept":7,
-              "text":"Window"}]
+              "text":"window"}]
 },
 {
     "language":"Japanese",

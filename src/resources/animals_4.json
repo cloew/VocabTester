@@ -2,19 +2,19 @@
 {
     "language":"English",
     "words":[{"concept":1,
-              "text":"Lion"},
+              "text":"lion"},
              {"concept":2,
-              "text":"Giraffe"},
+              "text":"giraffe"},
              {"concept":3,
-              "text":"Cow"},
+              "text":"cow"},
              {"concept":4,
-              "text":"Monkey"},
+              "text":"monkey"},
              {"concept":5,
-              "text":"Sheep"},
+              "text":"sheep"},
              {"concept":6,
-              "text":"Fox"},
+              "text":"fox"},
              {"concept":7,
-              "text":"Bear"}]
+              "text":"bear"}]
 },
 {
     "language":"Japanese",

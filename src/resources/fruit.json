@@ -2,19 +2,19 @@
 {
     "language":"English",
     "words":[{"concept":1,
-              "text":"Strawberry"},
+              "text":"strawberry"},
              {"concept":2,
-              "text":"Apple"},
+              "text":"apple"},
              {"concept":3,
-              "text":"Banana"},
+              "text":"banana"},
              {"concept":4,
-              "text":"Watermelon"},
+              "text":"watermelon"},
              {"concept":5,
-              "text":"Lemon"},
+              "text":"lemon"},
              {"concept":6,
-              "text":"Peach"},
+              "text":"peach"},
              {"concept":7,
-              "text":"Grapes"}]
+              "text":"grapes"}]
 },
 {
     "language":"Japanese",

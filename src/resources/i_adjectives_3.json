@@ -2,19 +2,19 @@
 {
     "language":"English",
     "words":[{"concept":1,
-              "text":"Painful"},
+              "text":"painful"},
               {"concept":2,
-              "text":"Big"},
+              "text":"big"},
               {"concept":3,
-              "text":"Small"},
+              "text":"small"},
               {"concept":4,
-              "text":"Cold"},
+              "text":"cold"},
               {"concept":5,
-              "text":"Hot"},
+              "text":"hot"},
               {"concept":6,
-              "text":"Expensive"},
+              "text":"expensive"},
               {"concept":7,
-              "text":"Cheap"}]
+              "text":"cheap"}]
 },
 {
     "language":"Japanese",

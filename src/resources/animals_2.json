@@ -2,19 +2,19 @@
 {
     "language":"English",
     "words":[{"concept":1,
-              "text":"Goldfish"},
+              "text":"goldfish"},
              {"concept":2,
-              "text":"Turtle"},
+              "text":"turtle"},
              {"concept":3,
-              "text":"Frog"},
+              "text":"frog"},
              {"concept":4,
-              "text":"Pig"},
+              "text":"pig"},
              {"concept":5,
-              "text":"Pigeon"},
+              "text":"pigeon"},
              {"concept":6,
-              "text":"Duck"},
+              "text":"duck"},
              {"concept":7,
-              "text":"Crab"}]
+              "text":"crab"}]
 },
 {
     "language":"Japanese",

@@ -2,15 +2,15 @@
 {
     "language":"English",
     "words":[{"concept":1,
-              "text":"Mother"},
+              "text":"mother"},
              {"concept":2,
-              "text":"Father"},
+              "text":"father"},
              {"concept":3,
-              "text":"Grandfather"},
+              "text":"grandfather"},
              {"concept":4,
-              "text":"Grandmother"},
+              "text":"grandmother"},
              {"concept":5,
-              "text":"Baby"}]
+              "text":"baby"}]
 },
 {
     "language":"Japanese",
