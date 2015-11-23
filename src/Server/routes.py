@@ -1,4 +1,4 @@
-from .helpers.admin_json_factory import toJson
+from .admin.admin_json_factory import toJson
 
 from .admin.routes import routes as AdminRoutes
 from .auth.routes import routes as AuthRoutes

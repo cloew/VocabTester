@@ -1,6 +1,6 @@
 from .auth import auth
 from .Controllers import CreateUserEnrollment, GetUserEnrollments
-from ..helpers.admin_json_factory import toJson
+from ..admin.admin_json_factory import toJson
 
 from kao_flask import Routes, Endpoint
 from kao_flask.ext.sqlalchemy import RecordValueProvider
