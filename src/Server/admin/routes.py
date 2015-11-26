@@ -1,7 +1,7 @@
 from . import urls
 from .admin_json_factory import toJson
 from .concepts_to_json import ConceptsToJson
-from .Controllers import CreateListConcept, GetListConcepts
+from .Controllers import CreateListConcept, DeleteListConcept, GetListConcepts
 from ..auth import auth
 from ..decorators import requires_admin
 from Data import Concept, Language, Symbol, SymbolList, SymbolInfo, User, Word, WordList, WordInfo
@@ -24,7 +24,7 @@ routes = Routes(CrudEndpoints('/api/admin/users', User, toJson,
                             decorators=[auth.requires_auth, requires_admin]),
                 CrudEndpoints('/api/admin/symbollists', SymbolList, toJson, decorators=[auth.requires_auth, requires_admin]),
                 Endpoint(urls.SymbolListConcepts, get=GetListConcepts(SymbolInfo)),
-                Endpoint(urls.SymbolListConcept, post=CreateListConcept(SymbolInfo)),
+                Endpoint(urls.SymbolListConcept, post=CreateListConcept(SymbolInfo), delete=DeleteListConcept(SymbolInfo)),
                 CrudEndpoints('/api/admin/wordlists', WordList, toJson, decorators=[auth.requires_auth, requires_admin]),
                 Endpoint(urls.WordListConcepts, get=GetListConcepts(WordInfo)),
-                Endpoint(urls.WordListConcept, post=CreateListConcept(WordInfo)))
+                Endpoint(urls.WordListConcept, post=CreateListConcept(WordInfo), delete=DeleteListConcept(WordInfo)))
