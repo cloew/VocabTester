@@ -14,5 +14,5 @@ class GetListConcepts(JSONController):
     
     def performWithJSON(self, listId, **kwargs):
         """ Convert the records to JSON """
-        conceptLists = self.formInfo.listModel.query.filter_by(id=listId).all()
-        return {"records":ConceptsToJson(conceptLists, **kwargs)}
+        conceptList = self.formInfo.listModel.query.filter_by(id=listId).first()
+        return {"records":ConceptsToJson(conceptList.concepts, **kwargs)}
