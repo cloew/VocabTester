@@ -134,6 +134,14 @@ angular.module('vocab.rest', ['kao.crud.api', 'kao.crud.frontend', 'kao.crud.con
             restrict: 'E',
             replace: true,
             controller: fn($scope, $http) {
+                $scope.delete = fn(concept) {
+                    $http.delete($scope.record.data.conceptsUrl+'/'+concept.id).success(fn(data) {
+                        $scope.concepts = data.records;
+                    }).error(fn(error) {
+                        console.log(error);
+                    });
+                };
+            
                 $scope.$watch('record.data.conceptsUrl', fn(conceptsUrl, oldUrl) {
                     if conceptsUrl? {
                         $http.get(conceptsUrl).success(fn(data) {

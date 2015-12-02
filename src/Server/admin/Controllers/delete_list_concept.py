@@ -5,6 +5,9 @@ from Server.decorators import requires_admin
 
 from kao_flask.controllers.json_controller import JSONController
 from kao_flask.ext.sqlalchemy import db
+from flask import abort
+
+import sys
 
 class DeleteListConcept(JSONController):
     """ Controller to delete a List-Concept connection """
@@ -17,10 +20,12 @@ class DeleteListConcept(JSONController):
     def performWithJSON(self, listId, conceptId, **kwargs):
         """ Convert the records to JSON """
         conceptList = self.formInfo.listModel.query.filter_by(id=listId).first()
-        concept = Concept(id=conceptId)
-        conceptList.concepts.remove(concept)
-        
-        db.session.add(conceptList)
-        db.session.commit()
-        
-        return {"record":ConceptsToJson(conceptList, **kwargs)}
+        conceptToDelete = None
+        for concept in conceptList.concepts:
+            if concept.id == conceptId:
+                conceptList.concepts.remove(concept)
+                db.session.add(conceptList)
+                db.session.commit()
+                return {"records":ConceptsToJson(conceptList.concepts, **kwargs)}
+        else:
+            abort(404);

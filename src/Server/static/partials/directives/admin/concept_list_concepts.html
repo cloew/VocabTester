@@ -4,9 +4,13 @@
         <table class="table table-striped table-bordered">
             <tr>
                 <th>Concept</th>
+                <th></th>
             </tr>
             <tr ng-repeat="concept in concepts">
-                <td>{{concept.native}}</a></td>
+                <td>{{concept.native}}</td>
+                <td class="text-center">
+                    <delete-button class="btn-sm" type="Concept" action="delete(concept)"></delete-button>
+                </td>
             </tr>
         </table>
     </div>
