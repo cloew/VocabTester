@@ -97,5 +97,6 @@ module.exports = function(grunt) {
     // Default task(s).
     grunt.registerTask('html', ['ngtemplates']);
     grunt.registerTask('spider', ['spider_script']);
-    grunt.registerTask('default', ['bowercopy', 'sass', 'spider', 'html']);
+    grunt.registerTask('local', ['sass', 'spider', 'html']);
+    grunt.registerTask('default', ['bowercopy', 'local']);
 };
