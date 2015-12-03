@@ -17,10 +17,10 @@ class CreateListConcept(JSONController):
     def performWithJSON(self, listId, conceptId, **kwargs):
         """ Convert the records to JSON """
         conceptList = self.formInfo.listModel.query.filter_by(id=listId).first()
-        concept = Concept(id=conceptId)
+        concept = Concept.query.filter_by(id=conceptId).first()
         conceptList.concepts.append(concept)
         
         db.session.add(conceptList)
         db.session.commit()
         
-        return {"record":ConceptsToJson(conceptList, **kwargs)}
+        return {"record":ConceptsToJson(concept, **kwargs)}

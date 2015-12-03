@@ -12,6 +12,22 @@
                     <delete-button class="btn-sm" type="Concept" action="delete(concept)"></delete-button>
                 </td>
             </tr>
+            <tr ng-repeat="form in conceptForms">
+                <td>
+                    <model-select class="form-control" model="form.concept" type="Concept" display-field="native"></model-select>
+                </td>
+                <td class="text-center">
+                    <save-button class="btn-sm" action="save(form)" tracker="form.tracker"></delete-button>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" class="text-center">
+                    <button ng-click="addConceptForm()" class="btn btn-primary">
+                       <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                       <span class="sr-only">New Concept</span>
+                   </button>
+                </td>
+            </tr>
         </table>
     </div>
 </div>
