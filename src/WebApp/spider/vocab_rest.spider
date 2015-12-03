@@ -36,7 +36,7 @@ angular.module('vocab.rest', ['kao.crud.api', 'kao.crud.frontend', 'kao.crud.con
                                     formDirective:'admin-concept-list-form', tableDirective:'admin-concept-list-table', afterEditDirective:'concept-list-concepts'});
             CrudApiConfig.add('/api/admin/wordlists', 'Word List');
             FrontEndCrudConfig.add({name:'Word List', listUrl:config.adminWordLists.path, newUrl:config.adminNewWordList.path, editUrl:config.adminEditWordList.path,
-                                    formDirective:'admin-concept-list-form', tableDirective:'admin-concept-list-table'});
+                                    formDirective:'admin-concept-list-form', tableDirective:'admin-concept-list-table', afterEditDirective:'concept-list-concepts'});
         }
     ])
     .directive('userTable', fn() {
