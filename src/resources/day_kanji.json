@@ -1,0 +1,36 @@
+[
+{
+    "language":"English",
+    "symbols":[{"concept":1,
+                "text":"day"},
+               {"concept":2,
+                "text":"moon"},
+               {"concept":3,
+                "text":"fire"},
+               {"concept":4,
+                "text":"water"},
+               {"concept":5,
+                "text":"tree"},
+               {"concept":6,
+                "text":"gold"},
+               {"concept":7,
+                "text":"earth"}]
+},
+{
+    "language":"Japanese",
+    "symbols":[{"concept":1,
+                "text":"日"},
+               {"concept":2,
+                "text":"月"},
+               {"concept":3,
+                "text":"火"},
+               {"concept":4,
+                "text":"水"},
+               {"concept":5,
+                "text":"木"},
+               {"concept":6,
+                "text":"金"},
+               {"concept":7,
+                "text":"土"}]
+}
+]
