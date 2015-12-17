@@ -1,0 +1,28 @@
+[
+{
+    "language":"English",
+    "symbols":[{"concept":1,
+                "text":"holiday"},
+               {"concept":2,
+                "text":"above"},
+               {"concept":3,
+                "text":"below"},
+               {"concept":4,
+                "text":"left"},
+               {"concept":5,
+                "text":"right"}]
+},
+{
+    "language":"Japanese",
+    "symbols":[{"concept":1,
+                "text":"休"},
+               {"concept":2,
+                "text":"上"},
+               {"concept":3,
+                "text":"下"},
+               {"concept":4,
+                "text":"左"},
+               {"concept":5,
+                "text":"右"}]
+}
+]
