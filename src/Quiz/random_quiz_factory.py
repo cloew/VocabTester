@@ -4,6 +4,8 @@ from Data import ConceptManager
 from Data.Cache import BuildMasteryCache
 from Data.Query import PrequeriedFormsHelper
 
+import random
+
 class RandomQuizFactory:
     """ Represents method to contstruct a Quiz from random learned Words or Symbols """
     MAX_QUESTIONS = 10
@@ -25,6 +27,7 @@ class RandomQuizFactory:
         conceptIds = [form.concept_id for form in sample]
         pairs = learnedFormsHelper.conceptManager.getConceptPairs(conceptIds)
         
+        random.shuffle(pairs)
         return Quiz("Random List", pairs, masteryCache), masteryCache
         
     def organizeByMastery(self, learnedForms, masteryCache):
