@@ -6,3 +6,7 @@ class Language(db.Model):
     
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String())
+        
+    def __repr__(self):
+        """ Return the String Representation of the Language Context """
+        return repr(self.name)

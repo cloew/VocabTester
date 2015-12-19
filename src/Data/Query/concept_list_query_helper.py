@@ -31,7 +31,7 @@ class ConceptListQueryHelper:
         
     @lazy_property
     def concepts(self):
-        """ Return the Foreign Forms """
+        """ Return the Concepts """
         return [concept for conceptList in self.items for concept in conceptList.concepts]
         
     @lazy_property

@@ -13,3 +13,7 @@ class LanguageContext:
     def __iter__(self):
         """ Return the iterator over the langauges """
         return iter([self.foreign, self.native])
+        
+    def __repr__(self):
+        """ Return the String Representation of the Language Context """
+        return repr(self.languages)

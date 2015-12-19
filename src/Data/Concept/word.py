@@ -17,3 +17,7 @@ class Word(db.Model):
     def __unicode__(self):
         """ Return the string representation of the Word """
         return unicode(self.text)
+    
+    def __repr__(self):
+        """ Return the string representation of the Word """
+        return repr(self.text)
