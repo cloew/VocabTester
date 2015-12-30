@@ -1,0 +1,32 @@
+[
+{
+    "language":"English",
+    "symbols":[{"concept":1,
+                "text":"big"},
+               {"concept":2,
+                "text":"in"},
+               {"concept":3,
+                "text":"small"},
+               {"concept":4,
+                "text":"round"},
+               {"concept":5,
+                "text":"people"},
+               {"concept":6,
+                "text":"eye"}]
+},
+{
+    "language":"Japanese",
+    "symbols":[{"concept":1,
+                "text":"大"},
+               {"concept":2,
+                "text":"中"},
+               {"concept":3,
+                "text":"小"},
+               {"concept":4,
+                "text":"円"},
+               {"concept":5,
+                "text":"人"},
+               {"concept":6,
+                "text":"目"}]
+}
+]
