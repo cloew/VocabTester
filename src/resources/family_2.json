@@ -1,0 +1,45 @@
+[
+{
+    "language":"English",
+    "words":[{"concept":1,
+              "text":"family"},
+             {"concept":2,
+              "text":"child"},
+             {"concept":3,
+              "text":"parent"},
+             {"concept":4,
+              "text":"older sister"},
+             {"concept":5,
+              "text":"younger sister"},
+             {"concept":6,
+              "text":"older brother"},
+             {"concept":7,
+              "text":"younger brother"}]
+},
+{
+    "language":"Japanese",
+    "words":[{"concept":1,
+              "text":"かぞく"},
+             {"concept":2,
+              "text":"こ"},
+             {"concept":3,
+              "text":"おや"},
+             {"concept":4,
+              "text":"おねえさん"},
+             {"concept":5,
+              "text":"いもうと"},
+             {"concept":6,
+              "text":"おにいさん"},
+             {"concept":7,
+              "text":"あとうと"}]
+},
+{
+    "language":"German",
+    "words":[{"concept":1,
+              "text":"Familie"},
+             {"concept":2,
+              "text":"Kind"},
+             {"concept":3,
+              "text":"Eltern"}]
+}
+]
