@@ -1,0 +1,41 @@
+[
+{
+    "language":"English",
+    "words":[{"concept":1,
+              "text":"weather"},
+             {"concept":2,
+              "text":"rain"},
+             {"concept":3,
+              "text":"snow"},
+             {"concept":4,
+              "text":"sky"},
+             {"concept":5,
+              "text":"hail"}]
+},
+{
+    "language":"Japanese",
+    "words":[{"concept":1,
+              "text":"てんき"},
+             {"concept":2,
+              "text":"あめ"},
+             {"concept":3,
+              "text":"ゆき"},
+             {"concept":4,
+              "text":"そら"},
+             {"concept":5,
+              "text":"ひょう"}]
+},
+{
+    "language":"German",
+    "words":[{"concept":1,
+              "text":"Wetter"},
+             {"concept":2,
+              "text":"Regen"},
+             {"concept":3,
+              "text":"Schnee"},
+             {"concept":4,
+              "text":"Himmel"},
+             {"concept":5,
+              "text":"Hagel"}]
+}
+]

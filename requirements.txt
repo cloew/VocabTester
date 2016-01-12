@@ -9,6 +9,7 @@ fuzzywuzzy==0.7.0
 gunicorn==19.3.0
 itsdangerous==0.24
 Jinja2==2.7.3
+git+git://github.com/cloew/KaoCommand.git
 git+git://github.com/cloew/KaoDecorators.git
 git+git://github.com/cloew/KaoExtensions.git
 git+git://github.com/cloew/KaoFactory.git
