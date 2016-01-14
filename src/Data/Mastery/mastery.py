@@ -1,4 +1,3 @@
-from .answer import Answer
 from .staleness_period import StalenessPeriod
 from ..symbol_info import SymbolInfo
 from ..word_info import WordInfo
@@ -9,16 +8,21 @@ import datetime
 class Mastery(db.Model):
     """ Represents the mastery of some skill """
     __tablename__ = 'masteries'
-    MAX_ANSWERS = 5
+    MAX_RATING = 5
     
     id = db.Column(db.Integer, primary_key=True)
+    
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     user = db.relationship("User")
+    
     word_id = db.Column(db.Integer, db.ForeignKey('words.id', ondelete="CASCADE"))
     word = db.relationship("Word")
     symbol_id = db.Column(db.Integer, db.ForeignKey('symbols.id', ondelete="CASCADE"))
     symbol = db.relationship("Symbol")
-    answers = db.relationship("Answer", order_by=Answer.createdDate, backref=db.backref('mastery'), lazy='subquery')
+    
+    answerRating = db.Column(db.Integer)
+    lastCorrectAnswer = db.Column(db.DateTime)
+    
     staleness_period_id = db.Column(db.Integer, db.ForeignKey('staleness_periods.id'))
     stalenessPeriod = db.relationship("StalenessPeriod", lazy='subquery')
     
@@ -33,15 +37,18 @@ class Mastery(db.Model):
     def addAnswer(self, correct):
         """ Add an answer to this mastery """
         self.updateStalenessPeriod(correct)
-        if len(self.answers) >= self.MAX_ANSWERS:
-            db.session.delete(self.answers[0])
-        answer = Answer(correct=correct, mastery=self)
-        db.session.add(answer)
+        
+        ratingChange = 1 if correct else -1
+        newRating = self.answerRating + ratingChange
+        newRating = min(newRating, self.MAX_RATING)
+        newRating = max(newRating, 0)
+        self.answerRating = newRating
+        db.session.add(self)
         db.session.commit()
         
     def updateStalenessPeriod(self, correct):
         """ Update the staleness period based on whether the answer is correct """
-        if correct and self.answerRating == self.MAX_ANSWERS and self.isStale:
+        if correct and self.answerRating == self.MAX_RATING and self.isStale:
             self.moveToNextStalenessPeriod()
         else:
             self.revertToFirstStalenessPeriod()
@@ -49,12 +56,10 @@ class Mastery(db.Model):
     def moveToNextStalenessPeriod(self):
         """ Move the mastery to the next staleness period """
         self.stalenessPeriod = self.stalenessPeriod.next
-        db.session.add(self)
         
     def revertToFirstStalenessPeriod(self):
         """ Revert the staleness period to the first staleness period """
         self.stalenessPeriod = StalenessPeriod.getFirstStalenessPeriod()
-        db.session.add(self)
     
     @property
     def form(self):
@@ -67,37 +72,18 @@ class Mastery(db.Model):
         return WordInfo if self.word_id is not None else SymbolInfo
     
     @property
-    def numberOfCorrectAnswers(self):
-        """ Return the number of correct answers for this mastery """
-        return len([answer for answer in self.answers if answer.correct])
-    
-    @property
     def rating(self):
         """ Return the rating of the mastery """
         return max(0, self.answerRating + self.stalenessRating)
     
     @property
-    def answerRating(self):
-        """ Return the answer rating of the mastery """
-        return self.numberOfCorrectAnswers
-    
-    @property
     def stalenessRating(self):
         """ Return the staleness rating of the mastery """
-        mostRecentCorrectAnswer = self.mostRecentCorrectAnswer
+        mostRecentCorrectAnswer = self.lastCorrectAnswer
         if mostRecentCorrectAnswer is None:
             return 0
         else:
             return -1 * int((datetime.datetime.now() - mostRecentCorrectAnswer).days / self.stalenessPeriod.days)
-    
-    @property
-    def mostRecentCorrectAnswer(self):
-        """ Return the most recent correct answer """
-        correctAnswerDates = [answer.createdDate for answer in self.answers if answer.correct]
-        if len(correctAnswerDates) == 0:
-            return None
-        else:
-            return max(correctAnswerDates)
             
     @property
     def isStale(self):

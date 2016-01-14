@@ -8,4 +8,4 @@ from .word_info import WordInfo
 
 from .Concept import Concept, ConceptManager, ConceptPair, Symbol, Word
 from .ConceptList import ConceptList, SymbolList, WordList, UserConceptList
-from .Mastery import Mastery, Answer, StalenessPeriod
+from .Mastery import Mastery, StalenessPeriod
