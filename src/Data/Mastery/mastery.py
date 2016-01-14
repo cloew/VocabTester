@@ -3,7 +3,8 @@ from ..symbol_info import SymbolInfo
 from ..word_info import WordInfo
 
 from kao_flask.ext.sqlalchemy import db
-import datetime
+from datetime import datetime
+import sys
 
 class Mastery(db.Model):
     """ Represents the mastery of some skill """
@@ -37,14 +38,25 @@ class Mastery(db.Model):
     def addAnswer(self, correct):
         """ Add an answer to this mastery """
         self.updateStalenessPeriod(correct)
+        self.updateAnswerDate(correct)
+        self.updateRating(correct)
         
+        db.session.add(self)
+        db.session.commit()
+        
+    def updateRating(self, correct):
+        """ Update the answer rating """
         ratingChange = 1 if correct else -1
+        
         newRating = self.answerRating + ratingChange
         newRating = min(newRating, self.MAX_RATING)
         newRating = max(newRating, 0)
         self.answerRating = newRating
-        db.session.add(self)
-        db.session.commit()
+        
+    def updateAnswerDate(self, correct):
+        """ Update the answer date """
+        if correct:
+            self.lastCorrectAnswer = datetime.now()
         
     def updateStalenessPeriod(self, correct):
         """ Update the staleness period based on whether the answer is correct """
@@ -83,7 +95,7 @@ class Mastery(db.Model):
         if mostRecentCorrectAnswer is None:
             return 0
         else:
-            return -1 * int((datetime.datetime.now() - mostRecentCorrectAnswer).days / self.stalenessPeriod.days)
+            return -1 * int((datetime.now() - mostRecentCorrectAnswer).days / self.stalenessPeriod.days)
             
     @property
     def isStale(self):
