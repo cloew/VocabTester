@@ -4,6 +4,7 @@ from ..word_info import WordInfo
 
 from kao_flask.ext.sqlalchemy import db
 from datetime import datetime
+from sqlalchemy import text
 import sys
 
 class Mastery(db.Model):
@@ -21,7 +22,7 @@ class Mastery(db.Model):
     symbol_id = db.Column(db.Integer, db.ForeignKey('symbols.id', ondelete="CASCADE"))
     symbol = db.relationship("Symbol")
     
-    answerRating = db.Column(db.Integer)
+    answerRating = db.Column(db.Integer, server_default=text('0'), nullable=False)
     lastCorrectAnswer = db.Column(db.DateTime)
     
     staleness_period_id = db.Column(db.Integer, db.ForeignKey('staleness_periods.id'))
@@ -86,8 +87,7 @@ class Mastery(db.Model):
     @property
     def rating(self):
         """ Return the rating of the mastery """
-        answerRating = self.answerRating if self.answerRating is not None else 0
-        return max(0, answerRating + self.stalenessRating)
+        return max(0, self.answerRating + self.stalenessRating)
     
     @property
     def stalenessRating(self):
