@@ -86,7 +86,8 @@ class Mastery(db.Model):
     @property
     def rating(self):
         """ Return the rating of the mastery """
-        return max(0, self.answerRating + self.stalenessRating)
+        answerRating = self.answerRating if self.answerRating is not None else 0
+        return max(0, answerRating + self.stalenessRating)
     
     @property
     def stalenessRating(self):
