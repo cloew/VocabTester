@@ -1,0 +1,53 @@
+[
+{
+    "language":"English",
+    "words":[{"concept":1,
+              "text":"time"},
+             {"concept":2,
+              "text":"day"},
+             {"concept":3,
+              "text":"month"},
+             {"concept":4,
+              "text":"year"},
+             {"concept":5,
+              "text":"past"},
+             {"concept":6,
+              "text":"present"},
+             {"concept":7,
+              "text":"future"}]
+},
+{
+    "language":"Japanese",
+    "words":[{"concept":1,
+              "text":"じかん"},
+             {"concept":2,
+              "text":"にち"},
+             {"concept":3,
+              "text":"がつ"},
+             {"concept":4,
+              "text":"ねん"},
+             {"concept":5,
+              "text":"かこ"},
+             {"concept":6,
+              "text":"げんざい"},
+             {"concept":7,
+              "text":"みらい"}]
+},
+{
+    "language":"German",
+    "words":[{"concept":1,
+              "text":"Zeit"},
+             {"concept":2,
+              "text":"Tag"},
+             {"concept":3,
+              "text":"Monat"},
+             {"concept":4,
+              "text":"Jahr"},
+             {"concept":5,
+              "text":"Vergangenheit"},
+             {"concept":6,
+              "text":"Gegenwart"},
+             {"concept":7,
+              "text":"Zukunft"}]
+}
+]
