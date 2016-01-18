@@ -10,6 +10,8 @@ class Mastery(db.Model):
     """ Represents the mastery of some skill """
     __tablename__ = 'masteries'
     MAX_RATING = 5
+    CORRECT_CHANGE = 1
+    WRONG_CHANGE = -1
     
     id = db.Column(db.Integer, primary_key=True)
     
@@ -46,7 +48,7 @@ class Mastery(db.Model):
         
     def updateRating(self, correct):
         """ Update the answer rating """
-        ratingChange = 1 if correct else -1
+        ratingChange = self.CORRECT_CHANGE if correct else self.WRONG_CHANGE
         
         newRating = self.answerRating + ratingChange
         newRating = min(newRating, self.MAX_RATING)
