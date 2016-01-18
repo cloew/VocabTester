@@ -88,7 +88,7 @@ class Mastery(db.Model):
     @property
     def rating(self):
         """ Return the rating of the mastery """
-        return max(0, self.answerRating + self.stalenessRating)
+        return max(0, self.answerRating - self.stalenessRating)
     
     @property
     def stalenessRating(self):
@@ -97,7 +97,7 @@ class Mastery(db.Model):
         if mostRecentCorrectAnswer is None:
             return 0
         else:
-            return -1 * int((datetime.now() - mostRecentCorrectAnswer).days / self.stalenessPeriod.days)
+            return int((datetime.now() - mostRecentCorrectAnswer).days / self.stalenessPeriod.days)
             
     @property
     def isStale(self):
