@@ -1,0 +1,28 @@
+[
+{
+    "language":"English",
+    "symbols":[{"concept":1,
+                "text":"stand"},
+               {"concept":2,
+                "text":"man"},
+               {"concept":3,
+                "text":"woman"},
+               {"concept":4,
+                "text":"child"},
+               {"concept":5,
+                "text":"raw"}]
+},
+{
+    "language":"Japanese",
+    "symbols":[{"concept":1,
+                "text":"立"},
+               {"concept":2,
+                "text":"男"},
+               {"concept":3,
+                "text":"女"},
+               {"concept":4,
+                "text":"子"},
+               {"concept":5,
+                "text":"生"}]
+}
+]
