@@ -88,7 +88,6 @@ class Mastery(db.Model):
         """ Return the Concept Form Info associated with the Mastery """
         return WordInfo if self.word_id is not None else SymbolInfo
     
-    @hybrid_property
     def rating(self):
         """ Return the rating of the mastery """
         return max(0, self.answerRating - self.stalenessRating)
@@ -106,7 +105,8 @@ class Mastery(db.Model):
     def stalenessRating(self):
         """ Return the Queryable staleness rating of the mastery """
         return func.coalesce(cast(func.extract('epoch', func.now()-self.lastCorrectAnswer)/86400, db.Integer)/StalenessPeriod.days, 0)
-            
+
+    @hybrid_property
     def isStale(self):
-        """ Return if the mastery is has outlived the staleness period """
-        return self.stalenessRating < 0
+        """ Return if the mastery has outlived the staleness period """
+        return self.stalenessRating > 0
