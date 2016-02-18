@@ -4,7 +4,9 @@ from ..word_info import WordInfo
 
 from kao_flask.ext.sqlalchemy import db
 from datetime import datetime
-from sqlalchemy import text
+from sqlalchemy import text, func
+from sqlalchemy.ext.hybrid import hybrid_property
+from sqlalchemy.sql.expression import cast
 import sys
 
 class Mastery(db.Model):
@@ -86,12 +88,12 @@ class Mastery(db.Model):
         """ Return the Concept Form Info associated with the Mastery """
         return WordInfo if self.word_id is not None else SymbolInfo
     
-    @property
+    @hybrid_property
     def rating(self):
         """ Return the rating of the mastery """
         return max(0, self.answerRating - self.stalenessRating)
     
-    @property
+    @hybrid_property
     def stalenessRating(self):
         """ Return the staleness rating of the mastery """
         mostRecentCorrectAnswer = self.lastCorrectAnswer
@@ -99,8 +101,12 @@ class Mastery(db.Model):
             return 0
         else:
             return int((datetime.now() - mostRecentCorrectAnswer).days / self.stalenessPeriod.days)
+    
+    @stalenessRating.expression
+    def stalenessRating(self):
+        """ Return the Queryable staleness rating of the mastery """
+        return func.coalesce(cast(func.extract('epoch', func.now()-self.lastCorrectAnswer)/86400, db.Integer)/StalenessPeriod.days, 0)
             
-    @property
     def isStale(self):
         """ Return if the mastery is has outlived the staleness period """
         return self.stalenessRating < 0
