@@ -12,7 +12,6 @@ down_revision = '2429d3daa7d'
 
 from alembic import op
 import sqlalchemy as sa
-from sqlalchemy.orm import sessionmaker
 from sqlalchemy.dialects import postgresql
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import backref, relationship, sessionmaker

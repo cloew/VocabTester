@@ -1,0 +1,53 @@
+[
+{
+    "language":"English",
+    "words":[{"concept":1,
+              "text":"sick"},
+             {"concept":2,
+              "text":"doctor"},
+             {"concept":3,
+              "text":"nurse"},
+             {"concept":4,
+              "text":"cough"},
+             {"concept":5,
+              "text":"sneeze"},
+             {"concept":6,
+              "text":"hospital"},
+             {"concept":7,
+              "text":"disease"}]
+},
+{
+    "language":"Japanese",
+    "words":[{"concept":1,
+              "text":"びょうき"},
+             {"concept":2,
+              "text":"いし"},
+             {"concept":3,
+              "text":"かんごふ"},
+             {"concept":4,
+              "text":"せき"},
+             {"concept":5,
+              "text":"はくしょん"},
+             {"concept":6,
+              "text":"びょういん"},
+             {"concept":7,
+              "text":"しっかん"}]
+},
+{
+    "language":"German",
+    "words":[{"concept":1,
+              "text":"krank"},
+             {"concept":2,
+              "text":"Arzt"},
+             {"concept":3,
+              "text":"Krankenschwester"},
+             {"concept":4,
+              "text":"Husten"},
+             {"concept":5,
+              "text":"Nieser"},
+             {"concept":6,
+              "text":"Krankenhaus"},
+             {"concept":7,
+              "text":"Krankheit"}]
+}
+]

@@ -1,0 +1,37 @@
+[
+{
+    "language":"English",
+    "words":[{"concept":1,
+              "text":"second"},
+             {"concept":2,
+              "text":"minute"},
+             {"concept":3,
+              "text":"hour"},
+             {"concept":4,
+              "text":"AM"},
+             {"concept":5,
+              "text":"PM"}]
+},
+{
+    "language":"Japanese",
+    "words":[{"concept":1,
+              "text":"びょう"},
+             {"concept":2,
+              "text":"ぶん"},
+             {"concept":3,
+              "text":"じ"},
+             {"concept":4,
+              "text":"ごぜん"},
+             {"concept":5,
+              "text":"ごご"}]
+},
+{
+    "language":"German",
+    "words":[{"concept":1,
+              "text":"Sekunde"},
+             {"concept":2,
+              "text":"Minute"},
+             {"concept":3,
+              "text":"Stunde"}]
+}
+]

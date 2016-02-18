@@ -1,0 +1,28 @@
+[
+{
+    "language":"English",
+    "symbols":[{"concept":1,
+                "text":"ear"},
+               {"concept":2,
+                "text":"mouth"},
+               {"concept":3,
+                "text":"hand"},
+               {"concept":4,
+                "text":"foot"},
+               {"concept":5,
+                "text":"power"}]
+},
+{
+    "language":"Japanese",
+    "symbols":[{"concept":1,
+                "text":"耳"},
+               {"concept":2,
+                "text":"口"},
+               {"concept":3,
+                "text":"手"},
+               {"concept":4,
+                "text":"足"},
+               {"concept":5,
+                "text":"力"}]
+}
+]
