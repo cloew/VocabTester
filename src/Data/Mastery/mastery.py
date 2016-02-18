@@ -88,9 +88,15 @@ class Mastery(db.Model):
         """ Return the Concept Form Info associated with the Mastery """
         return WordInfo if self.word_id is not None else SymbolInfo
     
+    @hybrid_property
     def rating(self):
         """ Return the rating of the mastery """
         return max(0, self.answerRating - self.stalenessRating)
+    
+    @rating.expression
+    def rating(self):
+        """ Return the Queryable rating of the mastery """
+        return func.greatest(0, self.answerRating - self.stalenessRating)
     
     @hybrid_property
     def stalenessRating(self):
