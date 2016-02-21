@@ -1,3 +1,4 @@
+from .Mastery import Mastery, StalenessPeriod
 
 class LearnHelper:
     """ Helper Class for learning forms """
@@ -20,7 +21,12 @@ class LearnHelper:
         
     def formsFor(self, language):
         """ Return the learned forms for the given language """
-        return self.field.filter_by(language_id=language.id).all()
+        formModel = self.formInfo.formModel
+        return self.field.filter_by(language_id=language.id)\
+                         .join(Mastery, (Mastery.user_id==self.user.id) & (getattr(Mastery, self.formInfo.masteryFieldName) == formModel.id))\
+                         .join(StalenessPeriod)\
+                         .order_by(formModel.ratingFor(self.user))\
+                         .all()
         
     @property
     def field(self):
