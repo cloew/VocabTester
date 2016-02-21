@@ -1,6 +1,4 @@
 from .staleness_period import StalenessPeriod
-from ..symbol_info import SymbolInfo
-from ..word_info import WordInfo
 
 from kao_flask.ext.sqlalchemy import db
 from datetime import datetime
@@ -82,11 +80,6 @@ class Mastery(db.Model):
     def form(self):
         """ Return the Concept Form associated with the Mastery """
         return self.word if self.word_id is not None else self.symbol
-    
-    @property
-    def formInfo(self):
-        """ Return the Concept Form Info associated with the Mastery """
-        return WordInfo if self.word_id is not None else SymbolInfo
     
     @hybrid_property
     def rating(self):
