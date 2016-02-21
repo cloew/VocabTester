@@ -1,0 +1,53 @@
+[
+{
+    "language":"English",
+    "words":[{"concept":1,
+              "text":"telephone"},
+             {"concept":2,
+              "text":"clock"},
+             {"concept":3,
+              "text":"newspaper"},
+             {"concept":4,
+              "text":"picture"},
+             {"concept":5,
+              "text":"umbrella"},
+             {"concept":6,
+              "text":"television"},
+             {"concept":7,
+              "text":"lamp"}]
+},
+{
+    "language":"Japanese",
+    "words":[{"concept":1,
+              "text":"でんわ"},
+             {"concept":2,
+              "text":"とけい"},
+             {"concept":3,
+              "text":"しんぷん"},
+             {"concept":4,
+              "text":"え"},
+             {"concept":5,
+              "text":"かさ"},
+             {"concept":6,
+              "text":"テレビ"},
+             {"concept":7,
+              "text":"ランプ"}]
+},
+{
+    "language":"German",
+    "words":[{"concept":1,
+              "text":"Telefon"},
+             {"concept":2,
+              "text":"Uhr"},
+             {"concept":3,
+              "text":"Zeitung"},
+             {"concept":4,
+              "text":"Bild"},
+             {"concept":5,
+              "text":"Regenschirm"},
+             {"concept":6,
+              "text":"Fernsehen"},
+             {"concept":7,
+              "text":"Lampe"}]
+}
+]
