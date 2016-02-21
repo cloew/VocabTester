@@ -18,6 +18,7 @@ class StagingConfig(Config):
 class DevelopmentConfig(Config):
     DEVELOPMENT = True
     DEBUG = True
+    SQLALCHEMY_ECHO = False
 
 class TestingConfig(Config):
     TESTING = True
