@@ -1,7 +1,9 @@
 from .concept import Concept
 from ..language import Language
+from ..Mastery import Mastery
 
 from kao_flask.ext.sqlalchemy import db
+from sqlalchemy.ext.hybrid import hybrid_method
 
 class Symbol(db.Model):
     """ Represents a symbol used in a language """
@@ -13,6 +15,16 @@ class Symbol(db.Model):
     concept = db.relationship("Concept")
     language_id = db.Column(db.Integer, db.ForeignKey('languages.id', ondelete="CASCADE"))
     language = db.relationship("Language")
+    
+    @hybrid_method
+    def ratingFor(self, masteryCache):
+        """ Return the rating for the given user """
+        return masteryCache[self.id].rating
+        
+    @ratingFor.expression
+    def ratingFor(self, user):
+        """ Return the expression to use when querying for a word's rating """
+        return Mastery.rating
     
     def __unicode__(self):
         """ Return the string representation of the Word """

@@ -20,8 +20,6 @@ class Word(db.Model):
     def ratingFor(self, masteryCache):
         """ Return the rating for the given user """
         return masteryCache[self.id].rating
-        # mastery = Mastery.query.filter_by(user_id=user.id, word_id=self.id).first()
-        # return mastery.rating if mastery else 0
         
     @ratingFor.expression
     def ratingFor(self, user):
