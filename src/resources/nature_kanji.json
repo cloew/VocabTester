@@ -1,0 +1,32 @@
+[
+{
+    "language":"English",
+    "symbols":[{"concept":1,
+                "text":"heaven"},
+               {"concept":2,
+                "text":"sky"},
+               {"concept":3,
+                "text":"spirit"},
+               {"concept":4,
+                "text":"rain"},
+               {"concept":5,
+                "text":"mountain"},
+               {"concept":6,
+                "text":"river"}]
+},
+{
+    "language":"Japanese",
+    "symbols":[{"concept":1,
+                "text":"天"},
+               {"concept":2,
+                "text":"空"},
+               {"concept":3,
+                "text":"気"},
+               {"concept":4,
+                "text":"雨"},
+               {"concept":5,
+                "text":"山"},
+               {"concept":6,
+                "text":"川"}]
+}
+]
