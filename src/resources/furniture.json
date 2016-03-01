@@ -1,0 +1,47 @@
+[
+{
+    "language":"English",
+    "words":[{"concept":1,
+              "text":"table"},
+             {"concept":2,
+              "text":"chair"},
+             {"concept":3,
+              "text":"bookshelf"},
+             {"concept":4,
+              "text":"sofa"},
+             {"concept":5,
+              "text":"dresser"},
+             {"concept":6,
+              "text":"desk"}]
+},
+{
+    "language":"Japanese",
+    "words":[{"concept":1,
+              "text":"テーブル"},
+             {"concept":2,
+              "text":"いす"},
+             {"concept":3,
+              "text":"ほんだな"},
+             {"concept":4,
+              "text":"ソファー"},
+             {"concept":5,
+              "text":"たんす"},
+             {"concept":6,
+              "text":"つくえ"}]
+},
+{
+    "language":"German",
+    "words":[{"concept":1,
+              "text":"Tisch"},
+             {"concept":2,
+              "text":"Stuhl"},
+             {"concept":3,
+              "text":"Bücherregal"},
+             {"concept":4,
+              "text":"Sofa"},
+             {"concept":5,
+              "text":"Kommode"},
+             {"concept":6,
+              "text":"Schreibtisch"}]
+}
+]
