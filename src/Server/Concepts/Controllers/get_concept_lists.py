@@ -18,7 +18,7 @@ class GetConceptLists(auth.JSONController):
         languageContext = BuildLanguageContext(languageId, user)
         conceptListHelper = ConceptListQueryHelper(self.formInfo, user, self.formInfo.listModel.query, languageContext)
         masteryCache = BuildMasteryCache.ViaForms(conceptListHelper.foreignForms, self.formInfo, user)
-        userLists = conceptListHelper.buildUserLists(user)
+        boundLists = conceptListHelper.bound_lists
         
         learnedCache = LearnedCache(user, self.formInfo)
-        return {"lists":toJson([userList for userList in userLists if len(userList.concepts) > 0], user=user, learnedCache=learnedCache, masteryCache=masteryCache)}
+        return {"lists":toJson([boundList for boundList in boundLists if len(boundList.concepts) > 0], user=user, learnedCache=learnedCache, masteryCache=masteryCache)}
