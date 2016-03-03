@@ -16,7 +16,7 @@ class GetConceptLists(auth.JSONController):
     def performWithJSON(self, languageId, json=None, user=None):
         """ Convert the existing Concept Lists to JSON """
         languageContext = BuildLanguageContext(languageId, user)
-        conceptListHelper = ConceptListQueryHelper(self.formInfo, self.formInfo.listModel.query, languageContext)
+        conceptListHelper = ConceptListQueryHelper(self.formInfo, user, self.formInfo.listModel.query, languageContext)
         masteryCache = BuildMasteryCache.ViaForms(conceptListHelper.foreignForms, self.formInfo, user)
         userLists = conceptListHelper.buildUserLists(user)
         
