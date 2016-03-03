@@ -1,16 +1,18 @@
 from .staleness_period import StalenessPeriod
-from ..symbol_info import SymbolInfo
-from ..word_info import WordInfo
 
 from kao_flask.ext.sqlalchemy import db
 from datetime import datetime
-from sqlalchemy import text
+from sqlalchemy import text, func
+from sqlalchemy.ext.hybrid import hybrid_property
+from sqlalchemy.sql.expression import cast
 import sys
 
 class Mastery(db.Model):
     """ Represents the mastery of some skill """
     __tablename__ = 'masteries'
     MAX_RATING = 5
+    CORRECT_CHANGE = 1
+    WRONG_CHANGE = -1
     
     id = db.Column(db.Integer, primary_key=True)
     
@@ -47,7 +49,7 @@ class Mastery(db.Model):
         
     def updateRating(self, correct):
         """ Update the answer rating """
-        ratingChange = 1 if correct else -1
+        ratingChange = self.CORRECT_CHANGE if correct else self.WRONG_CHANGE
         
         newRating = self.answerRating + ratingChange
         newRating = min(newRating, self.MAX_RATING)
@@ -79,26 +81,31 @@ class Mastery(db.Model):
         """ Return the Concept Form associated with the Mastery """
         return self.word if self.word_id is not None else self.symbol
     
-    @property
-    def formInfo(self):
-        """ Return the Concept Form Info associated with the Mastery """
-        return WordInfo if self.word_id is not None else SymbolInfo
-    
-    @property
+    @hybrid_property
     def rating(self):
         """ Return the rating of the mastery """
-        return max(0, self.answerRating + self.stalenessRating)
+        return max(0, self.answerRating - self.stalenessRating)
     
-    @property
+    @rating.expression
+    def rating(self):
+        """ Return the Queryable rating of the mastery """
+        return func.greatest(0, self.answerRating - self.stalenessRating)
+    
+    @hybrid_property
     def stalenessRating(self):
         """ Return the staleness rating of the mastery """
         mostRecentCorrectAnswer = self.lastCorrectAnswer
         if mostRecentCorrectAnswer is None:
             return 0
         else:
-            return -1 * int((datetime.now() - mostRecentCorrectAnswer).days / self.stalenessPeriod.days)
-            
-    @property
+            return int((datetime.now() - mostRecentCorrectAnswer).days / self.stalenessPeriod.days)
+    
+    @stalenessRating.expression
+    def stalenessRating(self):
+        """ Return the Queryable staleness rating of the mastery """
+        return func.coalesce(cast(func.extract('epoch', func.now()-self.lastCorrectAnswer)/86400, db.Integer)/StalenessPeriod.days, 0)
+
+    @hybrid_property
     def isStale(self):
-        """ Return if the mastery is has outlived the staleness period """
-        return self.stalenessRating < 0
+        """ Return if the mastery has outlived the staleness period """
+        return self.stalenessRating > 0
