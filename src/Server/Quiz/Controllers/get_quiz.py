@@ -19,11 +19,11 @@ class GetQuiz(auth.JSONController):
         """ Convert the quiz to JSON """
         languageContext = BuildLanguageContext(languageId, user)
         
-        conceptListHelper = ConceptListQueryHelper(self.formInfo, self.formInfo.listModel.query.filter_by(id=listId), languageContext)
-        userList = conceptListHelper.buildUserLists(user)[0]
+        conceptListHelper = ConceptListQueryHelper(self.formInfo, user, self.formInfo.listModel.query.filter_by(id=listId), languageContext)
+        boundList = conceptListHelper.bound_lists[0]
         
-        masteryCache = BuildMasteryCache.ViaPairs(userList.concepts, self.formInfo, user)
+        masteryCache = BuildMasteryCache.ViaPairs(boundList.concepts, self.formInfo, user)
         learnedCache = LearnedCache(user, self.formInfo)
-        quiz = Quiz(userList.name, userList.concepts, masteryCache)
+        quiz = Quiz(boundList.name, boundList.concepts, masteryCache)
         
         return {"quiz":toJson(quiz, user=user, learnedCache=learnedCache, masteryCache=masteryCache)}
