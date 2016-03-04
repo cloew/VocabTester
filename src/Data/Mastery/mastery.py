@@ -103,7 +103,7 @@ class Mastery(db.Model):
     @stalenessRating.expression
     def stalenessRating(self):
         """ Return the Queryable staleness rating of the mastery """
-        return func.coalesce(cast(func.extract('epoch', func.now()-self.lastCorrectAnswer)/86400, db.Integer)/StalenessPeriod.days, 0)
+        return func.coalesce(cast(func.floor(func.extract('epoch', func.now()-self.lastCorrectAnswer)/86400), db.Integer)/StalenessPeriod.days, 0)
 
     @hybrid_property
     def isStale(self):
