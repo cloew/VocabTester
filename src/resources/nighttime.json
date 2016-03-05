@@ -1,0 +1,53 @@
+[
+{
+    "language":"English",
+    "words":[{"concept":1,
+              "text":"bed"},
+             {"concept":2,
+              "text":"midnight"},
+             {"concept":3,
+              "text":"dream"},
+             {"concept":4,
+              "text":"nightmare"},
+             {"concept":5,
+              "text":"sleep"},
+             {"concept":6,
+              "text":"alarm clock"},
+             {"concept":7,
+              "text":"star"}]
+},
+{
+    "language":"Japanese",
+    "words":[{"concept":1,
+              "text":"しんだい"},
+             {"concept":2,
+              "text":"まよなか"},
+             {"concept":3,
+              "text":"ゆめ"},
+             {"concept":4,
+              "text":"あくむ"},
+             {"concept":5,
+              "text":"すいみん"},
+             {"concept":6,
+              "text":"めざましどけい"},
+             {"concept":7,
+              "text":"ほし"}]
+},
+{
+    "language":"German",
+    "words":[{"concept":1,
+              "text":"Bett"},
+             {"concept":2,
+              "text":"Mitternacht"},
+             {"concept":3,
+              "text":"Traum"},
+             {"concept":4,
+              "text":"Alptraum"},
+             {"concept":5,
+              "text":"Schlaf"},
+             {"concept":6,
+              "text":"Wecker"},
+             {"concept":7,
+              "text":"Stern"}]
+}
+]
