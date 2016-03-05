@@ -13,3 +13,7 @@ class BoundConceptList:
     def concepts(self):
         """ Return the concept pairs for the languages in the Concept Manager """
         return self.conceptList.getConceptPairs(self.conceptManager)
+        
+    def __repr__(self):
+        """ Return the String Representation of the Bound Concept List """
+        return "<BoundConceptList({0})>".format(self.conceptList)

@@ -51,6 +51,6 @@ class ConceptListQueryHelper:
                     .join(concept_list_concepts)\
                     .join(Concept)\
                     .join(formInfo.formModel, (formInfo.formModel.language_id == languages.foreign.id) & (formInfo.formModel.concept_id == Concept.id))\
-                    .join(Mastery, (Mastery.user_id==user.id) & (getattr(Mastery, formInfo.masteryFieldName) == formInfo.formModel.id))\
-                    .join(StalenessPeriod)\
+                    .outerjoin(Mastery, (Mastery.user_id==user.id) & (getattr(Mastery, formInfo.masteryFieldName) == formInfo.formModel.id))\
+                    .outerjoin(StalenessPeriod)\
                     .order_by(formInfo.listModel.averageRatingFor(user, languages.foreign))
