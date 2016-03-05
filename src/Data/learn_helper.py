@@ -23,8 +23,8 @@ class LearnHelper:
         """ Return the learned forms for the given language """
         formModel = self.formInfo.formModel
         return self.field.filter_by(language_id=language.id)\
-                         .join(Mastery, (Mastery.user_id==self.user.id) & (getattr(Mastery, self.formInfo.masteryFieldName) == formModel.id))\
-                         .join(StalenessPeriod)\
+                         .outerjoin(Mastery, (Mastery.user_id==self.user.id) & (getattr(Mastery, self.formInfo.masteryFieldName) == formModel.id))\
+                         .outerjoin(StalenessPeriod)\
                          .order_by(formModel.ratingFor(self.user))\
                          .all()
         
