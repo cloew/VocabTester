@@ -1,0 +1,36 @@
+[
+{
+    "language":"English",
+    "symbols":[{"concept":1,
+                "text":"woods"},
+               {"concept":2,
+                "text":"forest"},
+               {"concept":3,
+                "text":"stone"},
+               {"concept":4,
+                "text":"flower"},
+               {"concept":5,
+                "text":"dog"},
+               {"concept":6,
+                "text":"insect"},
+               {"concept":7,
+                "text":"town"}]
+},
+{
+    "language":"Japanese",
+    "symbols":[{"concept":1,
+                "text":"林"},
+               {"concept":2,
+                "text":"森"},
+               {"concept":3,
+                "text":"石"},
+               {"concept":4,
+                "text":"花"},
+               {"concept":5,
+                "text":"犬"},
+               {"concept":6,
+                "text":"虫"},
+               {"concept":7,
+                "text":"町"}]
+}
+]
