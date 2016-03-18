@@ -1,12 +1,14 @@
 use angular;
 use console;
 
-angular.module('Concepts', ['ui.bootstrap', 'kao.loading', 'Language', 'Forms'])
-    .controller('LearnedFormsController', fn($scope, FormsService, LanguageService, LoadingTracker) {
+angular.module('Concepts', ['ui.bootstrap', 'kao.loading', 'kao.page-title', 'Language', 'Forms'])
+    .controller('LearnedFormsController', fn($scope, FormsService, LanguageService, LoadingTracker, PageTitle) {
         var form = FormsService.current();
         $scope.formName = form.pluralName;
         $scope.quizUrl = form.randomQuizPath;
         $scope.tracker = new LoadingTracker();
+        
+        PageTitle.set("Vocab | Your Learned {{ pluralName }}", form);
         
         LanguageService.watchCurrentLanguage($scope, fn(event, language) {
             $scope.tracker.load(form.getLearned()).success(fn(data) {

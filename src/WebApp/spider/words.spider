@@ -2,7 +2,9 @@ use angular;
 use console;
     
 angular.module('Words', ['kao.loading', 'Concepts'])
-    .controller('SearchController', fn ($scope, $http, LanguageService, LoadingTracker) {
+    .controller('SearchController', fn ($scope, $http, LanguageService, LoadingTracker, PageTitle) {
+        PageTitle.set("Vocab | Search");
+        
         $scope.results = undefined;
         $scope.isWords = true;
         $scope.tracker = new LoadingTracker();

@@ -107,8 +107,9 @@ angular.module('Forms', ['kao.utils', 'kao.loading', 'average', 'pluck', 'precis
         return {
             restrict: 'E',
             replace: true,
-            controller: fn($scope, FormsService, LanguageService, LoadingTracker) {
+            controller: fn($scope, FormsService, LanguageService, LoadingTracker, PageTitle) {
                 var form = FormsService.current();
+                PageTitle.set("Vocab | {{ name }} Lists", form);
                 $scope.formName = form.name;
                 $scope.tracker = new LoadingTracker();
                 

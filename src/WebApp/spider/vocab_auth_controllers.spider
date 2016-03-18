@@ -2,7 +2,8 @@ use angular;
 use console;
 
 angular.module('vocab.auth.controllers', ['kao.loading', 'kao.utils', 'kao.nav'])
-    .controller('LoginController', fn($scope, $location, UserService, NavService) {
+    .controller('LoginController', fn($scope, $location, UserService, NavService, PageTitle) {
+        PageTitle.set("Vocab | Login");
         $scope.login = fn() {
             UserService.login({'email':$scope.email, 'password':$scope.password}).success(fn(user) {
                 var next = $location.search().returnTo;
@@ -16,7 +17,8 @@ angular.module('vocab.auth.controllers', ['kao.loading', 'kao.utils', 'kao.nav']
             });
         };
     })
-    .controller('RegisterController', fn($scope, UserService, NavService) {
+    .controller('RegisterController', fn($scope, UserService, NavService, PageTitle) {
+        PageTitle.set("Vocab | Register");
         $scope.user = {};
         $scope.register = fn() {
             UserService.register($scope.user).success(fn(user) {
@@ -26,7 +28,8 @@ angular.module('vocab.auth.controllers', ['kao.loading', 'kao.utils', 'kao.nav']
             });
         };
     })
-    .controller('ProfileController', fn($scope, UserService, LanguageEnrollmentsService) {
+    .controller('ProfileController', fn($scope, UserService, LanguageEnrollmentsService, PageTitle) {
+        PageTitle.set("Vocab | Profile");
         $scope.user = {};
         LanguageEnrollmentsService.requestEnrollments(fn(enrollments) {
             $scope.enrollments = enrollments;
