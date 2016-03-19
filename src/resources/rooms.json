@@ -1,0 +1,47 @@
+[
+{
+    "language":"English",
+    "words":[{"concept":1,
+              "text":"room"},
+             {"concept":2,
+              "text":"bedroom"},
+             {"concept":3,
+              "text":"kitchen"},
+             {"concept":4,
+              "text":"living room"},
+             {"concept":5,
+              "text":"hall"},
+             {"concept":6,
+              "text":"bathroom"}]
+},
+{
+    "language":"Japanese",
+    "words":[{"concept":1,
+              "text":"へや"},
+             {"concept":2,
+              "text":"しんしつ"},
+             {"concept":3,
+              "text":"だいどころ"},
+             {"concept":4,
+              "text":"リビングルーム"},
+             {"concept":5,
+              "text":"げんかん"},
+             {"concept":6,
+              "text":"よくしつ"}]
+},
+{
+    "language":"German",
+    "words":[{"concept":1,
+              "text":"Zimmer"},
+             {"concept":2,
+              "text":"Schlafzimmer"},
+             {"concept":3,
+              "text":"Küche"},
+             {"concept":4,
+              "text":"Wohnzimmer"},
+             {"concept":5,
+              "text":"Halle"},
+             {"concept":6,
+              "text":"Badezimmer"}]
+}
+]
