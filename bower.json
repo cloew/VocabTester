@@ -27,6 +27,7 @@
     "kao-ng-loading": "cloew/kao-ng-loading",
     "traceur-runtime": "0.0.91",
     "ng-autofocus": "~0.0.2",
-    "kao-ng-page-title": "cloew/kao-ng-page-title"
+    "kao-ng-page-title": "cloew/kao-ng-page-title",
+    "kao-ng-route-page-title": "cloew/kao-ng-route-page-title"
   }
 }
