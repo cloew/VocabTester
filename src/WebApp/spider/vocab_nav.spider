@@ -6,7 +6,7 @@ angular.module('vocab.nav', ['kao.nav', 'vocab.auth.controllers', 'kao.route.pag
         navConfig.add({name: 'index', path:'/', templateUrl:'static/partials/index.html', full_title:'Welcome to Vocab Tester', controller:'IndexController'});
         navConfig.add({name: 'login', path:'/login', templateUrl:'static/partials/login.html', title:'Login', controller:'LoginController'});
         navConfig.add({name: 'register', path:'/register', templateUrl:'static/partials/register.html', title:'Register', controller:'RegisterController'});
-        navConfig.add({name: 'enroll', path:'/enroll', templateUrl:'static/partials/enroll.html', title:'Choose a Language', controller:'ChooseEnrollmentController', onLoad: ['requireAuth']});
+        navConfig.add({name: 'enroll', path:'/enroll', templateUrl:'static/partials/enroll.html', full_title:'Choose a Language', controller:'ChooseEnrollmentController', onLoad: ['requireAuth']});
         navConfig.add({name: 'profile', path:'/profile', templateUrl:'static/partials/profile.html', title:'Profile', controller:'ProfileController', onLoad: ['requireAuth', 'requireEnrollment']});
         navConfig.add({name: 'words', path:'/words', templateUrl:'static/partials/learned_concepts.html', title:'Learned Words', controller:'LearnedFormsController', onLoad: ['requireAuth', 'requireEnrollment']});
         navConfig.add({name: 'wordLists', path:'/wordlists', template:'<form-lists></form-lists>', title:'Word Lists', onLoad: ['requireAuth', 'requireEnrollment']});
