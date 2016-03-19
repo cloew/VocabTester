@@ -1,0 +1,53 @@
+[
+{
+    "language":"English",
+    "words":[{"concept":1,
+              "text":"son"},
+             {"concept":2,
+              "text":"daughter"},
+             {"concept":3,
+              "text":"husband"},
+             {"concept":4,
+              "text":"wife"},
+             {"concept":5,
+              "text":"aunt"},
+             {"concept":6,
+              "text":"uncle"},
+             {"concept":7,
+              "text":"cousin"}]
+},
+{
+    "language":"Japanese",
+    "words":[{"concept":1,
+              "text":"むすこ"},
+             {"concept":2,
+              "text":"むすめ"},
+             {"concept":3,
+              "text":"おっと"},
+             {"concept":4,
+              "text":"つま"},
+             {"concept":5,
+              "text":"おば"},
+             {"concept":6,
+              "text":"おじ"},
+             {"concept":7,
+              "text":"いとこ"}]
+},
+{
+    "language":"German",
+    "words":[{"concept":1,
+              "text":"Sohn"},
+             {"concept":2,
+              "text":"Tochter"},
+             {"concept":3,
+              "text":"Ehemann"},
+             {"concept":4,
+              "text":"Ehefrau"},
+             {"concept":5,
+              "text":"Tante"},
+             {"concept":6,
+              "text":"Onkel"},
+             {"concept":7,
+              "text":"Cousin"}]
+}
+]
