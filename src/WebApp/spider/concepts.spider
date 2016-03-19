@@ -8,8 +8,6 @@ angular.module('Concepts', ['ui.bootstrap', 'kao.loading', 'kao.page-title', 'La
         $scope.quizUrl = form.randomQuizPath;
         $scope.tracker = new LoadingTracker();
         
-        PageTitle.set("Vocab | Your Learned {{ pluralName }}", form);
-        
         LanguageService.watchCurrentLanguage($scope, fn(event, language) {
             $scope.tracker.load(form.getLearned()).success(fn(data) {
                 $scope.concepts = data.concepts;

@@ -2,11 +2,10 @@ use angular;
 use console;
 
 angular.module('quiz', ['quiz.builders', 'ui.bootstrap', 'kao.input', 'kao.loading'])
-    .controller('QuizController', fn ($scope, QuizBuilders, Quiz, LoadingTracker, PageTitle) {
-        PageTitle.set("Vocab | Quiz");
+    .controller('QuizController', fn ($scope, $interpolate, QuizBuilders, Quiz, LoadingTracker, FormattedPageTitle) {
         $scope.tracker = new LoadingTracker();
         $scope.tracker.load(QuizBuilders.current().build()).success(fn(quiz) {
-            PageTitle.set("Vocab | {{ quiz.name }} Quiz", quiz);
+            FormattedPageTitle.set({title: $interpolate("{{ quiz.name }} Quiz")(quiz)});
             $scope.quiz = quiz;
         }).error(fn(error) {
             console.log(error);

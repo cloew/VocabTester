@@ -9,9 +9,8 @@ angular.module('VocabTester', ['ui.bootstrap', 'ngRoute', 'Header', 'Concepts', 
 			redirectTo: '/'
 		});
 	}])
-    .controller('IndexController', fn ($scope, UserService, PageTitle) {
+    .controller('IndexController', fn ($scope, UserService) {
         $scope.isLoggedIn = UserService.isLoggedIn;
-        PageTitle.set("Welcome to Vocab Tester");
     })
     .directive('info', fn() {
         return {
