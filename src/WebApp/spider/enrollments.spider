@@ -9,7 +9,7 @@ angular.module('vocab.enrollments', ['kao.auth', 'kao.loading', 'kao.utils', 'ka
         $scope.tracker = new LoadingTracker();
         UserService.withUser().success(fn(user) {
             $scope.tracker.load(languages()).success(fn(data) {
-                LanguageEnrollmentsService.requestEnrollments(fn(enrollments) {
+                LanguageEnrollmentsService.withEnrollments(fn(enrollments) {
                     var enrolledLanguageIds = [];
                     angular.forEach(enrollments, fn(enrollment, key) {
                         enrolledLanguageIds.push(enrollment.language.id);
@@ -45,18 +45,12 @@ angular.module('vocab.enrollments', ['kao.auth', 'kao.loading', 'kao.utils', 'ka
                 console.log(error);
             });
         };
-        this.requestEnrollments = fn(callback) {
+        this.withEnrollments = fn(callback) {
             if !enrollments? {
                 this.loadEnrollments(callback);
             } else {
                 callback(enrollments);
             }
-        };
-        this.watchEnrollments = fn(scope, callback) {
-            scope.$on(EnrollmentEvents.allChanged, callback);
-            this.requestEnrollments(fn(enrollments) {
-                callback(undefined, enrollments);
-            });
         };
         this.withCurrentEnrollment = fn() {
             var deferred = KaoDefer();
@@ -78,6 +72,12 @@ angular.module('vocab.enrollments', ['kao.auth', 'kao.loading', 'kao.utils', 'ka
                 }
             }, 0);
             return deferred.promise;
+        };
+        this.watchEnrollments = fn(scope, callback) {
+            scope.$on(EnrollmentEvents.allChanged, callback);
+            this.requestEnrollments(fn(enrollments) {
+                callback(undefined, enrollments);
+            });
         };
         this.watchCurrentEnrollment = fn(scope, callback) {
             scope.$on(EnrollmentEvents.currentChanged, callback);

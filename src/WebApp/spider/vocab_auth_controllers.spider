@@ -28,7 +28,7 @@ angular.module('vocab.auth.controllers', ['vocab.enrollments', 'kao.auth', 'kao.
     })
     .controller('ProfileController', fn($scope, UserService, LanguageEnrollmentsService) {
         $scope.user = {};
-        LanguageEnrollmentsService.requestEnrollments(fn(enrollments) {
+        LanguageEnrollmentsService.withEnrollments(fn(enrollments) {
             $scope.enrollments = enrollments;
         });
         UserService.withUser().success(fn(user) {
