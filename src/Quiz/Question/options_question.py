@@ -1,11 +1,11 @@
-from .options_finder import OptionsFinder
 from ..sampler import sample_at_most
+from ..Ambiguity import AmbiguityHelper
 
 import random
 
 class OptionsQuestion:
     """ Represents a question with options in a Quiz """
-    NUM_WRONG_ANSWERS = 4
+    MAX_OPTIONS = 5
     
     def __init__(self, subject, allPairs):
         """ Initialize the question with the word to display, its matching translation and the other options """
@@ -13,10 +13,11 @@ class OptionsQuestion:
         self.queryWord = self.getQuestionForm(subject)
         self.answer = self.getOptionForm(subject)
         
-        optionFinder = OptionsFinder(subject, allPairs)
-        self.otherOptions = [self.getOptionForm(option) for option in optionFinder.options]
+        random.shuffle(allPairs)
+        helper = AmbiguityHelper(allPairs)
+        optionPairs = helper.getUnambiguousPairs(self.subject, self.MAX_OPTIONS)
+        self.options = [self.getOptionForm(option) for option in optionPairs]
         
-        self.options = [self.answer] + sample_at_most(self.otherOptions, self.NUM_WRONG_ANSWERS)
         random.shuffle(self.options)
         
     @property

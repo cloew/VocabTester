@@ -13,9 +13,7 @@ class OptionsQuestionBuilder:
         """ Build the questions for use in the quiz """
         random.shuffle(pairs)
         questionClasses = self.getQuestionClasses(pairs)
-        
-        setOfPairs = set(allPairs)
-        return [questionClass(pair, setOfPairs) for pair, questionClass in zip(pairs, questionClasses)]
+        return [questionClass(pair, allPairs) for pair, questionClass in zip(pairs, questionClasses)]
     
     def getQuestionClasses(self, pairs):
         """ Return the question classes """
