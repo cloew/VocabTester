@@ -3,7 +3,8 @@ use console;
 
 angular.module('vocab.enrollments', ['kao.auth', 'kao.loading', 'kao.utils', 'kao.nav'])
     .value('EnrollmentEvents', {currentChanged: 'current-enrollment-changed',
-                                allChanged: 'enrollments-changed'})
+                                allChanged: 'enrollments-changed',
+                                reset:'enrollments-reset'})
     .controller('ChooseEnrollmentController', fn ($scope, languages, UserService, LanguageEnrollmentsService, NavService, LoadingTracker) {
         $scope.languages = [];
         $scope.tracker = new LoadingTracker();
@@ -75,7 +76,7 @@ angular.module('vocab.enrollments', ['kao.auth', 'kao.loading', 'kao.utils', 'ka
         };
         this.watchEnrollments = fn(scope, callback) {
             scope.$on(EnrollmentEvents.allChanged, callback);
-            this.requestEnrollments(fn(enrollments) {
+            this.withEnrollments(fn(enrollments) {
                 callback(undefined, enrollments);
             });
         };
@@ -89,7 +90,7 @@ angular.module('vocab.enrollments', ['kao.auth', 'kao.loading', 'kao.utils', 'ka
             var deferred = $q.defer();
             var self = this;
             $http.post('/api/users/current/enrollments', {language:language}).success(fn(data) {
-                self.requestEnrollments(fn(enrollments) {
+                self.withEnrollments(fn(enrollments) {
                     if enrollments.length == 0 {
                         data.record.default = true;
                         $rootScope.$broadcast(EnrollmentEvents.currentChanged, data.record);
@@ -112,6 +113,7 @@ angular.module('vocab.enrollments', ['kao.auth', 'kao.loading', 'kao.utils', 'ka
         };
         $rootScope.$on(userEvents.logout, fn() {
             enrollments = undefined;
+            $rootScope.$broadcast(EnrollmentEvents.reset);
         });
     })
     .service('requireEnrollment', fn($location, LanguageEnrollmentsService, NavService) {
