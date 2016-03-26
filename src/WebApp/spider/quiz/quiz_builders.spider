@@ -2,7 +2,7 @@ use angular;
 use console;
 
 angular.module('quiz.builders', ['question', 'kao.utils', 'kao.loading', 'Forms', 'vocab.nav'])
-    .factory('Quiz', fn(NavService, LanguageService, QuestionFactory, AnswerHelper, LoadingTracker) {
+    .factory('Quiz', fn(NavService, QuestionFactory, AnswerHelper, LoadingTracker) {
         fn Quiz(data) {
             this.quiz = data;
             this.currentQuestionIndex = 0;
