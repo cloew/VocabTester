@@ -10,3 +10,7 @@ class ConceptPair:
     def getMasteryForUser(self, user):
         """ Return the mastery for the foreign form for the user """
         return self.foreign.getMastery(user)
+        
+    def __repr__(self):
+        """ Return the String representation of the Concpet Pair """
+        return "<ConceptPair({}, {})>".format(self.native, self.foreign)
