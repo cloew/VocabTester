@@ -1,0 +1,123 @@
+use angular;
+use console;
+
+angular.module('vocab.enrollments', ['kao.auth', 'kao.loading', 'kao.utils', 'kao.nav'])
+    .value('EnrollmentEvents', {currentChanged: 'current-enrollment-changed',
+                                allChanged: 'enrollments-changed'})
+    .controller('ChooseEnrollmentController', fn ($scope, languages, UserService, LanguageEnrollmentsService, NavService, LoadingTracker) {
+        $scope.languages = [];
+        $scope.tracker = new LoadingTracker();
+        UserService.withUser().success(fn(user) {
+            $scope.tracker.load(languages()).success(fn(data) {
+                LanguageEnrollmentsService.requestEnrollments(fn(enrollments) {
+                    var enrolledLanguageIds = [];
+                    angular.forEach(enrollments, fn(enrollment, key) {
+                        enrolledLanguageIds.push(enrollment.language.id);
+                    });
+                    angular.forEach(data.records, fn(language, key) {
+                        if language.id != user.nativeLanguage.id && enrolledLanguageIds.indexOf(language.id) == -1 {
+                            $scope.languages.push(language);
+                        }
+                    });
+                });
+            }).error(fn(error) {
+                console.log(error);
+            });
+        }).error(fn(error) {
+            console.log(error);
+        });
+        
+        $scope.enroll = fn(language) {
+            LanguageEnrollmentsService.create(language).then(fn(data) {
+                NavService.profile.goTo();
+            }, fn(error) {
+                console.log(error);
+            });
+        };
+    })
+    .service('LanguageEnrollmentsService', fn($http, $q, $rootScope, $timeout, KaoDefer, userEvents, EnrollmentEvents) {
+        var enrollments = undefined;
+        this.loadEnrollments = fn(callback) {
+            $http.get('/api/users/current/enrollments').success(fn(data) {
+                enrollments = data.enrollments;
+                callback(enrollments);
+            }).error(fn(error) {
+                console.log(error);
+            });
+        };
+        this.requestEnrollments = fn(callback) {
+            if !enrollments? {
+                this.loadEnrollments(callback);
+            } else {
+                callback(enrollments);
+            }
+        };
+        this.watchEnrollments = fn(scope, callback) {
+            scope.$on(EnrollmentEvents.allChanged, callback);
+            this.requestEnrollments(fn(enrollments) {
+                callback(undefined, enrollments);
+            });
+        };
+        this.withCurrentEnrollment = fn() {
+            var deferred = KaoDefer();
+            var findCurrentEnrollment = fn(enrollments) {
+                for enrollment in enrollments {
+                    if (enrollment.default) {
+                        deferred.resolve(enrollment);
+                        return;
+                    }
+                }
+                deferred.reject();
+            };
+            var self = this;
+            $timeout(fn() {
+                if !enrollments? {
+                    self.loadEnrollments(findCurrentEnrollment);
+                } else {
+                    findCurrentEnrollment(enrollments);
+                }
+            }, 0);
+            return deferred.promise;
+        };
+        this.watchCurrentEnrollment = fn(scope, callback) {
+            scope.$on(EnrollmentEvents.currentChanged, callback);
+            this.withCurrentEnrollment().success(fn(currentEnrollment) {
+                callback(undefined, currentEnrollment);
+            });
+        };
+        this.create = fn(language, callback) {
+            var deferred = $q.defer();
+            var self = this;
+            $http.post('/api/users/current/enrollments', {language:language}).success(fn(data) {
+                self.requestEnrollments(fn(enrollments) {
+                    if enrollments.length == 0 {
+                        data.record.default = true;
+                        $rootScope.$broadcast(EnrollmentEvents.currentChanged, data.record);
+                    }
+                    enrollments.push(data.record);
+                    $rootScope.$broadcast(EnrollmentEvents.allChanged, enrollments);
+                });
+                deferred.resolve(data);
+            }).error(fn(error) {
+                deferred.reject(error);
+            });
+            return deferred.promise;
+        };
+        this.changeCurrentEnrollment = fn(index) {
+            this.withCurrentEnrollment().success(fn(currentEnrollment) {
+                currentEnrollment.default = false;
+                enrollments[index].default = true;
+                $rootScope.$broadcast(EnrollmentEvents.currentChanged, enrollments[index]);
+            });
+        };
+        $rootScope.$on(userEvents.logout, fn() {
+            enrollments = undefined;
+        });
+    })
+    .service('requireEnrollment', fn($location, LanguageEnrollmentsService, NavService) {
+        return fn(event) {
+            LanguageEnrollmentsService.withCurrentEnrollment().error(fn() {
+                $location.path(NavService.enroll.path);
+            });
+        };
+    });
