@@ -1,5 +1,6 @@
 from .concept import Concept
 from ..language import Language
+from ..Ambiguity import AmbiguityGroup
 from ..Mastery import Mastery
 
 from kao_flask.ext.sqlalchemy import db
@@ -12,9 +13,13 @@ class Symbol(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     text = db.Column(db.UnicodeText())
     concept_id = db.Column(db.Integer, db.ForeignKey('concepts.id', ondelete="CASCADE"))
-    concept = db.relationship("Concept")
     language_id = db.Column(db.Integer, db.ForeignKey('languages.id', ondelete="CASCADE"))
+    ambiguity_group_id = db.Column(db.Integer, db.ForeignKey(AmbiguityGroup.id, ondelete="SET NULL"))
+    clarification = db.Column(db.UnicodeText())
+    
+    concept = db.relationship("Concept")
     language = db.relationship("Language")
+    ambiguity_group = db.relationship(AmbiguityGroup)
     
     @hybrid_method
     def ratingFor(self, masteryCache):
