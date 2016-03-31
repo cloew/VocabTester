@@ -1,0 +1,36 @@
+[
+{
+    "language":"English",
+    "symbols":[{"concept":1,
+                "text":"village"},
+               {"concept":2,
+                "text":"field"},
+               {"concept":3,
+                "text":"night"},
+               {"concept":4,
+                "text":"red"},
+               {"concept":5,
+                "text":"blue"},
+               {"concept":6,
+                "text":"white"},
+               {"concept":7,
+                "text":"see"}]
+},
+{
+    "language":"Japanese",
+    "symbols":[{"concept":1,
+                "text":"村"},
+               {"concept":2,
+                "text":"田"},
+               {"concept":3,
+                "text":"夕"},
+               {"concept":4,
+                "text":"赤"},
+               {"concept":5,
+                "text":"青"},
+               {"concept":6,
+                "text":"白"},
+               {"concept":7,
+                "text":"見"}]
+}
+]
