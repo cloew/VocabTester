@@ -1,0 +1,32 @@
+[
+{
+    "language":"English",
+    "symbols":[{"concept":1,
+                "text":"exit"},
+               {"concept":2,
+                "text":"enter"},
+               {"concept":3,
+                "text":"tip"},
+               {"concept":4,
+                "text":"early"},
+               {"concept":5,
+                "text":"book"},
+               {"concept":6,
+                "text":"sentence"}]
+},
+{
+    "language":"Japanese",
+    "symbols":[{"concept":1,
+                "text":"出"},
+               {"concept":2,
+                "text":"入"},
+               {"concept":3,
+                "text":"先"},
+               {"concept":4,
+                "text":"早"},
+               {"concept":5,
+                "text":"本"},
+               {"concept":6,
+                "text":"文"}]
+}
+]
