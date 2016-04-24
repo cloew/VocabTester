@@ -1,0 +1,53 @@
+[
+{
+    "language":"English",
+    "words":[{"concept":1,
+              "text":"bowl"},
+             {"concept":2,
+              "text":"plate"},
+             {"concept":3,
+              "text":"fork"},
+             {"concept":4,
+              "text":"spoon"},
+             {"concept":5,
+              "text":"knife"},
+             {"concept":6,
+              "text":"chopstick"},
+             {"concept":7,
+              "text":"cup"}]
+},
+{
+    "language":"Japanese",
+    "words":[{"concept":1,
+              "text":"ボウル"},
+             {"concept":2,
+              "text":"さら"},
+             {"concept":3,
+              "text":"フォーク"},
+             {"concept":4,
+              "text":"スプーン"},
+             {"concept":5,
+              "text":"ナイフ"},
+             {"concept":6,
+              "text":"はし"},
+             {"concept":7,
+              "text":"カップ"}]
+},
+{
+    "language":"German",
+    "words":[{"concept":1,
+              "text":"Schüssel"},
+             {"concept":2,
+              "text":"Teller"},
+             {"concept":3,
+              "text":"Gabel"},
+             {"concept":4,
+              "text":"Löffel"},
+             {"concept":5,
+              "text":"Messer"},
+             {"concept":6,
+              "text":"Stäbchen"},
+             {"concept":7,
+              "text":"Tasse"}]
+}
+]
