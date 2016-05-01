@@ -1,0 +1,47 @@
+[
+{
+    "language":"English",
+    "words":[{"concept":1,
+              "text":"elementary school"},
+             {"concept":2,
+              "text":"middle school"},
+             {"concept":3,
+              "text":"high school"},
+             {"concept":4,
+              "text":"college"},
+             {"concept":5,
+              "text":"teacher"},
+             {"concept":6,
+              "text":"student"}]
+},
+{
+    "language":"Japanese",
+    "words":[{"concept":1,
+              "text":"しょうがっこう"},
+             {"concept":2,
+              "text":"ちゅうがっこう"},
+             {"concept":3,
+              "text":"こうこう"},
+             {"concept":4,
+              "text":"だいがく"},
+             {"concept":5,
+              "text":"せんせい"},
+             {"concept":6,
+              "text":"がくせい"}]
+},
+{
+    "language":"German",
+    "words":[{"concept":1,
+              "text":"Grundschule"},
+             {"concept":2,
+              "text":"Mittelschule"},
+             {"concept":3,
+              "text":"Oberschule"},
+             {"concept":4,
+              "text":"Universität"},
+             {"concept":5,
+              "text":"Lehrer"},
+             {"concept":6,
+              "text":"Schüler"}]
+}
+]
