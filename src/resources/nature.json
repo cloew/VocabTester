@@ -1,0 +1,53 @@
+[
+{
+    "language":"English",
+    "words":[{"concept":1,
+              "text":"mountain"},
+             {"concept":2,
+              "text":"hill"},
+             {"concept":3,
+              "text":"beach"},
+             {"concept":4,
+              "text":"tree"},
+             {"concept":5,
+              "text":"forest"},
+             {"concept":6,
+              "text":"river"},
+             {"concept":7,
+              "text":"lake"}]
+},
+{
+    "language":"Japanese",
+    "words":[{"concept":1,
+              "text":"やま"},
+             {"concept":2,
+              "text":"おか"},
+             {"concept":3,
+              "text":"はま"},
+             {"concept":4,
+              "text":"き"},
+             {"concept":5,
+              "text":"もり"},
+             {"concept":6,
+              "text":"かわ"},
+             {"concept":7,
+              "text":"みずうみ"}]
+},
+{
+    "language":"German",
+    "words":[{"concept":1,
+              "text":"Berg"},
+             {"concept":2,
+              "text":"Hügel"},
+             {"concept":3,
+              "text":"Strand"},
+             {"concept":4,
+              "text":"Baum"},
+             {"concept":5,
+              "text":"Wald"},
+             {"concept":6,
+              "text":"Fluss"},
+             {"concept":7,
+              "text":"See"}]
+}
+]
