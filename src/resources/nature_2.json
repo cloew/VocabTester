@@ -1,0 +1,53 @@
+[
+{
+    "language":"English",
+    "words":[{"concept":1,
+              "text":"grass"},
+             {"concept":2,
+              "text":"water"},
+             {"concept":3,
+              "text":"fire"},
+             {"concept":4,
+              "text":"soil"},
+             {"concept":5,
+              "text":"nature"},
+             {"concept":6,
+              "text":"animal"},
+             {"concept":7,
+              "text":"insect"}]
+},
+{
+    "language":"Japanese",
+    "words":[{"concept":1,
+              "text":"くさ"},
+             {"concept":2,
+              "text":"みず"},
+             {"concept":3,
+              "text":"ひ"},
+             {"concept":4,
+              "text":"つち"},
+             {"concept":5,
+              "text":"しぜん"},
+             {"concept":6,
+              "text":"どうぶつ"},
+             {"concept":7,
+              "text":"むし"}]
+},
+{
+    "language":"German",
+    "words":[{"concept":1,
+              "text":"Gras"},
+             {"concept":2,
+              "text":"Wasser"},
+             {"concept":3,
+              "text":"Feuer"},
+             {"concept":4,
+              "text":"Boden"},
+             {"concept":5,
+              "text":"Natur"},
+             {"concept":6,
+              "text":"Tier"},
+             {"concept":7,
+              "text":"Insekt"}]
+}
+]
