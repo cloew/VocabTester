@@ -35,6 +35,10 @@ class ConceptFormCache:
         """ Return the Concept Form for the given values """
         return [self[self.getIdKey(conceptId=conceptId, languageId=languageId)] for conceptId in conceptIds if self.getIdKey(conceptId=conceptId, languageId=languageId) in self]
         
+    def getConceptDict(self, *, conceptIds, languageId):
+        """ Return the Concept Form for the given values """
+        return {conceptId:self[self.getIdKey(conceptId=conceptId, languageId=languageId)] for conceptId in conceptIds if self.getIdKey(conceptId=conceptId, languageId=languageId) in self}
+        
     def getKey(self, form):
         """ Return the key for the given form """
         return self.getIdKey(conceptId=form.concept_id, languageId=form.language_id)
