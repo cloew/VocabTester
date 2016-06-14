@@ -1,0 +1,36 @@
+[
+{
+    "language":"English",
+    "symbols":[{"concept":1,
+                "text":"house"},
+               {"concept":2,
+                "text":"song"},
+               {"concept":3,
+                "text":"picture"},
+               {"concept":4,
+                "text":"turn"},
+               {"concept":5,
+                "text":"meet"},
+               {"concept":6,
+                "text":"ocean"},
+               {"concept":7,
+                "text":"outside"}]
+},
+{
+    "language":"Japanese",
+    "symbols":[{"concept":1,
+                "text":"家"},
+               {"concept":2,
+                "text":"歌"},
+               {"concept":3,
+                "text":"画"},
+               {"concept":4,
+                "text":"回"},
+               {"concept":5,
+                "text":"会"},
+               {"concept":6,
+                "text":"海"},
+               {"concept":7,
+                "text":"外"}]
+}
+]
