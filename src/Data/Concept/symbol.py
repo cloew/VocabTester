@@ -29,6 +29,17 @@ class Symbol(db.Model):
     def ratingFor(self, user):
         """ Return the expression to use when querying for a word's rating """
         return Mastery.rating
+        
+    def ambiguousWith(self, other):
+        """ Return if this Symbol is ambiguous with the other Symbol """
+        return self.text == other.text or self.matchingAmbiguityGroup(other)
+        
+    def matchingAmbiguityGroup(self, other):
+        """ Return whether this Symbol matches the other Symbol's Ambiguity Group """
+        if self.ambiguity_group is not None:
+            return self.ambiguity_group == other.ambiguity_group
+        else:
+            return False
     
     def __unicode__(self):
         """ Return the string representation of the Word """
