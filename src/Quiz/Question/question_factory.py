@@ -7,6 +7,7 @@ from ..ratio_picker import RatioPicker
 
 from itertools import groupby
 import random
+import sys
 
 class QuestionFactory:
     """ Constructs Questions """
@@ -22,11 +23,20 @@ class QuestionFactory:
     def buildQuestions(self, pairs, masteryCache):
         """ Build the questions for use in the quiz """
         questions = []
-        for mastery, conceptPairs in groupby(pairs, lambda pair: masteryCache[pair.foreign.id].answerRating):
+        optionsPairs = []
+        promptPairs = []
+        
+        for pair in pairs:
+            mastery = masteryCache[pair.foreign.id].answerRating
             if mastery in self.optionsRange:
-                questions += self.optionsQuestionBuilder.buildQuestions(list(conceptPairs), pairs)
+                optionsPairs.append(pair)
             if mastery in self.promptRange:
-                questions += self.promptQuestionBuilder.buildQuestions(list(conceptPairs))
+                promptPairs.append(pair)
+                
+        questions.extend(self.optionsQuestionBuilder.buildQuestions(optionsPairs, pairs))
+        questions.extend(self.promptQuestionBuilder.buildQuestions(promptPairs))
+        
+        random.shuffle(questions)
         return questions
     
 QuestionFactory = QuestionFactory()

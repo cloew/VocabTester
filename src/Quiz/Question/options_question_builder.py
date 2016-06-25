@@ -11,6 +11,8 @@ class OptionsQuestionBuilder:
                      
     def buildQuestions(self, pairs, allPairs):
         """ Build the questions for use in the quiz """
+        if len(pairs) == 0:
+            return []
         random.shuffle(pairs)
         questionClasses = self.getQuestionClasses(pairs)
         return [questionClass(pair, allPairs) for pair, questionClass in zip(pairs, questionClasses)]
