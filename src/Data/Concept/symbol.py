@@ -14,12 +14,11 @@ class Symbol(db.Model):
     text = db.Column(db.UnicodeText())
     concept_id = db.Column(db.Integer, db.ForeignKey('concepts.id', ondelete="CASCADE"))
     language_id = db.Column(db.Integer, db.ForeignKey('languages.id', ondelete="CASCADE"))
-    ambiguity_group_id = db.Column(db.Integer, db.ForeignKey(AmbiguityGroup.id, ondelete="SET NULL"))
+    ambiguity_group = db.Column(db.Integer, db.ForeignKey(AmbiguityGroup.id, ondelete="SET NULL"))
     clarification = db.Column(db.UnicodeText())
     
     concept = db.relationship("Concept")
     language = db.relationship("Language")
-    ambiguity_group = db.relationship(AmbiguityGroup)
     
     @hybrid_method
     def ratingFor(self, masteryCache):
