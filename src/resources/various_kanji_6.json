@@ -12,9 +12,7 @@
                {"concept":5,
                 "text":"meet"},
                {"concept":6,
-                "text":"ocean"},
-               {"concept":7,
-                "text":"outside"}]
+                "text":"ocean"}]
 },
 {
     "language":"Japanese",
@@ -29,8 +27,6 @@
                {"concept":5,
                 "text":"会"},
                {"concept":6,
-                "text":"海"},
-               {"concept":7,
-                "text":"外"}]
+                "text":"海"}]
 }
 ]
