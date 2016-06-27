@@ -17,6 +17,7 @@ class EggWrapper:
         """ Load the existing words and symbols specified in the egg """
         if self.language.exists():
             results = dict(self.wordsWrapper.find())
+            results.update(dict(self.symbolsWrapper.find()))
             return results.items()
         else:
             return []
