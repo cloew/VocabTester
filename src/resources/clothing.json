@@ -1,0 +1,47 @@
+[
+{
+    "language":"English",
+    "words":[{"concept":1,
+              "text":"shirt"},
+             {"concept":2,
+              "text":"pants"},
+             {"concept":3,
+              "text":"dress"},
+             {"concept":4,
+              "text":"sock"},
+             {"concept":5,
+              "text":"shoe"},
+             {"concept":6,
+              "text":"hat"}]
+},
+{
+    "language":"Japanese",
+    "words":[{"concept":1,
+              "text":"シャツ"},
+             {"concept":2,
+              "text":"ズボン"},
+             {"concept":3,
+              "text":"ドレス"},
+             {"concept":4,
+              "text":"くつした"},
+             {"concept":5,
+              "text":"くつ"},
+             {"concept":6,
+              "text":"ぼうし"}]
+},
+{
+    "language":"German",
+    "words":[{"concept":1,
+              "text":"Hemd"},
+             {"concept":2,
+              "text":"Hose"},
+             {"concept":3,
+              "text":"Kleid"},
+             {"concept":4,
+              "text":"Socke"},
+             {"concept":5,
+              "text":"Schuh"},
+             {"concept":6,
+              "text":"Hut"}]
+}
+]

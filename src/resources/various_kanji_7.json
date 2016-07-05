@@ -1,0 +1,36 @@
+[
+{
+    "language":"English",
+    "symbols":[{"concept":1,
+                "text":"picture"},
+               {"concept":2,
+                "text":"garden"},
+               {"concept":3,
+                "text":"outside"},
+               {"concept":4,
+                "text":"interval"},
+               {"concept":5,
+                "text":"face"},
+               {"concept":6,
+                "text":"steam"},
+               {"concept":7,
+                "text":"old"}]
+},
+{
+    "language":"Japanese",
+    "symbols":[{"concept":1,
+                "text":"絵"},
+               {"concept":2,
+                "text":"園"},
+               {"concept":3,
+                "text":"外"},
+               {"concept":4,
+                "text":"間"},
+               {"concept":5,
+                "text":"顔"},
+               {"concept":6,
+                "text":"汽"},
+               {"concept":7,
+                "text":"古"}]
+}
+]

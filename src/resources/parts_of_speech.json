@@ -1,0 +1,41 @@
+[
+{
+    "language":"English",
+    "words":[{"concept":1,
+              "text":"noun"},
+             {"concept":2,
+              "text":"verb"},
+             {"concept":3,
+              "text":"adjective"},
+             {"concept":4,
+              "text":"adverb"},
+             {"concept":5,
+              "text":"conjunction"}]
+},
+{
+    "language":"Japanese",
+    "words":[{"concept":1,
+              "text":"めいし"},
+             {"concept":2,
+              "text":"どうし"},
+             {"concept":3,
+              "text":"けいようし"},
+             {"concept":4,
+              "text":"ふくし"},
+             {"concept":5,
+              "text":"せつぞくし"}]
+},
+{
+    "language":"German",
+    "words":[{"concept":1,
+              "text":"Substantiv"},
+             {"concept":2,
+              "text":"Verb"},
+             {"concept":3,
+              "text":"Adjektiv"},
+             {"concept":4,
+              "text":"Adverb"},
+             {"concept":5,
+              "text":"Verbindung"}]
+}
+]

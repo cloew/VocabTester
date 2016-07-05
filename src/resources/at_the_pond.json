@@ -1,0 +1,53 @@
+[
+{
+    "language":"English",
+    "words":[{"concept":1,
+              "text":"pond"},
+             {"concept":2,
+              "text":"wet"},
+             {"concept":3,
+              "text":"water lily"},
+             {"concept":4,
+              "text":"frog"},
+             {"concept":5,
+              "text":"slimy"},
+             {"concept":6,
+              "text":"to eat"},
+             {"concept":7,
+              "text":"fly"}]
+},
+{
+    "language":"Japanese",
+    "words":[{"concept":1,
+              "text":"いけ"},
+             {"concept":2,
+              "text":"しっせい"},
+             {"concept":3,
+              "text":"スイレン"},
+             {"concept":4,
+              "text":"かえる"},
+             {"concept":5,
+              "text":"ぬるぬる"},
+             {"concept":6,
+              "text":"たべる"},
+             {"concept":7,
+              "text":"はえ"}]
+},
+{
+    "language":"German",
+    "words":[{"concept":1,
+              "text":"Teich"},
+             {"concept":2,
+              "text":"nass"},
+             {"concept":3,
+              "text":"Seerose"},
+             {"concept":4,
+              "text":"Frosch"},
+             {"concept":5,
+              "text":"schleimig"},
+             {"concept":6,
+              "text":"essen"},
+             {"concept":7,
+              "text":"Fliege"}]
+}
+]

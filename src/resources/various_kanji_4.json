@@ -1,0 +1,36 @@
+[
+{
+    "language":"English",
+    "symbols":[{"concept":1,
+                "text":"sound"},
+               {"concept":2,
+                "text":"thread"},
+               {"concept":3,
+                "text":"wheel"},
+               {"concept":4,
+                "text":"shell"},
+               {"concept":5,
+                "text":"ball"},
+               {"concept":6,
+                "text":"grass"},
+               {"concept":7,
+                "text":"bamboo"}]
+},
+{
+    "language":"Japanese",
+    "symbols":[{"concept":1,
+                "text":"音"},
+               {"concept":2,
+                "text":"糸"},
+               {"concept":3,
+                "text":"車"},
+               {"concept":4,
+                "text":"貝"},
+               {"concept":5,
+                "text":"玉"},
+               {"concept":6,
+                "text":"草"},
+               {"concept":7,
+                "text":"竹"}]
+}
+]

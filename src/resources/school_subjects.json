@@ -1,0 +1,47 @@
+[
+{
+    "language":"English",
+    "words":[{"concept":1,
+              "text":"math"},
+             {"concept":2,
+              "text":"science"},
+             {"concept":3,
+              "text":"history"},
+             {"concept":4,
+              "text":"art"},
+             {"concept":5,
+              "text":"PE"},
+             {"concept":6,
+              "text":"music"}]
+},
+{
+    "language":"Japanese",
+    "words":[{"concept":1,
+              "text":"すうがく"},
+             {"concept":2,
+              "text":"かがく"},
+             {"concept":3,
+              "text":"れきし"},
+             {"concept":4,
+              "text":"びじゅつ"},
+             {"concept":5,
+              "text":"たいいく"},
+             {"concept":6,
+              "text":"おんがく"}]
+},
+{
+    "language":"German",
+    "words":[{"concept":1,
+              "text":"Mathe"},
+             {"concept":2,
+              "text":"Wissenschaft"},
+             {"concept":3,
+              "text":"Historie"},
+             {"concept":4,
+              "text":"Kunst"},
+             {"concept":5,
+              "text":"Leibesübungen"},
+             {"concept":6,
+              "text":"Musik"}]
+}
+]
