@@ -14,11 +14,12 @@ class Symbol(db.Model):
     text = db.Column(db.UnicodeText())
     concept_id = db.Column(db.Integer, db.ForeignKey('concepts.id', ondelete="CASCADE"))
     language_id = db.Column(db.Integer, db.ForeignKey('languages.id', ondelete="CASCADE"))
-    ambiguity_group = db.Column(db.Integer, db.ForeignKey(AmbiguityGroup.id, ondelete="SET NULL"))
+    ambiguity_group_id = db.Column(db.Integer, db.ForeignKey(AmbiguityGroup.id, ondelete="SET NULL"))
     clarification = db.Column(db.UnicodeText())
     
     concept = db.relationship("Concept")
     language = db.relationship("Language")
+    ambiguity_group = db.relationship(AmbiguityGroup)
     
     @hybrid_method
     def ratingFor(self, masteryCache):
@@ -36,8 +37,8 @@ class Symbol(db.Model):
         
     def matchingAmbiguityGroup(self, other):
         """ Return whether this Symbol matches the other Symbol's Ambiguity Group """
-        if self.ambiguity_group is not None:
-            return self.ambiguity_group == other.ambiguity_group
+        if self.ambiguity_group_id is not None:
+            return self.ambiguity_group_id == other.ambiguity_group_id
         else:
             return False
     

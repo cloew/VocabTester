@@ -19,12 +19,12 @@ def upgrade():
     sa.Column('id', sa.Integer(), nullable=False),
     sa.PrimaryKeyConstraint('id')
     )
-    op.add_column('symbols', sa.Column('ambiguity_group', sa.Integer(), sa.ForeignKey('ambiguity_groups.id', ondelete="SET NULL"), nullable=True))
+    op.add_column('symbols', sa.Column('ambiguity_group_id', sa.Integer(), sa.ForeignKey('ambiguity_groups.id', ondelete="SET NULL"), nullable=True))
     op.add_column('symbols', sa.Column('clarification', sa.UnicodeText(), nullable=True))
-    op.create_foreign_key(None, 'symbols', 'ambiguity_groups', ['ambiguity_group'], ['id'], ondelete='SET NULL')
+    op.create_foreign_key(None, 'symbols', 'ambiguity_groups', ['ambiguity_group_id'], ['id'], ondelete='SET NULL')
 
 
 def downgrade():
     op.drop_column('symbols', 'clarification')
-    op.drop_column('symbols', 'ambiguity_group')
+    op.drop_column('symbols', 'ambiguity_group_id')
     op.drop_table('ambiguity_groups')
