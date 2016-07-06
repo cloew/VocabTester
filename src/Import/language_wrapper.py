@@ -8,7 +8,7 @@ class LanguageWrapper:
     
     def __init__(self, languageName):
         """ Initialize with the language name """
-        self.languageName = languageName
+        self.name = languageName
         
     def exists(self):
         """ Return if this language is already in the database """
@@ -22,10 +22,10 @@ class LanguageWrapper:
     @lazy_property
     def existingLanguage(self):
         """ Return the existing language model object """
-        return Language.query.filter_by(name=self.languageName).first()
+        return Language.query.filter_by(name=self.name).first()
             
     def buildLanguage(self):
         """ Build the Language """
-        language = Language(name=self.languageName)
+        language = Language(name=self.name)
         server.db.session.add(language)
         return language
