@@ -5,3 +5,7 @@ class AmbiguityGroup(db.Model):
     __tablename__ = 'ambiguity_groups'
     
     id = db.Column(db.Integer, primary_key=True)
+    
+    def __repr__(self):
+        """ Return the String Representation of the Ambiguity Group """
+        return "<AmbiguityGroup(id={})>".format(self.id)
