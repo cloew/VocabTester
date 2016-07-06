@@ -12,6 +12,11 @@ class AmbiguityGroupData:
         self.language = LanguageWrapper(language)
         self.symbolText = symbols
         
+    def assign(self):
+        """ Assign all of the Symbols in this Group to the proper Ambiguity Group """
+        for symbol in self.symbols:
+            symbol.ambiguity_group = self.group
+        
     @cached_property
     def symbols(self):
         """ Return the Symbols for this group """
