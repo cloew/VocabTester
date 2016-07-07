@@ -1,4 +1,4 @@
-from Import import LoadAmbiguityGroups
+from Import import AmbiguityLoader, LoadAmbiguityGroups
 
 from kao_command.args import Arg
 
@@ -10,4 +10,6 @@ class ImportAmbiguityCmd:
     def run(self, *, filename):
         """ Create the new log entry """
         groups = LoadAmbiguityGroups(filename)
-        print(groups)
+        loader = AmbiguityLoader(groups)
+        
+        loader.load()

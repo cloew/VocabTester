@@ -2,5 +2,25 @@
 {
     "language":"Japanese",
     "symbols":["へ", "ヘ"]
+},
+{
+    "language":"Japanese",
+    "symbols":["カ", "力"]
+},
+{
+    "language":"Japanese",
+    "symbols":["ニ", "二"]
+},
+{
+    "language":"Japanese",
+    "symbols":["ハ", "八"]
+},
+{
+    "language":"Japanese",
+    "symbols":["タ", "夕"]
+},
+{
+    "language":"Japanese",
+    "symbols":["ロ", "口"]
 }
 ]
