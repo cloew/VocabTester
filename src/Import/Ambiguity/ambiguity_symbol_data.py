@@ -12,6 +12,11 @@ class AmbiguitySymbolData:
     def setLanguage(self, language):
         """ Set the Language for this Symbol Data """
         self.language = language
+        
+    def assign(self, group):
+        """ Assign the Symbol's Ambiguity Group and Clarification """
+        self.symbol.ambiguity_group = group
+        self.symbol.clarification = self.clarification
     
     @cached_property
     def symbol(self):

@@ -16,8 +16,8 @@ class AmbiguityGroupData:
         
     def assign(self):
         """ Assign all of the Symbols in this Group to the proper Ambiguity Group """
-        for symbol in self.symbols:
-            symbol.ambiguity_group = self.group
+        for symbolData in self.symbolData:
+            symbolData.assign(self.group)
         
     @cached_property
     def symbols(self):
