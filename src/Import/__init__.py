@@ -1,1 +1,1 @@
-from .Ambiguity import LoadAmbiguityGroups
+from .Ambiguity import AmbiguityLoader, LoadAmbiguityGroups
