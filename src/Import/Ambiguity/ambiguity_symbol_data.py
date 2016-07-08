@@ -23,7 +23,7 @@ class AmbiguitySymbolData:
         """ Return the Symbol this Data belongs to """
         symbol = Symbol.query.filter_by(text=self.text, language=self.language.language).first()
         if symbol is None:
-            raise ValueError('Unknown symbol {}').format(text)
+            raise ValueError('Unknown symbol {}'.format(text))
         return symbol
         
     def __repr__(self):
