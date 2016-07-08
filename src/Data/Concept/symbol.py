@@ -20,7 +20,7 @@ class Symbol(db.Model):
     
     concept = db.relationship("Concept")
     language = db.relationship("Language")
-    ambiguity_group = db.relationship(AmbiguityGroup)
+    ambiguity_group = db.relationship(AmbiguityGroup, backref="symbols")
     
     @hybrid_method
     def ratingFor(self, masteryCache):
@@ -31,6 +31,11 @@ class Symbol(db.Model):
     def ratingFor(self, user):
         """ Return the expression to use when querying for a word's rating """
         return Mastery.rating
+        
+    @property
+    def needsClarification(self):
+        """ Return if this Symbol needs Clarification """
+        return self.ambiguity_group_id is not None
         
     def ambiguousWith(self, other):
         """ Return if this Symbol is ambiguous with the other Symbol """

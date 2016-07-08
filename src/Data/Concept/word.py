@@ -26,6 +26,11 @@ class Word(db.Model):
         """ Return the expression to use when querying for a word's rating """
         return Mastery.rating
         
+    @property
+    def needsClarification(self):
+        """ Return if this Symbol needs Clarification """
+        return False
+        
     def ambiguousWith(self, other):
         """ Return if this Symbol is ambiguous with the other Symbol """
         return self.text == other.text
