@@ -11,6 +11,7 @@ class OptionsQuestion:
         """ Initialize the question with the word to display, its matching translation and the other options """
         self.subject = subject
         self.queryWord = self.getQuestionForm(subject)
+        self.clarification = self.queryWord.clarification if self.queryWord.needsClarification else None
         self.answer = self.getOptionForm(subject)
         
         random.shuffle(allPairs)

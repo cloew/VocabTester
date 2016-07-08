@@ -5,6 +5,7 @@ class ForeignPromptQuestion:
     def __init__(self, subject):
         """ Initialize the question with the subject """
         self.subject = subject
+        self.clarification = self.subject.foreign.clarification if self.subject.foreign.needsClarification else None
         
     @property
     def prompt(self):
