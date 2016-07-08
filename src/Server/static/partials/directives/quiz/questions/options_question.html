@@ -1,6 +1,8 @@
 <div on-up-key="selectPreviousOption();" on-down-key="selectNextOption();">
     <div>
-        <h4 style="display:inline-block;">Translate {{question.queryWord.text}}</h4>
+        <h4 style="display:inline-block;">Translate {{question.queryWord.text}}
+            <b ng-if="question.clarification">({{ question.clarification }})</b>
+        </h4>
     </div>
     <div ng-repeat="option in question.options">
         <option option="option" 
