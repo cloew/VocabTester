@@ -11,9 +11,11 @@ def IsWordsQuiz(quiz):
     return len(quiz.questions) == 0 or quiz.questions[0].subject.foreign.__class__ is Word
 
 QuizJson = {GradeResult:AsObj(correct=ViaAttr(), imperfect=ViaAttr()),
-            OptionsQuestion:AsObj(subject=ViaAttr(), queryWord=ViaAttr(), options=ViaAttr(), answerIndex=ViaAttr(), questionType=lambda ctx: QuestionTypes.Options, 
+            OptionsQuestion:AsObj(subject=ViaAttr(), queryWord=ViaAttr(), clarification=ViaAttr(), options=ViaAttr(), 
+                                  answerIndex=ViaAttr(), questionType=lambda ctx: QuestionTypes.Options, 
                                   answerUrl=ViaFn(answerUrl, requires=['masteryCache'])),
-            ForeignPromptQuestion:AsObj(subject=ViaAttr(), prompt=ViaAttr(), answer=ViaAttr(), displayAnswer=ViaAttr(), questionType=lambda ctx: QuestionTypes.Prompt,
+            ForeignPromptQuestion:AsObj(subject=ViaAttr(), prompt=ViaAttr(), clarification=ViaAttr(), answer=ViaAttr(), 
+                                  displayAnswer=ViaAttr(), questionType=lambda ctx: QuestionTypes.Prompt,
                                   answerUrl=ViaFn(answerUrl, requires=['masteryCache'])),
             Quiz:AsObj(name=ViaAttr(), questions=ViaAttr(), isWords=ViaFn(IsWordsQuiz)),
            }
