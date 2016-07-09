@@ -7,6 +7,6 @@ from .symbol_info import SymbolInfo
 from .word_info import WordInfo
 
 from .Ambiguity import AmbiguityGroup
-from .Concept import Concept, ConceptManager, ConceptPair, Symbol, Word
+from .Concept import Concept, ConceptManager, ConceptPair, NativeOrForeign, Symbol, Word
 from .ConceptList import ConceptList, SymbolList, WordList, BoundConceptList
 from .Mastery import Mastery, StalenessPeriod
