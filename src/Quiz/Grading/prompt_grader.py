@@ -7,7 +7,7 @@ class PromptGrader:
     
     def grade(self, guess, answer):
         """ Return if the guess matches the answer """
-        ratio = fuzz.ratio(guess.lower(), answer)
+        ratio = fuzz.ratio(guess.lower(), answer.lower())
         correct = ratio >= self.CLOSE_ENOUGH_RATIO
         imperfect = ratio < 100
         return GradeResult(correct, imperfect=imperfect)
