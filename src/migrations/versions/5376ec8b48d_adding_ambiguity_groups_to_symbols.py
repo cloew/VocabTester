@@ -16,8 +16,8 @@ import sqlalchemy as sa
 
 def upgrade():
     op.create_table('ambiguity_groups',
-    sa.Column('id', sa.Integer(), nullable=False),
-    sa.PrimaryKeyConstraint('id')
+    sa.Column('id', sa.Integer(), primary_key=True),
+    sa.Column('language_id', sa.Integer(), sa.ForeignKey('languages.id'), nullable=False)
     )
     op.add_column('symbols', sa.Column('ambiguity_group_id', sa.Integer(), sa.ForeignKey('ambiguity_groups.id', ondelete="SET NULL"), nullable=True))
     op.add_column('symbols', sa.Column('clarification', sa.UnicodeText(), nullable=True))
