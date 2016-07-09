@@ -8,6 +8,8 @@ class AmbiguityGroup(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     language_id = db.Column(db.Integer, db.ForeignKey(Language.id), nullable=False)
     
+    language = db.relationship(Language)
+    
     def __repr__(self):
         """ Return the String Representation of the Ambiguity Group """
         return "<AmbiguityGroup(id={})>".format(self.id)
