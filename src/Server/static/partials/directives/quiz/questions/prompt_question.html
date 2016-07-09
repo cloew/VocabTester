@@ -1,7 +1,7 @@
 <div>
     <div>
-        <h4 style="display:inline-block;">Translate {{question.prompt}} 
-            <small ng-if="question.clarification">({{ question.clarification }})</small>
+        <h4 style="display:inline-block;">Translate {{question.subject.prompt}} 
+            <small ng-if="question.subject.clarification">({{ question.subject.clarification }})</small>
             <small ng-if="question.results && (!question.results.correct || question.results.imperfect)"> {{question.displayAnswer}}</small>
             <span class="glyphicon glyphicon-ok" ng-if="question.results.correct" style="color: #5cb85c"></span>
             <span class="glyphicon glyphicon-remove" ng-if="question.results && !question.results.correct" style="color: #a94442"></span>

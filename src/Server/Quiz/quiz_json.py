@@ -1,5 +1,5 @@
 from Data import Word
-from Quiz import Quiz, OptionsQuestion, ForeignPromptQuestion, QuestionTypes, GradeResult
+from Quiz import Quiz, OptionsQuestion, ForeignPromptQuestion, QuestionTypes, Subject, GradeResult
 from kao_json import JsonFactory, AsObj, ViaAttr, ViaFn
 
 def answerUrl(question, masteryCache):
@@ -11,10 +11,11 @@ def IsWordsQuiz(quiz):
     return len(quiz.questions) == 0 or quiz.questions[0].subject.foreign.__class__ is Word
 
 QuizJson = {GradeResult:AsObj(correct=ViaAttr(), imperfect=ViaAttr()),
-            OptionsQuestion:AsObj(subject=ViaAttr(), queryWord=ViaAttr(), clarification=ViaAttr(), options=ViaAttr(), 
+            Subject:AsObj(prompt=ViaAttr(), clarification=ViaAttr(), pair=ViaAttr()),
+            OptionsQuestion:AsObj(subject=ViaAttr(), options=ViaAttr(), 
                                   answerIndex=ViaAttr(), questionType=lambda ctx: QuestionTypes.Options, 
                                   answerUrl=ViaFn(answerUrl, requires=['masteryCache'])),
-            ForeignPromptQuestion:AsObj(subject=ViaAttr(), prompt=ViaAttr(), clarification=ViaAttr(), answer=ViaAttr(), 
+            ForeignPromptQuestion:AsObj(subject=ViaAttr(), answer=ViaAttr(), 
                                   displayAnswer=ViaAttr(), questionType=lambda ctx: QuestionTypes.Prompt,
                                   answerUrl=ViaFn(answerUrl, requires=['masteryCache'])),
             Quiz:AsObj(name=ViaAttr(), questions=ViaAttr(), isWords=ViaFn(IsWordsQuiz)),

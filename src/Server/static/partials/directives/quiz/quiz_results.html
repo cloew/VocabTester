@@ -1,4 +1,4 @@
 <table class="table table-striped table-bordered">
     <tr concept-table-header is-words="isWords"></tr>
-    <tr concept-table-row ng-repeat="question in quiz.questions" ng-class="{success: question.results.correct, danger: !question.results.correct}" concept="question.subject"></tr>
+    <tr concept-table-row ng-repeat="question in quiz.questions" ng-class="{success: question.results.correct, danger: !question.results.correct}" concept="question.subject.pair"></tr>
 </table>

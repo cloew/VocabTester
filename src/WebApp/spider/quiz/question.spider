@@ -60,7 +60,7 @@ angular.module('question', ['ng-autofocus', 'kao.input'])
             var answer = this.question.buildAnswer();
             return $http.post(this.question.answerUrl, answer).success(fn(data) {
                 self.question.results = data.results;
-                self.question.subject.mastery = data.rating;
+                self.question.subject.pair.mastery = data.rating;
             });
         };
         return AnswerHelper;
