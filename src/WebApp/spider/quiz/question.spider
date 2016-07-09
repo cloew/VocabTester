@@ -127,4 +127,15 @@ angular.module('question', ['ng-autofocus', 'kao.input'])
             },
             templateUrl: 'static/partials/directives/quiz/questions/option.html'
         };
+    })
+    .directive('questionPrompt', fn() {
+        return {
+            restrict: 'E',
+            replace: true,
+            transclude: true,
+            scope: {
+                subject: '='
+            },
+            templateUrl: 'static/partials/directives/quiz/questions/question_prompt.html'
+        };
     });
