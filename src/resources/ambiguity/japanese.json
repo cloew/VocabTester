@@ -1,26 +1,37 @@
 [
 {
     "language":"Japanese",
-    "symbols":["へ", "ヘ"]
+    "symbols":[{"text":"へ",
+                "clarification":"平仮名"},
+               {"text":"ヘ",
+                "clarification":"カタカナ"}]
 },
 {
     "language":"Japanese",
-    "symbols":["カ", "力"]
+    "symbols":[{"text":"カ",
+                "clarification":"カタカナ"},
+               {"text":"力",
+                "clarification":"漢字"}]
 },
 {
     "language":"Japanese",
-    "symbols":["ニ", "二"]
+    "symbols":[{"text":"ニ",
+                "clarification":"カタカナ"},
+               {"text":"二",
+                "clarification":"漢字"}]
 },
 {
     "language":"Japanese",
-    "symbols":["ハ", "八"]
+    "symbols":[{"text":"ハ",
+                "clarification":"カタカナ"},
+               {"text":"八",
+                "clarification":"漢字"}]
 },
 {
     "language":"Japanese",
-    "symbols":["タ", "夕"]
-},
-{
-    "language":"Japanese",
-    "symbols":["ロ", "口"]
+    "symbols":[{"text":"タ",
+                "clarification":"カタカナ"},
+               {"text":"夕",
+                "clarification":"漢字"}]
 }
 ]
