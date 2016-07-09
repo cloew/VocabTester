@@ -1,5 +1,7 @@
 from cached_property import cached_property
+from proxy_attrs import  proxy_for
 
+@proxy_for('pair', ['native', 'foreign'])
 class Subject:
     """ Represents the Subject of a Question """
     
