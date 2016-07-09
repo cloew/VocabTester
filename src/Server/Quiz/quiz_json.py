@@ -16,7 +16,7 @@ QuizJson = {GradeResult:AsObj(correct=ViaAttr(), imperfect=ViaAttr()),
                                   answerIndex=ViaAttr(), questionType=lambda ctx: QuestionTypes.Options, 
                                   answerUrl=ViaFn(answerUrl, requires=['masteryCache'])),
             ForeignPromptQuestion:AsObj(subject=ViaAttr(), answer=ViaAttr(), 
-                                  displayAnswer=ViaAttr(), questionType=lambda ctx: QuestionTypes.Prompt,
+                                  questionType=lambda ctx: QuestionTypes.Prompt,
                                   answerUrl=ViaFn(answerUrl, requires=['masteryCache'])),
             Quiz:AsObj(name=ViaAttr(), questions=ViaAttr(), isWords=ViaFn(IsWordsQuiz)),
            }
