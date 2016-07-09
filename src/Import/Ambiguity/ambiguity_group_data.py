@@ -37,7 +37,7 @@ class AmbiguityGroupData:
                     raise ValueError('These symbols are already split between multiple Ambiguity Groups')
                     
         if ambiguityGroup is None:
-            ambiguityGroup = AmbiguityGroup()
+            ambiguityGroup = AmbiguityGroup(language=self.language.language)
         return ambiguityGroup
         
     def __repr__(self):
