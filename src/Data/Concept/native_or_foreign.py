@@ -11,3 +11,11 @@ class NativeOrForeign(Enum):
             return pair.foreign
         elif self is NativeOrForeign.Native:
             return pair.native
+            
+    @property
+    def other(self):
+        """ Return the other Type of Native or Foreign """
+        if self is NativeOrForeign.Foreign:
+            return NativeOrForeign.Native
+        elif self is NativeOrForeign.Native:
+            return NativeOrForeign.Foreign
