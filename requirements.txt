@@ -11,6 +11,7 @@ itsdangerous==0.24
 Jinja2==2.7.3
 git+git://github.com/cloew/KaoCommand.git
 git+git://github.com/cloew/KaoDecorators.git
+git+git://github.com/cloew/proxy-attrs.git
 git+git://github.com/cloew/KaoExtensions.git
 git+git://github.com/cloew/KaoFactory.git
 git+git://github.com/cloew/KaoFlask.git
