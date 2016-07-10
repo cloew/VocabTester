@@ -1,5 +1,5 @@
 from . import urls
-from Data import Concept, ConceptList, ConceptPair, Language, LanguageEnrollment, Symbol, User, Word
+from Data import AmbiguityGroup, Concept, ConceptList, ConceptPair, Language, LanguageEnrollment, Symbol, User, Word
 from kao_json import JsonFactory, AsObj, ViaAttr, ViaFn
 
 def GetConceptsUrl(context):
@@ -26,6 +26,11 @@ jsonFactory = JsonFactory({Concept:AsObj(id=ViaAttr(), native=ViaFn(GetNativeFor
                            User:AsObj(id=ViaAttr(), email=ViaAttr(), is_admin=ViaAttr(), givenName=ViaAttr(), lastName=ViaAttr(), nativeLanguage=ViaAttr()),
                            Language:AsObj(id=ViaAttr(), name=ViaAttr()),
                            LanguageEnrollment:AsObj(id=ViaAttr(), language=ViaAttr(), default=ViaAttr())
+                          })
+                         
+langaugesFactory = JsonFactory({(Symbol, Word):AsObj(id=ViaAttr(), text=ViaAttr()),
+                           AmbiguityGroup:AsObj(id=ViaAttr(), symbols=ViaAttr()),
+                           Language:AsObj(id=ViaAttr(), name=ViaAttr(), ambiguity_groups=ViaAttr())
                           })
                          
 toJson = jsonFactory.toJson
