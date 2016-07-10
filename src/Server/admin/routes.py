@@ -1,5 +1,5 @@
 from . import urls
-from .admin_json_factory import toJson, langaugesFactory
+from .admin_json_factory import toJson
 from .concepts_to_json import ConceptsToJson
 from .Controllers import CreateListConcept, DeleteListConcept, GetListConcepts
 from ..auth import auth
@@ -12,7 +12,7 @@ from kao_flask.ext.sqlalchemy import CrudEndpoints
 routes = Routes(CrudEndpoints('/api/admin/users', User, toJson,
                         jsonColumnMap={'nativeLanguage': lambda value: ('native_language_id', value['id'])}, 
                         decorators=[auth.requires_auth, requires_admin]),
-                CrudEndpoints('/api/admin/languages', Language, langaugesFactory.toJson, decorators=[auth.requires_auth, requires_admin]),
+                CrudEndpoints('/api/admin/languages', Language, toJson, decorators=[auth.requires_auth, requires_admin]),
                 CrudEndpoints('/api/admin/concepts', Concept, ConceptsToJson, decorators=[auth.requires_auth, requires_admin]),
                 CrudEndpoints('/api/admin/concepts/<int:conceptId>/words', Word, toJson, 
                             routeParams={'conceptId':'concept_id'}, 
