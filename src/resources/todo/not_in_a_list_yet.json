@@ -1,0 +1,29 @@
+[
+{
+    "language":"English",
+    "words":[{"concept":1,
+              "text":"courage"},
+             {"concept":2,
+              "text":"passion"},
+             {"concept":3,
+              "text":"voice"}]
+},
+{
+    "language":"Japanese",
+    "words":[{"concept":1,
+              "text":"ゆうき"},
+             {"concept":2,
+              "text":"じょうねつ"},
+             {"concept":3,
+              "text":"こえ"}]
+},
+{
+    "language":"German",
+    "words":[{"concept":1,
+              "text":"Mut"},
+             {"concept":2,
+              "text":"Leidenschaft"},
+             {"concept":3,
+              "text":"Stimme"}]
+}
+]
