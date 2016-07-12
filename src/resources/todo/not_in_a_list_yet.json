@@ -6,7 +6,11 @@
              {"concept":2,
               "text":"passion"},
              {"concept":3,
-              "text":"voice"}]
+              "text":"voice"},
+             {"concept":4,
+              "text":"love"},
+             {"concept":5,
+              "text":"outer space"}]
 },
 {
     "language":"Japanese",
@@ -15,7 +19,11 @@
              {"concept":2,
               "text":"じょうねつ"},
              {"concept":3,
-              "text":"こえ"}]
+              "text":"こえ"},
+             {"concept":4,
+              "text":"あい"},
+             {"concept":5,
+              "text":"うちゅう"}]
 },
 {
     "language":"German",
@@ -24,6 +32,10 @@
              {"concept":2,
               "text":"Leidenschaft"},
              {"concept":3,
-              "text":"Stimme"}]
+              "text":"Stimme"},
+             {"concept":4,
+              "text":"Liebe"},
+             {"concept":5,
+              "text":"Weltraum"}]
 }
 ]
