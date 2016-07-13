@@ -1,5 +1,7 @@
 from .symbol_groups import HIRAGANA_MAP
+
 from cached_property import cached_property
+from kao_symbols import convert
 
 class TextConverter:
     """ Helper class to manage converting Japanese Character strings into a form the User can understand based on their Learned Symbols """
@@ -10,6 +12,7 @@ class TextConverter:
         
     def convert(self, word):
         """ Convert the given Word """
+        return convert(word.text, self.symbolMap)
         
     @cached_property
     def symbolMap(self):
