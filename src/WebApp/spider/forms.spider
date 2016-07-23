@@ -138,4 +138,14 @@ angular.module('Forms', ['kao.utils', 'kao.loading', 'average', 'pluck', 'precis
             },
             templateUrl: 'static/partials/directives/concept_list.html'
         };
+    })
+    .directive('formText', fn($parse) {
+        return {
+            restrict: 'E',
+            replace: true,
+            scope: {
+                form: '='
+            },
+            template: '<span>{{form.text}}<span ng-if="form.data.user_text && (form.text !== form.data.user_text)"> ({{form.data.user_text}})</span></span>'
+        };
     });
