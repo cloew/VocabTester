@@ -7,5 +7,5 @@ class SymbolInfo:
     formModel = Symbol
     listModel = SymbolList
     masteryFieldName = 'symbol_id'
-    learnedField = 'learnedSymbols'
+    learnedField = 'learned_symbols'
     learnedTable = learned_symbols

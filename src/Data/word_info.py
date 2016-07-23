@@ -7,5 +7,5 @@ class WordInfo:
     formModel = Word
     listModel = WordList
     masteryFieldName = 'word_id'
-    learnedField = 'learnedWords'
+    learnedField = 'learned_words'
     learnedTable = learned_words

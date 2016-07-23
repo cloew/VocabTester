@@ -4,8 +4,8 @@ from .learned_tables import learned_symbols, learned_words
 from .symbol_info import SymbolInfo
 from .word_info import WordInfo
 
-from kao_decorators import lazy_property
 from kao_flask.ext.sqlalchemy import db
+from cached_property import cached_property
 
 class User(db.Model):
     """ Represents a user """
@@ -18,9 +18,10 @@ class User(db.Model):
     givenName = db.Column(db.UnicodeText())
     lastName = db.Column(db.UnicodeText())
     native_language_id = db.Column(db.Integer, db.ForeignKey('languages.id'))
+    
     nativeLanguage = db.relationship("Language")
-    learnedSymbols = db.relationship("Symbol", secondary=learned_symbols, lazy='dynamic')
-    learnedWords = db.relationship("Word", secondary=learned_words, lazy='dynamic')
+    learned_symbols = db.relationship("Symbol", secondary=learned_symbols, lazy='dynamic')
+    learned_words = db.relationship("Word", secondary=learned_words, lazy='dynamic')
         
     def getLearnedFor(self, formInfo, language):
         """ Return the learned forms for the given Form Info """
@@ -41,12 +42,16 @@ class User(db.Model):
         """ Return the Learn Helper for the given Form Info """
         return self.learnedSymbolsHelper if formInfo is SymbolInfo else self.learnedWordsHelper
         
-    @lazy_property
+    def learnedSymbolsFor(self, language):
+        """ Return the Learned Symbols for the given Language """
+        return self.getLearnedFor(SymbolInfo, language)
+        
+    @cached_property
     def learnedSymbolsHelper(self):
         """ Helper to manage Learned Symbols """
         return LearnHelper(self, SymbolInfo)
         
-    @lazy_property
+    @cached_property
     def learnedWordsHelper(self):
         """ Helper to manage Learned Words """
         return LearnHelper(self, WordInfo)
