@@ -2,9 +2,15 @@
 class LanguageConfig:
     """ Represents the Data Configuration for a Language """
     
-    def __init__(self, wordDataCls=None):
-        """ Initialize the Config with the Word Data Class """
+    def __init__(self, learningDataCls=None, wordDataCls=None):
+        """ Initialize the Config with the Data Classes """
+        self.learningDataCls = learningDataCls
         self.wordDataCls = wordDataCls
+        
+    @property
+    def LearningDataCls(self):
+        """ Return the Learning Data Class """
+        return self.learningDataCls if self.learningDataCls else self.doNothing
         
     @property
     def WordDataCls(self):

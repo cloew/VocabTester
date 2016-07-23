@@ -1,13 +1,13 @@
 from .language_config import LanguageConfig
-from .Japanese import WordData
+from .Japanese import LearningData, WordData
 
 from enum import Enum
 from proxy_attrs import proxy_for
 
-@proxy_for('value', ['WordDataCls'])
+@proxy_for('value', ['LearningDataCls', 'WordDataCls'])
 class Languages(Enum):
     """ Represents all the Language Configurations available """
-    Japanese = LanguageConfig(WordData)
+    Japanese = LanguageConfig(LearningData, WordData)
     
     @classmethod
     def forLanguage(cls, language):
