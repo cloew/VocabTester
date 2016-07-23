@@ -7,7 +7,11 @@ class TextConverter:
         """ Initialize with the Symbols the User has learned """
         self.converter = RomKanConverter(symbol.text for symbol in symbols)
         
-    def convert(self, word, readings={}):
+    def convertWord(self, word):
         """ Convert the given Word """
-        return self.converter.convert(word.text, readings=readings)
+        return self.converter.convert(word.text)
+        
+    def convert(self, text, readings={}):
+        """ Convert the given text """
+        return self.converter.convert(text, readings=readings)
         
