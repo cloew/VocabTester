@@ -9,7 +9,7 @@ class TextConverter:
         
     def convertWord(self, word):
         """ Convert the given Word """
-        return self.converter.convert(word.text)
+        return self.converter.convert(word.text, readings=word.language_data['readings'])
         
     def convert(self, text, readings={}):
         """ Convert the given text """
