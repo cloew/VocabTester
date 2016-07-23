@@ -11,17 +11,12 @@ class Subject:
         self.nativeOrForeign = nativeOrForeign
         
     @cached_property
-    def prompt(self):
-        """ Return the text for the Question's Prompt """
-        return self.questionForm.text
-        
-    @cached_property
     def clarification(self):
         """ Return the clarification for the Question's Prompt """
-        return self.questionForm.clarification if self.questionForm.needsClarification else None
+        return self.prompt.clarification if self.prompt.needsClarification else None
         
     @cached_property
-    def questionForm(self):
+    def prompt(self):
         """ Return the form of the Concept Pair to use for the Question """
         return self.nativeOrForeign(self.pair)
         
