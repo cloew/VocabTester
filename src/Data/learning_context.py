@@ -1,5 +1,7 @@
 from .language_context import LanguageContext
+from proxy_attrs import proxy_for
 
+@proxy_for('languageContext', ['foreign', 'native', 'isForeign', 'isNative'])
 class LearningContext:
     """ Represents the Context of a User learning a Language """
     

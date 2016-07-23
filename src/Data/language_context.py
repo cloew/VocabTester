@@ -10,6 +10,14 @@ class LanguageContext:
         self.native = native
         self.languages = [foreign, native]
         
+    def isForeign(self, form):
+        """ Return whether the form is foreign """
+        return form.language is self.foreign
+        
+    def isNative(self, form):
+        """ Return whether the form is native """
+        return form.language is self.native
+        
     def __iter__(self):
         """ Return the iterator over the langauges """
         return iter([self.foreign, self.native])
