@@ -7,7 +7,7 @@ class WordData:
         self.word = word
         if not word.language_data:
             word.language_data = {}
-        self.data = word.languageData
+        self.data = word.language_data
         
     @property
     def readings(self):
