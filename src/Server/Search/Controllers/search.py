@@ -26,7 +26,7 @@ class Search(auth.JSONController):
         masteryCache = BuildMasteryCache.ViaPairs(pairs, WordInfo, user)
         learnedCache = LearnedCache(user, WordInfo)
         
-        return {"results":toJson(pairs, user=user, learnedCache=learnedCache, masteryCache=masteryCache)}
+        return {"results":toJson(pairs, user=user, learnedCache=learnedCache, masteryCache=masteryCache, learningContext=learningContext)}
         
     def getUniqueConcepts(self, text, languageContext):
         """ Return the Unique Concept Forms """

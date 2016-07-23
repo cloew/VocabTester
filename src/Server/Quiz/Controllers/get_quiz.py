@@ -27,4 +27,4 @@ class GetQuiz(auth.JSONController):
         learnedCache = LearnedCache(user, self.formInfo)
         quiz = Quiz(boundList.name, boundList.concepts, masteryCache)
         
-        return {"quiz":toJson(quiz, user=user, learnedCache=learnedCache, masteryCache=masteryCache)}
+        return {"quiz":toJson(quiz, user=user, learnedCache=learnedCache, masteryCache=masteryCache, learningContext=learningContext)}

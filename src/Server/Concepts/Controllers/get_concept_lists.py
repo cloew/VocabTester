@@ -23,4 +23,5 @@ class GetConceptLists(auth.JSONController):
         boundLists = conceptListHelper.bound_lists
         
         learnedCache = LearnedCache(user, self.formInfo)
-        return {"lists":toJson([boundList for boundList in boundLists if len(boundList.concepts) > 0], user=user, learnedCache=learnedCache, masteryCache=masteryCache)}
+        return {"lists":toJson([boundList for boundList in boundLists if len(boundList.concepts) > 0], user=user, 
+                                learnedCache=learnedCache, masteryCache=masteryCache, learningContext=learningContext)}

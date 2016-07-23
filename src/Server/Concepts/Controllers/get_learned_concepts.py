@@ -26,4 +26,4 @@ class GetLearnedConcepts(auth.JSONController):
         masteryCache = BuildMasteryCache.ViaPairs(pairs, self.formInfo, user)
         learnedCache = LearnedCache(user, self.formInfo)
         
-        return {"concepts":toJson(pairs, user=user, learnedCache=learnedCache, masteryCache=masteryCache), "isWords":self.formInfo.formModel is Word}
+        return {"concepts":toJson(pairs, user=user, learnedCache=learnedCache, masteryCache=masteryCache, learningContext=learningContext), "isWords":self.formInfo.formModel is Word}

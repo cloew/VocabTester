@@ -21,4 +21,4 @@ class GetRandomQuiz(auth.JSONController):
         
         quiz, masteryCache = RandomQuizFactory.buildQuiz(self.formInfo, user, languageContext)
         learnedCache = LearnedCache(user, self.formInfo)
-        return {"quiz":toJson(quiz, user=user, learnedCache=learnedCache, masteryCache=masteryCache)}
+        return {"quiz":toJson(quiz, user=user, learnedCache=learnedCache, masteryCache=masteryCache, learningContext=learningContext)}
