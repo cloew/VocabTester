@@ -35,4 +35,13 @@ angular.module('Words', ['kao.loading', 'Concepts'])
             },
             templateUrl: 'static/partials/directives/search_result.html'
         };
+    })
+    .filter('word', fn() {
+        return fn(word) {
+            if word.data?.user_text? {
+                return word.data.user_text;
+            } else {
+                return word.text;
+            }
+        };
     });
