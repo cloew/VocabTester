@@ -13,7 +13,7 @@ git+git://github.com/cloew/KaoCommand.git
 git+git://github.com/cloew/KaoDecorators.git
 git+git://github.com/cloew/proxy-attrs.git
 git+git://github.com/cloew/KaoSymbols.git
-git+git://github.com/cloew/KaoRomKan.git#v0.1.0
+git+git://github.com/cloew/KaoRomKan.git#v0.1.2
 git+git://github.com/cloew/KaoExtensions.git
 git+git://github.com/cloew/KaoFactory.git
 git+git://github.com/cloew/KaoFlask.git
