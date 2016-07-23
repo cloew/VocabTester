@@ -43,6 +43,6 @@ angular.module('Words', ['kao.loading', 'Concepts'])
             scope: {
                 form: '='
             },
-            template: '<span>{{form.text}}<span ng-if="form.data.user_text"> ({{form.data.user_text}})</span></span>'
+            template: '<span>{{form.text}}<span ng-if="form.data.user_text && (form.text !== form.data.user_text)"> ({{form.data.user_text}})</span></span>'
         };
     });
