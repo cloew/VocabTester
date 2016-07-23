@@ -1,5 +1,5 @@
 from Server.auth import auth
-from Server.helpers import BuildLanguageContext
+from Server.helpers import BuildLearningContext
 from Server.helpers.json_factory import toJson
 
 from Data import Word
@@ -16,7 +16,9 @@ class GetLearnedConcepts(auth.JSONController):
     
     def performWithJSON(self, languageId, json=None, user=None):
         """ Convert the quiz to JSON """
-        languageContext = BuildLanguageContext(languageId, user)
+        learningContext = BuildLearningContext(languageId, user)
+        languageContext = learningContext.languageContext
+        
         learnedForms = user.getLearnedFor(self.formInfo, languageContext.foreign)
         learnedFormsHelper = PrequeriedFormsHelper(learnedForms, self.formInfo, languageContext)
         

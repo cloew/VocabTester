@@ -1,5 +1,5 @@
 from Server.auth import auth
-from Server.helpers import BuildLanguageContext
+from Server.helpers import BuildLearningContext
 from Server.helpers.json_factory import toJson
 
 from Data.Cache import BuildMasteryCache, LearnedCache
@@ -15,7 +15,9 @@ class GetConceptLists(auth.JSONController):
     
     def performWithJSON(self, languageId, json=None, user=None):
         """ Convert the existing Concept Lists to JSON """
-        languageContext = BuildLanguageContext(languageId, user)
+        learningContext = BuildLearningContext(languageId, user)
+        languageContext = learningContext.languageContext
+        
         conceptListHelper = ConceptListQueryHelper(self.formInfo, user, self.formInfo.listModel.query, languageContext)
         masteryCache = BuildMasteryCache.ViaForms(conceptListHelper.foreignForms, self.formInfo, user)
         boundLists = conceptListHelper.bound_lists
