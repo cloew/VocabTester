@@ -2,8 +2,11 @@ from .concept import Concept
 from ..language import Language
 from ..Mastery import Mastery
 
+from Language import Languages
+
 from kao_flask.ext.sqlalchemy import db
 
+from cached_property import cached_property
 from sqlalchemy.dialects.postgresql import JSON
 from sqlalchemy.ext.hybrid import hybrid_method
 
@@ -13,7 +16,7 @@ class Word(db.Model):
     
     id = db.Column(db.Integer, primary_key=True)
     text = db.Column(db.UnicodeText())
-    language_data = db.Column(JSON)
+    language_data = db.Column('language_data', JSON)
     concept_id = db.Column(db.Integer, db.ForeignKey('concepts.id', ondelete="CASCADE"))
     language_id = db.Column(db.Integer, db.ForeignKey('languages.id', ondelete="CASCADE"))
     
@@ -38,6 +41,11 @@ class Word(db.Model):
     def ambiguousWith(self, other):
         """ Return if this Symbol is ambiguous with the other Symbol """
         return self.text == other.text
+        
+    @cached_property
+    def data(self):
+        """ Return the language data for this Word """
+        return Languages.forLanguage(self.language).WordDataCls(self)
     
     def __unicode__(self):
         """ Return the string representation of the Word """
