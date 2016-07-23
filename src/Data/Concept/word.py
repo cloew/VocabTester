@@ -45,7 +45,7 @@ class Word(db.Model):
     @cached_property
     def data(self):
         """ Return the language data for this Word """
-        return Languages.forLanguage(self.language).WordDataCls(self)
+        return self.language.config.WordDataCls(self)
     
     def __unicode__(self):
         """ Return the string representation of the Word """
