@@ -1,6 +1,6 @@
 <div class="panel panel-default">
     <div class="panel-body" style="text-align: left;">
-        <h3 class="col-md-4" style="margin-bottom:5px; margin-top:5px;">{{result.foreign|word}} <small>{{result.native.text}}</small></h3>
+        <h3 class="col-md-4" style="margin-bottom:5px; margin-top:5px;"><form form="result.foreign"></form> <small>{{result.native.text}}</small></h3>
         <div class="pull-right">
             <button ng-click="learn();" class="btn btn-lg btn-primary" ng-if="!result.foreign.learned">Learn</button>
             <span ng-if="result.foreign.learned">Learned <span class="glyphicon glyphicon-ok" aria-hidden="true"></span></button>

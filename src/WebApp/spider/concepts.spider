@@ -63,7 +63,7 @@ angular.module('Concepts', ['ui.bootstrap', 'kao.loading', 'kao.page-title', 'La
             scope: {
                 concept: '='
             },
-            template:  '<td>{{concept.foreign|word}}</td>
+            template:  '<td><form form="concept.foreign"></form></td>
                         <td>{{concept.native.text}}</td>
                         <td>{{concept.mastery}}</td>'
         };
