@@ -2,31 +2,31 @@
 {
     "language":"English",
     "symbols":[{"concept":1,
-                "text":"picture"},
+                "text":"source"},
                {"concept":2,
-                "text":"garden"},
+                "text":"door"},
                {"concept":3,
-                "text":"outside"},
+                "text":"old"},
                {"concept":4,
-                "text":"interval"},
+                "text":"noon"},
                {"concept":5,
-                "text":"face"},
+                "text":"after"},
                {"concept":6,
-                "text":"steam"}]
+                "text":"language"}]
 },
 {
     "language":"Japanese",
     "symbols":[{"concept":1,
-                "text":"絵"},
+                "text":"原"},
                {"concept":2,
-                "text":"園"},
+                "text":"戸"},
                {"concept":3,
-                "text":"外"},
+                "text":"古"},
                {"concept":4,
-                "text":"間"},
+                "text":"午"},
                {"concept":5,
-                "text":"顔"},
+                "text":"後"},
                {"concept":6,
-                "text":"汽"}]
+                "text":"語"}]
 }
 ]
