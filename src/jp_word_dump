@@ -1,0 +1,2286 @@
+[
+    {
+        "data": {
+            "readings": {"猫":"ねこ"}
+        },
+        "new_text": "猫",
+        "old_text": "ねこ"
+    },
+    {
+        "data": {
+            "readings": {"兎":"うさぎ"}
+        },
+        "new_text": "兎",
+        "old_text": "うさぎ"
+    },
+    {
+        "data": {
+            "readings": {"鼠":"ねずみ"}
+        },
+        "new_text": "鼠",
+        "old_text": "ねずみ"
+    },
+    {
+        "data": {
+            "readings": {"金":"きん",
+                         "魚":"ぎょ"}
+        },
+        "new_text": "金魚",
+        "old_text": "きんぎょ"
+    },
+    {
+        "data": {
+            "readings": {"亀":"かめ"}
+        },
+        "new_text": "亀",
+        "old_text": "かめ"
+    },
+    {
+        "data": {
+            "readings": {"蛙":"かえる"}
+        },
+        "new_text": "蛙",
+        "old_text": "かえる"
+    },
+    {
+        "data": {
+            "readings": {"豚":"ぶた"}
+        },
+        "new_text": "豚",
+        "old_text": "ぶた"
+    },
+    {
+        "data": {
+            "readings": {"鳩":"はと"}
+        },
+        "new_text": "鳩",
+        "old_text": "はと"
+    },
+    {
+        "data": {
+            "readings": {}
+        },
+        "new_text": "あひる",
+        "old_text": "あひろ"
+    },
+    {
+        "data": {
+            "readings": {"蟹":"かに"}
+        },
+        "new_text": "蟹",
+        "old_text": "かに"
+    },
+    {
+        "data": {
+            "readings": {"蛇":"へび"}
+        },
+        "new_text": "蛇",
+        "old_text": "へび"
+    },
+    {
+        "data": {
+            "readings": {"鳥":"とり"}
+        },
+        "new_text": "鳥",
+        "old_text": "とり"
+    },
+    {
+        "data": {
+            "readings": {}
+        },
+        "new_text": "",
+        "old_text": "ロブスター"
+    },
+    {
+        "data": {
+            "readings": {"蜥":"と",
+                         "蜴":"かげ"}
+        },
+        "new_text": "蜥蜴",
+        "old_text": "とかげ"
+    },
+    {
+        "data": {
+            "readings": {"魚":"さかな"}
+        },
+        "new_text": "魚",
+        "old_text": "さかな"
+    },
+    {
+        "data": {
+            "readings": {"恐":"きょう",
+                         "竜":"りゅう"}
+        },
+        "new_text": "恐竜",
+        "old_text": "きょうりゅう"
+    },
+    {
+        "data": {
+            "readings": {}
+        },
+        "new_text": "",
+        "old_text": "ライオン"
+    },
+    {
+        "data": {
+            "readings": {"麒":"き",
+                         "麟":"りん"}
+        },
+        "new_text": "麒麟",
+        "old_text": "きりん"
+    },
+    {
+        "data": {
+            "readings": {"牛":"うし"}
+        },
+        "new_text": "牛",
+        "old_text": "うし"
+    },
+    {
+        "data": {
+            "readings": {"猿":"さる"}
+        },
+        "new_text": "猿",
+        "old_text": "さる"
+    },
+    {
+        "data": {
+            "readings": {"羊":"ひつじ"}
+        },
+        "new_text": "羊",
+        "old_text": "ひつじ"
+    },
+    {
+        "data": {
+            "readings": {"狐":"きつね"}
+        },
+        "new_text": "狐",
+        "old_text": "きつね"
+    },
+    {
+        "data": {
+            "readings": {"熊":"くま"}
+        },
+        "new_text": "熊",
+        "old_text": "くま"
+    },
+    {
+        "data": {
+            "readings": {"枕":"まくら"}
+        },
+        "new_text": "枕",
+        "old_text": "まくら"
+    },
+    {
+        "data": {
+            "readings": {"布":"ふ",
+                         "団":"とん"}
+        },
+        "new_text": "布団",
+        "old_text": "ふとん"
+    },
+    {
+        "data": {
+            "readings": {"毛":"もう",
+                         "布":"ふ"}
+        },
+        "new_text": "毛布",
+        "old_text": "もうふ"
+    },
+    {
+        "data": {
+            "readings": {"風":"ふ",
+                         "呂":"ろ"}
+        },
+        "new_text": "お風呂",
+        "old_text": "おふろ"
+    },
+    {
+        "data": {
+            "readings": {"石":"せっ",
+                         "鹸":"けん"}
+        },
+        "new_text": "石鹸",
+        "old_text": "せっけん"
+    },
+    {
+        "data": {
+            "readings": {"鏡":"かがみ"}
+        },
+        "new_text": "鏡",
+        "old_text": "かがみ"
+    },
+    {
+        "data": {
+            "readings": {"窓":"まど"}
+        },
+        "new_text": "窓",
+        "old_text": "まど"
+    },
+    {
+        "data": {
+            "readings": {"口":"くち"}
+        },
+        "new_text": "口",
+        "old_text": "くち"
+    },
+    {
+        "data": {
+            "readings": {"目":"め"}
+        },
+        "new_text": "目",
+        "old_text": "め"
+    },
+    {
+        "data": {
+            "readings": {"耳":"みみ"}
+        },
+        "new_text": "耳",
+        "old_text": "みみ"
+    },
+    {
+        "data": {
+            "readings": {"鼻":"はな"}
+        },
+        "new_text": "鼻",
+        "old_text": "はな"
+    },
+    {
+        "data": {
+            "readings": {"顔":"かお"}
+        },
+        "new_text": "顔",
+        "old_text": "かお"
+    },
+    {
+        "data": {
+            "readings": {"手":"て"}
+        },
+        "new_text": "手",
+        "old_text": "て"
+    },
+    {
+        "data": {
+            "readings": {"足":"あし"}
+        },
+        "new_text": "足",
+        "old_text": "あし"
+    },
+    {
+        "data": {
+            "readings": {"指":"ゆび"}
+        },
+        "new_text": "指",
+        "old_text": "ゆび"
+    },
+    {
+        "data": {
+            "readings": {"頭":"あたま"}
+        },
+        "new_text": "頭",
+        "old_text": "あたま"
+    },
+    {
+        "data": {
+            "readings": {"歯":"は"}
+        },
+        "new_text": "歯",
+        "old_text": "は"
+    },
+    {
+        "data": {
+            "readings": {"赤":"あか"}
+        },
+        "new_text": "赤",
+        "old_text": "あか"
+    },
+    {
+        "data": {
+            "readings": {"青":"あお"}
+        },
+        "new_text": "青",
+        "old_text": "あお"
+    },
+    {
+        "data": {
+            "readings": {"黒":"くろ"}
+        },
+        "new_text": "黒",
+        "old_text": "くろ"
+    },
+    {
+        "data": {
+            "readings": {"白":"しろ"}
+        },
+        "new_text": "白",
+        "old_text": "しろ"
+    },
+    {
+        "data": {
+            "readings": {"茶":"ちゃ",
+                         "色":"いろ"}
+        },
+        "new_text": "茶色",
+        "old_text": "ちゃいろ"
+    },
+    {
+        "data": {
+            "readings": {"黄":"き",
+                         "色":"いろ"}
+        },
+        "new_text": "黄色",
+        "old_text": "きいろ"
+    },
+    {
+        "data": {
+            "readings": {"月":"げつ",
+                         "曜":"よう",
+                         "日":"び"}
+        },
+        "new_text": "月曜日",
+        "old_text": "げつようび"
+    },
+    {
+        "data": {
+            "readings": {"火":"か",
+                         "曜":"よう",
+                         "日":"び"}
+        },
+        "new_text": "火曜日",
+        "old_text": "かようび"
+    },
+    {
+        "data": {
+            "readings": {"水":"すい",
+                         "曜":"よう",
+                         "日":"び"}
+        },
+        "new_text": "水曜日",
+        "old_text": "すいようび"
+    },
+    {
+        "data": {
+            "readings": {"木":"もく",
+                         "曜":"よう",
+                         "日":"び"}
+        },
+        "new_text": "木曜日",
+        "old_text": "もくようび"
+    },
+    {
+        "data": {
+            "readings": {"金":"きん",
+                         "曜":"よう",
+                         "日":"び"}
+        },
+        "new_text": "金曜日",
+        "old_text": "きんようび"
+    },
+    {
+        "data": {
+            "readings": {"土":"ど",
+                         "曜":"よう",
+                         "日":"び"}
+        },
+        "new_text": "土曜日",
+        "old_text": "どようび"
+    },
+    {
+        "data": {
+            "readings": {"日":["にち","び"],
+                         "曜":"よう"}
+        },
+        "new_text": "日曜日",
+        "old_text": "にちようび"
+    },
+    {
+        "data": {
+            "readings": {"母":"かあ"}
+        },
+        "new_text": "お母さん",
+        "old_text": "おかあさん"
+    },
+    {
+        "data": {
+            "readings": {"祖":"じ",
+                         "父":"い"}
+        },
+        "new_text": "お祖父さん",
+        "old_text": "おじいさん"
+    },
+    {
+        "data": {
+            "readings": {"祖":"ば",
+                         "母":"あ"}
+        },
+        "new_text": "お祖母さん",
+        "old_text": "おばあさん"
+    },
+    {
+        "data": {
+            "readings": {"赤":"あか"}
+        },
+        "new_text": "赤ちゃん",
+        "old_text": "あかちゃん"
+    },
+    {
+        "data": {
+            "readings": {"苺":"いちご"}
+        },
+        "new_text": "苺",
+        "old_text": "いちご"
+    },
+    {
+        "data": {
+            "readings": {"林":"りん",
+                         "檎":"ご"}
+        },
+        "new_text": "林檎",
+        "old_text": "りんご"
+    },
+    {
+        "data": {
+            "readings": {"西":"すい",
+                         "瓜":"か"}
+        },
+        "new_text": "西瓜",
+        "old_text": "すいか"
+    },
+    {
+        "data": {
+            "readings": {"桃":"もも"}
+        },
+        "new_text": "桃",
+        "old_text": "もも"
+    },
+    {
+        "data": {
+            "readings": {"葡":"ぶ",
+                         "萄":"どう"}
+        },
+        "new_text": "葡萄",
+        "old_text": "ぶどう"
+    },
+    {
+        "data": {
+            "readings": {"古":"ふる"}
+        },
+        "new_text": "古い",
+        "old_text": "ふるい"
+    },
+    {
+        "data": {
+            "readings": {"新":"あたら"}
+        },
+        "new_text": "新しい",
+        "old_text": "あたらしい"
+    },
+    {
+        "data": {
+            "readings": {"広":"ひろ"}
+        },
+        "new_text": "広い",
+        "old_text": "ひろい"
+    },
+    {
+        "data": {
+            "readings": {"狭":"せま"}
+        },
+        "new_text": "狭い",
+        "old_text": "せまい"
+    },
+    {
+        "data": {
+            "readings": {"多":"おお"}
+        },
+        "new_text": "多い",
+        "old_text": "おおい"
+    },
+    {
+        "data": {
+            "readings": {"少":"すく"}
+        },
+        "new_text": "少ない",
+        "old_text": "すくない"
+    },
+    {
+        "data": {
+            "readings": {"面":"おも",
+                         "白":"しろ"}
+        },
+        "new_text": "面白い",
+        "old_text": "おもしろい"
+    },
+    {
+        "data": {
+            "readings": {"遠":"とお"}
+        },
+        "new_text": "遠い",
+        "old_text": "とおい"
+    },
+    {
+        "data": {
+            "readings": {"近":"ちか"}
+        },
+        "new_text": "近い",
+        "old_text": "ちかい"
+    },
+    {
+        "data": {
+            "readings": {"大":"お",
+                         "人":"とな"}
+        },
+        "new_text": "大人しい",
+        "old_text": "おとなしい"
+    },
+    {
+        "data": {
+            "readings": {"甘":"あま"}
+        },
+        "new_text": "甘い",
+        "old_text": "あまい"
+    },
+    {
+        "data": {
+            "readings": {"苦":"にが"}
+        },
+        "new_text": "苦い",
+        "old_text": "にがい"
+    },
+    {
+        "data": {
+            "readings": {"酸":"す"}
+        },
+        "new_text": "酸っぱい",
+        "old_text": "すっぱい"
+    },
+    {
+        "data": {
+            "readings": {"優":"やさ"}
+        },
+        "new_text": "優しい",
+        "old_text": "やさしい"
+    },
+    {
+        "data": {
+            "readings": {"痛":"いた"}
+        },
+        "new_text": "痛い",
+        "old_text": "いたい"
+    },
+    {
+        "data": {
+            "readings": {"大":"おお"}
+        },
+        "new_text": "大きい",
+        "old_text": "おおきい"
+    },
+    {
+        "data": {
+            "readings": {"小":"ちい"}
+        },
+        "new_text": "小さい",
+        "old_text": "ちいさい"
+    },
+    {
+        "data": {
+            "readings": {"寒":"さむ"}
+        },
+        "new_text": "寒い",
+        "old_text": "さむい"
+    },
+    {
+        "data": {
+            "readings": {"熱":"あつ"}
+        },
+        "new_text": "熱い",
+        "old_text": "あつい"
+    },
+    {
+        "data": {
+            "readings": {"高":"たか"}
+        },
+        "new_text": "高い",
+        "old_text": "たかい"
+    },
+    {
+        "data": {
+            "readings": {"安":"やす"}
+        },
+        "new_text": "安い",
+        "old_text": "やすい"
+    },
+    {
+        "data": {
+            "readings": {"信":"しん",
+                         "号":"ごう"}
+        },
+        "new_text": "信号",
+        "old_text": "しんごう"
+    },
+    {
+        "data": {
+            "readings": {"制":"せい",
+                         "限":"げん",
+                         "速":"そく",
+                         "度":"ど"}
+        },
+        "new_text": "制限速度",
+        "old_text": "せいげんそくど"
+    },
+    {
+        "data": {
+            "readings": {"交":"こう",
+                         "差":"さ",
+                         "点":"てん"}
+        },
+        "new_text": "交差点",
+        "old_text": "こうさてん"
+    },
+    {
+        "data": {
+            "readings": {"事":"じ",
+                         "故":"こ"}
+        },
+        "new_text": "事故",
+        "old_text": "じこ"
+    },
+    {
+        "data": {
+            "readings": {"歩":"ほ",
+                         "道":"どう"}
+        },
+        "new_text": "歩道",
+        "old_text": "ほどう"
+    },
+    {
+        "data": {
+            "readings": {"横":"おう",
+                         "断":"だん",
+                         "歩":"ほ",
+                         "道":"どう"}
+        },
+        "new_text": "横断歩道",
+        "old_text": "おうだんほどう"
+    },
+    {
+        "data": {
+            "readings": {"車":"くるま"}
+        },
+        "new_text": "車",
+        "old_text": "くるま"
+    },
+    {
+        "data": {
+            "readings": {"交":"こう",
+                         "通":"つう"}
+        },
+        "new_text": "交通",
+        "old_text": "こうつう"
+    },
+    {
+        "data": {
+            "readings": {"今日":"きょう"}
+        },
+        "new_text": "今日",
+        "old_text": "きょう"
+    },
+    {
+        "data": {
+            "readings": {"明":"あ",
+                         "日":"した"}
+        },
+        "new_text": "明日",
+        "old_text": "あした"
+    },
+    {
+        "data": {
+            "readings": {"昨日":"きのう"}
+        },
+        "new_text": "昨日",
+        "old_text": "きのう"
+    },
+    {
+        "data": {
+            "readings": {"一昨日":"おととい"}
+        },
+        "new_text": "一昨日",
+        "old_text": "おととい"
+    },
+    {
+        "data": {
+            "readings": {"明後日":"あさって"}
+        },
+        "new_text": "明後日",
+        "old_text": "あさって"
+    },
+    {
+        "data": {
+            "readings": {"先":"せん",
+                         "週":"しゅう"}
+        },
+        "new_text": "先週",
+        "old_text": "せんしゅう"
+    },
+    {
+        "data": {
+            "readings": {"今":"こん",
+                         "週":"しゅう"}
+        },
+        "new_text": "今週",
+        "old_text": "こんしゅう"
+    },
+    {
+        "data": {
+            "readings": {"来":"らい",
+                         "週":"しゅう"}
+        },
+        "new_text": "来週",
+        "old_text": "らいしゅう"
+    },
+    {
+        "data": {
+            "readings": {"先":"せん",
+                         "月":"げつ"}
+        },
+        "new_text": "先月",
+        "old_text": "せんげつ"
+    },
+    {
+        "data": {
+            "readings": {"今":"こん",
+                         "月":"げつ"}
+        },
+        "new_text": "今月",
+        "old_text": "こんげつ"
+    },
+    {
+        "data": {
+            "readings": {"来":"らい",
+                         "月":"げつ"}
+        },
+        "new_text": "来月",
+        "old_text": "らいげつ"
+    },
+    {
+        "data": {
+            "readings": {"去":"きょ",
+                         "年":"ねん"}
+        },
+        "new_text": "去年",
+        "old_text": "きょねん"
+    },
+    {
+        "data": {
+            "readings": {"今":"こ",
+                         "年":"とし"}
+        },
+        "new_text": "今年",
+        "old_text": "ことし"
+    },
+    {
+        "data": {
+            "readings": {"来":"らい",
+                         "年":"ねん"}
+        },
+        "new_text": "来年",
+        "old_text": "らいねん"
+    },
+    {
+        "data": {
+            "readings": {"上":"うえ"}
+        },
+        "new_text": "上",
+        "old_text": "うえ"
+    },
+    {
+        "data": {
+            "readings": {"下":"した"}
+        },
+        "new_text": "下",
+        "old_text": "した"
+    },
+    {
+        "data": {
+            "readings": {"中":"なか"}
+        },
+        "new_text": "中",
+        "old_text": "なか"
+    },
+    {
+        "data": {
+            "readings": {"横":"よこ"}
+        },
+        "new_text": "横",
+        "old_text": "よこ"
+    },
+    {
+        "data": {
+            "readings": {"前":"まえ"}
+        },
+        "new_text": "前",
+        "old_text": "まえ"
+    },
+    {
+        "data": {
+            "readings": {"後":"うし"}
+        },
+        "new_text": "後ろ",
+        "old_text": "うしろ"
+    },
+    {
+        "data": {
+            "readings": {"左":"ひだり"}
+        },
+        "new_text": "左",
+        "old_text": "ひだり"
+    },
+    {
+        "data": {
+            "readings": {"間":"あいだ"}
+        },
+        "new_text": "間",
+        "old_text": "あいだ"
+    },
+    {
+        "data": {
+            "readings": {"右":"みぎ"}
+        },
+        "new_text": "右",
+        "old_text": "みぎ"
+    },
+    {
+        "data": {
+            "readings": {"春":"はる"}
+        },
+        "new_text": "春",
+        "old_text": "はる"
+    },
+    {
+        "data": {
+            "readings": {"夏":"なつ"}
+        },
+        "new_text": "夏",
+        "old_text": "なつ"
+    },
+    {
+        "data": {
+            "readings": {"秋":"あき"}
+        },
+        "new_text": "秋",
+        "old_text": "あき"
+    },
+    {
+        "data": {
+            "readings": {"冬":"ふゆ"}
+        },
+        "new_text": "冬",
+        "old_text": "ふゆ"
+    },
+    {
+        "data": {
+            "readings": {"竜":"たつ",
+                         "巻":"まき"}
+        },
+        "new_text": "竜巻",
+        "old_text": "たつまき"
+    },
+    {
+        "data": {
+            "readings": {"曇":"くも"}
+        },
+        "new_text": "曇り",
+        "old_text": "くもり"
+    },
+    {
+        "data": {
+            "readings": {"雷":"かみなり"}
+        },
+        "new_text": "雷",
+        "old_text": "かみなり"
+    },
+    {
+        "data": {
+            "readings": {"雲":"くも"}
+        },
+        "new_text": "雲",
+        "old_text": "くも"
+    },
+    {
+        "data": {
+            "readings": {"風":"かぜ"}
+        },
+        "new_text": "風",
+        "old_text": "かぜ"
+    },
+    {
+        "data": {
+            "readings": {"地":"じ",
+                         "震":"しん"}
+        },
+        "new_text": "地震",
+        "old_text": "じしん"
+    },
+    {
+        "data": {
+            "readings": {"皆":"みな"}
+        },
+        "new_text": "皆",
+        "old_text": "みんな"
+    },
+    {
+        "data": {
+            "readings": {"飛":"ひ",
+                         "行":"こう",
+                         "機":"き"}
+        },
+        "new_text": "飛行機",
+        "old_text": "ひこうき"
+    },
+    {
+        "data": {
+            "readings": {"電":"でん",
+                         "車":"しゃ"}
+        },
+        "new_text": "電車",
+        "old_text": "でんしゃ"
+    },
+    {
+        "data": {
+            "readings": {"船":"ふね"}
+        },
+        "new_text": "船",
+        "old_text": "ふね"
+    },
+    {
+        "data": {
+            "readings": {"自":"じ",
+                         "転":"てん",
+                         "車":"しゃ"}
+        },
+        "new_text": "自転車",
+        "old_text": "じてんしゃ"
+    },
+    {
+        "data": {
+            "readings": {"北":"きた"}
+        },
+        "new_text": "北",
+        "old_text": "きた"
+    },
+    {
+        "data": {
+            "readings": {"南":"みなみ"}
+        },
+        "new_text": "南",
+        "old_text": "みなみ"
+    },
+    {
+        "data": {
+            "readings": {"東":"ひがし"}
+        },
+        "new_text": "東",
+        "old_text": "ひがし"
+    },
+    {
+        "data": {
+            "readings": {"西":"にし"}
+        },
+        "new_text": "西",
+        "old_text": "にし"
+    },
+    {
+        "data": {
+            "readings": {"星":"ほし"}
+        },
+        "new_text": "星",
+        "old_text": "ほし"
+    },
+    {
+        "data": {
+            "readings": {"世":"せ",
+                         "界":"かい"}
+        },
+        "new_text": "世界",
+        "old_text": "せかい"
+    },
+    {
+        "data": {
+            "readings": {"惑":"わく",
+                         "星":"せい"}
+        },
+        "new_text": "惑星",
+        "old_text": "わくせい"
+    },
+    {
+        "data": {
+            "readings": {"太":"たい",
+                         "陽":"よう"}
+        },
+        "new_text": "太陽",
+        "old_text": "たいよう"
+    },
+    {
+        "data": {
+            "readings": {"月":"つき"}
+        },
+        "new_text": "月",
+        "old_text": "つき"
+    },
+    {
+        "data": {
+            "readings": {"銀":"ぎん",
+                         "河":"が"}
+        },
+        "new_text": "銀河",
+        "old_text": "ぎんが"
+    },
+    {
+        "data": {
+            "readings": {"彗":"すい",
+                         "星":"せい"}
+        },
+        "new_text": "彗星",
+        "old_text": "すいせい"
+    },
+    {
+        "data": {
+            "readings": {"流":"りゅう",
+                         "星":"せい"}
+        },
+        "new_text": "流星",
+        "old_text": "りゅうせい"
+    },
+    {
+        "data": {
+            "readings": {"小":"しょう",
+                         "惑":"わく",
+                         "星":"せい"}
+        },
+        "new_text": "小惑星",
+        "old_text": "しょうわくせい"
+    },
+    {
+        "data": {
+            "readings": {"学":"がっ",
+                         "校":"こう"}
+        },
+        "new_text": "学校",
+        "old_text": "がっこう"
+    },
+    {
+        "data": {
+            "readings": {"宿":"しゅく",
+                         "題":"だい"}
+        },
+        "new_text": "宿題",
+        "old_text": "しゅくだい"
+    },
+    {
+        "data": {
+            "readings": {"鉛":"えん",
+                         "筆":"ぴつ"}
+        },
+        "new_text": "鉛筆",
+        "old_text": "えんぴつ"
+    },
+    {
+        "data": {
+            "readings": {"紙":"かみ"}
+        },
+        "new_text": "紙",
+        "old_text": "かみ"
+    },
+    {
+        "data": {
+            "readings": {"本":"ほん"}
+        },
+        "new_text": "本",
+        "old_text": "ほん"
+    },
+    {
+        "data": {
+            "readings": {"机":"つくえ"}
+        },
+        "new_text": "机",
+        "old_text": "つくえ"
+    },
+    {
+        "data": {
+            "readings": {"家":"か",
+                         "族":"ぞく"}
+        },
+        "new_text": "家族",
+        "old_text": "かぞく"
+    },
+    {
+        "data": {
+            "readings": {"子":"こ"}
+        },
+        "new_text": "子",
+        "old_text": "こ"
+    },
+    {
+        "data": {
+            "readings": {"親":"おや"}
+        },
+        "new_text": "親",
+        "old_text": "おや"
+    },
+    {
+        "data": {
+            "readings": {"姉":"ねえ"}
+        },
+        "new_text": "お姉さん",
+        "old_text": "おねえさん"
+    },
+    {
+        "data": {
+            "readings": {"妹":"いもうと"}
+        },
+        "new_text": "妹",
+        "old_text": "いもうと"
+    },
+    {
+        "data": {
+            "readings": {"兄":"にい"}
+        },
+        "new_text": "お兄さん",
+        "old_text": "おにいさん"
+    },
+    {
+        "data": {
+            "readings": {"弟":"あとうと"}
+        },
+        "new_text": "弟",
+        "old_text": "あとうと"
+    },
+    {
+        "data": {
+            "readings": {"空":"そら"}
+        },
+        "new_text": "空",
+        "old_text": "そら"
+    },
+    {
+        "data": {
+            "readings": {"天":"てん",
+                         "気":"き"}
+        },
+        "new_text": "天気",
+        "old_text": "てんき"
+    },
+    {
+        "data": {
+            "readings": {"雨":"あめ"}
+        },
+        "new_text": "雨",
+        "old_text": "あめ"
+    },
+    {
+        "data": {
+            "readings": {"雪":"ゆき"}
+        },
+        "new_text": "雪",
+        "old_text": "ゆき"
+    },
+    {
+        "data": {
+            "readings": {"雹":"ひょう"}
+        },
+        "new_text": "雹",
+        "old_text": "ひょう"
+    },
+    {
+        "data": {
+            "readings": {"時":"じ",
+                         "間":"かん"}
+        },
+        "new_text": "時間",
+        "old_text": "じかん"
+    },
+    {
+        "data": {
+            "readings": {"日":"にち"}
+        },
+        "new_text": "日",
+        "old_text": "にち"
+    },
+    {
+        "data": {
+            "readings": {"月":"がつ"}
+        },
+        "new_text": "月",
+        "old_text": "がつ"
+    },
+    {
+        "data": {
+            "readings": {"年":"ねん"}
+        },
+        "new_text": "年",
+        "old_text": "ねん"
+    },
+    {
+        "data": {
+            "readings": {"過":"か",
+                         "去":"こ"}
+        },
+        "new_text": "過去",
+        "old_text": "かこ"
+    },
+    {
+        "data": {
+            "readings": {"現":"げん",
+                         "在":"ざい"}
+        },
+        "new_text": "現在",
+        "old_text": "げんざい"
+    },
+    {
+        "data": {
+            "readings": {"未":"み",
+                         "来":"らい"}
+        },
+        "new_text": "未来",
+        "old_text": "みらい"
+    },
+    {
+        "data": {
+            "readings": {"秒":"びょう"}
+        },
+        "new_text": "秒",
+        "old_text": "びょう"
+    },
+    {
+        "data": {
+            "readings": {"分":"ぶん"}
+        },
+        "new_text": "分",
+        "old_text": "ぶん"
+    },
+    {
+        "data": {
+            "readings": {"時":"じ"}
+        },
+        "new_text": "時",
+        "old_text": "じ"
+    },
+    {
+        "data": {
+            "readings": {"午":"ご",
+                         "前":"ぜん"}
+        },
+        "new_text": "午前",
+        "old_text": "ごぜん"
+    },
+    {
+        "data": {
+            "readings": {"午":"ご",
+                         "後":"ご"}
+        },
+        "new_text": "午後",
+        "old_text": "ごご"
+    },
+    {
+        "data": {
+            "readings": {"病":"びょう",
+                         "気":"き"}
+        },
+        "new_text": "病気",
+        "old_text": "びょうき"
+    },
+    {
+        "data": {
+            "readings": {"石":"いし"}
+        },
+        "new_text": "石",
+        "old_text": "いし"
+    },
+    {
+        "data": {
+            "readings": {"看":"かん",
+                         "護":"ご",
+                         "婦":"ふ"}
+        },
+        "new_text": "看護婦",
+        "old_text": "かんごふ"
+    },
+    {
+        "data": {
+            "readings": {"咳":"せき"}
+        },
+        "new_text": "咳",
+        "old_text": "せき"
+    },
+    {
+        "data": {
+            "readings": {"病":"びょう",
+                         "院":"いん"}
+        },
+        "new_text": "病院",
+        "old_text": "びょういん"
+    },
+    {
+        "data": {
+            "readings": {"疾":"しっ",
+                         "患":"かん"}
+        },
+        "new_text": "疾患",
+        "old_text": "しっかん"
+    },
+    {
+        "data": {
+            "readings": {"電":"でん",
+                         "話":"わ"}
+        },
+        "new_text": "電話",
+        "old_text": "でんわ"
+    },
+    {
+        "data": {
+            "readings": {"時":"と",
+                         "計":"けい"}
+        },
+        "new_text": "時計",
+        "old_text": "とけい"
+    },
+    {
+        "data": {
+            "readings": {"新":"しん",
+                         "聞":"ぶん"}
+        },
+        "new_text": "新聞",
+        "old_text": "しんぶん"
+    },
+    {
+        "data": {
+            "readings": {"絵":"え"}
+        },
+        "new_text": "絵",
+        "old_text": "え"
+    },
+    {
+        "data": {
+            "readings": {"傘":"かさ"}
+        },
+        "new_text": "傘",
+        "old_text": "かさ"
+    },
+    {
+        "data": {
+            "readings": {"椅":"い",
+                         "子":"す"}
+        },
+        "new_text": "椅子",
+        "old_text": "いす"
+    },
+    {
+        "data": {
+            "readings": {"本":"ほん",
+                         "棚":"だな"}
+        },
+        "new_text": "本棚",
+        "old_text": "ほんだな"
+    },
+    {
+        "data": {
+            "readings": {"箪":"たん",
+                         "笥":"す"}
+        },
+        "new_text": "箪笥",
+        "old_text": "たんす"
+    },
+    {
+        "data": {
+            "readings": {"寝":"しん",
+                         "台":"だい"}
+        },
+        "new_text": "寝台",
+        "old_text": "しんだい"
+    },
+    {
+        "data": {
+            "readings": {"真":"ま",
+                         "夜":"よ",
+                         "中":"なか"}
+        },
+        "new_text": "真夜中",
+        "old_text": "まよなか"
+    },
+    {
+        "data": {
+            "readings": {"夢":"ゆめ"}
+        },
+        "new_text": "夢",
+        "old_text": "ゆめ"
+    },
+    {
+        "data": {
+            "readings": {"悪":"あく",
+                         "夢":"む"}
+        },
+        "new_text": "悪夢",
+        "old_text": "あくむ"
+    },
+    {
+        "data": {
+            "readings": {"睡":"すい",
+                         "眠":"みん"}
+        },
+        "new_text": "睡眠",
+        "old_text": "すいみん"
+    },
+    {
+        "data": {
+            "readings": {"目":"め",
+                         "覚":"ざ",
+                         "時":"ど",
+                         "計":"けい"}
+        },
+        "new_text": "目覚まし時計",
+        "old_text": "めざましどけい"
+    },
+    {
+        "data": {
+            "readings": {"部":"へ",
+                         "屋":"や"}
+        },
+        "new_text": "部屋",
+        "old_text": "へや"
+    },
+    {
+        "data": {
+            "readings": {"寝":"しん",
+                         "室":"しつ"}
+        },
+        "new_text": "寝室",
+        "old_text": "しんしつ"
+    },
+    {
+        "data": {
+            "readings": {"台":"だい",
+                         "所":"どころ"}
+        },
+        "new_text": "台所",
+        "old_text": "だいどころ"
+    },
+    {
+        "data": {
+            "readings": {"玄":"げん",
+                         "関":"かん"}
+        },
+        "new_text": "玄関",
+        "old_text": "げんかん"
+    },
+    {
+        "data": {
+            "readings": {"浴":"よく",
+                         "室":"しつ"}
+        },
+        "new_text": "浴室",
+        "old_text": "よくしつ"
+    },
+    {
+        "data": {
+            "readings": {"息":"むす",
+                         "子":"こ"}
+        },
+        "new_text": "息子",
+        "old_text": "むすこ"
+    },
+    {
+        "data": {
+            "readings": {"娘":"むすめ"}
+        },
+        "new_text": "娘",
+        "old_text": "むすめ"
+    },
+    {
+        "data": {
+            "readings": {"夫":"おっと"}
+        },
+        "new_text": "夫",
+        "old_text": "おっと"
+    },
+    {
+        "data": {
+            "readings": {"妻":"つま"}
+        },
+        "new_text": "妻",
+        "old_text": "つま"
+    },
+    {
+        "data": {
+            "readings": {"叔":"お",
+                         "母":"ば"}
+        },
+        "new_text": "叔母",
+        "old_text": "おば"
+    },
+    {
+        "data": {
+            "readings": {"叔":"お",
+                         "父":"じ"}
+        },
+        "new_text": "叔父",
+        "old_text": "おじ"
+    },
+    {
+        "data": {
+            "readings": {"従兄":"いとこ"}
+        },
+        "new_text": "従兄",
+        "old_text": "いとこ"
+    },
+    {
+        "data": {
+            "readings": {"腕":"うで"}
+        },
+        "new_text": "腕",
+        "old_text": "うで"
+    },
+    {
+        "data": {
+            "readings": {"肩":"かた"}
+        },
+        "new_text": "肩",
+        "old_text": "かた"
+    },
+    {
+        "data": {
+            "readings": {"肘":"ひじ"}
+        },
+        "new_text": "肘",
+        "old_text": "ひじ"
+    },
+    {
+        "data": {
+            "readings": {"膝":"ひざ"}
+        },
+        "new_text": "膝",
+        "old_text": "ひざ"
+    },
+    {
+        "data": {
+            "readings": {"胸":"むね"}
+        },
+        "new_text": "胸",
+        "old_text": "むね"
+    },
+    {
+        "data": {
+            "readings": {"背":"せ",
+                         "中":"なか"}
+        },
+        "new_text": "背中",
+        "old_text": "せなか"
+    },
+    {
+        "data": {
+            "readings": {"首":"くび"}
+        },
+        "new_text": "首",
+        "old_text": "くび"
+    },
+    {
+        "data": {
+            "readings": {"喉":"のど"}
+        },
+        "new_text": "喉",
+        "old_text": "のど"
+    },
+    {
+        "data": {
+            "readings": {"建":"たて",
+                         "物":"もの"}
+        },
+        "new_text": "建物",
+        "old_text": "たてもの"
+    },
+    {
+        "data": {
+            "readings": {"店":"みせ"}
+        },
+        "new_text": "店",
+        "old_text": "みせ"
+    },
+    {
+        "data": {
+            "readings": {"市":"いち",
+                         "場":"ば"}
+        },
+        "new_text": "市場",
+        "old_text": "いちば"
+    },
+    {
+        "data": {
+            "readings": {"銀":"ぎん",
+                         "行":"こう"}
+        },
+        "new_text": "銀行",
+        "old_text": "ぎんこう"
+    },
+    {
+        "data": {
+            "readings": {"家":"いえ"}
+        },
+        "new_text": "家",
+        "old_text": "いえ"
+    },
+    {
+        "data": {
+            "readings": {"図":"と",
+                         "書":"しょ",
+                         "館":"かん"}
+        },
+        "new_text": "図書館",
+        "old_text": "としょかん"
+    },
+    {
+        "data": {
+            "readings": {"体":"からだ"}
+        },
+        "new_text": "体",
+        "old_text": "からだ"
+    },
+    {
+        "data": {
+            "readings": {"毛":"もう",
+                         "髪":"はつ"}
+        },
+        "new_text": "毛髪",
+        "old_text": "もうはつ"
+    },
+    {
+        "data": {
+            "readings": {"眉":"まゆ"}
+        },
+        "new_text": "眉",
+        "old_text": "まゆ"
+    },
+    {
+        "data": {
+            "readings": {"顎":"あご"}
+        },
+        "new_text": "顎",
+        "old_text": "あご"
+    },
+    {
+        "data": {
+            "readings": {"額":"ひたい"}
+        },
+        "new_text": "額",
+        "old_text": "がく"
+    },
+    {
+        "data": {
+            "readings": {"足":"あし",
+                         "指":"ゆび"}
+        },
+        "new_text": "足の指",
+        "old_text": "あしのゆび"
+    },
+    {
+        "data": {
+            "readings": {"心":"こころ"}
+        },
+        "new_text": "心",
+        "old_text": "こころ"
+    },
+    {
+        "data": {
+            "readings": {"脳":"のう"}
+        },
+        "new_text": "脳",
+        "old_text": "のう"
+    },
+    {
+        "data": {
+            "readings": {"腹":"なか"}
+        },
+        "new_text": "お腹",
+        "old_text": "おなか"
+    },
+    {
+        "data": {
+            "readings": {"吃逆":"しゃっくり"}
+        },
+        "new_text": "吃逆",
+        "old_text": "しゃっくり"
+    },
+    {
+        "data": {
+            "readings": {"屁":"おなら"}
+        },
+        "new_text": "屁",
+        "old_text": "おなら"
+    },
+    {
+        "data": {
+            "readings": {"鼻":"はな"}
+        },
+        "new_text": "鼻くそ",
+        "old_text": "はなくそ"
+    },
+    {
+        "data": {
+            "readings": {"鼻":"はな",
+                         "水":"みず"}
+        },
+        "new_text": "鼻水",
+        "old_text": "はなみず"
+    },
+    {
+        "data": {
+            "readings": {"涎":"よだれ"}
+        },
+        "new_text": "涎",
+        "old_text": "よだれ"
+    },
+    {
+        "data": {
+            "readings": {"鼾":"いびき"}
+        },
+        "new_text": "鼾",
+        "old_text": "いびき"
+    },
+    {
+        "data": {
+            "readings": {"欠伸":"あくび"}
+        },
+        "new_text": "欠伸",
+        "old_text": "あくび"
+    },
+    {
+        "data": {
+            "readings": {"皿":"さら"}
+        },
+        "new_text": "皿",
+        "old_text": "さら"
+    },
+    {
+        "data": {
+            "readings": {"箸":"はし"}
+        },
+        "new_text": "箸",
+        "old_text": "はし"
+    },
+    {
+        "data": {
+            "readings": {"小":"しょう",
+                         "学":"がっ",
+                         "校":"こう"}
+        },
+        "new_text": "小学校",
+        "old_text": "しょうがっこう"
+    },
+    {
+        "data": {
+            "readings": {"中":"中",
+                         "学":"がっ",
+                         "校":"こう"}
+        },
+        "new_text": "中学校",
+        "old_text": "ちゅうがっこう"
+    },
+    {
+        "data": {
+            "readings": {"高":"こう",
+                         "校":"こう"}
+        },
+        "new_text": "高校",
+        "old_text": "こうこう"
+    },
+    {
+        "data": {
+            "readings": {"大":"だい",
+                         "学":"がく"}
+        },
+        "new_text": "大学",
+        "old_text": "だいがく"
+    },
+    {
+        "data": {
+            "readings": {"先":"せん",
+                         "生":"せい"}
+        },
+        "new_text": "先生",
+        "old_text": "せんせい"
+    },
+    {
+        "data": {
+            "readings": {"学":"がく",
+                         "生":"せい"}
+        },
+        "new_text": "学生",
+        "old_text": "がくせい"
+    },
+    {
+        "data": {
+            "readings": {"山":"やま"}
+        },
+        "new_text": "山",
+        "old_text": "やま"
+    },
+    {
+        "data": {
+            "readings": {"丘":"おか"}
+        },
+        "new_text": "丘",
+        "old_text": "おか"
+    },
+    {
+        "data": {
+            "readings": {}
+        },
+        "new_text": "",
+        "old_text": "はま"
+    },
+    {
+        "data": {
+            "readings": {"木":"き"}
+        },
+        "new_text": "木",
+        "old_text": "き"
+    },
+    {
+        "data": {
+            "readings": {"森":"もり"}
+        },
+        "new_text": "森",
+        "old_text": "もり"
+    },
+    {
+        "data": {
+            "readings": {"川":"かわ"}
+        },
+        "new_text": "川",
+        "old_text": "かわ"
+    },
+    {
+        "data": {
+            "readings": {"湖":"みずうみ"}
+        },
+        "new_text": "湖",
+        "old_text": "みずうみ"
+    },
+    {
+        "data": {
+            "readings": {"草":"くさ"}
+        },
+        "new_text": "草",
+        "old_text": "くさ"
+    },
+    {
+        "data": {
+            "readings": {"水":"みず"}
+        },
+        "new_text": "水",
+        "old_text": "みず"
+    },
+    {
+        "data": {
+            "readings": {"火":"ひ"}
+        },
+        "new_text": "火",
+        "old_text": "ひ"
+    },
+    {
+        "data": {
+            "readings": {"土":"つち"}
+        },
+        "new_text": "土",
+        "old_text": "つち"
+    },
+    {
+        "data": {
+            "readings": {"自":"し",
+                         "然":"ぜん"}
+        },
+        "new_text": "自然",
+        "old_text": "しぜん"
+    },
+    {
+        "data": {
+            "readings": {"動":"どう",
+                         "物":"ぶつ"}
+        },
+        "new_text": "動物",
+        "old_text": "どうぶつ"
+    },
+    {
+        "data": {
+            "readings": {"虫":"むし"}
+        },
+        "new_text": "虫",
+        "old_text": "むし"
+    },
+    {
+        "data": {
+            "readings": {"冷":"れい",
+                         "蔵":"ぞう",
+                         "庫":"こ"}
+        },
+        "new_text": "冷蔵庫",
+        "old_text": "れいぞうこ"
+    },
+    {
+        "data": {
+            "readings": {"冷":"れい",
+                         "凍":"とう",
+                         "庫":"こ"}
+        },
+        "new_text": "冷凍庫",
+        "old_text": "れいとうこ"
+    },
+    {
+        "data": {
+            "readings": {"電":"でん",
+                         "子":"し"}
+        },
+        "new_text": "電子レンジ",
+        "old_text": "でんしレンジ"
+    },
+    {
+        "data": {
+            "readings": {"流":"なが"}
+        },
+        "new_text": "流し",
+        "old_text": "ながし"
+    },
+    {
+        "data": {
+            "readings": {"食":"しょっ",
+                         "器":"き",
+                         "洗":"あら",
+                         "機":"き"}
+        },
+        "new_text": "食器洗い機",
+        "old_text": "しょっきあらいき"
+    },
+    {
+        "data": {
+            "readings": {"数":"すう",
+                         "学":"がく"}
+        },
+        "new_text": "数学",
+        "old_text": "すうがく"
+    },
+    {
+        "data": {
+            "readings": {"科":"か",
+                         "学":"がく"}
+        },
+        "new_text": "科学",
+        "old_text": "かがく"
+    },
+    {
+        "data": {
+            "readings": {"歴":"れき",
+                         "史":"し"}
+        },
+        "new_text": "歴史",
+        "old_text": "れきし"
+    },
+    {
+        "data": {
+            "readings": {"美":"び",
+                         "術":"じゅつ"}
+        },
+        "new_text": "美術",
+        "old_text": "びじゅつ"
+    },
+    {
+        "data": {
+            "readings": {"体":"たい",
+                         "育":"いく"}
+        },
+        "new_text": "体育",
+        "old_text": "たいいく"
+    },
+    {
+        "data": {
+            "readings": {"音":"おん",
+                         "楽":"がく"}
+        },
+        "new_text": "音楽",
+        "old_text": "おんがく"
+    },
+    {
+        "data": {
+            "readings": {"靴":"くつ",
+                         "下":"した"}
+        },
+        "new_text": "靴下",
+        "old_text": "くつした"
+    },
+    {
+        "data": {
+            "readings": {"靴":"くつ"}
+        },
+        "new_text": "靴",
+        "old_text": "くつ"
+    },
+    {
+        "data": {
+            "readings": {"帽":"ぼう",
+                         "子":"し"}
+        },
+        "new_text": "帽子",
+        "old_text": "ぼうし"
+    },
+    {
+        "data": {
+            "readings": {"壁":"かべ"}
+        },
+        "new_text": "壁",
+        "old_text": "かべ"
+    },
+    {
+        "data": {
+            "readings": {"天":"てん",
+                         "井":"じょう"}
+        },
+        "new_text": "天井",
+        "old_text": "てんじょう"
+    },
+    {
+        "data": {
+            "readings": {"床":"ゆか"}
+        },
+        "new_text": "床",
+        "old_text": "ゆか"
+    },
+    {
+        "data": {
+            "readings": {"屋":"や",
+                         "根":"ね"}
+        },
+        "new_text": "屋根",
+        "old_text": "やね"
+    },
+    {
+        "data": {
+            "readings": {"柵":"さく"}
+        },
+        "new_text": "柵",
+        "old_text": "さく"
+    },
+    {
+        "data": {
+            "readings": {"庭":"にわ"}
+        },
+        "new_text": "庭",
+        "old_text": "にわ"
+    },
+    {
+        "data": {
+            "readings": {"名":"めい",
+                         "詞":"し"}
+        },
+        "new_text": "名詞",
+        "old_text": "めいし"
+    },
+    {
+        "data": {
+            "readings": {"動":"どう",
+                         "詞":"し"}
+        },
+        "new_text": "動詞",
+        "old_text": "どうし"
+    },
+    {
+        "data": {
+            "readings": {"形":"けい",
+                         "容":"よう",
+                         "詞":"し"}
+        },
+        "new_text": "形容詞",
+        "old_text": "けいようし"
+    },
+    {
+        "data": {
+            "readings": {"副":"ふく",
+                         "詞":"し"}
+        },
+        "new_text": "副詞",
+        "old_text": "ふくし"
+    },
+    {
+        "data": {
+            "readings": {"接":"せつ",
+                         "続":"ぞく",
+                         "詞":"し"}
+        },
+        "new_text": "接続詞",
+        "old_text": "せつぞくし"
+    },
+    {
+        "data": {
+            "readings": {"池":"いけ"}
+        },
+        "new_text": "池",
+        "old_text": "いけ"
+    },
+    {
+        "data": {
+            "readings": {}
+        },
+        "new_text": "ぬれた",
+        "old_text": "しっせい"
+    },
+    {
+        "data": {
+            "readings": {"食":"た"}
+        },
+        "new_text": "食べる",
+        "old_text": "たべる"
+    },
+    {
+        "data": {
+            "readings": {"蝿":"はえ"}
+        },
+        "new_text": "蝿",
+        "old_text": "はえ"
+    },
+    {
+        "data": {
+            "readings": {"遠":"えん",
+                         "征":"せい"}
+        },
+        "new_text": "遠征",
+        "old_text": "えんせい"
+    },
+    {
+        "data": {
+            "readings": {"通":"とお"}
+        },
+        "new_text": "通り",
+        "old_text": "とうり"
+    },
+    {
+        "data": {
+            "readings": {"高":"こう",
+                         "速":"そく",
+                         "道":"どう",
+                         "路":"ろ"}
+        },
+        "new_text": "高速道路",
+        "old_text": "こうぞくどうろ"
+    },
+    {
+        "data": {
+            "readings": {"運":"うん",
+                         "転":"てん"}
+        },
+        "new_text": "運転する",
+        "old_text": "うんてんする"
+    },
+    {
+        "data": {
+            "readings": {"旅":"りょ",
+                         "客":"かく"}
+        },
+        "new_text": "旅客",
+        "old_text": "りょかく"
+    },
+    {
+        "data": {
+            "readings": {"読":"よ"}
+        },
+        "new_text": "読む",
+        "old_text": "よむ"
+    },
+    {
+        "data": {
+            "readings": {"朝":"あさ"}
+        },
+        "new_text": "朝",
+        "old_text": "あさ"
+    },
+    {
+        "data": {
+            "readings": {"料":"りょう",
+                        "理":"り"}
+        },
+        "new_text": "料理する",
+        "old_text": "りょうりする"
+    },
+    {
+        "data": {
+            "readings": {"美":"お",
+                         "味":"い"}
+        },
+        "new_text": "美味しい",
+        "old_text": "おいしい"
+    },
+    {
+        "data": {
+            "readings": {"朝":"あさ",
+                         "御":"ご",
+                         "飯":"はん"}
+        },
+        "new_text": "朝御飯",
+        "old_text": "あさごはん"
+    },
+    {
+        "data": {
+            "readings": {"卵":"たまご"}
+        },
+        "new_text": "卵",
+        "old_text": "たまご"
+    },
+    {
+        "data": {
+            "readings": {"塩":"しお"}
+        },
+        "new_text": "塩",
+        "old_text": "しお"
+    },
+    {
+        "data": {
+            "readings": {"牛":"ぎゅう",
+                         "乳":"にゅう"}
+        },
+        "new_text": "牛乳",
+        "old_text": "ぎゅうにゅう"
+    },
+    {
+        "data": {
+            "readings": {"難":"むずか"}
+        },
+        "new_text": "難しい",
+        "old_text": "むずかしい"
+    },
+    {
+        "data": {
+            "readings": {"質":"しつ",
+                         "問":"もん"}
+        },
+        "new_text": "質問",
+        "old_text": "しつもん"
+    },
+    {
+        "data": {
+            "readings": {"回":"かい",
+                         "答":"とう"}
+        },
+        "new_text": "回答",
+        "old_text": "かいとう"
+    },
+    {
+        "data": {
+            "readings": {"正":"ただ"}
+        },
+        "new_text": "正しい",
+        "old_text": "ただしい"
+    },
+    {
+        "data": {
+            "readings": {"間":"ま",
+                         "違":"ちが"}
+        },
+        "new_text": "間違いました",
+        "old_text": "まちがいました"
+    }
+]
