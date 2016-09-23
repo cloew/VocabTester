@@ -12,9 +12,7 @@
                {"concept":5,
                 "text":"face"},
                {"concept":6,
-                "text":"steam"},
-               {"concept":7,
-                "text":"old"}]
+                "text":"steam"}]
 },
 {
     "language":"Japanese",
@@ -29,8 +27,6 @@
                {"concept":5,
                 "text":"顔"},
                {"concept":6,
-                "text":"汽"},
-               {"concept":7,
-                "text":"古"}]
+                "text":"汽"}]
 }
 ]

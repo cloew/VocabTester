@@ -33,5 +33,12 @@
                 "clarification":"カタカナ"},
                {"text":"夕",
                 "clarification":"漢字"}]
+},
+{
+    "language":"Japanese",
+    "symbols":[{"text":"ロ",
+                "clarification":"カタカナ"},
+               {"text":"口",
+                "clarification":"漢字"}]
 }
 ]
