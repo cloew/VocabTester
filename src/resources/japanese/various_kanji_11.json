@@ -2,31 +2,31 @@
 {
     "language":"English",
     "symbols":[{"concept":1,
-                "text":"source"},
+                "text":"work"},
                {"concept":2,
-                "text":"door"},
+                "text":"wide"},
                {"concept":3,
-                "text":"old"},
+                "text":"exchange"},
                {"concept":4,
-                "text":"noon"},
+                "text":"light"},
                {"concept":5,
-                "text":"after"},
+                "text":"go"},
                {"concept":6,
-                "text":"language"}]
+                "text":"think"}]
 },
 {
     "language":"Japanese",
     "symbols":[{"concept":1,
-                "text":"原"},
+                "text":"工"},
                {"concept":2,
-                "text":"戸"},
+                "text":"広"},
                {"concept":3,
-                "text":"古"},
+                "text":"交"},
                {"concept":4,
-                "text":"午"},
+                "text":"光"},
                {"concept":5,
-                "text":"後"},
+                "text":"行"},
                {"concept":6,
-                "text":"語"}]
+                "text":"考"}]
 }
 ]
