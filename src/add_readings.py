@@ -25,6 +25,7 @@ def main(args):
                             
                         output = "Merged: {} {}\n".format(repr(word.text), repr(word.language_data))
                         log.write(bytes(output, encoding="utf8"))
+        server.db.session.commit()
 
 if __name__ == "__main__":
     main(sys.argv[1:])
