@@ -1,0 +1,32 @@
+[
+{
+    "language":"English",
+    "symbols":[{"concept":1,
+                "text":"high"},
+               {"concept":2,
+                "text":"yellow"},
+               {"concept":3,
+                "text":"combine"},
+               {"concept":4,
+                "text":"valley"},
+               {"concept":5,
+                "text":"country"},
+               {"concept":6,
+                "text":"black"}]
+},
+{
+    "language":"Japanese",
+    "symbols":[{"concept":1,
+                "text":"高"},
+               {"concept":2,
+                "text":"黄"},
+               {"concept":3,
+                "text":"合"},
+               {"concept":4,
+                "text":"谷"},
+               {"concept":5,
+                "text":"国"},
+               {"concept":6,
+                "text":"黒"}]
+}
+]
