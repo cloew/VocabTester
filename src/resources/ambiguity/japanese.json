@@ -40,5 +40,12 @@
                 "clarification":"カタカナ"},
                {"text":"口",
                 "clarification":"漢字"}]
+},
+{
+    "language":"Japanese",
+    "symbols":[{"text":"オ",
+                "clarification":"カタカナ"},
+               {"text":"才",
+                "clarification":"漢字"}]
 }
 ]
