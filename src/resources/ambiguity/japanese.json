@@ -43,6 +43,13 @@
 },
 {
     "language":"Japanese",
+    "symbols":[{"text":"エ",
+                "clarification":"カタカナ"},
+               {"text":"工",
+                "clarification":"漢字"}]
+},
+{
+    "language":"Japanese",
     "symbols":[{"text":"オ",
                 "clarification":"カタカナ"},
                {"text":"才",
