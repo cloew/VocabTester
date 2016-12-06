@@ -1,0 +1,32 @@
+[
+{
+    "language":"English",
+    "symbols":[{"concept":1,
+                "text":"thought"},
+               {"concept":2,
+                "text":"paper"},
+               {"concept":3,
+                "text":"oneself"},
+               {"concept":4,
+                "text":"temple"},
+               {"concept":5,
+                "text":"hour"},
+               {"concept":6,
+                "text":"room"}]
+},
+{
+    "language":"Japanese",
+    "symbols":[{"concept":1,
+                "text":"思"},
+               {"concept":2,
+                "text":"紙"},
+               {"concept":3,
+                "text":"自"},
+               {"concept":4,
+                "text":"寺"},
+               {"concept":5,
+                "text":"時"},
+               {"concept":6,
+                "text":"室"}]
+}
+]
