@@ -1,0 +1,36 @@
+[
+{
+    "language":"English",
+    "symbols":[{"concept":1,
+                "text":"society"},
+               {"concept":2,
+                "text":"weak"},
+               {"concept":3,
+                "text":"neck"},
+               {"concept":4,
+                "text":"fall"},
+               {"concept":5,
+                "text":"spring"},
+               {"concept":6,
+                "text":"write"},
+               {"concept":7,
+                "text":"young"}]
+},
+{
+    "language":"Japanese",
+    "symbols":[{"concept":1,
+                "text":"社"},
+               {"concept":2,
+                "text":"弱"},
+               {"concept":3,
+                "text":"首"},
+               {"concept":4,
+                "text":"秋"},
+               {"concept":5,
+                "text":"春"},
+               {"concept":6,
+                "text":"書"},
+               {"concept":7,
+                "text":"少"}]
+}
+]
