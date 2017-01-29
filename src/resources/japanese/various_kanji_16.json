@@ -1,0 +1,36 @@
+[
+{
+    "language":"English",
+    "symbols":[{"concept":1,
+                "text":"place"},
+               {"concept":2,
+                "text":"color"},
+               {"concept":3,
+                "text":"eat"},
+               {"concept":4,
+                "text":"heart"},
+               {"concept":5,
+                "text":"new"},
+               {"concept":6,
+                "text":"parent"},
+               {"concept":7,
+                "text":"drawing"}]
+},
+{
+    "language":"Japanese",
+    "symbols":[{"concept":1,
+                "text":"場"},
+               {"concept":2,
+                "text":"色"},
+               {"concept":3,
+                "text":"食"},
+               {"concept":4,
+                "text":"心"},
+               {"concept":5,
+                "text":"新"},
+               {"concept":6,
+                "text":"親"},
+               {"concept":7,
+                "text":"図"}]
+}
+]
