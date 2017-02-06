@@ -70,7 +70,8 @@ class Mastery(db.Model):
             
     def moveToNextStalenessPeriod(self):
         """ Move the mastery to the next staleness period """
-        self.stalenessPeriod = self.stalenessPeriod.next
+        if self.stalenessPeriod.next:
+            self.stalenessPeriod = self.stalenessPeriod.next
         
     def revertToFirstStalenessPeriod(self):
         """ Revert the staleness period to the first staleness period """
