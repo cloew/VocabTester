@@ -25,7 +25,7 @@ git+git://github.com/cloew/KaoModules.git
 git+git://github.com/cloew/LanguageEggs.git
 Mako==1.0.1
 MarkupSafe==0.23
-psycopg2==2.6
+psycopg2==2.9.1
 PyJWT==1.3.0
 git+git://github.com/cloew/SmartDefaults.git
 SQLAlchemy==1.0.4
